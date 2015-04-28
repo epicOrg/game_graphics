@@ -91,6 +91,7 @@ public class FieldsNames {
     public static final String ROOM_TEAM = "team";
     public static final String ROOM_TEAM_COLOR = "teamColor";
     public static final String ROOM_ACTION = "action";
+    public static final String ROOM_JOINED = "joined";
     public static final String ROOM_START = "start";
     public static final String ROOM_EXIT = "exit";
 
@@ -130,4 +131,5 @@ public class FieldsNames {
     public static final String OFFLINE = "offline";
     public static final String SERVER_ERROR = "serverError";
     public static final String MISSING_FIELD = "missingField";
+
 }
