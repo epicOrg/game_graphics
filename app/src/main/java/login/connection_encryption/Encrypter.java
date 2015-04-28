@@ -55,7 +55,7 @@ public class Encrypter {
     }
 
     public String getEncryptedString() {
-        return StringConversionUtils.encodeHexString(cryptedData);
+        return StringConverter.encodeHexString(cryptedData);
     }
 
 }

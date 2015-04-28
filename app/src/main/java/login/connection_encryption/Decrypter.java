@@ -24,11 +24,7 @@ public class Decrypter {
 
     public void decrypt(String encryptedString) {
 
-        byte[] encryptedData = null;
-
-        // TODO
-        // encryptedData = Hex.decodeHex(encryptedString.toCharArray());
-
+        byte[] encryptedData = StringConverter.decodeHexString(encryptedString);
 
         try {
 

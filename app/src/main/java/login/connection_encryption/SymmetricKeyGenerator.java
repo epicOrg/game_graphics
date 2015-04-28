@@ -27,7 +27,6 @@ public class SymmetricKeyGenerator implements ISymmetricKeyGenerator {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
 
     public SecretKey getKey() {

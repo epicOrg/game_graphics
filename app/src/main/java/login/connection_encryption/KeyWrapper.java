@@ -15,16 +15,14 @@ import javax.crypto.NoSuchPaddingException;
 public class KeyWrapper {
 
     private Key symmetricKey;
-    private Key publicKey;
     private byte[] wrappedKey;
 
-    public KeyWrapper(Key symmetricKey, Key publicKey) {
+    public KeyWrapper(Key symmetricKey) {
         super();
         this.symmetricKey = symmetricKey;
-        this.publicKey = publicKey;
     }
 
-    public void wrapKey() {
+    public void wrapKey(Key publicKey) {
 
         try {
 
@@ -48,12 +46,12 @@ public class KeyWrapper {
 
     }
 
-    public byte[] getWrappedKey() {
+    public byte[] getWrappedKeyBytes() {
         return wrappedKey;
     }
 
     public String getWrappedKeyString() {
-        return StringConversionUtils.encodeHexString(wrappedKey);
+        return StringConverter.encodeHexString(wrappedKey);
     }
 
 }
