@@ -2,7 +2,7 @@ package login.interaction;
 
 /**
  * @author Noris
- * @version 18
+ * @version 19
  * @date 2015/03/30
  */
 
@@ -60,11 +60,11 @@ public class FieldsNames {
     public static final String REGISTER_ALREADY_USED = "alreadyUsed";
 
     //Encrypt
-    public static final String ENCRYPT_MESSAGE = "encrypedMessage";
-    public static final String ENCRYPT_GET_KEY = "getKey";
-    public static final String ENCRYPT_SET_KEY = "setKey";
-    public static final String ENCRYPT_PUBLIC_KEY = "pKey";
-    public static final String ENCRYPT_WRAPPED_KEY = "aKey";
+    public static final String ENCRYPTED_MESSAGE = "encrypedMessage";
+    public static final String ENCRYPT_REQUEST = "encryptRequest";
+    public static final String PUBLIC_KEY_REQUEST = "getKey";
+    public static final String PUBLIC_KEY = "pKey";
+    public static final String WRAPPED_KEY = "aKey";
 
     // Rooms/Room
     //Others
