@@ -6,6 +6,8 @@ import android.os.Handler;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import login.interaction.FieldsNames;
+
 /**
  * @author Noris
  * @since 2015-03-26
@@ -33,7 +35,7 @@ public class Unknown implements Service {
 
         try {
 
-            jsonResponse.put("service", "UNKNOWN");
+            jsonResponse.put(FieldsNames.SERVICE, FieldsNames.UNKNOWN);
             return jsonResponse;
 
         } catch (JSONException e) {
