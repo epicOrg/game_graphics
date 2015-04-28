@@ -19,6 +19,7 @@ import java.util.concurrent.CountDownLatch;
 import game.GameManager;
 import game.Room;
 import game.Team;
+import game.graphics.Map;
 import game.musics.BackgroundSound;
 import game.musics.GameSoundtracks;
 import game.net.GameHandler;
@@ -74,14 +75,23 @@ public class GameActivity extends Activity implements GameHandlerListener {
         gameHandler = new GameHandler();
         gameHandler.addGameHandlerListeners(this);
 
-        serverCommunicationThread.setHandler(gameHandler);
-        Log.d(LOG_TAG, "Asking Map..");
-        try {
-            serverCommunicationThread.send(createMapRequest());
-        } catch (NotConnectedException e) {
-            Toast.makeText(this, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
-            e.printStackTrace();
+        boolean noServer = intent.getBooleanExtra("NO_SERVER", false);
+
+        if (noServer) {
+            Map map = new Map();
+            DebugUtils.fillMap(map, 20);
+            DebugUtils.startGame(this, otherPlayers, map, 20, 20, startSignal);
+        } else {
+            serverCommunicationThread.setHandler(gameHandler);
+            Log.d(LOG_TAG, "Asking Map..");
+            try {
+                serverCommunicationThread.send(createMapRequest());
+            } catch (NotConnectedException e) {
+                Toast.makeText(this, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+            }
         }
+
     }
 
     @Override
@@ -93,8 +103,10 @@ public class GameActivity extends Activity implements GameHandlerListener {
         SFVertex3f direction = new SFVertex3f(-1, -0.25f, 0);
 
         me = new Player(new PlayerStatus(direction, new Circle(position, 0.75)), "Me");
-        for (Team team : gameManager.getRoom().getTeams())
-            otherPlayers.addAll(team.getPlayers());
+        ArrayList<Team> teams = gameManager.getRoom().getTeams();
+        if (teams != null)
+            for (Team team : teams)
+                otherPlayers.addAll(team.getPlayers());
 
         Iterator<Player> iterator = otherPlayers.iterator();
         while (iterator.hasNext()) {

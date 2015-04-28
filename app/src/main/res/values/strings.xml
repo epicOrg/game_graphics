@@ -21,6 +21,7 @@
     <string name="title_activity_call">CallActivity</string>
     <string name="dialog_net_error">Errore di rete, l\'applicazione terminerà</string>
     <string name="action_game_graphics">Vai al game_graphics (DEBUG)</string>
+    <string name="action_game_graphics_no_server">Vai al game_graphics - NoServer (DEBUG)</string>
 
     <string name="error_not_connected">Server non raggiungibile</string>
     <string name="cancel">Cancel</string>

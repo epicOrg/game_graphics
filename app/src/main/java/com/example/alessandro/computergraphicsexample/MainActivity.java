@@ -69,9 +69,20 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                intent.putExtra("NO_SERVER", false);
                 startActivity(intent);
             }
         });
+        //DEBUG
+        views.get(R.id.game_graphics_no_server).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                intent.putExtra("NO_SERVER", true);
+                startActivity(intent);
+            }
+        });
+
 
         checkRememberMe();
         startThreadIfNotStarted();
@@ -241,7 +252,8 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
         putViewIntoMap(R.id.remeberMeBox);
         putViewIntoMap(R.id.login_form);
         putViewIntoMap(R.id.login_progress);
-        putViewIntoMap(R.id.game_graphics); //DEBUG
+        putViewIntoMap(R.id.game_graphics);
+        putViewIntoMap(R.id.game_graphics_no_server);//DEBUG
     }
 
     private void putViewIntoMap(int id) {
