@@ -126,6 +126,21 @@ public class RoomActivity extends ActionBarActivity {
         return request;
     }
 
+    private JSONObject createListReceivedRequest() {
+        JSONObject request = new JSONObject();
+        try {
+            request.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
+            request.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS);
+            request.put(FieldsNames.HASHCODE, hashcode);
+            request.put(FieldsNames.USERNAME, username);
+            request.put(FieldsNames.ROOM_NAME, roomName);
+            request.put(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_LIST_RECEIVED);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return request;
+    }
+
 
     public class RoomHandler extends Handler {
 
@@ -145,6 +160,10 @@ public class RoomActivity extends ActionBarActivity {
         }
 
         private void processListMessage(Message msg) {
+            boolean firstTime = false;
+            if (currentRoom == null)
+                firstTime = true;
+
             CurrentRoom.CurrentRoomResult results = (CurrentRoom.CurrentRoomResult) msg.obj;
             currentRoom = new Room(roomName, results.getMaxPlayer(), results.getTeams());
 
@@ -165,6 +184,14 @@ public class RoomActivity extends ActionBarActivity {
             }
 
             roomStatus.setText("(" + currentPlayers + " / " + results.getMaxPlayer() + ")");
+
+            if(firstTime) {
+                try {
+                    serverCommunicationThread.send(createListReceivedRequest());
+                } catch (NotConnectedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         private void processExitMessage(Message msg) {
@@ -183,6 +210,8 @@ public class RoomActivity extends ActionBarActivity {
                 gameManager.setRoom(currentRoom);
 
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                intent.putExtra(FieldsNames.USERNAME, username);
+                intent.putExtra(FieldsNames.HASHCODE, hashcode);
                 startActivity(intent);
             }
         }

@@ -24,6 +24,7 @@ import game.musics.BackgroundSound;
 import game.musics.GameSoundtracks;
 import game.net.GameHandler;
 import game.net.GameHandlerListener;
+import game.net.GamePositionSender;
 import game.physics.Circle;
 import game.player.Player;
 import game.player.PlayerStatus;
@@ -60,22 +61,45 @@ public class GameActivity extends Activity implements GameHandlerListener {
         setContentView(R.layout.activity_game);
         context = this;
 
-        backgroundSound = new BackgroundSound(context, new GameSoundtracks(R.raw.soundtrack_01, R.raw.soundtrack_02).getSoundtracks(context));
-
         Intent intent = getIntent();
+        boolean noServer = intent.getBooleanExtra("NO_SERVER", false);
         username = intent.getStringExtra(FieldsNames.USERNAME);
         hashcode = intent.getIntExtra(FieldsNames.HASHCODE, 0);
+
+        gameManager = GameManager.getInstance();
+        if (noServer) {
+            gameManager.setRoom(new Room("TestRoom", 10, 2));
+        }
+        gameHandler = new GameHandler();
+        gameHandler.addGameHandlerListeners(this);
+
+        backgroundSound = new BackgroundSound(context, new GameSoundtracks(R.raw.soundtrack_01, R.raw.soundtrack_02).getSoundtracks(context));
+
+        SFVertex3f position = new SFVertex3f(5, 0.5f, -7);
+        SFVertex3f direction = new SFVertex3f(-1, -0.25f, 0);
+
+        me = new Player(new PlayerStatus(direction, new Circle(position, 0.75)), "Me");
+        Room room = gameManager.getRoom();
+        ArrayList<Team> teams = room.getTeams();
+        if (teams != null)
+            for (Team team : teams)
+                otherPlayers.addAll(team.getPlayers());
+
+        Iterator<Player> iterator = otherPlayers.iterator();
+        while (iterator.hasNext()) {
+            Player p = iterator.next();
+            if (p.getName().equals(username)) {
+                me = p;
+                iterator.remove();
+            }
+        }
 
         Log.d(LOG_TAG, "Starting SplashScreen..");
         SplashScreen splashScreen = new SplashScreen(this, R.id.game_splash_container, R.id.game_splash_image, R.id.game_splash_text, startSignal);
         splashScreen.animate();
 
-        gameManager = GameManager.getInstance();
-        gameManager.setRoom(new Room("TestRoom", 10, 2)); //DEBUG
-        gameHandler = new GameHandler();
-        gameHandler.addGameHandlerListeners(this);
-
-        boolean noServer = intent.getBooleanExtra("NO_SERVER", false);
+        Log.d(LOG_TAG, "Starting GamePositionSender..");
+        GamePositionSender gamePositionSender = new GamePositionSender(me, gameManager.getRoom().getName(), startSignal);
 
         if (noServer) {
             Map map = new Map();
@@ -98,24 +122,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
     public void onMapReceived() {
         Log.d(LOG_TAG, "onMapReceived");
         gameManager.setMap(gameHandler.getMap());
-
-        SFVertex3f position = new SFVertex3f(5, 0.5f, -7);
-        SFVertex3f direction = new SFVertex3f(-1, -0.25f, 0);
-
-        me = new Player(new PlayerStatus(direction, new Circle(position, 0.75)), "Me");
-        ArrayList<Team> teams = gameManager.getRoom().getTeams();
-        if (teams != null)
-            for (Team team : teams)
-                otherPlayers.addAll(team.getPlayers());
-
-        Iterator<Player> iterator = otherPlayers.iterator();
-        while (iterator.hasNext()) {
-            Player p = iterator.next();
-            if (p.getName().equals(username)) {
-                me = p;
-                iterator.remove();
-            }
-        }
 
         Log.d(LOG_TAG, "Starting GraphicsView..");
         LinearLayout graphicsContainerLayout = (LinearLayout) findViewById(R.id.graphics_view_container);

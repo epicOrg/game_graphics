@@ -4,6 +4,7 @@ import android.content.Context;
 import game.generators.FundamentalGenerator;
 import game.player.Player;
 import sfogl.integration.Node;
+import shadow.math.SFMatrix3f;
 import shadow.math.SFTransform3f;
 
 /**
@@ -21,7 +22,7 @@ public class PlayerView {
         this.textureId=textureId;
         node.setModel(FundamentalGenerator.getModel(context,ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER),textureId,"Obstacle01.obj"));
         node.getRelativeTransform().setPosition(player.getStatus().getPosition());
-//        node.getRelativeTransform().setMatrix(SFMatrix3f.getRotationY(player.getStatus().getDirection()));
+        node.updateTree(new SFTransform3f());
     }
 
     public void draw(){

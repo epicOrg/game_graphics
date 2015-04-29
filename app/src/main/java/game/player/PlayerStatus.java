@@ -65,4 +65,12 @@ public class PlayerStatus {
         return direction;
     }
 
+    public void setPosition(SFVertex3f position) {
+        this.position = position;
+    }
+
+    public void setDirection(SFVertex3f direction) {
+        this.direction = direction;
+    }
+
 }

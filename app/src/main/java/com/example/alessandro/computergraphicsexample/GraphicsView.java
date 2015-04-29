@@ -76,9 +76,6 @@ public class GraphicsView extends GLSurfaceView {
         this.context = context;
         this.me = me;
         this.otherPlayers = otherPlayers;
-        for (Player player : otherPlayers) {
-            playerViews.add(new PlayerView(player, context, R.drawable.wall_texture_01));
-        }
         this.map = map;
         this.startSignal = startSignal;
         this.groundWidth = groundWidth;
@@ -133,6 +130,10 @@ public class GraphicsView extends GLSurfaceView {
             ShadersKeeper.loadPipelineShaders(context);
             program = ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER);
             TextureKeeper.getInstance().reload(context);
+
+            for (Player player : otherPlayers) {
+                playerViews.add(new PlayerView(player, context, R.drawable.wall_texture_01));
+            }
 
             groundNode = new GroundGenerator(FundamentalGenerator.getModel(context, program, R.drawable.ground_texture_04, "Ground.obj")).getGroundNode(0, 0, groundWidth, groundHeight, -1);
             map.loadMap(cm, context);

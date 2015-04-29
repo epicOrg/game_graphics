@@ -9,8 +9,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import login.interaction.FieldsNames;
+import shadow.math.SFVertex3f;
 
 public class Game implements Service {
 
@@ -96,20 +98,32 @@ public class Game implements Service {
 
     private Message getGamePositionsMessage() {
         GamePositionsResult gamePositionsResult = null;
-        ArrayList<GamePositionsObject> gamePositionsObjects = new ArrayList<>();
+        HashMap<String, GamePositionsObject> gamePositionsObjectHashMap = new HashMap<>();
+
         try {
-            JSONArray jItems = json.getJSONArray(FieldsNames.GAME_ITEMS);
-            for (int i = 0; i < jItems.length(); i++) {
-                JSONObject jObject = jItems.getJSONObject(i);
-                String name = jObject.getString(FieldsNames.GAME_PLAYER_NAME);
-                String position = jObject.getString(FieldsNames.GAME_POSITION);
-                gamePositionsObjects.add(new GamePositionsObject(name, position));
+            JSONArray jPlayers = json.getJSONArray(FieldsNames.GAME_PLAYERS);
+
+            for(int i = 0; i < jPlayers.length(); i++){
+                JSONObject jPlayer =  jPlayers.getJSONObject(i);
+                String username = jPlayer.getString(FieldsNames.USERNAME);
+                JSONObject pos = jPlayer.getJSONObject(FieldsNames.GAME_POSITION);
+                JSONObject dir = jPlayer.getJSONObject(FieldsNames.GAME_DIRECTION);
+
+                float xPos = Float.parseFloat(pos.getString(FieldsNames.GAME_X));
+                float yPos = Float.parseFloat(pos.getString(FieldsNames.GAME_Y));
+                float zPos = Float.parseFloat(pos.getString(FieldsNames.GAME_Z));
+                float xDir = Float.parseFloat(dir.getString(FieldsNames.GAME_X));
+                float yDir = Float.parseFloat(dir.getString(FieldsNames.GAME_Y));
+                float zDir = Float.parseFloat(dir.getString(FieldsNames.GAME_Z));
+
+                gamePositionsObjectHashMap.put(username, new GamePositionsObject(new SFVertex3f(xPos, yPos, zPos), new SFVertex3f(xDir, yDir, zDir)));
             }
+
+            gamePositionsResult = new GamePositionsResult(gamePositionsObjectHashMap);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        gamePositionsResult = new GamePositionsResult(gamePositionsObjects);
         return handler.obtainMessage(POSITIONS, gamePositionsResult);
     }
 
@@ -169,24 +183,25 @@ public class Game implements Service {
 
     public class GamePositionsResult {
 
-        private ArrayList<GamePositionsObject> gamePositionsObjects;
+        private HashMap<String, GamePositionsObject> gamePositionsObjectHashMap;
 
-        public GamePositionsResult(ArrayList<GamePositionsObject> gamePositionsObjects) {
-            this.gamePositionsObjects = gamePositionsObjects;
+        public GamePositionsResult(HashMap<String, GamePositionsObject> gamePositionsObjectHashMap) {
+            this.gamePositionsObjectHashMap = gamePositionsObjectHashMap;
         }
 
-        public ArrayList<GamePositionsObject> getGamePositionsObjects() {
-            return gamePositionsObjects;
+        public HashMap<String, GamePositionsObject> getGamePositionsObjectHashMap() {
+            return gamePositionsObjectHashMap;
         }
 
     }
 
     public class GamePositionsObject {
-        public String name, position;
 
-        public GamePositionsObject(String name, String position) {
-            this.name = name;
-            this.position = position;
+        public SFVertex3f pos, dir;
+
+        public GamePositionsObject(SFVertex3f pos, SFVertex3f dir) {
+            this.pos = pos;
+            this.dir = dir;
         }
 
     }

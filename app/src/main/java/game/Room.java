@@ -60,6 +60,15 @@ public class Room {
         teams.add(t);
     }
 
+    public Player getPlayerByUsername(String username){
+        for(Team t: teams)
+            for(Player p : t.getPlayers())
+                if(p.getName().equals(username))
+                    return p;
+
+        return null;
+    }
+
     @Override
     public String toString() {
         return getName() + " (" + getCurrentPlayers() + " / " + getMaxPlayers() + ")";

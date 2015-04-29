@@ -59,7 +59,7 @@ public class FieldsNames {
     public static final String REGISTER_SERVER_ERROR = "serverError";
     public static final String REGISTER_ALREADY_USED = "alreadyUsed";
 
-    //Encrypt
+    // Encrypt
     public static final String ENCRYPTED_MESSAGE = "encrypedMessage";
     public static final String ENCRYPT_REQUEST = "encryptRequest";
     public static final String PUBLIC_KEY_REQUEST = "getKey";
@@ -67,7 +67,7 @@ public class FieldsNames {
     public static final String WRAPPED_KEY = "aKey";
 
     // Rooms/Room
-    //Others
+    // Others
     public static final String ROOM_MAX_PLAYERS = "maxPlayers";
     public static final String ROOM_NAME = "name";
 
@@ -91,7 +91,7 @@ public class FieldsNames {
     public static final String ROOM_TEAM = "team";
     public static final String ROOM_TEAM_COLOR = "teamColor";
     public static final String ROOM_ACTION = "action";
-    public static final String ROOM_JOINED = "joined";
+    public static final String ROOM_LIST_RECEIVED = "listReceived";
     public static final String ROOM_START = "start";
     public static final String ROOM_EXIT = "exit";
 
@@ -110,6 +110,7 @@ public class FieldsNames {
     public static final String GAME_OBJECT = "object";
     public static final String GAME_TEXTURE = "texture";
     public static final String GAME_POSITION = "position";
+    public static final String GAME_PLAYERS = "players";
     public static final String GAME_DIRECTION = "direction";
     public static final String GAME_SIZE = "size";
     public static final String GAME_X = "x";
@@ -126,10 +127,9 @@ public class FieldsNames {
     public static final String NO_ERRORS = "noErrors";
     public static final String ERRORS = "errors";
 
-    //Commons
+    // Commons
     public static final String INVALID = "invalidField";
     public static final String OFFLINE = "offline";
     public static final String SERVER_ERROR = "serverError";
     public static final String MISSING_FIELD = "missingField";
-
 }
