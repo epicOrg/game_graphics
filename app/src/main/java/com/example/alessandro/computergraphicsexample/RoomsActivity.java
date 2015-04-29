@@ -101,6 +101,13 @@ public class RoomsActivity extends ActionBarActivity {
             case R.id.action_new_rom:
                 showNewRoomDialog();
                 return true;
+            case R.id.action_refresh:
+                try {
+                    serverCommunicationThread.send(createListRequest());
+                } catch (NotConnectedException e) {
+                    e.printStackTrace();
+                }
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
