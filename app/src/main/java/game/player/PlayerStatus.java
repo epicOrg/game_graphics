@@ -23,34 +23,34 @@ public class PlayerStatus {
     }
 
     public void move(SFVertex3f motion, CollisionMediator cm) {
-        SFVertex3f circlePosition=circle.getPos(), originalPosition = new SFVertex3f(circlePosition);
+        SFVertex3f circlePosition = circle.getPos(), originalPosition = new SFVertex3f(circlePosition);
         circlePosition.add3f(motion);
 
-        CollisionBox box=cm.collide(circle);
+        CollisionBox box = cm.collide(circle);
         // Correct for obstacles
-        if (box!=null)
+        if (box != null)
             correctMotion(circlePosition, originalPosition, motion, box);
-        box=cm.collide(circle);
+        box = cm.collide(circle);
         // Correct for junctions
-        if (box!=null)
+        if (box != null)
             correctMotion(circlePosition, originalPosition, motion, box);
         // Reset if blocked, else update effective position
-        if (cm.collide(circle)!=null)
+        if (cm.collide(circle) != null)
             circlePosition.set(originalPosition);
         else
             position.set(circlePosition);
     }
 
-    private void correctMotion(SFVertex3f v, SFVertex3f v0, SFVertex3f tempVertex, CollisionBox box){
+    private void correctMotion(SFVertex3f v, SFVertex3f v0, SFVertex3f tempVertex, CollisionBox box) {
         SFVertex3f vertex;
         for (int i = 0; i < NUMBER_OF_ANGLE_DIVISIONS; i++) {
-            for (int j = -1; j < 2; j+=2) {
-                SFMatrix3f rotationMatrix = SFMatrix3f.getRotationY(i*j*(float)Math.PI/(2*NUMBER_OF_ANGLE_DIVISIONS));
-                vertex=new SFVertex3f(tempVertex);
+            for (int j = -1; j < 2; j += 2) {
+                SFMatrix3f rotationMatrix = SFMatrix3f.getRotationY(i * j * (float) Math.PI / (2 * NUMBER_OF_ANGLE_DIVISIONS));
+                vertex = new SFVertex3f(tempVertex);
                 vertex = rotationMatrix.Mult(vertex);
                 v.set(v0);
                 v.add(vertex);
-                if (!CollisionMediator.checkCollision(circle, box)){
+                if (!CollisionMediator.checkCollision(circle, box)) {
                     return;
                 }
             }
@@ -73,4 +73,9 @@ public class PlayerStatus {
         this.direction = direction;
     }
 
+    @Override
+    public String toString() {
+        return "POS: " + getPosition().getX() + " - " + getPosition().getY() + " - " + getPosition().getZ() +
+                "DIR: " + getDirection().getX() + " - " + getDirection().getY() + " - " + getDirection().getZ();
+    }
 }

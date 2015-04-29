@@ -51,8 +51,6 @@ public class GamePositionSender {
             }
 
             while (sending) {
-                Log.d(LOG_TAG, "Sending new position..");
-
                 JSONObject request = new JSONObject();
                 JSONObject posObject = null;
                 JSONObject dirObject = null;
@@ -86,7 +84,7 @@ public class GamePositionSender {
                 }
 
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

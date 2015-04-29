@@ -103,17 +103,17 @@ public class Game implements Service {
         try {
             JSONArray jPlayers = json.getJSONArray(FieldsNames.GAME_PLAYERS);
 
-            for(int i = 0; i < jPlayers.length(); i++){
-                JSONObject jPlayer =  jPlayers.getJSONObject(i);
+            for (int i = 0; i < jPlayers.length(); i++) {
+                JSONObject jPlayer = jPlayers.getJSONObject(i);
                 String username = jPlayer.getString(FieldsNames.USERNAME);
                 JSONObject pos = jPlayer.getJSONObject(FieldsNames.GAME_POSITION);
                 JSONObject dir = jPlayer.getJSONObject(FieldsNames.GAME_DIRECTION);
 
                 float xPos = Float.parseFloat(pos.getString(FieldsNames.GAME_X));
-                float yPos = Float.parseFloat(pos.getString(FieldsNames.GAME_Y));
+                float yPos = Float.parseFloat(pos.getString(FieldsNames.GAME_Y)) - 1.5f;
                 float zPos = Float.parseFloat(pos.getString(FieldsNames.GAME_Z));
                 float xDir = Float.parseFloat(dir.getString(FieldsNames.GAME_X));
-                float yDir = Float.parseFloat(dir.getString(FieldsNames.GAME_Y));
+                float yDir = Float.parseFloat(dir.getString(FieldsNames.GAME_Y)) - 1.5f;
                 float zDir = Float.parseFloat(dir.getString(FieldsNames.GAME_Z));
 
                 gamePositionsObjectHashMap.put(username, new GamePositionsObject(new SFVertex3f(xPos, yPos, zPos), new SFVertex3f(xDir, yDir, zDir)));

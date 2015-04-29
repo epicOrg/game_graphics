@@ -132,7 +132,7 @@ public class GraphicsView extends GLSurfaceView {
             TextureKeeper.getInstance().reload(context);
 
             for (Player player : otherPlayers) {
-                playerViews.add(new PlayerView(player, context, R.drawable.wall_texture_01));
+                playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
             }
 
             groundNode = new GroundGenerator(FundamentalGenerator.getModel(context, program, R.drawable.ground_texture_04, "Ground.obj")).getGroundNode(0, 0, groundWidth, groundHeight, -1);

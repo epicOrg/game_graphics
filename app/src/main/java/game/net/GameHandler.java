@@ -115,4 +115,5 @@ public class GameHandler extends Handler {
     public int getGroundHeight() {
         return groundHeight;
     }
+
 }

@@ -8,8 +8,8 @@ import shadow.math.SFVertex3f;
  */
 public class Player {
 
-    private String name;
-    private PlayerStatus status;
+    private volatile String name;
+    private volatile PlayerStatus status;
 
     public Player(PlayerStatus status, String name) {
         this.status = status;
