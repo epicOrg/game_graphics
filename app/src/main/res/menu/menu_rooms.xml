@@ -12,7 +12,7 @@
 
     <item
         android:id="@+id/action_new_rom"
-        android:icon="@drawable/ic_action_new"
+        android:icon="@drawable/ic_add_white_36dp"
         android:orderInCategory="100"
         android:title="@string/action_new_room"
         app:showAsAction="always" />
