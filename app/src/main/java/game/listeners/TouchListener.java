@@ -3,6 +3,7 @@ package game.listeners;
 import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
 import android.view.MotionEvent;
+
 import game.controls.Button;
 import game.controls.ButtonsControl;
 
@@ -27,7 +28,7 @@ public class TouchListener implements TouchListenerInterface {
     private Thread moveThread;
 
     public TouchListener(ButtonsControl buttonsControl, DirectionMoveListenerInterface directionMoveListener) {
-        this.buttonsControl =buttonsControl;
+        this.buttonsControl = buttonsControl;
         this.directionMoveListener = directionMoveListener;
     }
 
@@ -76,7 +77,7 @@ public class TouchListener implements TouchListenerInterface {
                 final float touchX = MotionEventCompat.getX(event, i);
                 final float touchY = MotionEventCompat.getY(event, i);
 
-                if (!buttonsControl.isInsideAButton(touchX, touchY)) {
+                if (buttonsControl.isInsideAButton(touchX, touchY)) {
                     startPressing(event, i, touchX, touchY);
                 }
             }
@@ -102,7 +103,6 @@ public class TouchListener implements TouchListenerInterface {
         }
     }
 
-
     private void startPressing(MotionEvent event, int index, final float touchX, final float touchY) {
         isPressing = true;
         positionId = MotionEventCompat.getPointerId(event, index);
@@ -111,11 +111,11 @@ public class TouchListener implements TouchListenerInterface {
             @Override
             public void run() {
                 while (isPressing) {
-                    Button pressedButton= buttonsControl.getPressedButton(touchX, touchY);
-                    if (pressedButton!=null)
+                    Button pressedButton = buttonsControl.getPressedButton(touchX, touchY);
+                    if (pressedButton != null)
                         pressedButton.execute(TIME_SLEEP);
                     else
-                        Log.d(LOG_TAG,"Null button");
+                        Log.d(LOG_TAG, "Null button");
                     try {
                         Thread.sleep(TIME_SLEEP);
                     } catch (InterruptedException e) {

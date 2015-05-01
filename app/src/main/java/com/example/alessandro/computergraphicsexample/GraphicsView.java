@@ -150,10 +150,9 @@ public class GraphicsView extends GLSurfaceView {
             camera.updateMatrices((float) width / height);
             directionMoveListener.update(width, height);
 
-            Model arrowModel = FundamentalGenerator.getModel(context, program, R.drawable.arrow_texture_02, "Arrow.obj");
-
             buttonMaster = new ButtonMaster(null, 0.15f, new SFVertex3f(-1f, -0.50f, 1));
-            new MoveButtonsGenerator(buttonMaster, arrowModel, positionMoveListener).generate();
+            Model arrowModel = FundamentalGenerator.getModel(context, program, R.drawable.arrow_texture_02, "Arrow.obj");
+            MoveButtonsGenerator.generate(buttonMaster, arrowModel, positionMoveListener);
             final ButtonsControl buttonsControl = new ButtonsControl(context, program, camera.getOrthoMatrix(), buttonMaster);
 
             touchListener = new TouchListener(buttonsControl, directionMoveListener);

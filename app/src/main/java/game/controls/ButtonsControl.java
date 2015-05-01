@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.opengl.GLES20;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.HashMap;
@@ -21,8 +22,7 @@ public class ButtonsControl {
 
     public static final String LOG_TAG = "ButtonsControl";
 
-    private HashMap<Integer, Button> map=new HashMap<>();
-    private HashMap<Button, Material> map2=new HashMap<>();
+    private HashMap<Integer, ButtonControlObject> buttonsMap = new HashMap<>();
 
     private ShadingProgram program;
     private float[] orthoMatrix;
@@ -33,13 +33,12 @@ public class ButtonsControl {
     public ButtonsControl(Context context, ShadingProgram program, float[] orthoMatrix, ButtonMaster buttonMaster) {
         this.program = program;
         this.orthoMatrix = orthoMatrix;
-        this.buttonMaster=buttonMaster;
-        int n=0;
-        for(Button b: buttonMaster.getButtons()){
+        this.buttonMaster = buttonMaster;
+        int n = 0;
+        for (Button b : buttonMaster.getButtons()) {
             n++;
-            int color=generateNewColor(n);
-            map.put(color, b);
-            map2.put(b, FundamentalGenerator.getColorMaterial(context,program,color));
+            int color = generateNewColor(n);
+            buttonsMap.put(color, new ButtonControlObject(b, FundamentalGenerator.getColorMaterial(context, program, color)));
         }
     }
 
@@ -70,18 +69,16 @@ public class ButtonsControl {
 
     public Button getPressedButton(float touchX, float touchY) {
         program.setupProjection(orthoMatrix);
-        return map.get(getColorAt(touchX,touchY));
+        return buttonsMap.get(getColorAt(touchX, touchY)).button;
     }
 
-
-
-    private int generateNewColor(int n){
+    private int generateNewColor(int n) {
         return Color.argb(255, n, 0, 0);
     }
 
     private void drawForColorPicking() {
-        for(Button b: map2.keySet()){
-            savePreviousMaterialDrawRestore(buttonMaster.getButtonNode(b), map2.get(b));
+        for (ButtonControlObject o : buttonsMap.values()) {
+            savePreviousMaterialDrawRestore(buttonMaster.getButtonNode(o.button), o.material);
         }
     }
 
@@ -94,6 +91,18 @@ public class ButtonsControl {
 
     private int getColorAt(float touchX, float touchY) {
         return buttonsBitmap.getPixel((int) touchX, (int) touchY);
+    }
+
+    private class ButtonControlObject {
+
+        public Button button;
+        public Material material;
+
+        public ButtonControlObject(Button button, Material material) {
+            this.button = button;
+            this.material = material;
+        }
+
     }
 
 }

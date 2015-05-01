@@ -12,49 +12,40 @@ import shadow.math.SFVertex3f;
  */
 public class MoveButtonsGenerator {
 
-    private ButtonMaster buttonMaster;
-    private Model model;
-    private PositionMoveListenerInterface positionMoveListener;
-
-    public MoveButtonsGenerator(ButtonMaster buttonMaster, Model model, final PositionMoveListenerInterface positionMoveListener){
-        this.buttonMaster=buttonMaster;
-        this.model=model;
-        this.positionMoveListener=positionMoveListener;
-    }
-
-    public void generate(){
+    public static void generate(ButtonMaster buttonMaster, Model model, final PositionMoveListenerInterface positionMoveListener) {
         buttonMaster.setModel(model);
 
         buttonMaster.addButton(new Button(new ButtonAction() {
                     @Override
                     public void action(Object parameter) {
-                        positionMoveListener.move((float) +Math.PI / 2, 0, (long)parameter);
+                        positionMoveListener.move((float) +Math.PI / 2, 0, (long) parameter);
                     }
                 }),
-                new SFVertex3f(-2, 0, 0),(float) -Math.PI / 2);
+                new SFVertex3f(-2, 0, 0), (float) -Math.PI / 2);
 
         buttonMaster.addButton(new Button(new ButtonAction() {
                     @Override
                     public void action(Object parameter) {
-                        positionMoveListener.move((float) -Math.PI / 2, 0, (long)parameter);
+                        positionMoveListener.move((float) -Math.PI / 2, 0, (long) parameter);
                     }
                 }),
-                new SFVertex3f(2, 0, 0),(float) Math.PI / 2);
+                new SFVertex3f(2, 0, 0), (float) Math.PI / 2);
 
         buttonMaster.addButton(new Button(new ButtonAction() {
                     @Override
                     public void action(Object parameter) {
-                        positionMoveListener.move(0, 0, (long)parameter);
+                        positionMoveListener.move(0, 0, (long) parameter);
                     }
                 }),
-                new SFVertex3f(0, 2, 0),(float) 0);
+                new SFVertex3f(0, 2, 0), (float) 0);
 
         buttonMaster.addButton(new Button(new ButtonAction() {
                     @Override
                     public void action(Object parameter) {
-                        positionMoveListener.move((float) -Math.PI , 0, (long)parameter);
+                        positionMoveListener.move((float) -Math.PI, 0, (long) parameter);
                     }
                 }),
-                new SFVertex3f(0, -2, 0),(float) -Math.PI );
+                new SFVertex3f(0, -2, 0), (float) -Math.PI);
     }
+
 }
