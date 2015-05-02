@@ -1,5 +1,7 @@
 package login.call.audio;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.net.rtp.AudioCodec;
 import android.net.rtp.AudioGroup;
 import android.net.rtp.AudioStream;
@@ -18,6 +20,8 @@ public class AudioCallManager {
 
     private static AudioCallManager instance = new AudioCallManager();
     private AudioGroup audioGroup;
+    private AudioStream audioStream;
+    private Context context;
 
     private AudioCallManager() {
         initAudioGroup();
@@ -32,16 +36,32 @@ public class AudioCallManager {
         audioGroup.setMode(AudioGroup.MODE_NORMAL);
     }
 
-    public AudioStream newAudioStream() throws SocketException, UnknownHostException {
-        AudioStream audioStream = new AudioStream(InetAddress.getByName(
+    public int newAudioStream() throws UnknownHostException, SocketException {
+        audioStream = new AudioStream(InetAddress.getByName(
                 ServerCommunicationThread.getLocalIpAddress()));
-        audioStream.setCodec(AudioCodec.AMR);
+        audioStream.setCodec(AudioCodec.PCMU);
         audioStream.setMode(RtpStream.MODE_NORMAL);
-        audioStream.join(audioGroup);
-        return audioStream;
+        return audioStream.getLocalPort();
     }
 
-    public void setAudio() {
-        //TODO
+    public void associateStream(InetAddress ip, int port){
+        audioStream.associate(ip, port);
+        audioStream.join(audioGroup);
+        AudioManager Audio =  (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        Audio.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        Audio.setSpeakerphoneOn(true);
+    }
+
+    public void releaseResources(){
+        audioStream.join(null);
+        audioStream.release();
+        audioStream = null;
+        AudioManager Audio =  (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        Audio.setMode(AudioManager.MODE_NORMAL);
+        Audio.setSpeakerphoneOn(false);
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 }

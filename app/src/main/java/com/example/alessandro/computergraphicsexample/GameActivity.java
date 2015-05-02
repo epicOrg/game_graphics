@@ -12,6 +12,8 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
@@ -29,6 +31,7 @@ import game.physics.Circle;
 import game.player.Player;
 import game.player.PlayerStatus;
 import game.views.SplashScreen;
+import login.call.audio.AudioCallManager;
 import login.communication.NotConnectedException;
 import login.communication.ServerCommunicationThread;
 import login.interaction.FieldsNames;
@@ -108,6 +111,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
         } else {
             serverCommunicationThread.setHandler(gameHandler);
             Log.d(LOG_TAG, "Asking Map..");
+            initAudioSetting();
+            Log.d(LOG_TAG,"Init Audio...");
             try {
                 serverCommunicationThread.send(createMapRequest());
             } catch (NotConnectedException e) {
@@ -116,6 +121,36 @@ public class GameActivity extends Activity implements GameHandlerListener {
             }
         }
 
+    }
+
+    private void initAudioSetting() {
+        AudioCallManager audioCallManager = AudioCallManager.getInstance();
+        audioCallManager.setContext(context);
+        audioCallManager.initAudioGroup();
+        try {
+            int audioport = audioCallManager.newAudioStream();
+            serverCommunicationThread.send(getCallRequest( audioport));
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (SocketException e) {
+            e.printStackTrace();
+        } catch (NotConnectedException e) {
+            Toast.makeText(this, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
+
+    private JSONObject getCallRequest(int audioport) {
+        JSONObject request = new JSONObject();
+        try {
+            request.put(FieldsNames.SERVICE, FieldsNames.AUDIO);
+            request.put(FieldsNames.HASHCODE, hashcode);
+            request.put(FieldsNames.USERNAME, username);
+            request.put(FieldsNames.AUDIO_PORT,audioport);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return request;
     }
 
     @Override

@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import login.interaction.FieldsNames;
+import login.services.Audio;
 import login.services.CurrentRoom;
 import login.services.Game;
 import login.services.Login;
@@ -31,6 +32,8 @@ public class ServiceChooser {
                 return new CurrentRoom(json);
             case FieldsNames.GAME:
                 return new Game(json);
+            case FieldsNames.AUDIO:
+                return new Audio(json);
             default:
                 //TODO
                 return new Unknown();
