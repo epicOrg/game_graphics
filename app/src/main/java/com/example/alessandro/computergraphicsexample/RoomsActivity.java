@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -52,11 +53,22 @@ public class RoomsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rooms);
 
+        ImageButton fabImageButton = (ImageButton) findViewById(R.id.action_new_rom);
+
+        fabImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showNewRoomDialog();
+            }
+        });
+
+
         context = this;
 
         Intent intent = getIntent();
         username = intent.getStringExtra(FieldsNames.USERNAME);
         hashcode = intent.getIntExtra(FieldsNames.HASHCODE, 0);
+
 
         roomsList = (ListView) findViewById(R.id.rooms_list);
         roomsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -121,6 +133,7 @@ public class RoomsActivity extends ActionBarActivity {
         final EditText name = (EditText) dialog.findViewById(R.id.newroom_name);
         final Button cancel = (Button) dialog.findViewById(R.id.newroom_cancel);
         final Button create = (Button) dialog.findViewById(R.id.newroom_create);
+
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override

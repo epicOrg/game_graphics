@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -58,6 +59,7 @@ public class RoomActivity extends ActionBarActivity {
 
         roomStatus = (TextView) findViewById(R.id.room_status);
         roomListsContainer = (LinearLayout) findViewById(R.id.room_lists_container);
+        ImageButton fabImageButton = (ImageButton) findViewById(R.id.action_new_rom);
 
         serverCommunicationThread.setHandler(new RoomHandler());
         try {
