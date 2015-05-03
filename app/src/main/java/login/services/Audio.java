@@ -27,7 +27,7 @@ public class Audio implements Service {
     public void start() {
         AudioCallManager audioCallManager = AudioCallManager.getInstance();
         try {
-            int serverPort = jsonRequest.getInt(FieldsNames.AUDIO_PORT);
+            int serverPort = jsonRequest.getInt(FieldsNames.AUDIO_PORT_SERVER);
             InetAddress serverIp = InetAddress.getByName(ServerCommunicationThread.SERVER_ADDRESS);
             audioCallManager.associateStream(serverIp,serverPort);
         } catch (JSONException e) {

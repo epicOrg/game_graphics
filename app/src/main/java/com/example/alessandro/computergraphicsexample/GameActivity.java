@@ -128,8 +128,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
         audioCallManager.setContext(context);
         audioCallManager.initAudioGroup();
         try {
-            int audioport = audioCallManager.newAudioStream();
-            serverCommunicationThread.send(getCallRequest( audioport));
+            int audioPort = audioCallManager.newAudioStream();
+            serverCommunicationThread.send(getCallRequest( audioPort));
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (SocketException e) {
@@ -146,7 +146,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
             request.put(FieldsNames.SERVICE, FieldsNames.AUDIO);
             request.put(FieldsNames.HASHCODE, hashcode);
             request.put(FieldsNames.USERNAME, username);
-            request.put(FieldsNames.AUDIO_PORT,audioport);
+            request.put(FieldsNames.AUDIO_PORT_CLIENT,audioport);
+            request.put(FieldsNames.ROOM_NAME, gameManager.getRoom().getName());
         } catch (JSONException e) {
             e.printStackTrace();
         }
