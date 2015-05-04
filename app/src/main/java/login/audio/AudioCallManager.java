@@ -1,4 +1,4 @@
-package login.call.audio;
+package login.audio;
 
 import android.content.Context;
 import android.media.AudioManager;
@@ -23,6 +23,9 @@ public class AudioCallManager {
     private AudioStream audioStream;
     private Context context;
 
+    private InetAddress serverIp;
+    private int serverPort;
+
     private AudioCallManager() {
         initAudioGroup();
     }
@@ -44,8 +47,8 @@ public class AudioCallManager {
         return audioStream.getLocalPort();
     }
 
-    public void associateStream(InetAddress ip, int port){
-        audioStream.associate(ip, port);
+    public void associateStream(){
+        audioStream.associate(serverIp, serverPort);
         audioStream.join(audioGroup);
         AudioManager Audio =  (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         Audio.setMode(AudioManager.MODE_IN_COMMUNICATION);
@@ -64,4 +67,13 @@ public class AudioCallManager {
     public void setContext(Context context) {
         this.context = context;
     }
+
+    public void setServerIp(InetAddress serverIp) {
+        this.serverIp = serverIp;
+    }
+
+    public void setServerPort(int serverPort) {
+        this.serverPort = serverPort;
+    }
+
 }

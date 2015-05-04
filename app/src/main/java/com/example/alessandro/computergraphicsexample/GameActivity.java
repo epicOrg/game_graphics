@@ -21,17 +21,19 @@ import java.util.concurrent.CountDownLatch;
 import game.GameManager;
 import game.Room;
 import game.Team;
+import game.WaiterGroup;
 import game.graphics.Map;
 import game.musics.BackgroundSound;
 import game.musics.GameSoundtracks;
 import game.net.GameHandler;
 import game.net.GameHandlerListener;
 import game.net.GamePositionSender;
+import game.net.GameStatusWaiter;
 import game.physics.Circle;
 import game.player.Player;
 import game.player.PlayerStatus;
 import game.views.SplashScreen;
-import login.call.audio.AudioCallManager;
+import login.audio.AudioCallManager;
 import login.communication.NotConnectedException;
 import login.communication.ServerCommunicationThread;
 import login.interaction.FieldsNames;
@@ -97,12 +99,20 @@ public class GameActivity extends Activity implements GameHandlerListener {
             }
         }
 
+        WaiterGroup waiterGroup = new WaiterGroup(startSignal);
+
         Log.d(LOG_TAG, "Starting SplashScreen..");
-        SplashScreen splashScreen = new SplashScreen(this, R.id.game_splash_container, R.id.game_splash_image, R.id.game_splash_text, startSignal);
+        SplashScreen splashScreen = new SplashScreen(this, R.id.game_splash_container, R.id.game_splash_image, R.id.game_splash_text);
         splashScreen.animate();
+        waiterGroup.addWaiter(splashScreen);
 
         Log.d(LOG_TAG, "Starting GamePositionSender..");
-        GamePositionSender gamePositionSender = new GamePositionSender(me, gameManager.getRoom().getName(), startSignal);
+        GamePositionSender gamePositionSender = new GamePositionSender(me, room.getName());
+        waiterGroup.addWaiter(gamePositionSender);
+
+        waiterGroup.addWaiter(new GameStatusWaiter(room.getName(), username, hashcode));
+
+        waiterGroup.startWaiting();
 
         if (noServer) {
             Map map = new Map();
@@ -112,7 +122,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
             serverCommunicationThread.setHandler(gameHandler);
             Log.d(LOG_TAG, "Asking Map..");
             initAudioSetting();
-            Log.d(LOG_TAG,"Init Audio...");
+            Log.d(LOG_TAG, "Init Audio...");
             try {
                 serverCommunicationThread.send(createMapRequest());
             } catch (NotConnectedException e) {
@@ -129,7 +139,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         audioCallManager.initAudioGroup();
         try {
             int audioPort = audioCallManager.newAudioStream();
-            serverCommunicationThread.send(getCallRequest( audioPort));
+            serverCommunicationThread.send(getCallRequest(audioPort));
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (SocketException e) {
@@ -146,7 +156,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
             request.put(FieldsNames.SERVICE, FieldsNames.AUDIO);
             request.put(FieldsNames.HASHCODE, hashcode);
             request.put(FieldsNames.USERNAME, username);
-            request.put(FieldsNames.AUDIO_PORT_CLIENT,audioport);
+            request.put(FieldsNames.AUDIO_PORT_CLIENT, audioport);
             request.put(FieldsNames.ROOM_NAME, gameManager.getRoom().getName());
         } catch (JSONException e) {
             e.printStackTrace();

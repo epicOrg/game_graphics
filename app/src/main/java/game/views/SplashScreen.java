@@ -13,33 +13,32 @@ import com.example.alessandro.computergraphicsexample.R;
 
 import java.util.concurrent.CountDownLatch;
 
+import game.Waiter;
+
 /**
  * Created by Andrea on 22/04/2015.
  */
-public class SplashScreen {
+public class SplashScreen implements Waiter {
 
     public static final String LOG_TAG = "SplashScreen";
 
-    private CountDownLatch startSignal;
     private Activity activity;
 
     private FrameLayout frameLayout;
     private ImageView imageView;
     private TextView textView;
 
-    public SplashScreen(Activity activity, int frameLayoutId, int imageViewId, int textViewId, CountDownLatch startSignal) {
+    public SplashScreen(Activity activity, int frameLayoutId, int imageViewId, int textViewId) {
         frameLayout = (FrameLayout) activity.findViewById(frameLayoutId);
         imageView = (ImageView) activity.findViewById(imageViewId);
         textView = (TextView) activity.findViewById(textViewId);
 
-        this.startSignal = startSignal;
         this.activity = activity;
     }
 
     public void animate() {
         animateImage();
         animateText();
-        startSplashScreenThread();
     }
 
     private void animateImage() {
@@ -102,24 +101,14 @@ public class SplashScreen {
         });
     }
 
-    private void startSplashScreenThread() {
-        new Thread(new Runnable() {
+    @Override
+    public void unleash() {
+        activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    startSignal.await();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        frameLayout.setVisibility(View.GONE);
-                    }
-                });
+                frameLayout.setVisibility(View.GONE);
             }
-        }).start();
+        });
     }
 
 }

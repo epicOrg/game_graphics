@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import login.call.audio.AudioCallManager;
+import login.audio.AudioCallManager;
 import login.communication.ServerCommunicationThread;
 import login.interaction.FieldsNames;
 
@@ -29,7 +29,8 @@ public class Audio implements Service {
         try {
             int serverPort = jsonRequest.getInt(FieldsNames.AUDIO_PORT_SERVER);
             InetAddress serverIp = InetAddress.getByName(ServerCommunicationThread.SERVER_ADDRESS);
-            audioCallManager.associateStream(serverIp,serverPort);
+            audioCallManager.setServerPort(serverPort);
+            audioCallManager.setServerIp(serverIp);
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (UnknownHostException e) {

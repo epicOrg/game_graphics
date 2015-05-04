@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.util.concurrent.CountDownLatch;
 
 import game.Room;
+import game.Waiter;
 import game.player.Player;
 import game.player.PlayerStatus;
 import login.communication.NotConnectedException;
@@ -17,24 +18,20 @@ import login.interaction.FieldsNames;
 /**
  * Created by Andrea on 29/04/2015.
  */
-public class GamePositionSender {
+public class GamePositionSender implements Waiter {
 
     public static final String LOG_TAG = "GamePositionSender";
 
     private Player player;
     private String roomName;
-    private CountDownLatch startSignal;
 
     private ServerCommunicationThread serverCommunicationThread = ServerCommunicationThread.getInstance();
 
     private boolean sending = true;
 
-    public GamePositionSender(Player player, String roomName, CountDownLatch startSignal) {
+    public GamePositionSender(Player player, String roomName) {
         this.player = player;
         this.roomName = roomName;
-        this.startSignal = startSignal;
-
-        new Thread(sendPositionRunnable).start();
     }
 
     public void setSending(boolean sending) {
@@ -44,13 +41,7 @@ public class GamePositionSender {
     private Runnable sendPositionRunnable = new Runnable() {
         @Override
         public void run() {
-            try {
-                startSignal.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            while (sending) {
+             while (sending) {
                 JSONObject request = new JSONObject();
                 JSONObject posObject = null;
                 JSONObject dirObject = null;
@@ -91,4 +82,9 @@ public class GamePositionSender {
             }
         }
     };
+
+    @Override
+    public void unleash() {
+        new Thread(sendPositionRunnable).start();
+    }
 }
