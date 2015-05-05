@@ -67,7 +67,7 @@
             <!-- Blue button pressed -->
             <item>
                 <shape android:shape="oval">
-                    <solid android:color="#ff37ff1f" />
+                    <solid android:color="#CDDC39" />
                 </shape>
             </item>
         </layer-list>
@@ -139,7 +139,7 @@
             <!-- Blue button -->
             <item>
                 <shape android:shape="oval">
-                    <solid android:color="#ff1316e9" />
+                    <solid android:color="#CDDC39" />
                 </shape>
             </item>
         </layer-list>
