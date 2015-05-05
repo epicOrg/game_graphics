@@ -1,6 +1,7 @@
 package com.example.alessandro.computergraphicsexample;
 
 import android.content.Context;
+import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -21,6 +22,7 @@ import game.graphics.Map;
 import game.graphics.PlayerView;
 import game.graphics.ShadersKeeper;
 import game.graphics.Sky;
+import game.graphics.TextLabel;
 import game.graphics.TextureKeeper;
 import game.listeners.DirectionDirectionMoveListener;
 import game.listeners.DirectionMoveListenerInterface;
@@ -28,8 +30,6 @@ import game.listeners.PositionMoveListenerInterface;
 import game.listeners.PositionMoveListenerXZWithCollisions;
 import game.listeners.TouchListener;
 import game.listeners.TouchListenerInterface;
-import game.musics.BackgroundSound;
-import game.musics.GameSoundtracks;
 import game.physics.CollisionMediator;
 import game.player.Player;
 import sfogl.integration.Model;
@@ -85,6 +85,8 @@ public class GraphicsView extends GLSurfaceView {
         cm = new CollisionMediator();
         sfs = SFOGLStateEngine.glEnable(GL_CULL_FACE);
 
+
+
         positionMoveListener = new PositionMoveListenerXZWithCollisions(me.getStatus(), cm);
         directionMoveListener = new DirectionDirectionMoveListener(me.getStatus().getDirection(), getWidth(), getHeight());
 
@@ -130,6 +132,10 @@ public class GraphicsView extends GLSurfaceView {
             ShadersKeeper.loadPipelineShaders(context);
             program = ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER);
             TextureKeeper.getInstance().reload(context);
+            GLES20.glEnable(GLES20.GL_BLEND);
+            GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);
+
+            label=new TextLabel(0.5f,0.5f,new SFVertex3f(2, 0.5f, -7),new SFVertex3f(0,0,-1),"epicOrg");
 
             for (Player player : otherPlayers) {
                 playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
@@ -141,6 +147,8 @@ public class GraphicsView extends GLSurfaceView {
 
             createMonkeys();
         }
+
+        private TextLabel label;
 
         @Override
         public void onSurfaceChanged(GL10 gl, final int width, final int height) {
@@ -170,6 +178,7 @@ public class GraphicsView extends GLSurfaceView {
 
         @Override
         public void onDrawFrame(GL10 gl) {
+            sky.draw();
             program.setupProjection(camera.getResultMatrix());
             SFOGLSystemState.cleanupColorAndDepth(0, 0, 1, 1);
             sfs.applyState();
@@ -179,6 +188,7 @@ public class GraphicsView extends GLSurfaceView {
             drawPlayers();
             map.draw();
             sky.draw();
+            label.draw();
 
             program.setupProjection(camera.getOrthoMatrix());
 

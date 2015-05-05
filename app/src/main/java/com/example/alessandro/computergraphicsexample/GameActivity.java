@@ -106,11 +106,14 @@ public class GameActivity extends Activity implements GameHandlerListener {
         splashScreen.animate();
         waiterGroup.addWaiter(splashScreen);
 
-        Log.d(LOG_TAG, "Starting GamePositionSender..");
-        GamePositionSender gamePositionSender = new GamePositionSender(me, room.getName());
-        waiterGroup.addWaiter(gamePositionSender);
+        if (!noServer){
+            Log.d(LOG_TAG, "Starting GamePositionSender..");
+            GamePositionSender gamePositionSender = new GamePositionSender(me, room.getName());
+            waiterGroup.addWaiter(gamePositionSender);
 
-        waiterGroup.addWaiter(new GameStatusWaiter(room.getName(), username, hashcode));
+            waiterGroup.addWaiter(new GameStatusWaiter(room.getName(), username, hashcode));
+        }
+
 
         waiterGroup.startWaiting();
 
