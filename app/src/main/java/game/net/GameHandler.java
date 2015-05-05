@@ -99,7 +99,8 @@ public class GameHandler extends Handler {
 
         for(String s : gamePositionsObjectHashMap.keySet()){
             Player p = room.getPlayerByUsername(s);
-            p.getStatus().setPosition(gamePositionsObjectHashMap.get(s).pos);
+            p.getStatus().getPosition().set(gamePositionsObjectHashMap.get(s).pos);
+//            p.getStatus().setPosition(gamePositionsObjectHashMap.get(s).pos);
             p.getStatus().setDirection(gamePositionsObjectHashMap.get(s).dir);
         }
     }

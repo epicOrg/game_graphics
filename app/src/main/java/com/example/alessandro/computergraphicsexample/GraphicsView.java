@@ -1,6 +1,7 @@
 package com.example.alessandro.computergraphicsexample;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
@@ -41,6 +42,7 @@ import sfogl2.SFOGLStateEngine;
 import sfogl2.SFOGLSystemState;
 import shadow.math.SFMatrix3f;
 import shadow.math.SFTransform3f;
+import shadow.math.SFVertex3f;
 
 import static android.opengl.GLES20.GL_CULL_FACE;
 import static android.opengl.GLES20.glViewport;
@@ -135,9 +137,11 @@ public class GraphicsView extends GLSurfaceView {
             GLES20.glEnable(GLES20.GL_BLEND);
             GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);
 
+            label=new TextLabel(0.6f,0.6f,me.getStatus().getDirection(),new SFVertex3f(2, 0.5f, -7),"epicOrg", Color.RED);
+
             for (Player player : otherPlayers) {
                 playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
-                labels.add(new TextLabel(0.6f, 0.6f, me.getStatus().getDirection(), player.getStatus(), player.getName()));
+                labels.add(new TextLabel(0.6f,0.6f,me.getStatus().getDirection(), player.getStatus().getPosition(), player.getName(),Color.BLUE));
             }
 
             groundNode = new GroundGenerator(FundamentalGenerator.getModel(context, program, R.drawable.ground_texture_04, "Ground.obj"))
@@ -147,6 +151,8 @@ public class GraphicsView extends GLSurfaceView {
 
             createMonkeys();
         }
+
+        private TextLabel label;
 
         @Override
         public void onSurfaceChanged(GL10 gl, final int width, final int height) {
@@ -189,6 +195,8 @@ public class GraphicsView extends GLSurfaceView {
             drawPlayers();
             map.draw();
             sky.draw();
+
+            label.draw();
 
             for (TextLabel label : labels) {
                 label.draw();

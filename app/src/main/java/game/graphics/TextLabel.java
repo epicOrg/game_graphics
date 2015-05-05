@@ -51,15 +51,13 @@ public class TextLabel {
         return board;
     }
 
-    public TextLabel(float width, float height, SFVertex3f direction, PlayerStatus status, String text){
+    public TextLabel(float width, float height, SFVertex3f direction, SFVertex3f position, String text, int color){
         setBoard(width, height);
-        node=generateNode(board, getTextBitmap(text,Color.BLUE));
+        node=generateNode(board, getTextBitmap(text,color));
         this.direction=direction;
-        this.status=status;
+        this.position=position;
     }
 
-
-    private PlayerStatus status;
 
     private Node generateNode(ArrayObject arrayObject, Bitmap bitmap) {
         Mesh meshPos = new Mesh(arrayObject);
@@ -92,10 +90,14 @@ public class TextLabel {
         return bitmap;
     }
 
-    private SFVertex3f direction;
+    public void setPosition(SFVertex3f position){
+        this.position=position;
+    }
+
+    private SFVertex3f direction,position;
 
     public void draw() {
-        node.getRelativeTransform().setPosition(new SFVertex3f(status.getPosition()));
+        node.getRelativeTransform().setPosition(new SFVertex3f(position.getX(),0.5f,position.getZ()));
         float angle=-(float)Math.atan2(direction.getZ(),direction.getX())+(float)(1*Math.PI/2);
         node.getRelativeTransform().setMatrix(SFMatrix3f.getRotationY(angle));
         node.updateTree(new SFTransform3f());
