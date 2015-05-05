@@ -5,6 +5,6 @@ package game.controls;
  */
 public interface ButtonAction {
 
-    public void action(Object parameter);
+    void action(Object parameter);
 
 }

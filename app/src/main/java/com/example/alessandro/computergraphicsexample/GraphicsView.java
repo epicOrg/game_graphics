@@ -17,6 +17,7 @@ import game.controls.ButtonsControl;
 import game.generators.FundamentalGenerator;
 import game.generators.GroundGenerator;
 import game.generators.MoveButtonsGenerator;
+import game.generators.SettingsButtonsGenerator;
 import game.graphics.Camera;
 import game.graphics.Map;
 import game.graphics.PlayerView;
@@ -40,7 +41,6 @@ import sfogl2.SFOGLStateEngine;
 import sfogl2.SFOGLSystemState;
 import shadow.math.SFMatrix3f;
 import shadow.math.SFTransform3f;
-import shadow.math.SFVertex3f;
 
 import static android.opengl.GLES20.GL_CULL_FACE;
 import static android.opengl.GLES20.glViewport;
@@ -86,7 +86,6 @@ public class GraphicsView extends GLSurfaceView {
         sfs = SFOGLStateEngine.glEnable(GL_CULL_FACE);
 
 
-
         positionMoveListener = new PositionMoveListenerXZWithCollisions(me.getStatus(), cm);
         directionMoveListener = new DirectionDirectionMoveListener(me.getStatus().getDirection(), getWidth(), getHeight());
 
@@ -122,7 +121,7 @@ public class GraphicsView extends GLSurfaceView {
         private Sky sky;
         private Node node, groundNode;
         private ButtonMaster buttonMaster;
-        private ArrayList<TextLabel> labels=new ArrayList<>();
+        private ArrayList<TextLabel> labels = new ArrayList<>();
 
         private float t = 0;
 
@@ -138,7 +137,7 @@ public class GraphicsView extends GLSurfaceView {
 
             for (Player player : otherPlayers) {
                 playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
-                labels.add(new TextLabel(0.6f,0.6f,me.getStatus().getDirection(), player.getStatus(), player.getName()));
+                labels.add(new TextLabel(0.6f, 0.6f, me.getStatus().getDirection(), player.getStatus(), player.getName()));
             }
 
             groundNode = new GroundGenerator(FundamentalGenerator.getModel(context, program, R.drawable.ground_texture_04, "Ground.obj"))
@@ -157,9 +156,12 @@ public class GraphicsView extends GLSurfaceView {
             camera.updateMatrices((float) width / height);
             directionMoveListener.update(width, height);
 
-            buttonMaster = new ButtonMaster(null, 0.15f, new SFVertex3f(-1f, -0.50f, 1));
-            Model arrowModel = FundamentalGenerator.getModel(context, program, R.drawable.arrow_texture_02, "Arrow.obj");
-            MoveButtonsGenerator.generate(buttonMaster, arrowModel, positionMoveListener);
+            buttonMaster = new ButtonMaster();
+            MoveButtonsGenerator moveButtonsGenerator = new MoveButtonsGenerator(context, program, buttonMaster, positionMoveListener);
+            moveButtonsGenerator.generate();
+            SettingsButtonsGenerator settingsButtonsGenerator = new SettingsButtonsGenerator(context, program, buttonMaster);
+            settingsButtonsGenerator.generate();
+
             final ButtonsControl buttonsControl = new ButtonsControl(context, program, camera.getOrthoMatrix(), buttonMaster);
 
             touchListener = new TouchListener(buttonsControl, directionMoveListener);
@@ -188,7 +190,7 @@ public class GraphicsView extends GLSurfaceView {
             map.draw();
             sky.draw();
 
-            for(TextLabel label: labels){
+            for (TextLabel label : labels) {
                 label.draw();
             }
 
