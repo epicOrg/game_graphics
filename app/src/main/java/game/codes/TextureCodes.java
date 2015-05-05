@@ -19,6 +19,7 @@ public class TextureCodes {
         codes.put("hedge_texture_01", R.drawable.hedge_texture_01);
         codes.put("hedge_texture_02", R.drawable.hedge_texture_02);
         codes.put("hedge_texture_02_1", R.drawable.hedge_texture_02_1);
+        codes.put("vase_texture", R.drawable.vase_texture);
     }
 
     public static int getTextureIdFromString(String s){
