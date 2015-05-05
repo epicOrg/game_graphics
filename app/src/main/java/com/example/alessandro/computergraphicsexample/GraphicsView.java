@@ -136,11 +136,9 @@ public class GraphicsView extends GLSurfaceView {
             GLES20.glEnable(GLES20.GL_BLEND);
             GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);
 
-            label=new TextLabel(0.5f,0.5f,me.getStatus().getPosition(),new SFVertex3f(2, 0.5f, -7),me.getStatus().getDirection(),"epicOrg");
-
             for (Player player : otherPlayers) {
                 playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
-                labels.add(new TextLabel(0.6f,0.6f,me.getStatus().getPosition(),player.getStatus().getPosition(), me.getStatus().getDirection(), player.getName()));
+                labels.add(new TextLabel(0.6f,0.6f,me.getStatus().getDirection(), player.getStatus(), player.getName()));
             }
 
             groundNode = new GroundGenerator(FundamentalGenerator.getModel(context, program, R.drawable.ground_texture_04, "Ground.obj"))
@@ -150,8 +148,6 @@ public class GraphicsView extends GLSurfaceView {
 
             createMonkeys();
         }
-
-        private TextLabel label;
 
         @Override
         public void onSurfaceChanged(GL10 gl, final int width, final int height) {
@@ -191,7 +187,6 @@ public class GraphicsView extends GLSurfaceView {
             drawPlayers();
             map.draw();
             sky.draw();
-            label.draw();
 
             for(TextLabel label: labels){
                 label.draw();

@@ -55,13 +55,13 @@ public class BitmapTexture implements SFInitiable {
         for (int j = 0; j < height; j++) {
             for (int i = 0; i < width; i++) {
                 int color = image.getPixel(i, height - j - 1);
-                values[index] = (color & 0xff000000) >> 24;
-                index++;
                 values[index] = (color & 0xff0000) >> 16;
                 index++;
                 values[index] = (color & 0xff00) >> 8;
                 index++;
                 values[index] = (color & 0xff);
+                index++;
+                values[index] = (color & 0xff000000) >> 24;
                 index++;
             }
         }
