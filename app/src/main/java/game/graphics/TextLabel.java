@@ -51,11 +51,13 @@ public class TextLabel {
         return board;
     }
 
-    public TextLabel(float width, float height, SFVertex3f position, SFVertex3f direction, String text){
+    public TextLabel(float width, float height, SFVertex3f position, SFVertex3f position0, SFVertex3f direction, String text){
         setBoard(width, height);
         node=generateNode(board, getTextBitmap(text,Color.BLUE));
-        this.position=position;
+//        this.position=position;
         this.direction=direction;
+        this.position0=position0;
+        Log.d("ControlDIrection", "" + (float) Math.atan2(direction.getZ(), direction.getX()));
     }
 
     private Node generateNode(ArrayObject arrayObject, Bitmap bitmap) {
@@ -85,15 +87,19 @@ public class TextLabel {
         paint.setAntiAlias(false);
         paint.setTextSize(20);
         paint.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText(text,64,64,paint);
+        canvas.drawText(text, 64, 64, paint);
         return bitmap;
     }
 
-    private SFVertex3f position, direction;
+    private SFVertex3f position, direction,position0;
 
     public void draw() {
-        node.getRelativeTransform().setPosition(position.getX(), position.getY(), position.getZ());
-        float angle=(float)Math.atan2(direction.getZ(),direction.getX());
+        node.getRelativeTransform().setPosition(position0.getX(), position0.getY(), position0.getZ());
+        float angle=-(float)Math.atan2(direction.getZ(),direction.getX())+(float)(1*Math.PI/2);
+//        SFVertex3f vector=new SFVertex3f(position0);
+//        vector.subtract(position);
+//
+//        float angle=-(float)Math.atan2(vector.getZ(),vector.getX())+(float)(3*Math.PI/2)+3*(float)(Math.PI/2);
         node.getRelativeTransform().setMatrix(SFMatrix3f.getRotationY(angle));
         node.updateTree(new SFTransform3f());
         node.draw();

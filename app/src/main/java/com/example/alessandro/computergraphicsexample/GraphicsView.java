@@ -122,6 +122,7 @@ public class GraphicsView extends GLSurfaceView {
         private Sky sky;
         private Node node, groundNode;
         private ButtonMaster buttonMaster;
+        private ArrayList<TextLabel> labels=new ArrayList<>();
 
         private float t = 0;
 
@@ -135,13 +136,15 @@ public class GraphicsView extends GLSurfaceView {
             GLES20.glEnable(GLES20.GL_BLEND);
             GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);
 
-            label=new TextLabel(0.5f,0.5f,new SFVertex3f(2, 0.5f, -7),new SFVertex3f(0,0,-1),"epicOrg");
+            label=new TextLabel(0.5f,0.5f,me.getStatus().getPosition(),new SFVertex3f(2, 0.5f, -7),me.getStatus().getDirection(),"epicOrg");
 
             for (Player player : otherPlayers) {
                 playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
+                labels.add(new TextLabel(0.6f,0.6f,me.getStatus().getPosition(),player.getStatus().getPosition(), me.getStatus().getDirection(), player.getName()));
             }
 
-            groundNode = new GroundGenerator(FundamentalGenerator.getModel(context, program, R.drawable.ground_texture_04, "Ground.obj")).getGroundNode(0, 0, groundWidth, groundHeight, -1);
+            groundNode = new GroundGenerator(FundamentalGenerator.getModel(context, program, R.drawable.ground_texture_04, "Ground.obj"))
+                    .getGroundNode(0, 0, groundWidth, groundHeight, -1);
             map.loadMap(cm, context);
             sky = new Sky(context, program, me.getStatus().getPosition());
 
@@ -189,6 +192,10 @@ public class GraphicsView extends GLSurfaceView {
             map.draw();
             sky.draw();
             label.draw();
+
+            for(TextLabel label: labels){
+                label.draw();
+            }
 
             program.setupProjection(camera.getOrthoMatrix());
 
