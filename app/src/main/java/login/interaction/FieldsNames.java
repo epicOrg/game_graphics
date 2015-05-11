@@ -25,6 +25,7 @@ public class FieldsNames {
     public static final String GAME = "game";
     public static final String UNKNOWN = "unknown";
     public static final String AUDIO = "audio";
+    public static final String POLLING = "polling";
 
     /**
      * ************************************************************************
@@ -135,4 +136,5 @@ public class FieldsNames {
     public static final String OFFLINE = "offline";
     public static final String SERVER_ERROR = "serverError";
     public static final String MISSING_FIELD = "missingField";
+
 }
