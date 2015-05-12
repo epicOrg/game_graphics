@@ -47,7 +47,7 @@ public class MoveButtonsGenerator {
                     public void action(Object parameter) {
                         positionMoveListener.move((float) +Math.PI / 2, 0, (long) parameter);
                     }
-                }),
+                }, true, true),
                 new SFVertex3f(-2, 0, 0), (float) -Math.PI / 2, parentNode);
 
         buttonMaster.addButton(new Button(new ButtonAction() {
@@ -55,7 +55,7 @@ public class MoveButtonsGenerator {
                     public void action(Object parameter) {
                         positionMoveListener.move((float) -Math.PI / 2, 0, (long) parameter);
                     }
-                }),
+                }, true, true),
                 new SFVertex3f(2, 0, 0), (float) Math.PI / 2, parentNode);
 
         buttonMaster.addButton(new Button(new ButtonAction() {
@@ -63,7 +63,7 @@ public class MoveButtonsGenerator {
                     public void action(Object parameter) {
                         positionMoveListener.move(0, 0, (long) parameter);
                     }
-                }),
+                }, true, true),
                 new SFVertex3f(0, 2, 0), (float) 0, parentNode);
 
         buttonMaster.addButton(new Button(new ButtonAction() {
@@ -71,7 +71,7 @@ public class MoveButtonsGenerator {
                     public void action(Object parameter) {
                         positionMoveListener.move((float) -Math.PI, 0, (long) parameter);
                     }
-                }),
+                }, true, true),
                 new SFVertex3f(0, -2, 0), (float) -Math.PI, parentNode);
     }
 

@@ -27,13 +27,22 @@ public class TouchListener implements TouchListenerInterface {
     private float previousX, previousY;
     private Thread moveThread;
 
+    private boolean readyToPlay = false;
+
     public TouchListener(ButtonsControl buttonsControl, DirectionMoveListenerInterface directionMoveListener) {
         this.buttonsControl = buttonsControl;
         this.directionMoveListener = directionMoveListener;
     }
 
+    public void setReadyToPlay(boolean readyToPlay) {
+        this.readyToPlay = readyToPlay;
+    }
+
     @Override
     public void onTouchEvent(final MotionEvent event) {
+        if (!readyToPlay)
+            return;
+
         final int action = MotionEventCompat.getActionMasked(event);
         final int index = MotionEventCompat.getActionIndex(event);
 
@@ -112,10 +121,19 @@ public class TouchListener implements TouchListenerInterface {
             public void run() {
                 while (isPressing) {
                     Button pressedButton = buttonsControl.getPressedButton(touchX, touchY);
+
+                    if (pressedButton.isNeedToBeReady() && !readyToPlay) {
+                        return;
+                    }
+
                     if (pressedButton != null)
                         pressedButton.execute(TIME_SLEEP);
                     else
                         Log.d(LOG_TAG, "Null button");
+
+                    if (!pressedButton.isContinuousPressing())
+                        return;
+
                     try {
                         Thread.sleep(TIME_SLEEP);
                     } catch (InterruptedException e) {
@@ -123,7 +141,9 @@ public class TouchListener implements TouchListenerInterface {
                     }
                 }
             }
-        });
+        }
+
+        );
         moveThread.start();
     }
 

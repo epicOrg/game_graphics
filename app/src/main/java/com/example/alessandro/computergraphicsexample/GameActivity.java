@@ -113,6 +113,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         SplashScreen splashScreen = new SplashScreen(this, R.id.game_splash_container, R.id.game_splash_image, R.id.game_splash_text);
         splashScreen.animate();
         waiterGroup.addWaiter(splashScreen);
+        messageScreen.setText("Waiting for other players..", Color.BLUE);
         waiterGroup.addWaiter(messageScreen);
 
         if (!noServer) {
@@ -122,7 +123,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
             waiterGroup.addWaiter(new GameStatusWaiter(room.getName(), username, hashcode));
         }
-
 
         waiterGroup.startWaiting();
 
@@ -182,10 +182,10 @@ public class GameActivity extends Activity implements GameHandlerListener {
         gameManager.setMap(gameHandler.getMap());
 
         Log.d(LOG_TAG, "Starting GraphicsView..");
-        LinearLayout graphicsContainerLayout = (LinearLayout) findViewById(R.id.graphics_view_container);
         int width = gameHandler.getGroundWidth();
         int height = gameHandler.getGroundHeight();
         graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), gameManager.getMap(), startSignal, width, height);
+        LinearLayout graphicsContainerLayout = (LinearLayout) findViewById(R.id.graphics_view_container);
         graphicsContainerLayout.addView(graphicsView);
     }
 
@@ -193,6 +193,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
     public void onGameGo() {
         Log.d(LOG_TAG, "onGameGo");
         messageScreen.hide();
+
+        graphicsView.onGameGo();
     }
 
     @Override

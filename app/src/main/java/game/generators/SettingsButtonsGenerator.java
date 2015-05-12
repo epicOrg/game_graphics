@@ -48,7 +48,7 @@ public class SettingsButtonsGenerator {
                         //TODO
                         Log.d(LOG_TAG, "Pressed pause button");
                     }
-                }),
+                }, false, false),
                 new SFVertex3f(0, 0, 0), 0, parentNode);
     }
 

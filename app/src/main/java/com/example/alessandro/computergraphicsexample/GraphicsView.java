@@ -69,7 +69,6 @@ public class GraphicsView extends GLSurfaceView {
     private CollisionMediator cm;
     private Map map;
 
-    private boolean isReadyForTouch = false;
     private SFOGLState sfs;
 
     private int groundWidth, groundHeight;
@@ -115,10 +114,13 @@ public class GraphicsView extends GLSurfaceView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (isReadyForTouch)
-            touchListener.onTouchEvent(event);
+        touchListener.onTouchEvent(event);
 
         return true;
+    }
+
+    public void onGameGo() {
+        touchListener.setReadyToPlay(true);
     }
 
     public class GraphicsRenderer implements Renderer {
@@ -184,7 +186,6 @@ public class GraphicsView extends GLSurfaceView {
                 @Override
                 public void run() {
                     buttonsControl.update(width, height);
-                    isReadyForTouch = true;
                 }
             });
 
