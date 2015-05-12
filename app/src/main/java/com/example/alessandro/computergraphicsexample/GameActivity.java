@@ -74,6 +74,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         context = this;
 
         messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
+        messageScreen = new MessageScreen(context, Color.argb(128, 255, 0, 0), messageContainer);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
 
         Intent intent = getIntent();
@@ -85,7 +86,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         if (noServer) {
             gameManager.setRoom(new Room("TestRoom", 10, 2));
         }
-        gameHandler = new GameHandler();
+        gameHandler = new GameHandler(messageScreen);
         gameHandler.addGameHandlerListeners(this);
 
         backgroundSound = new BackgroundSound(context, new GameSoundtracks(R.raw.soundtrack_01, R.raw.soundtrack_02).getSoundtracks(context));
@@ -187,7 +188,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), gameManager.getMap(), startSignal, width, height);
         graphicsContainerLayout.addView(graphicsView);
 
-        messageScreen = new MessageScreen(context, "Waiting for other players..", Color.argb(128, 255, 0, 0), messageContainer);
+        messageScreen.setText("Waiting other players..", Color.BLACK);
         messageScreen.show();
     }
 
