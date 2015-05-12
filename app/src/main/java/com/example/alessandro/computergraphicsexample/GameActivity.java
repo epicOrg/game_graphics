@@ -76,8 +76,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
         messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
-
-        messageScreen = new MessageScreen(this, Color.argb(128, 255, 0, 0), messageContainer);
+        messageScreen = new MessageScreen(this, Color.argb(128, 0xCD, 0xDC, 0x39), messageContainer);
         settingsScreen = new SettingsScreen(this, menuContainer);
 
         Intent intent = getIntent();
@@ -119,7 +118,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         SplashScreen splashScreen = new SplashScreen(this, R.id.game_splash_container, R.id.game_splash_image, R.id.game_splash_text);
         splashScreen.animate();
         waiterGroup.addWaiter(splashScreen);
-        messageScreen.setText("Waiting for other players..", Color.BLUE);
+        messageScreen.setText("Waiting for other players..", getResources().getColor(R.color.primary_text));
         waiterGroup.addWaiter(messageScreen);
 
         if (!noServer) {
