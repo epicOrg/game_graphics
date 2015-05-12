@@ -1,7 +1,9 @@
 package game.views;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -31,6 +33,11 @@ public class SettingsScreen {
     }
 
     private void setup() {
+        SettingsContainer settingsContainer = new SettingsContainer(activity);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        settingsContainer.setLayoutParams(layoutParams);
+        settingsContainer.setOrientation(LinearLayout.VERTICAL);
+
         Button muteButton = (Button) activity.findViewById(R.id.game_menu_mute_unmute);
         Button quitButton = (Button) activity.findViewById(R.id.game_menu_quit);
         Button cancelButton = (Button) activity.findViewById(R.id.game_menu_cancel);
@@ -53,6 +60,12 @@ public class SettingsScreen {
                 settingsScreen.hide();
             }
         });
+
+        container.removeAllViews();
+        settingsContainer.addView(muteButton);
+        settingsContainer.addView(quitButton);
+        settingsContainer.addView(cancelButton);
+        container.addView(settingsContainer);
     }
 
     public void show() {
@@ -72,4 +85,15 @@ public class SettingsScreen {
         container.setVisibility(View.GONE);
     }
 
+    private class SettingsContainer extends LinearLayout {
+
+        public SettingsContainer(Context context) {
+            super(context);
+        }
+
+        @Override
+        public boolean onTouchEvent(MotionEvent event) {
+            return true;
+        }
+    }
 }

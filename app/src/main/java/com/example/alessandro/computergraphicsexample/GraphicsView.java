@@ -123,13 +123,19 @@ public class GraphicsView extends GLSurfaceView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        touchListener.onTouchEvent(event);
+        if (touchListener != null)
+            touchListener.onTouchEvent(event);
 
         return true;
     }
 
     public void onGameGo() {
-        touchListener.setReadyToPlay(true);
+        queueEvent(new Runnable() {
+            @Override
+            public void run() {
+                touchListener.setReadyToPlay(true);
+            }
+        });
     }
 
     public class GraphicsRenderer implements Renderer {
@@ -189,12 +195,11 @@ public class GraphicsView extends GLSurfaceView {
 
             final ButtonsControl buttonsControl = new ButtonsControl(context, program, camera.getOrthoMatrix(), buttonMaster);
 
-            touchListener = new TouchListener(buttonsControl, directionMoveListener);
-
             queueEvent(new Runnable() {
                 @Override
                 public void run() {
                     buttonsControl.update(width, height);
+                    touchListener = new TouchListener(buttonsControl, directionMoveListener);
                 }
             });
 
