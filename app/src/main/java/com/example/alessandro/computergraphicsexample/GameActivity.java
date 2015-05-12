@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -50,6 +51,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
     private CountDownLatch startSignal = new CountDownLatch(1);
     private GraphicsView graphicsView;
+    private LinearLayout waitingContainer;
     private LinearLayout menuContainer;
 
     private String username;
@@ -67,6 +69,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         setContentView(R.layout.activity_game);
         context = this;
 
+        waitingContainer = (LinearLayout) findViewById(R.id.game_waiting_container);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
 
         Intent intent = getIntent();
@@ -185,6 +188,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
     @Override
     public void onGameGo() {
+        waitingContainer.setVisibility(View.GONE);
         graphicsView.startGame();
     }
 

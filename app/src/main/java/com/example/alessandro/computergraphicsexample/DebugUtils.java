@@ -1,14 +1,13 @@
 package com.example.alessandro.computergraphicsexample;
 
 import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
 
+import game.Team;
 import game.graphics.Map;
 import game.graphics.Obstacle;
 import game.graphics.Wall;
@@ -57,7 +56,7 @@ public class DebugUtils {
 
         Log.d(LOG_TAG, "Starting GraphicsView..");
         LinearLayout graphicsContainerLayout = (LinearLayout) activity.findViewById(R.id.graphics_view_container);
-        GraphicsView graphicsView = new GraphicsView(activity, me, otherPlayers, map, startSignal, groundWidth, groundHeight);
+        GraphicsView graphicsView = new GraphicsView(activity, me, new ArrayList<Team>(), map, startSignal, groundWidth, groundHeight);
         graphicsContainerLayout.addView(graphicsView);
     }
 
