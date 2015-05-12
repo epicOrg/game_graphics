@@ -1,6 +1,7 @@
 package game.generators;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.alessandro.computergraphicsexample.R;
 
@@ -32,6 +33,7 @@ public class MoveButtonsGenerator {
     }
 
     public void generate() {
+        Log.d("MOVEBUTTONGENERATOR","Generate move buttons");
         Node parentNode = new Node();
         SFVertex3f parentPosition = new SFVertex3f(-1f, -0.50f, 1);
         SFMatrix3f scalingMatrix = SFMatrix3f.getScale(0.15f, 0.15f, 0.15f);

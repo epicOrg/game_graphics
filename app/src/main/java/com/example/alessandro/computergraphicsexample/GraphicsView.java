@@ -126,11 +126,14 @@ public class GraphicsView extends GLSurfaceView {
         final ButtonsControl buttonsControl = new ButtonsControl(context, program, camera.getOrthoMatrix(), buttonMaster);
 
         touchListener = new TouchListener(buttonsControl, directionMoveListener);
+
+        buttonsControl.update(w, h);
         touchListener.block(false);
     }
 
     private ShadingProgram program;
     private ButtonMaster buttonMaster;
+    private int w,h;
 
     public class GraphicsRenderer implements Renderer {
 
@@ -175,6 +178,7 @@ public class GraphicsView extends GLSurfaceView {
 
         @Override
         public void onSurfaceChanged(GL10 gl, final int width, final int height) {
+            w=width; h=height;
             Log.d(LOG_TAG, "onSurfaceChanged");
 
             glViewport(0, 0, width, height);
@@ -182,6 +186,7 @@ public class GraphicsView extends GLSurfaceView {
             directionMoveListener.update(width, height);
 
             buttonMaster = new ButtonMaster();
+
 
 
 

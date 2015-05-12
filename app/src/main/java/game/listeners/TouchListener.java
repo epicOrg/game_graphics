@@ -31,6 +31,7 @@ public class TouchListener implements TouchListenerInterface {
     public TouchListener(ButtonsControl buttonsControl, DirectionMoveListenerInterface directionMoveListener) {
         this.buttonsControl = buttonsControl;
         this.directionMoveListener = directionMoveListener;
+        Log.d(LOG_TAG,"Create touch listener");
     }
 
     @Override
@@ -70,6 +71,8 @@ public class TouchListener implements TouchListenerInterface {
     @Override
     public void block(boolean block){
         blocked=block;
+        if (!block)
+            Log.d(LOG_TAG,"Unblocked touchListener");
     }
 
     private void actionMovePositionProcessor(MotionEvent event) {
