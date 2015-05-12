@@ -33,18 +33,10 @@
             android:orientation="vertical" />
 
         <LinearLayout
-            android:id="@+id/game_waiting_container"
+            android:id="@+id/game_message_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#88ff0000"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Waiting for other players.." />
-        </LinearLayout>
+            android:orientation="vertical" />
 
         <FrameLayout
             android:id="@+id/game_splash_container"

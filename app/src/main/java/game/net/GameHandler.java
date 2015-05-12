@@ -1,5 +1,6 @@
 package game.net;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -16,6 +17,8 @@ import game.graphics.Wall;
 import game.physics.Circle;
 import game.physics.Square;
 import game.player.Player;
+import game.views.MessageScreen;
+import login.interaction.FieldsNames;
 import login.services.Game;
 import shadow.math.SFVertex3f;
 
@@ -33,6 +36,12 @@ public class GameHandler extends Handler {
 
     private int groundWidth = 0;
     private int groundHeight = 0;
+
+    private MessageScreen messageScreen;
+
+    public GameHandler(MessageScreen messageScreen) {
+        this.messageScreen = messageScreen;
+    }
 
     public void addGameHandlerListeners(GameHandlerListener l) {
         gameHandlerListeners.add(l);
@@ -65,8 +74,8 @@ public class GameHandler extends Handler {
 
     private void callOnMapReceived() {
         for (GameHandlerListener l : gameHandlerListeners)
-            l.onMapReceived();
-    }
+    l.onMapReceived();
+}
 
     private void processStatusMessage(Message msg) {
         Log.d(LOG_TAG, "processStatusMessage");
@@ -74,6 +83,23 @@ public class GameHandler extends Handler {
 
         if (results.isGo())
             callOnGameGo();
+        if(results.getGameEnd() != null){
+            String gameEnd = results.getGameEnd();
+            switch (gameEnd){
+                case FieldsNames.GAME_WIN:
+                    messageScreen.setText("YOU WIN!", Color.GREEN);
+                    break;
+                case FieldsNames.GAME_DRAW:
+                    messageScreen.setText("YOU DIDN'T WIN and YOU DIDN'T LOSE!", Color.BLUE);
+                    break;
+                case FieldsNames.GAME_LOSE:
+                    messageScreen.setText("YOU LOSE!", Color.RED);
+                    break;
+            }
+            messageScreen.show();
+
+            //TODO
+        }
     }
 
     private void processMapMessage(Message msg) {

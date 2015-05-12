@@ -60,13 +60,15 @@ public class Game implements Service {
     private Message getGameStatusMessage() {
         GameStatusResult gameStatusResult = null;
         boolean go = false;
+        String gameEnd = "";
         try {
             go = json.getBoolean(FieldsNames.GAME_GO);
+            gameEnd = json.getString(FieldsNames.GAME_END);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        gameStatusResult = new GameStatusResult(go);
+        gameStatusResult = new GameStatusResult(go, gameEnd);
         return handler.obtainMessage(STATUS, gameStatusResult);
     }
 
@@ -134,13 +136,19 @@ public class Game implements Service {
     public class GameStatusResult {
 
         private boolean go;
+        private String gameEnd;
 
-        public GameStatusResult(boolean go) {
+        public GameStatusResult(boolean go, String gameEnd) {
             this.go = go;
+            this.gameEnd = gameEnd;
         }
 
         public boolean isGo() {
             return go;
+        }
+
+        public String getGameEnd() {
+            return gameEnd;
         }
 
     }

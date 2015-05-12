@@ -3,6 +3,7 @@ package com.example.alessandro.computergraphicsexample;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,7 @@ import game.net.GameStatusWaiter;
 import game.physics.Circle;
 import game.player.Player;
 import game.player.PlayerStatus;
+import game.views.MessageScreen;
 import game.views.SplashScreen;
 import login.audio.AudioCallManager;
 import login.communication.NotConnectedException;
@@ -51,8 +53,10 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
     private CountDownLatch startSignal = new CountDownLatch(1);
     private GraphicsView graphicsView;
-    private LinearLayout waitingContainer;
+    private LinearLayout messageContainer;
     private LinearLayout menuContainer;
+
+    private MessageScreen messageScreen;
 
     private String username;
     private int hashcode;
@@ -69,7 +73,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         setContentView(R.layout.activity_game);
         context = this;
 
-        waitingContainer = (LinearLayout) findViewById(R.id.game_waiting_container);
+        messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
 
         Intent intent = getIntent();
@@ -182,11 +186,14 @@ public class GameActivity extends Activity implements GameHandlerListener {
         int height = gameHandler.getGroundHeight();
         graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), gameManager.getMap(), startSignal, width, height);
         graphicsContainerLayout.addView(graphicsView);
+
+        messageScreen = new MessageScreen(context, "Waiting for other players..", Color.argb(128, 255, 0, 0), messageContainer);
+        messageScreen.show();
     }
 
     @Override
     public void onGameGo() {
-        waitingContainer.setVisibility(View.GONE);
+        messageScreen.hide();
         graphicsView.startGame();
     }
 

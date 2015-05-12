@@ -1,7 +1,10 @@
 package login.interaction;
+
+import java.util.Collection;
+
 /**
  * @author Noris
- * @version 22
+ * @version 24
  * @date 2015/03/30
  */
 
@@ -26,6 +29,7 @@ public class FieldsNames {
     public static final String UNKNOWN = "unknown";
     public static final String AUDIO = "audio";
     public static final String POLLING = "polling";
+
 
     /**
      * ************************************************************************
@@ -104,9 +108,15 @@ public class FieldsNames {
     public static final String GAME_STATUS = "status";
     public static final String GAME_MAP = "map";
     public static final String GAME_POSITIONS = "positions";
+    public static final String GAME_END = "end";
     // Others
     public static final String GAME_READY = "ready";
     public static final String GAME_GO = "go";
+
+    public static final String GAME_WIN = "win";
+    public static final String GAME_LOSE = "lose";
+    public static final String GAME_DRAW = "draw";
+
     public static final String GAME_WIDTH = "width";
     public static final String GAME_LENGTH = "length";
     public static final String GAME_HEIGHT = "height";
@@ -136,5 +146,5 @@ public class FieldsNames {
     public static final String OFFLINE = "offline";
     public static final String SERVER_ERROR = "serverError";
     public static final String MISSING_FIELD = "missingField";
-
 }
+	
