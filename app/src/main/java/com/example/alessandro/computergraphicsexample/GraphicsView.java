@@ -118,9 +118,15 @@ public class GraphicsView extends GLSurfaceView {
     }
 
     public void startGame(){
-        touchListener.block(false);
         MoveButtonsGenerator moveButtonsGenerator = new MoveButtonsGenerator(context, program, buttonMaster, positionMoveListener);
         moveButtonsGenerator.generate();
+        SettingsButtonsGenerator settingsButtonsGenerator = new SettingsButtonsGenerator(context, program, buttonMaster);
+        settingsButtonsGenerator.generate();
+
+        final ButtonsControl buttonsControl = new ButtonsControl(context, program, camera.getOrthoMatrix(), buttonMaster);
+
+        touchListener = new TouchListener(buttonsControl, directionMoveListener);
+        touchListener.block(false);
     }
 
     private ShadingProgram program;
@@ -177,20 +183,15 @@ public class GraphicsView extends GLSurfaceView {
 
             buttonMaster = new ButtonMaster();
 
-            SettingsButtonsGenerator settingsButtonsGenerator = new SettingsButtonsGenerator(context, program, buttonMaster);
-            settingsButtonsGenerator.generate();
 
-            final ButtonsControl buttonsControl = new ButtonsControl(context, program, camera.getOrthoMatrix(), buttonMaster);
 
-            touchListener = new TouchListener(buttonsControl, directionMoveListener);
-
-            queueEvent(new Runnable() {
-                @Override
-                public void run() {
-                    buttonsControl.update(width, height);
-                    isReadyForTouch = true;
-                }
-            });
+//            queueEvent(new Runnable() {
+//                @Override
+//                public void run() {
+//                    buttonsControl.update(width, height);
+//                    isReadyForTouch = true;
+//                }
+//            });
 
             startSignal.countDown();
         }
