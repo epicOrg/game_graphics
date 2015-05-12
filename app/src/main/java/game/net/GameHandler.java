@@ -47,6 +47,8 @@ public class GameHandler extends Handler {
         Log.d(LOG_TAG, "handleMessage");
         switch (msg.what) {
             case Game.STATUS:
+                for (GameHandlerListener l : gameHandlerListeners)
+                    l.onMapReceived();
                 break;
             case Game.MAP:
                 processMapMessage(msg);

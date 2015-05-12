@@ -88,7 +88,6 @@ public class GraphicsView extends GLSurfaceView {
         cm = new CollisionMediator();
         sfs = SFOGLStateEngine.glEnable(GL_CULL_FACE);
 
-
         positionMoveListener = new PositionMoveListenerXZWithCollisions(me.getStatus(), cm);
         directionMoveListener = new DirectionDirectionMoveListener(me.getStatus().getDirection(), getWidth(), getHeight());
 
@@ -116,6 +115,10 @@ public class GraphicsView extends GLSurfaceView {
             touchListener.onTouchEvent(event);
 
         return true;
+    }
+
+    public void startGame(){
+
     }
 
     public class GraphicsRenderer implements Renderer {

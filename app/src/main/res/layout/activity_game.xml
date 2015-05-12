@@ -9,10 +9,42 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/graphics_view_container"
-            android:orientation="vertical"
+            android:id="@+id/game_menu_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="#ffff0000"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mute/UnMute" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quit" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/game_waiting_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#88ff0000"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Waiting for other players.." />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/graphics_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
 
         <FrameLayout
             android:id="@+id/game_splash_container"
@@ -31,9 +63,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
-                android:textStyle="bold"
+                android:text="@string/game_loading"
                 android:textSize="20sp"
-                android:text="@string/game_loading" />
+                android:textStyle="bold" />
         </FrameLayout>
     </FrameLayout>
 

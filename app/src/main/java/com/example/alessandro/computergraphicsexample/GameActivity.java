@@ -50,6 +50,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
     private CountDownLatch startSignal = new CountDownLatch(1);
     private GraphicsView graphicsView;
+    private LinearLayout menuContainer;
 
     private String username;
     private int hashcode;
@@ -65,6 +66,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_game);
         context = this;
+
+        menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
 
         Intent intent = getIntent();
         boolean noServer = intent.getBooleanExtra("NO_SERVER", false);
@@ -106,7 +109,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         splashScreen.animate();
         waiterGroup.addWaiter(splashScreen);
 
-        if (!noServer){
+        if (!noServer) {
             Log.d(LOG_TAG, "Starting GamePositionSender..");
             GamePositionSender gamePositionSender = new GamePositionSender(me, room.getName());
             waiterGroup.addWaiter(gamePositionSender);
@@ -178,6 +181,11 @@ public class GameActivity extends Activity implements GameHandlerListener {
         int height = gameHandler.getGroundHeight();
         graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), gameManager.getMap(), startSignal, width, height);
         graphicsContainerLayout.addView(graphicsView);
+    }
+
+    @Override
+    public void onGameGo() {
+        graphicsView.startGame();
     }
 
     @Override
