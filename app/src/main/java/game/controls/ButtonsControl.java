@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.opengl.GLES20;
-import android.util.Log;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -36,7 +35,6 @@ public class ButtonsControl {
         this.orthoMatrix = orthoMatrix;
         this.buttonMaster = buttonMaster;
         int n = 0;
-        Log.d(LOG_TAG, "Set button control");
         for (Button b : buttonMaster.getButtons()) {
             n++;
             int color = generateNewColor(n);

@@ -88,6 +88,7 @@ public class GraphicsView extends GLSurfaceView {
         cm = new CollisionMediator();
         sfs = SFOGLStateEngine.glEnable(GL_CULL_FACE);
 
+
         positionMoveListener = new PositionMoveListenerXZWithCollisions(me.getStatus(), cm);
         directionMoveListener = new DirectionDirectionMoveListener(me.getStatus().getDirection(), getWidth(), getHeight());
 
@@ -117,32 +118,12 @@ public class GraphicsView extends GLSurfaceView {
         return true;
     }
 
-    public void startGame(){
-        MoveButtonsGenerator moveButtonsGenerator = new MoveButtonsGenerator(context, program, buttonMaster, positionMoveListener);
-        moveButtonsGenerator.generate();
-        SettingsButtonsGenerator settingsButtonsGenerator = new SettingsButtonsGenerator(context, program, buttonMaster);
-        settingsButtonsGenerator.generate();
-
-        final ButtonsControl buttonsControl = new ButtonsControl(context, program, camera.getOrthoMatrix(), buttonMaster);
-
-        touchListener = new TouchListener(buttonsControl, directionMoveListener);
-
-        buttonsControl.update(w, h);
-        isReadyForTouch = true;
-
-        touchListener.block(false);
-    }
-
-    private ShadingProgram program;
-    private ButtonMaster buttonMaster;
-    private int w,h;
-
     public class GraphicsRenderer implements Renderer {
 
-
+        private ShadingProgram program;
         private Sky sky;
         private Node node, groundNode;
-
+        private ButtonMaster buttonMaster;
         private ArrayList<TextLabel> labels = new ArrayList<>();
 
         private float t = 0;
@@ -161,10 +142,8 @@ public class GraphicsView extends GLSurfaceView {
 
             for (Team team: teams){
                 for (Player player: team.getPlayers()) {
-                    if (player!=me) {
-                        playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
-                        labels.add(new TextLabel(0.6f, 0.6f, me.getStatus().getDirection(), player.getStatus().getPosition(), player.getName(), team.getColor()));
-                    }
+                    playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
+                    labels.add(new TextLabel(0.6f,0.6f,me.getStatus().getDirection(), player.getStatus().getPosition(), player.getName(),team.getColor()));
                 }
             }
 
@@ -180,7 +159,6 @@ public class GraphicsView extends GLSurfaceView {
 
         @Override
         public void onSurfaceChanged(GL10 gl, final int width, final int height) {
-            w=width; h=height;
             Log.d(LOG_TAG, "onSurfaceChanged");
 
             glViewport(0, 0, width, height);
@@ -188,17 +166,22 @@ public class GraphicsView extends GLSurfaceView {
             directionMoveListener.update(width, height);
 
             buttonMaster = new ButtonMaster();
+            MoveButtonsGenerator moveButtonsGenerator = new MoveButtonsGenerator(context, program, buttonMaster, positionMoveListener);
+            moveButtonsGenerator.generate();
+            SettingsButtonsGenerator settingsButtonsGenerator = new SettingsButtonsGenerator(context, program, buttonMaster);
+            settingsButtonsGenerator.generate();
 
+            final ButtonsControl buttonsControl = new ButtonsControl(context, program, camera.getOrthoMatrix(), buttonMaster);
 
+            touchListener = new TouchListener(buttonsControl, directionMoveListener);
 
-
-//            queueEvent(new Runnable() {
-//                @Override
-//                public void run() {
-//                    buttonsControl.update(width, height);
-//                    isReadyForTouch = true;
-//                }
-//            });
+            queueEvent(new Runnable() {
+                @Override
+                public void run() {
+                    buttonsControl.update(width, height);
+                    isReadyForTouch = true;
+                }
+            });
 
             startSignal.countDown();
         }

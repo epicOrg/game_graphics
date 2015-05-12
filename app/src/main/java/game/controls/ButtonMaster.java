@@ -1,7 +1,5 @@
 package game.controls;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -53,7 +51,6 @@ public class ButtonMaster {
     }
 
     public void draw() {
-        Log.d(LOG_TAG,"Draw Buttons: "+parentNodes);
         for (Node n : parentNodes) {
             n.updateTree(new SFTransform3f());
             n.draw();

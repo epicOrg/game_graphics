@@ -1,10 +1,12 @@
 package com.example.alessandro.computergraphicsexample;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
 
 import game.Team;

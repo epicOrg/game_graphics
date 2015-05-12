@@ -3,7 +3,6 @@ package com.example.alessandro.computergraphicsexample;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
@@ -33,7 +32,6 @@ import game.net.GameStatusWaiter;
 import game.physics.Circle;
 import game.player.Player;
 import game.player.PlayerStatus;
-import game.views.MessageScreen;
 import game.views.SplashScreen;
 import login.audio.AudioCallManager;
 import login.communication.NotConnectedException;
@@ -52,10 +50,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
     private CountDownLatch startSignal = new CountDownLatch(1);
     private GraphicsView graphicsView;
-    private LinearLayout messageContainer;
-    private LinearLayout menuContainer;
-
-    //private MessageScreen messageScreen;
 
     private String username;
     private int hashcode;
@@ -72,10 +66,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
         setContentView(R.layout.activity_game);
         context = this;
 
-        //messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
-        //messageScreen = new MessageScreen(context, Color.argb(128, 255, 0, 0), messageContainer);
-        menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
-
         Intent intent = getIntent();
         boolean noServer = intent.getBooleanExtra("NO_SERVER", false);
         username = intent.getStringExtra(FieldsNames.USERNAME);
@@ -85,7 +75,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         if (noServer) {
             gameManager.setRoom(new Room("TestRoom", 10, 2));
         }
-        gameHandler = new GameHandler(null);
+        gameHandler = new GameHandler();
         gameHandler.addGameHandlerListeners(this);
 
         backgroundSound = new BackgroundSound(context, new GameSoundtracks(R.raw.soundtrack_01, R.raw.soundtrack_02).getSoundtracks(context));
@@ -116,13 +106,14 @@ public class GameActivity extends Activity implements GameHandlerListener {
         splashScreen.animate();
         waiterGroup.addWaiter(splashScreen);
 
-        if (!noServer) {
+        if (!noServer){
             Log.d(LOG_TAG, "Starting GamePositionSender..");
             GamePositionSender gamePositionSender = new GamePositionSender(me, room.getName());
             waiterGroup.addWaiter(gamePositionSender);
 
             waiterGroup.addWaiter(new GameStatusWaiter(room.getName(), username, hashcode));
         }
+
 
         waiterGroup.startWaiting();
 
@@ -142,6 +133,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
                 e.printStackTrace();
             }
         }
+
     }
 
     private void initAudioSetting() {
@@ -186,15 +178,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
         int height = gameHandler.getGroundHeight();
         graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), gameManager.getMap(), startSignal, width, height);
         graphicsContainerLayout.addView(graphicsView);
-
-        //messageScreen.setText("Waiting other players..", Color.BLACK);
-        //messageScreen.show();
-    }
-
-    @Override
-    public void onGameGo() {
-        Log.d(LOG_TAG, "onGameGo");
-        graphicsView.startGame();
     }
 
     @Override

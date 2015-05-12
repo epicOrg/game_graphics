@@ -2,6 +2,7 @@ package login.services;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,16 +60,13 @@ public class Game implements Service {
     private Message getGameStatusMessage() {
         GameStatusResult gameStatusResult = null;
         boolean go = false;
-        String gameEnd = null;
         try {
             go = json.getBoolean(FieldsNames.GAME_GO);
-            if (json.has(FieldsNames.GAME_END))
-                gameEnd = json.getString(FieldsNames.GAME_END);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        gameStatusResult = new GameStatusResult(go, gameEnd);
+        gameStatusResult = new GameStatusResult(go);
         return handler.obtainMessage(STATUS, gameStatusResult);
     }
 
@@ -136,19 +134,13 @@ public class Game implements Service {
     public class GameStatusResult {
 
         private boolean go;
-        private String gameEnd;
 
-        public GameStatusResult(boolean go, String gameEnd) {
+        public GameStatusResult(boolean go) {
             this.go = go;
-            this.gameEnd = gameEnd;
         }
 
         public boolean isGo() {
             return go;
-        }
-
-        public String getGameEnd() {
-            return gameEnd;
         }
 
     }
