@@ -54,26 +54,29 @@ public class MessageScreen implements Waiter {
 
     public void show() {
         Log.d(LOG_TAG, "show");
-
-        container.addView(textView);
-        container.setBackgroundColor(backgroundColor);
-        container.bringToFront();
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                container.addView(textView);
+                container.setBackgroundColor(backgroundColor);
+                container.bringToFront();
+            }
+        });
     }
 
     public void hide() {
         Log.d(LOG_TAG, "hide");
-
-        container.removeAllViews();
-        container.setBackgroundColor(Color.TRANSPARENT);
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                container.removeAllViews();
+                container.setBackgroundColor(Color.TRANSPARENT);
+            }
+        });
     }
 
     @Override
     public void unleash() {
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                show();
-            }
-        });
+        show();
     }
 }

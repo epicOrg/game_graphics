@@ -40,9 +40,6 @@ public class TouchListener implements TouchListenerInterface {
 
     @Override
     public void onTouchEvent(final MotionEvent event) {
-        if (!readyToPlay)
-            return;
-
         final int action = MotionEventCompat.getActionMasked(event);
         final int index = MotionEventCompat.getActionIndex(event);
 
@@ -67,6 +64,9 @@ public class TouchListener implements TouchListenerInterface {
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
+                if(!readyToPlay)
+                    return;
+
                 actionMovePositionProcessor(event);
                 actionMoveDirectionProcessor(event);
                 break;
@@ -123,6 +123,7 @@ public class TouchListener implements TouchListenerInterface {
                     Button pressedButton = buttonsControl.getPressedButton(touchX, touchY);
 
                     if (pressedButton.isNeedToBeReady() && !readyToPlay) {
+                        Log.d(LOG_TAG, "Not readyToPlay.");
                         return;
                     }
 

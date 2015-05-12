@@ -35,6 +35,8 @@ import game.listeners.TouchListener;
 import game.listeners.TouchListenerInterface;
 import game.physics.CollisionMediator;
 import game.player.Player;
+import game.views.MessageScreen;
+import game.views.SettingsScreen;
 import sfogl.integration.Model;
 import sfogl.integration.Node;
 import sfogl.integration.ShadingProgram;
@@ -66,6 +68,9 @@ public class GraphicsView extends GLSurfaceView {
     private PositionMoveListenerInterface positionMoveListener;
     private DirectionMoveListenerInterface directionMoveListener;
 
+    private MessageScreen messageScreen;
+    private SettingsScreen settingsScreen;
+
     private CollisionMediator cm;
     private Map map;
 
@@ -74,7 +79,7 @@ public class GraphicsView extends GLSurfaceView {
     private int groundWidth, groundHeight;
     private ArrayList<PlayerView> playerViews = new ArrayList<>();
 
-    public GraphicsView(Context context, Player me, ArrayList<Team> teams, Map map, CountDownLatch startSignal, int groundWidth, int groundHeight) {
+    public GraphicsView(Context context, Player me, ArrayList<Team> teams, Map map, CountDownLatch startSignal, int groundWidth, int groundHeight, MessageScreen messageScreen, SettingsScreen settingsScreen) {
         super(context);
         setEGLContextClientVersion(2);
         setEGLConfigChooser(8, 8, 8, 8, 16, 0);
@@ -89,6 +94,10 @@ public class GraphicsView extends GLSurfaceView {
 
         camera = new Camera(me, 0.125f, 128, 80);
         cm = new CollisionMediator();
+
+        this.messageScreen = messageScreen;
+        this.settingsScreen = settingsScreen;
+
         sfs = SFOGLStateEngine.glEnable(GL_CULL_FACE);
 
         positionMoveListener = new PositionMoveListenerXZWithCollisions(me.getStatus(), cm);
@@ -175,7 +184,7 @@ public class GraphicsView extends GLSurfaceView {
             buttonMaster = new ButtonMaster();
             MoveButtonsGenerator moveButtonsGenerator = new MoveButtonsGenerator(context, program, buttonMaster, positionMoveListener);
             moveButtonsGenerator.generate();
-            SettingsButtonsGenerator settingsButtonsGenerator = new SettingsButtonsGenerator(context, program, buttonMaster);
+            SettingsButtonsGenerator settingsButtonsGenerator = new SettingsButtonsGenerator(context, program, buttonMaster, settingsScreen);
             settingsButtonsGenerator.generate();
 
             final ButtonsControl buttonsControl = new ButtonsControl(context, program, camera.getOrthoMatrix(), buttonMaster);

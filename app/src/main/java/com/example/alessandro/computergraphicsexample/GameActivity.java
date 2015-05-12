@@ -34,6 +34,7 @@ import game.physics.Circle;
 import game.player.Player;
 import game.player.PlayerStatus;
 import game.views.MessageScreen;
+import game.views.SettingsScreen;
 import game.views.SplashScreen;
 import login.audio.AudioCallManager;
 import login.communication.NotConnectedException;
@@ -53,8 +54,10 @@ public class GameActivity extends Activity implements GameHandlerListener {
     private CountDownLatch startSignal = new CountDownLatch(1);
     private GraphicsView graphicsView;
     private LinearLayout messageContainer;
+    private LinearLayout menuContainer;
 
     private MessageScreen messageScreen;
+    private SettingsScreen settingsScreen;
 
     private String username;
     private int hashcode;
@@ -72,7 +75,10 @@ public class GameActivity extends Activity implements GameHandlerListener {
         context = this;
 
         messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
+        menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
+
         messageScreen = new MessageScreen(this, Color.argb(128, 255, 0, 0), messageContainer);
+        settingsScreen = new SettingsScreen(this, menuContainer);
 
         Intent intent = getIntent();
         boolean noServer = intent.getBooleanExtra("NO_SERVER", false);
@@ -184,7 +190,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         Log.d(LOG_TAG, "Starting GraphicsView..");
         int width = gameHandler.getGroundWidth();
         int height = gameHandler.getGroundHeight();
-        graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), gameManager.getMap(), startSignal, width, height);
+        graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), gameManager.getMap(), startSignal, width, height, messageScreen, settingsScreen);
         LinearLayout graphicsContainerLayout = (LinearLayout) findViewById(R.id.graphics_view_container);
         graphicsContainerLayout.addView(graphicsView);
     }

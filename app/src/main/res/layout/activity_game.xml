@@ -12,18 +12,27 @@
             android:id="@+id/game_menu_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffff0000"
+            android:background="#ffffffff"
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/game_menu_mute_unmute"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Mute/UnMute" />
 
             <Button
+                android:id="@+id/game_menu_quit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Quit" />
+
+            <Button
+                android:id="@+id/game_menu_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:text="Cancel" />
         </LinearLayout>
 
         <LinearLayout
