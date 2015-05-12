@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -56,7 +55,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
     private LinearLayout messageContainer;
     private LinearLayout menuContainer;
 
-    private MessageScreen messageScreen;
+    //private MessageScreen messageScreen;
 
     private String username;
     private int hashcode;
@@ -73,8 +72,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
         setContentView(R.layout.activity_game);
         context = this;
 
-        messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
-        messageScreen = new MessageScreen(context, Color.argb(128, 255, 0, 0), messageContainer);
+        //messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
+        //messageScreen = new MessageScreen(context, Color.argb(128, 255, 0, 0), messageContainer);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
 
         Intent intent = getIntent();
@@ -86,7 +85,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         if (noServer) {
             gameManager.setRoom(new Room("TestRoom", 10, 2));
         }
-        gameHandler = new GameHandler(messageScreen);
+        gameHandler = new GameHandler(null);
         gameHandler.addGameHandlerListeners(this);
 
         backgroundSound = new BackgroundSound(context, new GameSoundtracks(R.raw.soundtrack_01, R.raw.soundtrack_02).getSoundtracks(context));
@@ -188,13 +187,13 @@ public class GameActivity extends Activity implements GameHandlerListener {
         graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), gameManager.getMap(), startSignal, width, height);
         graphicsContainerLayout.addView(graphicsView);
 
-        messageScreen.setText("Waiting other players..", Color.BLACK);
-        messageScreen.show();
+        //messageScreen.setText("Waiting other players..", Color.BLACK);
+        //messageScreen.show();
     }
 
     @Override
     public void onGameGo() {
-        messageScreen.hide();
+        Log.d(LOG_TAG, "onGameGo");
         graphicsView.startGame();
     }
 

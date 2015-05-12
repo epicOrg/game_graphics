@@ -27,13 +27,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/graphics_view_container"
+            android:id="@+id/game_message_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" />
 
         <LinearLayout
-            android:id="@+id/game_message_container"
+            android:id="@+id/graphics_view_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" />
