@@ -119,14 +119,19 @@ public class GraphicsView extends GLSurfaceView {
 
     public void startGame(){
         touchListener.block(false);
+        MoveButtonsGenerator moveButtonsGenerator = new MoveButtonsGenerator(context, program, buttonMaster, positionMoveListener);
+        moveButtonsGenerator.generate();
     }
+
+    private ShadingProgram program;
+    private ButtonMaster buttonMaster;
 
     public class GraphicsRenderer implements Renderer {
 
-        private ShadingProgram program;
+
         private Sky sky;
         private Node node, groundNode;
-        private ButtonMaster buttonMaster;
+
         private ArrayList<TextLabel> labels = new ArrayList<>();
 
         private float t = 0;
@@ -171,8 +176,7 @@ public class GraphicsView extends GLSurfaceView {
             directionMoveListener.update(width, height);
 
             buttonMaster = new ButtonMaster();
-            MoveButtonsGenerator moveButtonsGenerator = new MoveButtonsGenerator(context, program, buttonMaster, positionMoveListener);
-            moveButtonsGenerator.generate();
+
             SettingsButtonsGenerator settingsButtonsGenerator = new SettingsButtonsGenerator(context, program, buttonMaster);
             settingsButtonsGenerator.generate();
 
