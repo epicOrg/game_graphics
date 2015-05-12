@@ -13,6 +13,7 @@ import java.util.concurrent.CountDownLatch;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import game.Team;
 import game.controls.ButtonMaster;
 import game.controls.ButtonsControl;
 import game.generators.FundamentalGenerator;
@@ -58,7 +59,7 @@ public class GraphicsView extends GLSurfaceView {
     private Camera camera;
     private Context context;
     private Player me;
-    private ArrayList<Player> otherPlayers;
+    private ArrayList<Team> teams;
     private TouchListenerInterface touchListener;
     private PositionMoveListenerInterface positionMoveListener;
     private DirectionMoveListenerInterface directionMoveListener;
@@ -68,16 +69,16 @@ public class GraphicsView extends GLSurfaceView {
     private SFOGLState sfs;
 
     private int groundWidth, groundHeight;
-    private ArrayList<PlayerView> playerViews = new ArrayList();
+    private ArrayList<PlayerView> playerViews = new ArrayList<>();
 
-    public GraphicsView(Context context, Player me, ArrayList<Player> otherPlayers, Map map, CountDownLatch startSignal, int groundWidth, int groundHeight) {
+    public GraphicsView(Context context, Player me, ArrayList<Team> teams, Map map, CountDownLatch startSignal, int groundWidth, int groundHeight) {
         super(context);
         setEGLContextClientVersion(2);
         setEGLConfigChooser(8, 8, 8, 8, 16, 0);
 
         this.context = context;
         this.me = me;
-        this.otherPlayers = otherPlayers;
+        this.teams=teams;
         this.map = map;
         this.startSignal = startSignal;
         this.groundWidth = groundWidth;
@@ -139,9 +140,11 @@ public class GraphicsView extends GLSurfaceView {
 
             label=new TextLabel(0.6f,0.6f,me.getStatus().getDirection(),new SFVertex3f(2, 0.5f, -7),"epicOrg", Color.RED);
 
-            for (Player player : otherPlayers) {
-                playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
-                labels.add(new TextLabel(0.6f,0.6f,me.getStatus().getDirection(), player.getStatus().getPosition(), player.getName(),Color.BLUE));
+            for (Team team: teams){
+                for (Player player: team.getPlayers()) {
+                    playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
+                    labels.add(new TextLabel(0.6f,0.6f,me.getStatus().getDirection(), player.getStatus().getPosition(), player.getName(),team.getColor()));
+                }
             }
 
             groundNode = new GroundGenerator(FundamentalGenerator.getModel(context, program, R.drawable.ground_texture_04, "Ground.obj"))

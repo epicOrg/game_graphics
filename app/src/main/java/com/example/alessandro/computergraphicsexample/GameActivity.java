@@ -176,7 +176,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         LinearLayout graphicsContainerLayout = (LinearLayout) findViewById(R.id.graphics_view_container);
         int width = gameHandler.getGroundWidth();
         int height = gameHandler.getGroundHeight();
-        graphicsView = new GraphicsView(context, me, otherPlayers, gameManager.getMap(), startSignal, width, height);
+        graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), gameManager.getMap(), startSignal, width, height);
         graphicsContainerLayout.addView(graphicsView);
     }
 
