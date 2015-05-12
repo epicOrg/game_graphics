@@ -128,6 +128,8 @@ public class GraphicsView extends GLSurfaceView {
         touchListener = new TouchListener(buttonsControl, directionMoveListener);
 
         buttonsControl.update(w, h);
+        isReadyForTouch = true;
+
         touchListener.block(false);
     }
 
