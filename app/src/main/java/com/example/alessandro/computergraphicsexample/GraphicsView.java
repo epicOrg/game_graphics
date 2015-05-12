@@ -118,7 +118,7 @@ public class GraphicsView extends GLSurfaceView {
     }
 
     public void startGame(){
-
+        touchListener.block(false);
     }
 
     public class GraphicsRenderer implements Renderer {
@@ -145,8 +145,10 @@ public class GraphicsView extends GLSurfaceView {
 
             for (Team team: teams){
                 for (Player player: team.getPlayers()) {
-                    playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
-                    labels.add(new TextLabel(0.6f,0.6f,me.getStatus().getDirection(), player.getStatus().getPosition(), player.getName(),team.getColor()));
+                    if (player!=me) {
+                        playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
+                        labels.add(new TextLabel(0.6f, 0.6f, me.getStatus().getDirection(), player.getStatus().getPosition(), player.getName(), team.getColor()));
+                    }
                 }
             }
 

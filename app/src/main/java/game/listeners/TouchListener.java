@@ -26,6 +26,7 @@ public class TouchListener implements TouchListenerInterface {
 
     private float previousX, previousY;
     private Thread moveThread;
+    private boolean blocked=true;
 
     public TouchListener(ButtonsControl buttonsControl, DirectionMoveListenerInterface directionMoveListener) {
         this.buttonsControl = buttonsControl;
@@ -58,10 +59,17 @@ public class TouchListener implements TouchListenerInterface {
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                actionMovePositionProcessor(event);
-                actionMoveDirectionProcessor(event);
+                if (!blocked) {
+                    actionMovePositionProcessor(event);
+                    actionMoveDirectionProcessor(event);
+                }
                 break;
         }
+    }
+
+    @Override
+    public void block(boolean block){
+        blocked=block;
     }
 
     private void actionMovePositionProcessor(MotionEvent event) {

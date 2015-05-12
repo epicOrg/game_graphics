@@ -7,4 +7,5 @@ import android.view.MotionEvent;
  */
 public interface TouchListenerInterface {
     void onTouchEvent(MotionEvent event);
+    void block(boolean block);
 }
