@@ -120,7 +120,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
             waiterGroup.addWaiter(new GameStatusWaiter(room.getName(), username, hashcode));
         }
 
-
         waiterGroup.startWaiting();
 
         if (noServer) {
@@ -139,7 +138,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
                 e.printStackTrace();
             }
         }
-
     }
 
     private void initAudioSetting() {
