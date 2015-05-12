@@ -1,17 +1,22 @@
 package game.views;
 
-import android.content.Context;
+import android.app.Activity;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import game.Waiter;
 
 /**
  * Created by Andrea on 12/05/2015.
  */
-public class MessageScreen {
+public class MessageScreen implements Waiter {
 
-    private Context context;
+    public static final String LOG_TAG = "MessageScreen";
+
+    private Activity activity;
     private String message;
     private int textColor;
     private int backgroundColor;
@@ -19,8 +24,8 @@ public class MessageScreen {
 
     private TextView textView;
 
-    public MessageScreen(Context context, int backgroundColor, LinearLayout container) {
-        this.context = context;
+    public MessageScreen(Activity activity, int backgroundColor, LinearLayout container) {
+        this.activity = activity;
         this.backgroundColor = backgroundColor;
         this.container = container;
 
@@ -28,7 +33,7 @@ public class MessageScreen {
     }
 
     private void setup() {
-        textView = new TextView(context);
+        textView = new TextView(activity);
         textView.setText(message);
         textView.setTextColor(textColor);
 
@@ -38,10 +43,6 @@ public class MessageScreen {
         layoutParams.gravity = Gravity.CENTER;
 
         textView.setLayoutParams(layoutParams);
-
-        container.addView(textView);
-        container.setBackgroundColor(backgroundColor);
-        container.setVisibility(View.GONE);
     }
 
     public void setText(String text, int color) {
@@ -52,12 +53,27 @@ public class MessageScreen {
     }
 
     public void show() {
-        container.setVisibility(View.VISIBLE);
+        Log.d(LOG_TAG, "show");
+
+        container.addView(textView);
+        container.setBackgroundColor(backgroundColor);
         container.bringToFront();
     }
 
     public void hide() {
-        container.setVisibility(View.GONE);
+        Log.d(LOG_TAG, "hide");
+
+        container.removeAllViews();
+        container.setBackgroundColor(Color.TRANSPARENT);
     }
 
+    @Override
+    public void unleash() {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                show();
+            }
+        });
+    }
 }

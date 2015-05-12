@@ -58,13 +58,17 @@ public class GraphicsView extends GLSurfaceView {
     private CountDownLatch startSignal;
     private Camera camera;
     private Context context;
+
     private Player me;
     private ArrayList<Team> teams;
+
     private TouchListenerInterface touchListener;
     private PositionMoveListenerInterface positionMoveListener;
     private DirectionMoveListenerInterface directionMoveListener;
+
     private CollisionMediator cm;
     private Map map;
+
     private boolean isReadyForTouch = false;
     private SFOGLState sfs;
 
@@ -78,7 +82,7 @@ public class GraphicsView extends GLSurfaceView {
 
         this.context = context;
         this.me = me;
-        this.teams=teams;
+        this.teams = teams;
         this.map = map;
         this.startSignal = startSignal;
         this.groundWidth = groundWidth;
@@ -87,7 +91,6 @@ public class GraphicsView extends GLSurfaceView {
         camera = new Camera(me, 0.125f, 128, 80);
         cm = new CollisionMediator();
         sfs = SFOGLStateEngine.glEnable(GL_CULL_FACE);
-
 
         positionMoveListener = new PositionMoveListenerXZWithCollisions(me.getStatus(), cm);
         directionMoveListener = new DirectionDirectionMoveListener(me.getStatus().getDirection(), getWidth(), getHeight());
@@ -138,12 +141,14 @@ public class GraphicsView extends GLSurfaceView {
             GLES20.glEnable(GLES20.GL_BLEND);
             GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);
 
-            label=new TextLabel(0.6f,0.6f,me.getStatus().getDirection(),new SFVertex3f(2, 0.5f, -7),"epicOrg", Color.RED);
+            label = new TextLabel(0.6f, 0.6f, me.getStatus().getDirection(), new SFVertex3f(2, 0.5f, -7), "epicOrg", Color.RED);
 
-            for (Team team: teams){
-                for (Player player: team.getPlayers()) {
-                    playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
-                    labels.add(new TextLabel(0.6f,0.6f,me.getStatus().getDirection(), player.getStatus().getPosition(), player.getName(),team.getColor()));
+            for (Team team : teams) {
+                for (Player player : team.getPlayers()) {
+                    if (!player.getName().equals(me.getName())) {
+                        playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
+                        labels.add(new TextLabel(0.6f, 0.6f, me.getStatus().getDirection(), player.getStatus().getPosition(), player.getName(), team.getColor()));
+                    }
                 }
             }
 

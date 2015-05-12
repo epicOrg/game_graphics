@@ -58,7 +58,7 @@ public class DebugUtils {
 
         Log.d(LOG_TAG, "Starting GraphicsView..");
         LinearLayout graphicsContainerLayout = (LinearLayout) activity.findViewById(R.id.graphics_view_container);
-        GraphicsView graphicsView = new GraphicsView(activity, me, new ArrayList<Team>(), map, startSignal, groundWidth, groundHeight);
+        GraphicsView graphicsView = new GraphicsView(activity, me, new ArrayList<Team>(), map, startSignal, groundWidth, groundHeight); //TODO
         graphicsContainerLayout.addView(graphicsView);
     }
 

@@ -5,6 +5,7 @@ package game.net;
  */
 public interface GameHandlerListener {
 
-    public void onMapReceived();
+    void onMapReceived();
+    void onGameGo();
 
 }
