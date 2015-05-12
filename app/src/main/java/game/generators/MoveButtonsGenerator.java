@@ -42,7 +42,7 @@ public class MoveButtonsGenerator {
         Model model = FundamentalGenerator.getModel(context, program, R.drawable.arrow_texture_02, "Arrow.obj");
 
         buttonMaster.setModel(model);
-        buttonMaster.addButton(new Button(new ButtonAction() {
+        buttonMaster.addButton(new Button("LEFT", new ButtonAction() {
                     @Override
                     public void action(Object parameter) {
                         positionMoveListener.move((float) +Math.PI / 2, 0, (long) parameter);
@@ -50,7 +50,7 @@ public class MoveButtonsGenerator {
                 }, true, true),
                 new SFVertex3f(-2, 0, 0), (float) -Math.PI / 2, parentNode);
 
-        buttonMaster.addButton(new Button(new ButtonAction() {
+        buttonMaster.addButton(new Button("RIGHT", new ButtonAction() {
                     @Override
                     public void action(Object parameter) {
                         positionMoveListener.move((float) -Math.PI / 2, 0, (long) parameter);
@@ -58,7 +58,7 @@ public class MoveButtonsGenerator {
                 }, true, true),
                 new SFVertex3f(2, 0, 0), (float) Math.PI / 2, parentNode);
 
-        buttonMaster.addButton(new Button(new ButtonAction() {
+        buttonMaster.addButton(new Button("UP", new ButtonAction() {
                     @Override
                     public void action(Object parameter) {
                         positionMoveListener.move(0, 0, (long) parameter);
@@ -66,7 +66,7 @@ public class MoveButtonsGenerator {
                 }, true, true),
                 new SFVertex3f(0, 2, 0), (float) 0, parentNode);
 
-        buttonMaster.addButton(new Button(new ButtonAction() {
+        buttonMaster.addButton(new Button("DOWN", new ButtonAction() {
                     @Override
                     public void action(Object parameter) {
                         positionMoveListener.move((float) -Math.PI, 0, (long) parameter);

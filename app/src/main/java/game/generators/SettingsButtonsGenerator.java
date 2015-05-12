@@ -42,11 +42,10 @@ public class SettingsButtonsGenerator {
 
         Model pauseModel = FundamentalGenerator.getModel(context, program, R.drawable.button_circle_pause_texture_01, "ButtonCirclePause01.obj");
         buttonMaster.setModel(pauseModel);
-        buttonMaster.addButton(new Button(new ButtonAction() {
+        buttonMaster.addButton(new Button("PAUSE", new ButtonAction() {
                     @Override
                     public void action(Object parameter) {
                         //TODO
-                        Log.d(LOG_TAG, "Pressed pause button");
                     }
                 }, false, false),
                 new SFVertex3f(0, 0, 0), 0, parentNode);

@@ -5,17 +5,23 @@ package game.controls;
  */
 public class Button {
 
+    private String name;
     private ButtonAction action;
     private boolean continuousPressing;
     private boolean needToBeReady;
 
-    public Button(ButtonAction action, boolean continuousPressing, boolean needToBeReady) {
+    public Button(String name, ButtonAction action, boolean continuousPressing, boolean needToBeReady) {
+        this.name = name;
         this.action = action;
         this.continuousPressing = continuousPressing;
         this.needToBeReady = needToBeReady;
     }
 
-    public void execute(Object parameter){
+    public String getName() {
+        return name;
+    }
+
+    public void execute(Object parameter) {
         action.action(parameter);
     }
 
