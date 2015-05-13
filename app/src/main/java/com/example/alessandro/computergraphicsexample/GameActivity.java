@@ -37,6 +37,7 @@ import game.views.MessageScreen;
 import game.views.SettingsScreen;
 import game.views.SplashScreen;
 import login.audio.AudioCallManager;
+import login.audio.HeadsetListener;
 import login.communication.NotConnectedException;
 import login.communication.ServerCommunicationThread;
 import login.interaction.FieldsNames;
@@ -73,6 +74,9 @@ public class GameActivity extends Activity implements GameHandlerListener {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_game);
         context = this;
+
+        HeadsetListener headsetListener = new HeadsetListener(context);
+        headsetListener.init();
 
         messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
