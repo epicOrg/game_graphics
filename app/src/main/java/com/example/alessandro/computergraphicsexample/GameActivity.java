@@ -210,7 +210,12 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
     @Override
     public void onGameFinish() {
-        finish();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+            }
+        });
     }
 
     @Override

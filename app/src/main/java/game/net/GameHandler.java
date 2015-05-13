@@ -90,7 +90,7 @@ public class GameHandler extends Handler {
 
         if (results.isGo())
             Log.d(LOG_TAG, "results.isGo");
-            callOnGameGo();
+        callOnGameGo();
         if (results.getGameEnd() != null) {
             Log.d(LOG_TAG, "results.getGameEnd");
             String gameEnd = results.getGameEnd();
@@ -112,13 +112,17 @@ public class GameHandler extends Handler {
             gamePositionSender.setSending(false);
             messageScreen.show();
 
-            try {
-                Thread.sleep(5*1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            callOnGameFinish();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    callOnGameFinish();
+                }
+            }).start();
         }
     }
 
