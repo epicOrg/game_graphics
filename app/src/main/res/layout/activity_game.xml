@@ -12,7 +12,7 @@
             android:id="@+id/game_menu_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffffff"
+            android:background="#80ffffff"
             android:orientation="vertical">
 
             <Button
