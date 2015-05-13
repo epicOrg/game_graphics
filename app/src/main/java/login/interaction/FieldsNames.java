@@ -111,6 +111,7 @@ public class FieldsNames {
     public static final String GAME_END = "end";
     // Others
     public static final String GAME_READY = "ready";
+    public static final String GAME_EXIT = "exit";
     public static final String GAME_GO = "go";
 
     public static final String GAME_WIN = "win";

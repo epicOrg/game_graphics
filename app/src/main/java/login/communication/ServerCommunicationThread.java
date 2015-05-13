@@ -40,7 +40,7 @@ public class ServerCommunicationThread extends Thread {
 
     public static final String LOG_TAG = "ServerCommunicationT";
 
-    public static final String SERVER_ADDRESS = "192.168.43.187";
+    public static final String SERVER_ADDRESS = "192.168.137.1";
     public static final int SERVER_PORT = 7007;
 
     private static ServerCommunicationThread instance;

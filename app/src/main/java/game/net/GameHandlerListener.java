@@ -7,5 +7,6 @@ public interface GameHandlerListener {
 
     void onMapReceived();
     void onGameGo();
+    void onGameFinish();
 
 }

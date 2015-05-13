@@ -207,6 +207,11 @@ public class GameActivity extends Activity implements GameHandlerListener {
     }
 
     @Override
+    public void onGameFinish() {
+        finish();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         //backgroundSound.start();

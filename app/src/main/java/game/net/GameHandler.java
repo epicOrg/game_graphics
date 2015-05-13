@@ -77,6 +77,11 @@ public class GameHandler extends Handler {
             l.onMapReceived();
     }
 
+    private void callOnGameFinish() {
+        for (GameHandlerListener l : gameHandlerListeners)
+            l.onGameFinish();
+    }
+
     private void processStatusMessage(Message msg) {
         Log.d(LOG_TAG, "processStatusMessage");
         Game.GameStatusResult results = (Game.GameStatusResult) msg.obj;
@@ -98,7 +103,13 @@ public class GameHandler extends Handler {
             }
             messageScreen.show();
 
-            //TODO
+            try {
+                Thread.sleep(5*1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            callOnGameFinish();
         }
     }
 
