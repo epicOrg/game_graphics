@@ -92,8 +92,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
         if (noServer) {
             gameManager.setRoom(new Room("TestRoom", 10, 2));
         }
-        gameHandler = new GameHandler(messageScreen);
-        gameHandler.addGameHandlerListeners(this);
 
         backgroundSound = new BackgroundSound(context, new GameSoundtracks(R.raw.soundtrack_01, R.raw.soundtrack_02).getSoundtracks(context));
 
@@ -128,12 +126,16 @@ public class GameActivity extends Activity implements GameHandlerListener {
         if (!noServer) {
             Log.d(LOG_TAG, "Starting GamePositionSender..");
             GamePositionSender gamePositionSender = new GamePositionSender(me, room.getName());
+            gameHandler = new GameHandler(gamePositionSender, messageScreen);
+            gameHandler.addGameHandlerListeners(this);
+
             waiterGroup.addWaiter(gamePositionSender);
 
             waiterGroup.addWaiter(new GameStatusWaiter(room.getName(), username, hashcode));
         }
 
         waiterGroup.startWaiting();
+
 
         if (noServer) {
             Map map = new Map();

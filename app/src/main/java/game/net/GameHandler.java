@@ -37,9 +37,11 @@ public class GameHandler extends Handler {
     private int groundWidth = 0;
     private int groundHeight = 0;
 
+    private GamePositionSender gamePositionSender;
     private MessageScreen messageScreen;
 
-    public GameHandler(MessageScreen messageScreen) {
+    public GameHandler(GamePositionSender gamePositionSender, MessageScreen messageScreen) {
+        this.gamePositionSender = gamePositionSender;
         this.messageScreen = messageScreen;
     }
 
@@ -53,7 +55,7 @@ public class GameHandler extends Handler {
 
     @Override
     public void handleMessage(Message msg) {
-        Log.d(LOG_TAG, "handleMessage");
+        //Log.d(LOG_TAG, "handleMessage");
         switch (msg.what) {
             case Game.STATUS:
                 processStatusMessage(msg);
@@ -106,6 +108,8 @@ public class GameHandler extends Handler {
                     messageScreen.setText("INTERRUPTED!", Color.BLACK);
                     break;
             }
+
+            gamePositionSender.setSending(false);
             messageScreen.show();
 
             try {
@@ -151,7 +155,7 @@ public class GameHandler extends Handler {
     }
 
     private void processPositionsMessage(Message msg) {
-        Log.d(LOG_TAG, "processPositionsMessage");
+        //Log.d(LOG_TAG, "processPositionsMessage");
         Game.GamePositionsResult results = (Game.GamePositionsResult) msg.obj;
 
         Room room = gameManager.getRoom();
