@@ -83,12 +83,14 @@ public class GameHandler extends Handler {
     }
 
     private void processStatusMessage(Message msg) {
-        Log.d(LOG_TAG, "processStatusMessage");
+        //Log.d(LOG_TAG, "processStatusMessage");
         Game.GameStatusResult results = (Game.GameStatusResult) msg.obj;
 
         if (results.isGo())
+            Log.d(LOG_TAG, "results.isGo");
             callOnGameGo();
         if (results.getGameEnd() != null) {
+            Log.d(LOG_TAG, "results.getGameEnd");
             String gameEnd = results.getGameEnd();
             switch (gameEnd) {
                 case FieldsNames.GAME_WIN:
@@ -117,7 +119,7 @@ public class GameHandler extends Handler {
     }
 
     private void processMapMessage(Message msg) {
-        Log.d(LOG_TAG, "processMapMessage");
+        //Log.d(LOG_TAG, "processMapMessage");
         Game.GameMapResult results = (Game.GameMapResult) msg.obj;
         map = new Map();
 

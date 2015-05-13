@@ -61,7 +61,8 @@ public class Game implements Service {
         boolean go = false;
         String gameEnd = null;
         try {
-            go = json.getBoolean(FieldsNames.GAME_GO);
+            if (json.has(FieldsNames.GAME_GO))
+                go = json.getBoolean(FieldsNames.GAME_GO);
             if (json.has(FieldsNames.GAME_END))
                 gameEnd = json.getString(FieldsNames.GAME_END);
         } catch (JSONException e) {
