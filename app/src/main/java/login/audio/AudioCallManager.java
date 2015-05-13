@@ -52,7 +52,8 @@ public class AudioCallManager {
         audioStream.join(audioGroup);
         AudioManager Audio =  (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         Audio.setMode(AudioManager.MODE_IN_COMMUNICATION);
-        Audio.setSpeakerphoneOn(true);
+        if(Audio.isWiredHeadsetOn())
+            Audio.setSpeakerphoneOn(false);
     }
 
     public void releaseResources(){
