@@ -117,6 +117,7 @@ public class FieldsNames {
     public static final String GAME_WIN = "win";
     public static final String GAME_LOSE = "lose";
     public static final String GAME_DRAW = "draw";
+    public static final String GAME_INTERRUPTED = "interrupted";
 
     public static final String GAME_WIDTH = "width";
     public static final String GAME_LENGTH = "length";

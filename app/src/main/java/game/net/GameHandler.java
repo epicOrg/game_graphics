@@ -100,6 +100,9 @@ public class GameHandler extends Handler {
                 case FieldsNames.GAME_LOSE:
                     messageScreen.setText("YOU LOSE!", Color.RED);
                     break;
+                case FieldsNames.GAME_INTERRUPTED:
+                    messageScreen.setText("INTERRUPTED!", Color.BLACK);
+                    break;
             }
             messageScreen.show();
 
