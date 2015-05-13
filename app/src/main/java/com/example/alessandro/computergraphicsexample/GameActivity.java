@@ -81,7 +81,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
         messageScreen = new MessageScreen(this, Color.argb(128, 0xCD, 0xDC, 0x39), messageContainer);
-        settingsScreen = new SettingsScreen(this, menuContainer);
+        settingsScreen = new SettingsScreen(this, menuContainer, username, hashcode);
 
         Intent intent = getIntent();
         boolean noServer = intent.getBooleanExtra("NO_SERVER", false);

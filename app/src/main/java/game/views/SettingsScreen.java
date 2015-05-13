@@ -14,9 +14,15 @@ import android.widget.Toast;
 
 import com.example.alessandro.computergraphicsexample.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import game.GameManager;
 import game.Team;
 import game.player.Player;
+import login.communication.NotConnectedException;
+import login.communication.ServerCommunicationThread;
+import login.interaction.FieldsNames;
 
 /**
  * Created by Andrea on 12/05/2015.
@@ -25,15 +31,21 @@ public class SettingsScreen {
 
     public static final String LOG_TAG = "SettingsScreen";
 
+    private ServerCommunicationThread serverCommunicationThread = ServerCommunicationThread.getInstance();
+
     private Activity activity;
     private LinearLayout container;
+    private String username;
+    private int hashcode;
 
     private SettingsScreen settingsScreen;
     private GameManager gameManager;
 
-    public SettingsScreen(Activity activity, LinearLayout container) {
+    public SettingsScreen(Activity activity, LinearLayout container, String username, int hashcode) {
         this.activity = activity;
         this.container = container;
+        this.username = username;
+        this.hashcode = hashcode;
 
         settingsScreen = this;
 
@@ -65,6 +77,11 @@ public class SettingsScreen {
             @Override
             public void onClick(View view) {
                 Toast.makeText(activity, "Quitting..", Toast.LENGTH_SHORT).show();
+                try {
+                    serverCommunicationThread.send(createExitRequest());
+                } catch (NotConnectedException e) {
+                    e.printStackTrace();
+                }
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +121,20 @@ public class SettingsScreen {
         });
     }
 
+    private JSONObject createExitRequest() {
+        JSONObject request = new JSONObject();
+        try {
+            request.put(FieldsNames.SERVICE, FieldsNames.GAME);
+            request.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS);
+            request.put(FieldsNames.HASHCODE, hashcode);
+            request.put(FieldsNames.USERNAME, username);
+            request.put(FieldsNames.GAME_EXIT, true);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return request;
+    }
+
     public void hide() {
         Log.d(LOG_TAG, "hide");
 
@@ -121,4 +152,5 @@ public class SettingsScreen {
             return true;
         }
     }
+
 }
