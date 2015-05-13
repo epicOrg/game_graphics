@@ -202,7 +202,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
     public void onGameGo() {
         Log.d(LOG_TAG, "onGameGo");
         messageScreen.hide();
-
+        backgroundSound.stop();
         graphicsView.onGameGo();
     }
 
@@ -214,7 +214,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
     @Override
     protected void onResume() {
         super.onResume();
-        //backgroundSound.start();
+        backgroundSound.start();
 
         if (graphicsView != null)
             graphicsView.onResume();
