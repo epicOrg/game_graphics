@@ -89,7 +89,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
         messageScreen = new MessageScreen(this, Color.argb(128, 0xCD, 0xDC, 0x39), messageContainer);
         settingsScreen = new SettingsScreen(this, menuContainer, username, hashcode, gameManager.getRoom().getName());
-        
+
         if (noServer) {
             gameManager.setRoom(new Room("TestRoom", 10, 2));
         }
@@ -247,6 +247,11 @@ public class GameActivity extends Activity implements GameHandlerListener {
             e.printStackTrace();
         }
         return request;
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do nothing
     }
 
 }
