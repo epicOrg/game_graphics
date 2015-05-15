@@ -78,18 +78,18 @@ public class GameActivity extends Activity implements GameHandlerListener {
         HeadsetListener headsetListener = new HeadsetListener(context);
         headsetListener.init();
 
+        Intent intent = getIntent();
+        boolean noServer = intent.getBooleanExtra("NO_SERVER", false);
+        username = intent.getStringExtra(FieldsNames.USERNAME);
+        hashcode = intent.getIntExtra(FieldsNames.HASHCODE, 0);
+
         gameManager = GameManager.getInstance();
 
         messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
         messageScreen = new MessageScreen(this, Color.argb(128, 0xCD, 0xDC, 0x39), messageContainer);
         settingsScreen = new SettingsScreen(this, menuContainer, username, hashcode, gameManager.getRoom().getName());
-
-        Intent intent = getIntent();
-        boolean noServer = intent.getBooleanExtra("NO_SERVER", false);
-        username = intent.getStringExtra(FieldsNames.USERNAME);
-        hashcode = intent.getIntExtra(FieldsNames.HASHCODE, 0);
-
+        
         if (noServer) {
             gameManager.setRoom(new Room("TestRoom", 10, 2));
         }
@@ -131,7 +131,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
             gameHandler.addGameHandlerListeners(this);
 
             waiterGroup.addWaiter(gamePositionSender);
-
             waiterGroup.addWaiter(new GameStatusWaiter(room.getName(), username, hashcode));
         }
 

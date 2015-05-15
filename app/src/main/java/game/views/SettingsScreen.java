@@ -2,13 +2,13 @@ package game.views;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -97,17 +97,33 @@ public class SettingsScreen {
         settingsContainer.addView(quitButton);
         settingsContainer.addView(cancelButton);
 
-        for (Team t : gameManager.getRoom().getTeams()) {
-            ListView listView = new ListView(activity);
-            settingsContainer.addView(listView);
-            ArrayAdapter<Player> adapter = new ArrayAdapter<Player>(activity, android.R.layout.simple_list_item_1, t.getPlayers());
+        ScrollView scrollView = new ScrollView(activity);
+        scrollView.setBackgroundColor(activity.getResources().getColor(android.R.color.transparent));
+        scrollView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
 
-            TextView textView = new TextView(activity);
-            textView.setText(t.getName());
-            listView.addHeaderView(textView);
-            listView.setAdapter(adapter);
+        LinearLayout playersContainer = new LinearLayout(activity);
+        LinearLayout.LayoutParams playersLayout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        for (Team t : gameManager.getRoom().getTeams()) {
+            playersContainer.setLayoutParams(playersLayout);
+            playersContainer.setOrientation(LinearLayout.VERTICAL);
+
+            TextView teamName = new TextView(activity);
+            teamName.setText(t.getName());
+            teamName.setTypeface(teamName.getTypeface(), Typeface.BOLD);
+
+            playersContainer.addView(teamName);
+
+            for (Player p : t.getPlayers()) {
+                TextView playerName = new TextView(activity);
+                playerName.setText(p.getName());
+                playerName.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                playersContainer.addView(playerName);
+            }
         }
 
+        scrollView.addView(playersContainer);
+        settingsContainer.addView(scrollView);
         container.addView(settingsContainer);
     }
 

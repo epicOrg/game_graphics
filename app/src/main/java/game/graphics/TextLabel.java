@@ -84,7 +84,7 @@ public class TextLabel {
         Paint paint=new Paint();
         paint.setColor(color);
         paint.setAntiAlias(false);
-        paint.setTextSize(20);
+        paint.setTextSize(24);
         paint.setTextAlign(Paint.Align.CENTER);
         canvas.drawText(text, 64, 64, paint);
         return bitmap;
