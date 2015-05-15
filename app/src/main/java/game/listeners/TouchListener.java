@@ -64,7 +64,7 @@ public class TouchListener implements TouchListenerInterface {
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                if(!readyToPlay)
+                if (!readyToPlay)
                     return;
 
                 actionMovePositionProcessor(event);
@@ -127,12 +127,8 @@ public class TouchListener implements TouchListenerInterface {
                         return;
                     }
 
-                    if (pressedButton != null) {
-                        Log.d(LOG_TAG, "Pressed " + pressedButton.getName() + " button.");
-                        pressedButton.execute(TIME_SLEEP);
-                    } else {
-                        Log.d(LOG_TAG, "Invalid button.");
-                    }
+                    Log.d(LOG_TAG, "Pressed " + pressedButton.getName() + " button.");
+                    pressedButton.execute(TIME_SLEEP);
 
                     if (!pressedButton.isContinuousPressing())
                         return;

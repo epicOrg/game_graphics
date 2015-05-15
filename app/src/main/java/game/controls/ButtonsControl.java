@@ -64,16 +64,15 @@ public class ButtonsControl {
     }
 
     public boolean isInsideAButton(float touchX, float touchY) {
-        return getColorAt(touchX, touchY) != Color.argb(255, 0, 0, 0);
+        return getColorAt(touchX, touchY) != Color.rgb(0, 0, 0);
     }
 
     public Button getPressedButton(float touchX, float touchY) {
-        program.setupProjection(orthoMatrix);
         return buttonsMap.get(getColorAt(touchX, touchY)).button;
     }
 
     private int generateNewColor(int n) {
-        return Color.argb(255, n, 0, 0);
+        return Color.rgb(n, 0, 0);
     }
 
     private void drawForColorPicking() {
@@ -90,7 +89,7 @@ public class ButtonsControl {
     }
 
     private int getColorAt(float touchX, float touchY) {
-        return buttonsBitmap.getPixel((int) touchX, (int) touchY);
+        return buttonsBitmap.getPixel((int) touchX, (int) touchY) | 0xff000000;
     }
 
     private class ButtonControlObject {
