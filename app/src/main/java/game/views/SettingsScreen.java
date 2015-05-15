@@ -35,17 +35,18 @@ public class SettingsScreen {
 
     private Activity activity;
     private LinearLayout container;
-    private String username;
+    private String username, roomName;
     private int hashcode;
 
     private SettingsScreen settingsScreen;
     private GameManager gameManager;
 
-    public SettingsScreen(Activity activity, LinearLayout container, String username, int hashcode) {
+    public SettingsScreen(Activity activity, LinearLayout container, String username, int hashcode, String roomName) {
         this.activity = activity;
         this.container = container;
         this.username = username;
         this.hashcode = hashcode;
+        this.roomName = roomName;
 
         settingsScreen = this;
 
@@ -112,6 +113,7 @@ public class SettingsScreen {
 
     public void show() {
         Log.d(LOG_TAG, "show");
+
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -128,6 +130,7 @@ public class SettingsScreen {
             request.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS);
             request.put(FieldsNames.HASHCODE, hashcode);
             request.put(FieldsNames.USERNAME, username);
+            request.put(FieldsNames.ROOM_NAME, roomName);
             request.put(FieldsNames.GAME_EXIT, true);
         } catch (JSONException e) {
             e.printStackTrace();
