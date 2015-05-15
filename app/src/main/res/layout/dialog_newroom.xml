@@ -25,14 +25,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="50"
-            android:text="@string/cancel" />
+            android:text="@string/cancel"
+            android:textColor="@color/icons"
+            android:background="@drawable/background_button" />
 
         <Button
             android:id="@+id/newroom_create"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="50"
-            android:text="@string/rooms_create" />
+            android:text="@string/rooms_create"
+            android:textColor="@color/icons"
+            android:background="@drawable/background_button" />
     </LinearLayout>
 
 </LinearLayout>
