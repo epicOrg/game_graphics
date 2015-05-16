@@ -18,6 +18,8 @@ import login.communication.ServerCommunicationThread;
  */
 public class AudioCallManager {
 
+    public static final String LOG_TAG = "AudioCallManager";
+
     private static AudioCallManager instance = new AudioCallManager();
     private AudioGroup audioGroup;
     private AudioStream audioStream;
@@ -36,31 +38,33 @@ public class AudioCallManager {
 
     public void initAudioGroup() {
         audioGroup = new AudioGroup();
-        audioGroup.setMode(AudioGroup.MODE_NORMAL);
+        audioGroup.setMode(AudioGroup.MODE_ECHO_SUPPRESSION);
     }
 
     public int newAudioStream() throws UnknownHostException, SocketException {
-        audioStream = new AudioStream(InetAddress.getByName(
-                ServerCommunicationThread.getLocalIpAddress()));
+        InetAddress localIpAddress = InetAddress.getByName(ServerCommunicationThread.getLocalIpAddress());
+        audioStream = new AudioStream(localIpAddress);
         audioStream.setCodec(AudioCodec.PCMU);
         audioStream.setMode(RtpStream.MODE_NORMAL);
-        return audioStream.getLocalPort();
+        int localPort = audioStream.getLocalPort();
+        return localPort;
     }
 
-    public void associateStream(){
+    public void associateStream() {
         audioStream.associate(serverIp, serverPort);
         audioStream.join(audioGroup);
-        AudioManager Audio =  (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        AudioManager Audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         Audio.setMode(AudioManager.MODE_IN_COMMUNICATION);
-        if(Audio.isWiredHeadsetOn())
+
+        if (Audio.isWiredHeadsetOn())
             Audio.setSpeakerphoneOn(false);
     }
 
-    public void releaseResources(){
+    public void releaseResources() {
         audioStream.join(null);
         audioStream.release();
         audioStream = null;
-        AudioManager Audio =  (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        AudioManager Audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         Audio.setMode(AudioManager.MODE_NORMAL);
         Audio.setSpeakerphoneOn(false);
     }

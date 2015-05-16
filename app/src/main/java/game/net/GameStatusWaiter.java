@@ -48,7 +48,5 @@ public class GameStatusWaiter implements Waiter {
         } catch (NotConnectedException e) {
             e.printStackTrace();
         }
-
-        AudioCallManager.getInstance().associateStream();
     }
 }

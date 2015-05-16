@@ -143,9 +143,9 @@ public class GameActivity extends Activity implements GameHandlerListener {
             DebugUtils.startGame(this, otherPlayers, map, 20, 20, startSignal);
         } else {
             serverCommunicationThread.setHandler(gameHandler);
-            Log.d(LOG_TAG, "Asking Map..");
+            Log.d(LOG_TAG, "Starting Audio..");
             initAudioSetting();
-            Log.d(LOG_TAG, "Init Audio...");
+            Log.d(LOG_TAG, "Asking Map..");
             try {
                 serverCommunicationThread.send(createMapRequest());
             } catch (NotConnectedException e) {

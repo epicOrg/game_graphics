@@ -31,6 +31,7 @@ public class Audio implements Service {
             InetAddress serverIp = InetAddress.getByName(ServerCommunicationThread.SERVER_ADDRESS);
             audioCallManager.setServerPort(serverPort);
             audioCallManager.setServerIp(serverIp);
+            audioCallManager.associateStream();
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (UnknownHostException e) {
