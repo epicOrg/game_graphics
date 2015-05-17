@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -168,22 +169,22 @@ public class RoomsActivity extends ActionBarActivity {
             Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-
-
     }
 
-
     private void showNewRoomDialog() {
-
         AlertDialog.Builder b = new AlertDialog.Builder(context);
         b.setTitle("Create new room");
-        final EditText input = new EditText(context);
-        b.setView(input);
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_new_room, null);
+        b.setView(dialogView);
+
+        final EditText newRoomName = (EditText) dialogView.findViewById(R.id.rooms_new_room_name);
+
         b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int whichButton) {
-                // SHOULD NOW WORK
-                result = input.getText().toString();
+                result = newRoomName.getText().toString();
 
                 try {
                     serverCommunicationThread.send(createNewRoomRequest(result));
