@@ -61,6 +61,11 @@ public class SettingsScreen {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         settingsContainer.setLayoutParams(layoutParams);
 
+        LinearLayout buttonsContainer = new LinearLayout(activity);
+        LinearLayout.LayoutParams buttonLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        buttonsContainer.setLayoutParams(buttonLayoutParams);
+        buttonsContainer.setOrientation(LinearLayout.HORIZONTAL);
+
         int padding = activity.getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin);
         settingsContainer.setPadding(padding, padding, padding, padding);
         settingsContainer.setOrientation(LinearLayout.VERTICAL);
@@ -96,8 +101,9 @@ public class SettingsScreen {
         });
 
         container.removeAllViews();
-        settingsContainer.addView(muteButton);
-        settingsContainer.addView(quitButton);
+        buttonsContainer.addView(muteButton);
+        buttonsContainer.addView(quitButton);
+        settingsContainer.addView(buttonsContainer);
         settingsContainer.addView(cancelButton);
 
         ScrollView scrollView = new ScrollView(activity);
@@ -106,11 +112,10 @@ public class SettingsScreen {
 
         LinearLayout playersContainer = new LinearLayout(activity);
         LinearLayout.LayoutParams playersLayout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        playersContainer.setLayoutParams(playersLayout);
+        playersContainer.setOrientation(LinearLayout.VERTICAL);
 
         for (Team t : gameManager.getRoom().getTeams()) {
-            playersContainer.setLayoutParams(playersLayout);
-            playersContainer.setOrientation(LinearLayout.VERTICAL);
-
             TextView teamName = new TextView(activity);
             teamName.setText(t.getName());
             teamName.setTypeface(teamName.getTypeface(), Typeface.BOLD);
