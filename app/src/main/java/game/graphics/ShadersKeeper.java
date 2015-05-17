@@ -44,4 +44,8 @@ public class ShadersKeeper {
         return shaders.get(name);
     }
 
+    public static void clear() {
+        shaders.clear();
+    }
+
 }

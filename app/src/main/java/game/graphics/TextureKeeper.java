@@ -103,4 +103,9 @@ public class TextureKeeper {
         return tex;
     }
 
+    public void clear() {
+        mapFromResources.clear();
+        mapFromColors.clear();
+    }
+
 }

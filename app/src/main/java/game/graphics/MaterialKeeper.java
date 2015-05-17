@@ -51,4 +51,9 @@ public class MaterialKeeper {
         }
     }
 
+    public void clear() {
+        mapFromResources.clear();
+        mapFromColors.clear();
+    }
+
 }

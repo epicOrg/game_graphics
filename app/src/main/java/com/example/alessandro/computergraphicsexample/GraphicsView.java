@@ -21,6 +21,7 @@ import game.generators.MoveButtonsGenerator;
 import game.generators.SettingsButtonsGenerator;
 import game.graphics.Camera;
 import game.graphics.Map;
+import game.graphics.MaterialKeeper;
 import game.graphics.PlayerView;
 import game.graphics.ShadersKeeper;
 import game.graphics.Sky;
@@ -34,7 +35,6 @@ import game.listeners.TouchListener;
 import game.listeners.TouchListenerInterface;
 import game.physics.CollisionMediator;
 import game.player.Player;
-import game.views.MessageScreen;
 import game.views.SettingsScreen;
 import sfogl.integration.Model;
 import sfogl.integration.Node;
@@ -68,7 +68,6 @@ public class GraphicsView extends GLSurfaceView {
     private PositionMoveListenerInterface positionMoveListener;
     private DirectionMoveListenerInterface directionMoveListener;
 
-    private MessageScreen messageScreen;
     private SettingsScreen settingsScreen;
 
     private CollisionMediator cm;
@@ -79,7 +78,7 @@ public class GraphicsView extends GLSurfaceView {
     private int groundWidth, groundHeight;
     private ArrayList<PlayerView> playerViews = new ArrayList<>();
 
-    public GraphicsView(Context context, Player me, ArrayList<Team> teams, Map map, CountDownLatch startSignal, int groundWidth, int groundHeight, MessageScreen messageScreen, SettingsScreen settingsScreen) {
+    public GraphicsView(Context context, Player me, ArrayList<Team> teams, Map map, CountDownLatch startSignal, int groundWidth, int groundHeight, SettingsScreen settingsScreen) {
         super(context);
         setEGLContextClientVersion(2);
         setEGLConfigChooser(8, 8, 8, 8, 16, 0);
@@ -95,7 +94,6 @@ public class GraphicsView extends GLSurfaceView {
         camera = new Camera(me, 0.125f, 128, 80);
         cm = new CollisionMediator();
 
-        this.messageScreen = messageScreen;
         this.settingsScreen = settingsScreen;
 
         sfs = SFOGLStateEngine.glEnable(GL_CULL_FACE);
@@ -119,6 +117,10 @@ public class GraphicsView extends GLSurfaceView {
     @Override
     public void onPause() {
         super.onPause();
+
+        ShadersKeeper.clear();
+        MaterialKeeper.getInstance().clear();
+        TextureKeeper.getInstance().clear();
     }
 
     @Override
