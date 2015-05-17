@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:text="Mute/UnMute"
                 android:textColor="@color/icons"
-                android:background="@drawable/background_button" />
+                android:background="@color/primary" />
 
             <Button
                 android:id="@+id/game_menu_quit"
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:text="Quit"
                 android:textColor="@color/icons"
-                android:background="@drawable/background_button" />
+                android:background="@color/primary" />
 
             <Button
                 android:id="@+id/game_menu_cancel"
@@ -39,7 +39,7 @@
                 android:layout_marginBottom="10dip"
                 android:text="Cancel"
                 android:textColor="@color/icons"
-                android:background="@drawable/background_button" />
+                android:background="@color/primary" />
         </LinearLayout>
 
         <LinearLayout

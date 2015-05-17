@@ -2,7 +2,6 @@ package com.example.alessandro.computergraphicsexample;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -51,6 +49,7 @@ public class RoomsActivity extends ActionBarActivity {
 
     private Context context;
     private Activity activity = this;
+    private String result;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -175,27 +174,19 @@ public class RoomsActivity extends ActionBarActivity {
 
 
     private void showNewRoomDialog() {
-        final Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.dialog_newroom);
-        dialog.setTitle("Create New Room");
 
-        final EditText name = (EditText) dialog.findViewById(R.id.newroom_name);
-        final Button cancel = (Button) dialog.findViewById(R.id.newroom_cancel);
-        final Button create = (Button) dialog.findViewById(R.id.newroom_create);
-
-
-        cancel.setOnClickListener(new View.OnClickListener() {
+        AlertDialog.Builder b = new AlertDialog.Builder(context);
+        b.setTitle("Create new room");
+        final EditText input = new EditText(context);
+        b.setView(input);
+        b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                dialog.cancel();
-            }
-        });
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // SHOULD NOW WORK
+                result = input.getText().toString();
 
-        create.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 try {
-                    serverCommunicationThread.send(createNewRoomRequest(name.getText().toString()));
+                    serverCommunicationThread.send(createNewRoomRequest(result));
                 } catch (NotConnectedException e) {
                     Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
                     e.printStackTrace();
@@ -203,8 +194,8 @@ public class RoomsActivity extends ActionBarActivity {
                 dialog.cancel();
             }
         });
-
-        dialog.show();
+        b.setNegativeButton("CANCEL", null);
+        b.create().show();
     }
 
     private JSONObject createNewRoomRequest(String name) {
@@ -305,3 +296,4 @@ public class RoomsActivity extends ActionBarActivity {
     }
 
 }
+

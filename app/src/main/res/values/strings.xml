@@ -27,7 +27,7 @@
     <string name="cancel">Cancel</string>
     <string name="logout">Logout</string>
     <string name="logout_confirm">Vuoi davvero uscire ?</string>
-    <string name="yes">Si</string>
-    <string name="no">No</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
 
 </resources>

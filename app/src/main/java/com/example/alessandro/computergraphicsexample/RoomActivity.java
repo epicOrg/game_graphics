@@ -79,7 +79,7 @@ public class RoomActivity extends ActionBarActivity {
         alertDialogBuilder.setTitle(getString(R.string.room_exit_message));
         alertDialogBuilder
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         try {
                             serverCommunicationThread.send(createExitRequest());
@@ -89,7 +89,7 @@ public class RoomActivity extends ActionBarActivity {
                         }
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
