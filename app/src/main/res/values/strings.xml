@@ -5,7 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-    <string name="info_press_again_to_quit">Premi ancora per uscire</string>
+    <string name="info_press_again_to_quit">Press again to exit</string>
 
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
@@ -14,19 +14,19 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_call">Chiama</string>
-    <string name="prompt_user_to_call">User da chiamare</string>
+    <string name="action_call">Call</string>
+    <string name="prompt_user_to_call">User to call</string>
 
     <string name="action_example">Example action</string>
     <string name="title_activity_call">CallActivity</string>
-    <string name="dialog_net_error">Errore di rete, l\'applicazione terminerà</string>
+    <string name="dialog_net_error">Netwok error , App will be closed</string>
     <string name="action_game_graphics">Vai al game_graphics (DEBUG)</string>
     <string name="action_game_graphics_no_server">Vai al game_graphics - NoServer (DEBUG)</string>
 
     <string name="error_not_connected">Server not connected</string>
     <string name="cancel">Cancel</string>
     <string name="logout">Logout</string>
-    <string name="logout_confirm">Vuoi davvero uscire ?</string>
+    <string name="logout_confirm">Do you really want to exit?</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
 

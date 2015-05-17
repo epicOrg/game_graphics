@@ -5,25 +5,25 @@
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="action_log_in">Login</string>
-    <string name="action_sign_in_short">Avanti</string>
-    <string name="action_not_registered">Non sei registrato?</string>
-    <string name="action_remember_me">Ricordami</string>
+    <string name="action_sign_in_short">Next</string>
+    <string name="action_not_registered">Sing up</string>
+    <string name="action_remember_me">Remember me</string>
 
-    <string name="error_invalid_email">Email non valida</string>
-    <string name="error_invalid_password">Deve contenere almeno un numero e una letttera</string>
-    <string name="error_short_password">Deve contenere almeno 8 caratteri</string>
+    <string name="error_invalid_email">Email invalid</string>
+    <string name="error_invalid_password">It must contain at least one number and a letter</string>
+    <string name="error_short_password">It must contain at least 8 characters</string>
     <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">Campo obbligatorio</string>
-    <string name="error_server_unreachable">Impossibile comunicare col server</string>
-    <string name="error_communication">Impossibile comunicare correttamente col server</string>
-    <string name="login_failed">Password o username errati</string>
+    <string name="error_field_required">Field required</string>
+    <string name="error_server_unreachable">Unable to communicate with the server</string>
+    <string name="error_communication">Unable to communicate with server</string>
+    <string name="login_failed">Wrong username or password</string>
 
     <string name="main_status_connecting">Connecting..</string>
     <string name="main_status_connected">Connected</string>
     <string name="main_status_not_connected">Not Connected</string>
     <string name="main_status_press_to_rety">Press here to retry</string>
 
-    <string name="dialog_error">Errore</string>
-    <string name="dialog_try_again">Riprova</string>
+    <string name="dialog_error">Error</string>
+    <string name="dialog_try_again">Try again</string>
     <string name="login_exit_message">Press BACK again to Exit</string>
 </resources>

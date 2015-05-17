@@ -5,18 +5,18 @@
 
     <string name="registration_title">Registration</string>
     <string name="prompt_email">Email</string>
-    <string name="prompt_confirm_password">Conferma password</string>
-    <string name="action_registration">Registrati</string>
+    <string name="prompt_confirm_password">Reinsert password</string>
+    <string name="action_registration">Sing up</string>
 
-    <string name="error_passwords_different">Le password non coincidono</string>
+    <string name="error_passwords_different">Passwords do not match</string>
 
-    <string name="email_not_valid">Email non valida</string>
-    <string name="domain_not_vaid">Dominio email non valido</string>
-    <string name="username_short">Username troppo corto</string>
-    <string name="username_long">Username troppo lungo</string>
-    <string name="username_invaid_char">L\'username contiene caratteri non validi</string>
-    <string name="password_long">Password troppo lunga</string>
-    <string name="email_already_used">Email già usata</string>
-    <string name="username_already_used">Username già usato</string>
+    <string name="email_not_valid">Invalid Email</string>
+    <string name="domain_not_vaid">Invalid email domain</string>
+    <string name="username_short">Username too short</string>
+    <string name="username_long">Username too long</string>
+    <string name="username_invaid_char">The username contains invalid character</string>
+    <string name="password_long">Password too long</string>
+    <string name="email_already_used">Email already used</string>
+    <string name="username_already_used">Username already used</string>
 
 </resources>
