@@ -29,4 +29,8 @@ public class HeadsetListener extends BroadcastReceiver {
 
         Audio.setSpeakerphoneOn(state == 0? true : false);
     }
+
+    public void release(){
+        context.unregisterReceiver(this);
+    }
 }

@@ -57,6 +57,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
     private LinearLayout messageContainer;
     private LinearLayout menuContainer;
 
+    private HeadsetListener headsetListener;
+
     private MessageScreen messageScreen;
     private SettingsScreen settingsScreen;
 
@@ -75,7 +77,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         setContentView(R.layout.activity_game);
         context = this;
 
-        HeadsetListener headsetListener = new HeadsetListener(context);
+        headsetListener = new HeadsetListener(context);
         headsetListener.init();
 
         Intent intent = getIntent();
@@ -215,6 +217,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
             public void run() {
                 finish();
                 AudioCallManager.getInstance().releaseResources();
+                headsetListener.release();
             }
         });
     }
