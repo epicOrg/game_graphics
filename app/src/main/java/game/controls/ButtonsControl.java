@@ -9,7 +9,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.HashMap;
 
-import game.generators.FundamentalGenerator;
+import game.graphics.MaterialKeeper;
 import sfogl.integration.Material;
 import sfogl.integration.Node;
 import sfogl.integration.ShadingProgram;
@@ -38,7 +38,7 @@ public class ButtonsControl {
         for (Button b : buttonMaster.getButtons()) {
             n++;
             int color = generateNewColor(n);
-            buttonsMap.put(color, new ButtonControlObject(b, FundamentalGenerator.getColorMaterial(context, program, color)));
+            buttonsMap.put(color, new ButtonControlObject(b, MaterialKeeper.getInstance().getColorMaterial(context, program, color)));
         }
     }
 

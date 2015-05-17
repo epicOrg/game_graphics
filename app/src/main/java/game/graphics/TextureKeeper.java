@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.util.Log;
+
 import java.util.HashMap;
+
 import sfogl.integration.BitmapTexture;
 import sfogl2.SFOGLTextureModel;
 import shadow.graphics.SFImageFormat;
@@ -26,7 +28,7 @@ public class TextureKeeper {
     private TextureKeeper(){
     }
 
-    public static TextureKeeper getInstance(){
+    public static TextureKeeper getInstance() {
         return instance;
     }
 
