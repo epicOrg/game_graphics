@@ -16,5 +16,5 @@
         android:bottom="0dp" />
     <stroke
         android:width="3dp"
-        android:color="@color/primary" />
+        android:color="@color/icons" />
 </shape>
