@@ -140,9 +140,7 @@ public class TouchListener implements TouchListenerInterface {
                     }
                 }
             }
-        }
-
-        );
+        });
         moveThread.start();
     }
 
@@ -168,5 +166,4 @@ public class TouchListener implements TouchListenerInterface {
         isMoving = false;
         directionId = -1;
     }
-
 }

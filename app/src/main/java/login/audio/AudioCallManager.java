@@ -67,6 +67,15 @@ public class AudioCallManager {
         AudioManager Audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         Audio.setMode(AudioManager.MODE_NORMAL);
         Audio.setSpeakerphoneOn(false);
+        Audio.setMicrophoneMute(false);
+    }
+
+    public void muteUnMute(){
+        AudioManager Audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        if(Audio.isMicrophoneMute())
+            Audio.setMicrophoneMute(false);
+        else
+            Audio.setMicrophoneMute(true);
     }
 
     public void setContext(Context context) {
@@ -80,5 +89,6 @@ public class AudioCallManager {
     public void setServerPort(int serverPort) {
         this.serverPort = serverPort;
     }
+
 
 }

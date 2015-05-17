@@ -214,6 +214,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
             @Override
             public void run() {
                 finish();
+                AudioCallManager.getInstance().releaseResources();
             }
         });
     }

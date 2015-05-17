@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import game.GameManager;
 import game.Team;
 import game.player.Player;
+import login.audio.AudioCallManager;
 import login.communication.NotConnectedException;
 import login.communication.ServerCommunicationThread;
 import login.interaction.FieldsNames;
@@ -72,6 +73,8 @@ public class SettingsScreen {
             @Override
             public void onClick(View view) {
                 Toast.makeText(activity, "Muting/UnMuting..", Toast.LENGTH_SHORT).show();
+                AudioCallManager.getInstance().muteUnMute();
+
             }
         });
         quitButton.setOnClickListener(new View.OnClickListener() {
