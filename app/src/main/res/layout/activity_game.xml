@@ -60,13 +60,13 @@
             android:id="@+id/game_splash_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ff3366FF">
+            android:background="@color/primary">
 
             <ImageView
                 android:id="@+id/game_splash_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/splash_01" />
+                android:src="@drawable/splash_02" />
 
             <TextView
                 android:id="@+id/game_splash_text"
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
                 android:text="@string/game_loading"
-                android:textColor="@android:color/white"
+                android:textColor="@color/icons"
                 android:textSize="23sp"
                 android:textStyle="bold" />
         </FrameLayout>

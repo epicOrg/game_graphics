@@ -39,7 +39,7 @@ public class MoveButtonsGenerator {
         parentNode.getRelativeTransform().setPosition(parentPosition);
         parentNode.getRelativeTransform().setMatrix(scalingMatrix);
 
-        Model model = FundamentalGenerator.getModel(context, program, R.drawable.arrow_texture_02, "Arrow.obj");
+        Model model = FundamentalGenerator.getColorModel(context, program, context.getResources().getColor(R.color.primary), "Arrow.obj");
 
         buttonMaster.setModel(model);
         buttonMaster.addButton(new Button("LEFT", new ButtonAction() {

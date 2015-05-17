@@ -6,7 +6,7 @@
     <string name="registration_title">Registration</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_confirm_password">Reinsert password</string>
-    <string name="action_registration">Sing up</string>
+    <string name="action_registration">Sign up</string>
 
     <string name="error_passwords_different">Passwords do not match</string>
 

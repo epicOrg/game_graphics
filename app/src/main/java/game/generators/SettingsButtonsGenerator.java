@@ -36,7 +36,7 @@ public class SettingsButtonsGenerator {
     public void generate() {
         Node parentNode = new Node();
 
-        SFVertex3f parentPosition = new SFVertex3f(+1, +0.5f, 0);
+        SFVertex3f parentPosition = new SFVertex3f(+1.1f, +0.6f, 0);
         SFMatrix3f scalingMatrix = SFMatrix3f.getScale(0.15f, 0.15f, 0.15f);
 
         parentNode.getRelativeTransform().setPosition(parentPosition);

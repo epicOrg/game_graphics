@@ -91,7 +91,7 @@ public class GraphicsView extends GLSurfaceView {
         this.groundWidth = groundWidth;
         this.groundHeight = groundHeight;
 
-        camera = new Camera(me, 0.125f, 128, 80);
+        camera = new Camera(me, 0.125f, 200, 80);
         cm = new CollisionMediator();
 
         this.settingsScreen = settingsScreen;

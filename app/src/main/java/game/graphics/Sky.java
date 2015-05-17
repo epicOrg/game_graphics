@@ -26,7 +26,7 @@ import shadow.math.SFVertex3f;
  */
 public class Sky {
 
-    private static final int SKY_DISTANCE = 30;
+    private static final int SKY_DISTANCE = 100;
     private static final short[] indices = new short[]{3, 2, 0, 0, 1, 3};
 
     private ArrayObject arrayObjectPosX = new ArrayObject(
