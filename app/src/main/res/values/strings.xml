@@ -25,5 +25,9 @@
 
     <string name="error_not_connected">Server not connected</string>
     <string name="cancel">Cancel</string>
+    <string name="logout">Logout</string>
+    <string name="logout_confirm">Vuoi davvero uscire ?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
 
 </resources>

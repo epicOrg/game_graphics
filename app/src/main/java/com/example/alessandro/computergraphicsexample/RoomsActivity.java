@@ -1,7 +1,10 @@
 package com.example.alessandro.computergraphicsexample;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
@@ -47,6 +50,7 @@ public class RoomsActivity extends ActionBarActivity {
     private int hashcode;
 
     private Context context;
+    private Activity activity = this;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,6 +128,51 @@ public class RoomsActivity extends ActionBarActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(getString(R.string.logout_confirm)).setTitle(getString(R.string.logout));
+        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                createLogoutRequest();
+                finish();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.create().show();
+
+
+    }
+
+    private void createLogoutRequest() {
+
+        JSONObject logoutRequest = new JSONObject();
+        try {
+            logoutRequest.put(FieldsNames.SERVICE, FieldsNames.LOGOUT);
+            logoutRequest.put(FieldsNames.USERNAME, username);
+            logoutRequest.put(FieldsNames.HASHCODE, hashcode);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            serverCommunicationThread.send(logoutRequest);
+        } catch (NotConnectedException e) {
+            Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+
+
+    }
+
 
     private void showNewRoomDialog() {
         final Dialog dialog = new Dialog(context);
