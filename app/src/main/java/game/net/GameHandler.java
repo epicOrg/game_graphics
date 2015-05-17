@@ -14,6 +14,7 @@ import game.codes.TextureCodes;
 import game.graphics.Map;
 import game.graphics.Obstacle;
 import game.graphics.Wall;
+import game.graphics.Vase;
 import game.physics.Circle;
 import game.physics.Square;
 import game.player.Player;
@@ -149,6 +150,14 @@ public class GameHandler extends Handler {
                 float sizeY = Float.parseFloat(o.size.split(" ")[1]);
                 int texture = TextureCodes.getTextureIdFromString(o.texture);
                 map.addObjects(new Obstacle(new Circle(new SFVertex3f(posX, posY, posZ), sizeX), sizeY, texture));
+            } else if (o.object.equals("Vase")) {
+                float posX = Float.parseFloat(o.position.split(" ")[0]);
+                float posY = Float.parseFloat(o.position.split(" ")[1]);
+                float posZ = Float.parseFloat(o.position.split(" ")[2]);
+                float sizeX = Float.parseFloat(o.size.split(" ")[0]);
+                float sizeY = Float.parseFloat(o.size.split(" ")[1]);
+                int texture = TextureCodes.getTextureIdFromString(o.texture);
+                map.addObjects(new Vase(new Circle(new SFVertex3f(posX, posY, posZ), sizeX), sizeY, texture));
             }
         }
 
