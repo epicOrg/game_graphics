@@ -14,22 +14,6 @@ import sfogl.integration.ShadingProgram;
  * Created by Andrea on 27/03/2015.
  */
 public class FundamentalGenerator {
-/*
-    public static Material getMaterial(Context context, ShadingProgram program, int textureId) {
-        BitmapTexture texture = TextureKeeper.getInstance().getTexture(context, textureId);
-        Material material = new Material(program);
-        material.getTextures().add(texture);
-
-        return material;
-    }
-
-    public static Material getColorMaterial(Context context, ShadingProgram program, int color) {
-        BitmapTexture texture = TextureKeeper.getInstance().getColorTexture(context, color);
-        Material material = new Material(program);
-        material.getTextures().add(texture);
-
-        return material;
-    }*/
 
     public static Model getModel(Context context, ShadingProgram program, int textureId, String obj) {
         ArrayObject[] object = ObjLoader.arrayObjectFromFile(context, obj);
