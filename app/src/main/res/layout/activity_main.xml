@@ -37,29 +37,29 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/main_refresh"
                     android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/main_refresh"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        android:text="Status:"
-                        android:textStyle="italic"
                         android:maxLines="1"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        android:text="Status:"
+                        android:textStyle="italic" />
 
                     <TextView
                         android:id="@+id/main_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="50"
-                        android:text="@string/main_status_connecting"
-                        android:textStyle="italic"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:layout_gravity="center" />
+                        android:text="@string/main_status_connecting"
+                        android:textStyle="italic" />
 
                 </LinearLayout>
 
@@ -97,62 +97,41 @@
 
 
             <CheckBox
+                android:id="@+id/remeberMeBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/action_remember_me"
-                android:id="@+id/remeberMeBox"
                 android:checked="false"
-                android:onClick="rememberMe" />
+                android:onClick="rememberMe"
+                android:text="@string/action_remember_me" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/log_in"
                     android:layout_width="match_parent"
-                    android:layout_height="36dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="50"
-                    android:text="@string/action_log_in"
-                    android:layout_marginTop="16dp"
+                    android:background="@drawable/button_background"
                     android:enabled="false"
                     android:onClick="attemptLogin"
-                    android:textColor="@color/icons"
-                    android:background="@color/primary" />
+                    android:text="@string/action_log_in"
+                    android:textColor="@color/icons" />
 
 
                 <Button
                     android:id="@+id/not_registered"
                     android:layout_width="match_parent"
-                    android:layout_height="36dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="50"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/action_not_registered"
+                    android:background="@drawable/button_background"
                     android:enabled="false"
                     android:onClick="notRegistered"
-                    android:textColor="@color/icons"
-                    android:background="@color/primary" />
-
-
-                <Button
-                android:id="@+id/game_graphics"
-                android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/action_game_graphics"
-                android:textColor="@color/icons"
-                    android:background="@color/primary" />
-
-            <Button
-                android:id="@+id/game_graphics_no_server"
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/action_game_graphics_no_server"
-                android:textColor="@color/icons"
-                android:background="@color/primary" />
+                    android:text="@string/action_not_registered"
+                    android:textColor="@color/icons" />
 
             </LinearLayout>
         </LinearLayout>
