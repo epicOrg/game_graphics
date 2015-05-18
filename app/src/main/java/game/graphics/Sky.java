@@ -8,6 +8,7 @@ import com.example.alessandro.computergraphicsexample.R;
 
 import java.util.List;
 
+import game.generators.FundamentalGenerator;
 import sfogl.integration.ArrayObject;
 import sfogl.integration.BitmapTexture;
 import sfogl.integration.Material;
@@ -145,23 +146,9 @@ public class Sky {
         mainNode.getRelativeTransform().setMatrix(SFMatrix3f.getIdentity());
     }
 
-    private Node generateNode(ArrayObject arrayObject, int textureId) {
-        Mesh meshPos = new Mesh(arrayObject);
-        meshPos.init();
-        Model modelPos = new Model();
-        modelPos.setRootGeometry(meshPos);
-
-        int textureModel = SFOGLTextureModel.generateTextureObjectModel(SFImageFormat.RGB, GLES20.GL_CLAMP_TO_EDGE, GLES20.GL_CLAMP_TO_EDGE, GLES20.GL_LINEAR, GLES20.GL_LINEAR);
-        BitmapTexture bitmapTexture = BitmapTexture.loadBitmapTexture(BitmapFactory.decodeResource(context.getResources(), textureId), textureModel);
-        bitmapTexture.init();
-        Material material = new Material(program);
-        material.getTextures().add(bitmapTexture);
-
-        modelPos.setMaterialComponent(material);
-        Node nodePos = new Node();
-        nodePos.setModel(modelPos);
-
-        return nodePos;
+    private Node generateNode(ArrayObject arrayObject, int textureId){
+        return FundamentalGenerator.generateNode(arrayObject,
+                BitmapFactory.decodeResource(context.getResources(), textureId),ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER));
     }
 
     public void draw() {

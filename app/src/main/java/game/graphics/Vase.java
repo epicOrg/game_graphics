@@ -20,7 +20,7 @@ public class Vase implements MazeObject {
     private float height;
 
     /**
-     * Crea un nuovo Obstacle di dimensioni e texture dati.
+     * Crea un nuovo Vase di dimensioni e texture dati.
      *
      * @param c          Circle che costituisce la CollisionBox e determina le dimensioni nel piano xz.
      * @param height     altezza nella direzione y.

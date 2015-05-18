@@ -15,7 +15,7 @@ import shadow.math.SFMatrix3f;
 import shadow.math.SFVertex3f;
 
 /**
- * Created by depa on 21/04/15.
+ * Classe che si occupa di generare i 4 Button di controllo del movimento.
  */
 public class MoveButtonsGenerator {
 
@@ -24,6 +24,13 @@ public class MoveButtonsGenerator {
     private ButtonMaster buttonMaster;
     private PositionMoveListenerInterface positionMoveListener;
 
+    /**
+     * Crea un nuovo MoveButtonsGenerator.
+     * @param context Context per recuperare le risorse.
+     * @param program ShadingProgram per rappresentare i Button.
+     * @param buttonMaster ButtonMaster a cui associare i Button di movimento.
+     * @param positionMoveListener Interfaccia grazie al quale si associa l'azione di movimento ai Button.
+     */
     public MoveButtonsGenerator(Context context, ShadingProgram program, ButtonMaster buttonMaster, PositionMoveListenerInterface positionMoveListener) {
         this.context = context;
         this.program = program;
@@ -31,12 +38,17 @@ public class MoveButtonsGenerator {
         this.positionMoveListener = positionMoveListener;
     }
 
-    public void generate() {
+    /**
+     * Genera i Button di movimento in una configurazione a croce, con alcuni parametri regolabili.
+     * @param center Posizione centrale dei Button.
+     * @param scale Fattore di scala omogeneo dei Model dei Button.
+     * @param distance Distanza tra i Button di movimento.
+     */
+    public void generate(SFVertex3f center, float scale, float distance) {
         Node parentNode = new Node();
-        SFVertex3f parentPosition = new SFVertex3f(-1f, -0.50f, 1);
-        SFMatrix3f scalingMatrix = SFMatrix3f.getScale(0.15f, 0.15f, 0.15f);
+        SFMatrix3f scalingMatrix = SFMatrix3f.getScale(scale,scale,scale);
 
-        parentNode.getRelativeTransform().setPosition(parentPosition);
+        parentNode.getRelativeTransform().setPosition(center);
         parentNode.getRelativeTransform().setMatrix(scalingMatrix);
 
         Model model = FundamentalGenerator.getColorModel(context, program, context.getResources().getColor(R.color.primary), "Arrow.obj");
@@ -48,7 +60,7 @@ public class MoveButtonsGenerator {
                         positionMoveListener.move((float) +Math.PI / 2, 0, (long) parameter);
                     }
                 }, true, true),
-                new SFVertex3f(-2, 0, 0), (float) -Math.PI / 2, parentNode);
+                new SFVertex3f(-distance, 0, 0), (float) -Math.PI / 2, parentNode);
 
         buttonMaster.addButton(new Button("RIGHT", new ButtonAction() {
                     @Override
@@ -56,7 +68,7 @@ public class MoveButtonsGenerator {
                         positionMoveListener.move((float) -Math.PI / 2, 0, (long) parameter);
                     }
                 }, true, true),
-                new SFVertex3f(2, 0, 0), (float) Math.PI / 2, parentNode);
+                new SFVertex3f(distance, 0, 0), (float) Math.PI / 2, parentNode);
 
         buttonMaster.addButton(new Button("UP", new ButtonAction() {
                     @Override
@@ -64,7 +76,7 @@ public class MoveButtonsGenerator {
                         positionMoveListener.move(0, 0, (long) parameter);
                     }
                 }, true, true),
-                new SFVertex3f(0, 2, 0), (float) 0, parentNode);
+                new SFVertex3f(0, distance, 0), (float) 0, parentNode);
 
         buttonMaster.addButton(new Button("DOWN", new ButtonAction() {
                     @Override
@@ -72,7 +84,7 @@ public class MoveButtonsGenerator {
                         positionMoveListener.move((float) -Math.PI, 0, (long) parameter);
                     }
                 }, true, true),
-                new SFVertex3f(0, -2, 0), (float) -Math.PI, parentNode);
+                new SFVertex3f(0, -distance, 0), (float) -Math.PI, parentNode);
     }
 
 }

@@ -44,6 +44,7 @@ import sfogl2.SFOGLStateEngine;
 import sfogl2.SFOGLSystemState;
 import shadow.math.SFMatrix3f;
 import shadow.math.SFTransform3f;
+import shadow.math.SFVertex3f;
 
 import static android.opengl.GLES20.GL_CULL_FACE;
 import static android.opengl.GLES20.glBlendFunc;
@@ -164,7 +165,7 @@ public class GraphicsView extends GLSurfaceView {
                 for (Player player : team.getPlayers()) {
                     if (!player.getName().equals(me.getName())) {
                         playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
-                        labels.add(new TextLabel(0.6f, 0.6f, me.getStatus().getDirection(), player.getStatus().getPosition(), player.getName(), team.getColor()));
+                        labels.add(new TextLabel(0.6f, 0.6f, 0.5f, me.getStatus().getDirection(), player.getStatus().getPosition(), player.getName(), team.getColor()));
                     }
                 }
             }
@@ -187,7 +188,7 @@ public class GraphicsView extends GLSurfaceView {
 
             buttonMaster = new ButtonMaster();
             MoveButtonsGenerator moveButtonsGenerator = new MoveButtonsGenerator(context, program, buttonMaster, positionMoveListener);
-            moveButtonsGenerator.generate();
+            moveButtonsGenerator.generate(new SFVertex3f(-1f, -0.50f, 1), 0.15f, 2);
             SettingsButtonsGenerator settingsButtonsGenerator = new SettingsButtonsGenerator(context, program, buttonMaster, settingsScreen);
             settingsButtonsGenerator.generate();
 
