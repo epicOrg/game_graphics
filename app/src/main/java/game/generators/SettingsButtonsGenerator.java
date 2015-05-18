@@ -15,7 +15,7 @@ import shadow.math.SFMatrix3f;
 import shadow.math.SFVertex3f;
 
 /**
- * Created by depa on 21/04/15.
+ * Classe che si occupa di generare il button di pausa.
  */
 public class SettingsButtonsGenerator {
 
@@ -33,14 +33,16 @@ public class SettingsButtonsGenerator {
         this.settingsScreen = settingsScreen;
     }
 
-    public void generate() {
+    public void generate(SFVertex3f position, float scale) {
         Node parentNode = new Node();
 
-        SFVertex3f parentPosition = new SFVertex3f(+1.1f, +0.6f, 0);
-        SFMatrix3f scalingMatrix = SFMatrix3f.getScale(0.15f, 0.15f, 0.15f);
+//        SFVertex3f parentPosition = new SFVertex3f(+1.1f, +0.6f, 0);
+//        SFMatrix3f scalingMatrix = SFMatrix3f.getScale(0.15f, 0.15f, 0.15f);
 
-        parentNode.getRelativeTransform().setPosition(parentPosition);
-        parentNode.getRelativeTransform().setMatrix(SFMatrix3f.getRotationY((float) (Math.PI / 2)).MultMatrix(scalingMatrix));
+//        parentNode.getRelativeTransform().setPosition(parentPosition);
+//        parentNode.getRelativeTransform().setMatrix(SFMatrix3f.getRotationY((float) (Math.PI / 2)).MultMatrix(scalingMatrix));
+        parentNode.getRelativeTransform().setPosition(position);
+        parentNode.getRelativeTransform().setMatrix(SFMatrix3f.getRotationY((float) (Math.PI / 2)).MultMatrix(SFMatrix3f.getScale(scale,scale,scale)));
 
         Model pauseModel = FundamentalGenerator.getModel(context, program, R.drawable.button_circle_pause_texture_01, "ButtonCirclePause01.obj");
         buttonMaster.setModel(pauseModel);

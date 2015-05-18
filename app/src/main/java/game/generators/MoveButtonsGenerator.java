@@ -7,6 +7,7 @@ import com.example.alessandro.computergraphicsexample.R;
 import game.controls.Button;
 import game.controls.ButtonAction;
 import game.controls.ButtonMaster;
+import game.graphics.MaterialKeeper;
 import game.listeners.PositionMoveListenerInterface;
 import sfogl.integration.Model;
 import sfogl.integration.Node;
@@ -51,7 +52,9 @@ public class MoveButtonsGenerator {
         parentNode.getRelativeTransform().setPosition(center);
         parentNode.getRelativeTransform().setMatrix(scalingMatrix);
 
-        Model model = FundamentalGenerator.getColorModel(context, program, context.getResources().getColor(R.color.primary), "Arrow.obj");
+//        Model model = FundamentalGenerator.getColorModel(context, program, context.getResources().getColor(R.color.primary), "Arrow.obj");
+        int color=context.getResources().getColor(R.color.primary);
+        Model model = FundamentalGenerator.getModelFromFileAndMaterial(context, MaterialKeeper.getInstance().getColorMaterial(context, program, color), "Arrow.obj");
 
         buttonMaster.setModel(model);
         buttonMaster.addButton(new Button("LEFT", new ButtonAction() {

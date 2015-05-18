@@ -190,7 +190,7 @@ public class GraphicsView extends GLSurfaceView {
             MoveButtonsGenerator moveButtonsGenerator = new MoveButtonsGenerator(context, program, buttonMaster, positionMoveListener);
             moveButtonsGenerator.generate(new SFVertex3f(-1f, -0.50f, 1), 0.15f, 2);
             SettingsButtonsGenerator settingsButtonsGenerator = new SettingsButtonsGenerator(context, program, buttonMaster, settingsScreen);
-            settingsButtonsGenerator.generate();
+            settingsButtonsGenerator.generate(new SFVertex3f(+1.1f, +0.6f, 0), 0.15f);
 
             final ButtonsControl buttonsControl = new ButtonsControl(context, program, camera.getOrthoMatrix(), buttonMaster);
 

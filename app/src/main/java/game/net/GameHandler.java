@@ -4,24 +4,16 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import game.GameManager;
 import game.Room;
-import game.codes.TextureCodes;
 import game.graphics.Map;
-import game.graphics.Obstacle;
-import game.graphics.Wall;
-import game.graphics.Vase;
-import game.physics.Circle;
-import game.physics.Square;
+import game.graphics.MapObjects;
 import game.player.Player;
 import game.views.MessageScreen;
 import login.interaction.FieldsNames;
 import login.services.Game;
-import shadow.math.SFVertex3f;
 
 /**
  * Created by Andrea on 22/04/2015.
@@ -133,32 +125,7 @@ public class GameHandler extends Handler {
         map = new Map();
 
         for (Game.GameMapObject o : results.getGameMapObjects()) {
-            if (o.object.equals("Wall")) {
-                float posX = Float.parseFloat(o.position.split(" ")[0]);
-                float posY = Float.parseFloat(o.position.split(" ")[1]);
-                float posZ = Float.parseFloat(o.position.split(" ")[2]);
-                float sizeX = Float.parseFloat(o.size.split(" ")[0]);
-                float sizeY = Float.parseFloat(o.size.split(" ")[1]);
-                float sizeZ = Float.parseFloat(o.size.split(" ")[2]);
-                int texture = TextureCodes.getTextureIdFromString(o.texture);
-                map.addObjects(new Wall(new Square(new SFVertex3f(posX, posY, posZ), sizeX, sizeY, sizeZ), texture));
-            } else if (o.object.equals("Obstacle")) {
-                float posX = Float.parseFloat(o.position.split(" ")[0]);
-                float posY = Float.parseFloat(o.position.split(" ")[1]);
-                float posZ = Float.parseFloat(o.position.split(" ")[2]);
-                float sizeX = Float.parseFloat(o.size.split(" ")[0]);
-                float sizeY = Float.parseFloat(o.size.split(" ")[1]);
-                int texture = TextureCodes.getTextureIdFromString(o.texture);
-                map.addObjects(new Obstacle(new Circle(new SFVertex3f(posX, posY, posZ), sizeX), sizeY, texture));
-            } else if (o.object.equals("Vase")) {
-                float posX = Float.parseFloat(o.position.split(" ")[0]);
-                float posY = Float.parseFloat(o.position.split(" ")[1]);
-                float posZ = Float.parseFloat(o.position.split(" ")[2]);
-                float sizeX = Float.parseFloat(o.size.split(" ")[0]);
-                float sizeY = Float.parseFloat(o.size.split(" ")[1]);
-                int texture = TextureCodes.getTextureIdFromString(o.texture);
-                map.addObjects(new Vase(new Circle(new SFVertex3f(posX, posY, posZ), sizeX), sizeY, texture));
-            }
+            map.addObjects(MapObjects.get().getObjectFromNameAndData(o.object,o.position,o.size,o.texture));
         }
 
         groundWidth = results.getWidth();
@@ -177,7 +144,6 @@ public class GameHandler extends Handler {
         for (String s : gamePositionsObjectHashMap.keySet()) {
             Player p = room.getPlayerByUsername(s);
             p.getStatus().getPosition().set(gamePositionsObjectHashMap.get(s).pos);
-//            p.getStatus().setPosition(gamePositionsObjectHashMap.get(s).pos);
             p.getStatus().setDirection(gamePositionsObjectHashMap.get(s).dir);
         }
     }

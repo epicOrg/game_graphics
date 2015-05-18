@@ -1,13 +1,7 @@
 package game;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
-
-import login.communication.ServerCommunicationThread;
-import login.interaction.FieldsNames;
 
 /**
  * Created by Andrea on 04/05/2015.

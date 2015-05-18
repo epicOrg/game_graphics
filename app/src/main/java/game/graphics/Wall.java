@@ -1,7 +1,6 @@
 package game.graphics;
 
 import android.content.Context;
-
 import game.physics.CollisionBox;
 import game.physics.Square;
 import sfogl.integration.Node;
@@ -44,4 +43,14 @@ public class Wall implements MazeObject{
         return box;
     }
 
+    @Override
+    public MazeObject cloneFromData(String position, String size, int textureId) {
+        float posX = Float.parseFloat(position.split(" ")[0]);
+        float posY = Float.parseFloat(position.split(" ")[1]);
+        float posZ = Float.parseFloat(position.split(" ")[2]);
+        float sizeX = Float.parseFloat(size.split(" ")[0]);
+        float sizeY = Float.parseFloat(size.split(" ")[1]);
+        float sizeZ = Float.parseFloat(size.split(" ")[2]);
+        return new Wall(new Square(new SFVertex3f(posX, posY, posZ),sizeX,sizeY,sizeZ), textureId);
+    }
 }

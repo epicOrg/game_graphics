@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.example.alessandro.computergraphicsexample.R;
 
-import java.util.concurrent.CountDownLatch;
-
 import game.Waiter;
 
 /**
@@ -47,21 +45,26 @@ public class SplashScreen implements Waiter {
         imageRotation.setInterpolator(li);
 
         imageView.startAnimation(imageRotation);
-
-        imageRotation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
+        imageRotation.setAnimationListener(new AnimationAdapter() {
             @Override
             public void onAnimationEnd(Animation animation) {
                 imageView.startAnimation(imageRotation);
             }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
         });
+//                imageRotation.setAnimationListener(new Animation.AnimationListener() {
+//            @Override
+//            public void onAnimationStart(Animation animation) {
+//            }
+//
+//            @Override
+//            public void onAnimationEnd(Animation animation) {
+//                imageView.startAnimation(imageRotation);
+//            }
+//
+//            @Override
+//            public void onAnimationRepeat(Animation animation) {
+//            }
+//        });
     }
 
     private void animateText() {
@@ -70,35 +73,49 @@ public class SplashScreen implements Waiter {
 
         textView.startAnimation(fadeIn);
 
-        fadeIn.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
+        fadeIn.setAnimationListener(new AnimationAdapter() {
             @Override
             public void onAnimationEnd(Animation animation) {
                 textView.startAnimation(fadeOut);
             }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
         });
 
-        fadeOut.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
+        fadeOut.setAnimationListener(new AnimationAdapter() {
             @Override
             public void onAnimationEnd(Animation animation) {
                 textView.startAnimation(fadeIn);
             }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
         });
+
+//        fadeIn.setAnimationListener(new Animation.AnimationListener() {
+//            @Override
+//            public void onAnimationStart(Animation animation) {
+//            }
+//
+//            @Override
+//            public void onAnimationEnd(Animation animation) {
+//                textView.startAnimation(fadeOut);
+//            }
+//
+//            @Override
+//            public void onAnimationRepeat(Animation animation) {
+//            }
+//        });
+
+//        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+//            @Override
+//            public void onAnimationStart(Animation animation) {
+//            }
+//
+//            @Override
+//            public void onAnimationEnd(Animation animation) {
+//                textView.startAnimation(fadeIn);
+//            }
+//
+//            @Override
+//            public void onAnimationRepeat(Animation animation) {
+//            }
+//        });
     }
 
     @Override
@@ -109,6 +126,15 @@ public class SplashScreen implements Waiter {
                 frameLayout.setVisibility(View.GONE);
             }
         });
+    }
+
+    public abstract class AnimationAdapter implements Animation.AnimationListener{
+        @Override
+        public void onAnimationStart(Animation animation) {}
+        @Override
+        public void onAnimationEnd(Animation animation) {}
+        @Override
+        public void onAnimationRepeat(Animation animation) {}
     }
 
 }

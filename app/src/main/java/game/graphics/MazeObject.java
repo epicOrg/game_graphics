@@ -25,4 +25,13 @@ public interface MazeObject {
      */
     public CollisionBox getBox();
 
+    /**
+     * Genera un nuovo MazeObject dello stesso tipo tramite dei parametri.
+     * @param position Posizione del MazeObject.
+     * @param size Dimensioni del MazeObject.
+     * @param textureId Id della texture del MazeObject.
+     * @return MazeObject generato.
+     */
+    public MazeObject cloneFromData(String position, String size, int textureId);
+
 }
