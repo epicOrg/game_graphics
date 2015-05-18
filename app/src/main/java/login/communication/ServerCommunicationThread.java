@@ -40,7 +40,6 @@ public class ServerCommunicationThread extends Thread {
 
     public static final String LOG_TAG = "ServerCommunicationT";
 
-    public static final String SERVER_ADDRESS = "192.168.1.6";
     public static final int SERVER_PORT = 7007;
 
     private static ServerCommunicationThread instance;
@@ -54,8 +53,18 @@ public class ServerCommunicationThread extends Thread {
     private PrintWriter writer;
     private ServiceChooser serviceChooser = new ServiceChooser();
 
+    private String serverAddres;
+
     private ServerCommunicationThread() {
 
+    }
+
+    public String getServerAddres() {
+        return serverAddres;
+    }
+
+    public void setServerAddres(String serverAddres) {
+        this.serverAddres = serverAddres;
     }
 
     @Override
@@ -93,7 +102,7 @@ public class ServerCommunicationThread extends Thread {
 
         try {
             socket = new Socket();
-            socket.connect(new InetSocketAddress(InetAddress.getByName(SERVER_ADDRESS), SERVER_PORT), 5000);
+            socket.connect(new InetSocketAddress(InetAddress.getByName(serverAddres), SERVER_PORT), 5000);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new PrintWriter(socket.getOutputStream(), true);
             setStateAndUpdate(CONNECTED);

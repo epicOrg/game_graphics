@@ -134,7 +134,6 @@
                     android:onClick="notRegistered"
                     android:text="@string/action_not_registered"
                     android:textColor="@color/icons" />
-
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
