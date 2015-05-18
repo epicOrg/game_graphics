@@ -8,10 +8,10 @@
         android:top="3dp">
 
         <shape>
-            <solid android:color="@color/background_material_dark" />
+            <solid android:color="@color/dim_foreground_disabled_material_dark" />
             <stroke
                 android:width="3dp"
-                android:color="@color/primary_dark" />
+                android:color="@color/dim_foreground_disabled_material_dark" />
             <corners android:radius="5dp" />
             <padding
                 android:bottom="10dp"
