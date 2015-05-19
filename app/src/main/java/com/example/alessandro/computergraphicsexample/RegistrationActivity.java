@@ -17,6 +17,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import game.JSONd;
+import game.RequestMaker;
 import login.communication.NotConnectedException;
 import login.communication.ServerCommunicationThread;
 import login.data.RegistrationData;
@@ -87,7 +89,10 @@ public class RegistrationActivity extends ActionBarActivity {
         if (!cancel) {
             progressShower.showProgress(true);
             try {
-                serverCommunicationThread.send(createRequest(registrationData));
+                serverCommunicationThread.send(requestMaker.getNewRequest(new JSONd(FieldsNames.SERVICE, FieldsNames.REGISTER),
+                        new JSONd(FieldsNames.EMAIL, registrationData.getEmail()),
+                        new JSONd(FieldsNames.USERNAME, registrationData.getUsername()),
+                        new JSONd(FieldsNames.PASSWORD, registrationData.getPassword())));
             } catch (NotConnectedException e) {
                 Toast.makeText(thisActivity, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
                 e.printStackTrace();
@@ -95,20 +100,8 @@ public class RegistrationActivity extends ActionBarActivity {
         }
     }
 
-    private JSONObject createRequest(RegistrationData registrationData) {
+    private RequestMaker requestMaker=new RequestMaker();
 
-        JSONObject request = new JSONObject();
-        try {
-            request.put(FieldsNames.SERVICE, FieldsNames.REGISTER);
-            request.put(FieldsNames.EMAIL, registrationData.getEmail());
-            request.put(FieldsNames.USERNAME, registrationData.getUsername());
-            request.put(FieldsNames.PASSWORD, registrationData.getPassword());
-            Log.d("REQUEST", request.toString());
-        } catch (JSONException e) {
-            //TODO
-        }
-        return request;
-    }
 
     // recupera i dati dai campi di testo
     private RegistrationData getRegistrationData() {

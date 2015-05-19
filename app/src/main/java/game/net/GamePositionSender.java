@@ -7,6 +7,8 @@ import org.json.JSONObject;
 
 import java.util.concurrent.CountDownLatch;
 
+import game.JSONd;
+import game.RequestMaker;
 import game.Room;
 import game.Waiter;
 import game.player.Player;
@@ -28,6 +30,7 @@ public class GamePositionSender implements Waiter {
     private ServerCommunicationThread serverCommunicationThread = ServerCommunicationThread.getInstance();
 
     private boolean sending = true;
+    private RequestMaker requestMaker=new RequestMaker();
 
     public GamePositionSender(Player player, String roomName) {
         this.player = player;
@@ -42,31 +45,21 @@ public class GamePositionSender implements Waiter {
         @Override
         public void run() {
              while (sending) {
-                JSONObject request = new JSONObject();
-                JSONObject posObject = null;
-                JSONObject dirObject = null;
-                try {
-                    request.put(FieldsNames.SERVICE, FieldsNames.GAME);
-                    request.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_POSITIONS);
-                    request.put(FieldsNames.USERNAME, player.getName());
-                    request.put(FieldsNames.ROOM_NAME, roomName);
+                 PlayerStatus playerStatus = player.getStatus();
+                JSONObject request = requestMaker.getNewRequest(new JSONd(FieldsNames.SERVICE, FieldsNames.GAME),
+                        new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_POSITIONS),
+                        new JSONd(FieldsNames.USERNAME, player.getName()),
+                        new JSONd(FieldsNames.ROOM_NAME, roomName),
 
-                    posObject = new JSONObject();
-                    dirObject = new JSONObject();
-
-                    PlayerStatus playerStatus = player.getStatus();
-                    posObject.put(FieldsNames.GAME_X, playerStatus.getPosition().getX());
-                    posObject.put(FieldsNames.GAME_Y, playerStatus.getPosition().getY());
-                    posObject.put(FieldsNames.GAME_Z, playerStatus.getPosition().getZ());
-                    dirObject.put(FieldsNames.GAME_X, playerStatus.getDirection().getX());
-                    dirObject.put(FieldsNames.GAME_Y, playerStatus.getDirection().getY());
-                    dirObject.put(FieldsNames.GAME_Z, playerStatus.getDirection().getZ());
-
-                    request.put(FieldsNames.GAME_POSITION, posObject);
-                    request.put(FieldsNames.GAME_DIRECTION, dirObject);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                        new JSONd(FieldsNames.GAME_POSITION, requestMaker.getNewRequest(
+                                new JSONd(FieldsNames.GAME_X, playerStatus.getPosition().getX()),
+                                new JSONd(FieldsNames.GAME_Y, playerStatus.getPosition().getY()),
+                                new JSONd(FieldsNames.GAME_Z, playerStatus.getPosition().getZ()))),
+                        new JSONd(FieldsNames.GAME_DIRECTION, requestMaker.getNewRequest(
+                                new JSONd(FieldsNames.GAME_X, playerStatus.getDirection().getX()),
+                                new JSONd(FieldsNames.GAME_Y, playerStatus.getDirection().getY()),
+                                new JSONd(FieldsNames.GAME_Z, playerStatus.getDirection().getZ())))
+                );
 
                 try {
                     serverCommunicationThread.send(request);

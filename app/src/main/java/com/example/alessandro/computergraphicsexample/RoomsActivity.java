@@ -25,6 +25,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import game.JSONd;
+import game.RequestMaker;
 import game.Room;
 import login.communication.NotConnectedException;
 import login.communication.ServerCommunicationThread;
@@ -51,6 +53,7 @@ public class RoomsActivity extends ActionBarActivity {
     private Context context;
     private Activity activity = this;
     private String result;
+    private RequestMaker requestMaker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,8 @@ public class RoomsActivity extends ActionBarActivity {
         Intent intent = getIntent();
         username = intent.getStringExtra(FieldsNames.USERNAME);
         hashcode = intent.getIntExtra(FieldsNames.HASHCODE, 0);
+        requestMaker=new RequestMaker(new JSONd(FieldsNames.USERNAME, username),
+                new JSONd(FieldsNames.HASHCODE, hashcode));
 
 
         roomsList = (ListView) findViewById(R.id.rooms_list);
@@ -79,7 +84,9 @@ public class RoomsActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                    serverCommunicationThread.send(createJoinRoomRequest(rooms.get(position)));
+                    serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.ROOMS),
+                            new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_JOIN),
+                            new JSONd(FieldsNames.ROOM_NAME, rooms.get(position).getName())));
                 } catch (NotConnectedException e) {
                     Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
                     e.printStackTrace();
@@ -153,15 +160,7 @@ public class RoomsActivity extends ActionBarActivity {
     }
 
     private void createLogoutRequest() {
-
-        JSONObject logoutRequest = new JSONObject();
-        try {
-            logoutRequest.put(FieldsNames.SERVICE, FieldsNames.LOGOUT);
-            logoutRequest.put(FieldsNames.USERNAME, username);
-            logoutRequest.put(FieldsNames.HASHCODE, hashcode);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        JSONObject logoutRequest = requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.LOGOUT));
 
         try {
             serverCommunicationThread.send(logoutRequest);
@@ -187,7 +186,9 @@ public class RoomsActivity extends ActionBarActivity {
                 result = newRoomName.getText().toString();
 
                 try {
-                    serverCommunicationThread.send(createNewRoomRequest(result));
+                    serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.ROOMS),
+                            new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_CREATE),
+                            new JSONd(FieldsNames.ROOM_NAME, result)));
                 } catch (NotConnectedException e) {
                     Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
                     e.printStackTrace();
@@ -199,46 +200,11 @@ public class RoomsActivity extends ActionBarActivity {
         b.create().show();
     }
 
-    private JSONObject createNewRoomRequest(String name) {
-        JSONObject request = new JSONObject();
-        try {
-            request.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
-            request.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_CREATE);
-            request.put(FieldsNames.ROOM_NAME, name);
-            request.put(FieldsNames.HASHCODE, hashcode);
-            request.put(FieldsNames.USERNAME, username);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return request;
+    private JSONObject createListRequest(){
+        return requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.ROOMS),
+            new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOMS_LIST));
     }
 
-    private JSONObject createJoinRoomRequest(Room room) {
-        JSONObject request = new JSONObject();
-        try {
-            request.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
-            request.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_JOIN);
-            request.put(FieldsNames.HASHCODE, hashcode);
-            request.put(FieldsNames.USERNAME, username);
-            request.put(FieldsNames.ROOM_NAME, room.getName());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return request;
-    }
-
-    private JSONObject createListRequest() {
-        JSONObject request = new JSONObject();
-        try {
-            request.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
-            request.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOMS_LIST);
-            request.put(FieldsNames.HASHCODE, hashcode);
-            request.put(FieldsNames.USERNAME, username);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return request;
-    }
 
     public class RoomsHandler extends android.os.Handler {
 

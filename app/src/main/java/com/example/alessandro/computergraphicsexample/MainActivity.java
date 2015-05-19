@@ -19,6 +19,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import game.JSONd;
+import game.RequestMaker;
 import game.net.LoginHandler;
 import game.net.LoginHandlerListener;
 import login.communication.NotConnectedException;
@@ -46,6 +48,7 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
     private LoginData loginData;
 
     private boolean doubleBackToExitPressedOnce;
+    private RequestMaker requestMaker=new RequestMaker();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +167,9 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
         if (!cancel) {
             progressShower.showProgress(true);
             try {
-                serverCommunicationThread.send(createRequest());
+                serverCommunicationThread.send(requestMaker.getNewRequest(new JSONd(FieldsNames.SERVICE, FieldsNames.LOGIN),
+                        new JSONd(FieldsNames.USERNAME, loginData.getUsername()),
+                        new JSONd(FieldsNames.PASSWORD, loginData.getPassword())));
             } catch (NotConnectedException e) {
                 progressShower.showProgress(false);
                 Toast.makeText(activity, getString(R.string.error_not_connected), Toast.LENGTH_SHORT).show();
@@ -173,17 +178,6 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
         }
     }
 
-    private JSONObject createRequest() {
-        JSONObject request = new JSONObject();
-        try {
-            request.put(FieldsNames.SERVICE, FieldsNames.LOGIN);
-            request.put(FieldsNames.USERNAME, loginData.getUsername());
-            request.put(FieldsNames.PASSWORD, loginData.getPassword());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return request;
-    }
 
     // recupera i dati dai campi di testo
     private LoginData getData() {

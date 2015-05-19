@@ -20,6 +20,8 @@ import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
 
 import game.GameManager;
+import game.JSONd;
+import game.RequestMaker;
 import game.Room;
 import game.Team;
 import game.WaiterGroup;
@@ -69,6 +71,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
     private ArrayList<Player> otherPlayers = new ArrayList<>();
 
     private Context context;
+    private RequestMaker requestMaker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +85,14 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
         Intent intent = getIntent();
         boolean noServer = intent.getBooleanExtra("NO_SERVER", false);
+        gameManager = GameManager.MANAGER;
         username = intent.getStringExtra(FieldsNames.USERNAME);
         hashcode = intent.getIntExtra(FieldsNames.HASHCODE, 0);
+        requestMaker=new RequestMaker(new JSONd(FieldsNames.USERNAME, username),
+                new JSONd(FieldsNames.HASHCODE, hashcode),
+                new JSONd(FieldsNames.ROOM_NAME, gameManager.getRoom().getName()));
 
-        gameManager = GameManager.MANAGER;
+
 
         messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
@@ -149,7 +156,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
             initAudioSetting();
             Log.d(LOG_TAG, "Asking Map..");
             try {
-                serverCommunicationThread.send(createMapRequest());
+                serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.GAME),
+                        new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_MAP)));
             } catch (NotConnectedException e) {
                 Toast.makeText(this, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
                 e.printStackTrace();
@@ -164,7 +172,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
         audioCallManager.initAudioGroup();
         try {
             int audioPort = audioCallManager.newAudioStream();
-            serverCommunicationThread.send(getCallRequest(audioPort));
+            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.AUDIO),
+                    new JSONd(FieldsNames.AUDIO_PORT_CLIENT, audioPort)));
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (SocketException e) {
@@ -175,19 +184,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
         }
     }
 
-    private JSONObject getCallRequest(int audioport) {
-        JSONObject request = new JSONObject();
-        try {
-            request.put(FieldsNames.SERVICE, FieldsNames.AUDIO);
-            request.put(FieldsNames.HASHCODE, hashcode);
-            request.put(FieldsNames.USERNAME, username);
-            request.put(FieldsNames.AUDIO_PORT_CLIENT, audioport);
-            request.put(FieldsNames.ROOM_NAME, gameManager.getRoom().getName());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return request;
-    }
 
     @Override
     public void onMapReceived() {
@@ -240,19 +236,19 @@ public class GameActivity extends Activity implements GameHandlerListener {
             graphicsView.onPause();
     }
 
-    private JSONObject createMapRequest() {
-        JSONObject request = new JSONObject();
-        try {
-            request.put(FieldsNames.SERVICE, FieldsNames.GAME);
-            request.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_MAP);
-            request.put(FieldsNames.HASHCODE, hashcode);
-            request.put(FieldsNames.USERNAME, username);
-            request.put(FieldsNames.ROOM_NAME, gameManager.getRoom().getName());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return request;
-    }
+//    private JSONObject createMapRequest() {
+//        JSONObject request = new JSONObject();
+//        try {
+//            request.put(FieldsNames.SERVICE, FieldsNames.GAME);
+//            request.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_MAP);
+//            request.put(FieldsNames.HASHCODE, hashcode);
+//            request.put(FieldsNames.USERNAME, username);
+//            request.put(FieldsNames.ROOM_NAME, gameManager.getRoom().getName());
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        return request;
+//    }
 
     @Override
     public void onBackPressed() {

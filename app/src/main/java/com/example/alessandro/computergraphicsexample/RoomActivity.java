@@ -20,6 +20,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import game.GameManager;
+import game.JSONd;
+import game.RequestMaker;
 import game.Room;
 import game.Team;
 import game.player.Player;
@@ -46,6 +48,7 @@ public class RoomActivity extends ActionBarActivity {
     private int hashcode;
 
     private Context context;
+    private RequestMaker requestMaker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,10 @@ public class RoomActivity extends ActionBarActivity {
         username = intent.getStringExtra(FieldsNames.USERNAME);
         hashcode = intent.getIntExtra(FieldsNames.HASHCODE, 0);
         roomName = intent.getStringExtra(FieldsNames.ROOM_NAME);
+        requestMaker=new RequestMaker(new JSONd(FieldsNames.USERNAME, username),
+                new JSONd(FieldsNames.HASHCODE, hashcode),
+                new JSONd(FieldsNames.ROOM_NAME, roomName),
+                new JSONd(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM));
 
         roomStatus = (TextView) findViewById(R.id.room_status);
         roomListsContainer = (LinearLayout) findViewById(R.id.room_lists_container);
@@ -65,7 +72,7 @@ public class RoomActivity extends ActionBarActivity {
 
         serverCommunicationThread.setHandler(new RoomHandler());
         try {
-            serverCommunicationThread.send(createPlayerListRequest());
+            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_PLAYER_LIST)));
         } catch (NotConnectedException e) {
             Toast.makeText(this, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
             e.printStackTrace();
@@ -84,7 +91,8 @@ public class RoomActivity extends ActionBarActivity {
                 .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         try {
-                            serverCommunicationThread.send(createExitRequest());
+                            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS),
+                                    new JSONd(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_EXIT)));
                         } catch (NotConnectedException e) {
                             Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
                             e.printStackTrace();
@@ -99,50 +107,6 @@ public class RoomActivity extends ActionBarActivity {
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
-    }
-
-    private JSONObject createPlayerListRequest() {
-        JSONObject request = new JSONObject();
-        try {
-            request.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
-            request.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_PLAYER_LIST);
-            request.put(FieldsNames.HASHCODE, hashcode);
-            request.put(FieldsNames.USERNAME, username);
-            request.put(FieldsNames.ROOM_NAME, roomName);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return request;
-    }
-
-    private JSONObject createExitRequest() {
-        JSONObject request = new JSONObject();
-        try {
-            request.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
-            request.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS);
-            request.put(FieldsNames.HASHCODE, hashcode);
-            request.put(FieldsNames.USERNAME, username);
-            request.put(FieldsNames.ROOM_NAME, roomName);
-            request.put(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_EXIT);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return request;
-    }
-
-    private JSONObject createListReceivedRequest() {
-        JSONObject request = new JSONObject();
-        try {
-            request.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
-            request.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS);
-            request.put(FieldsNames.HASHCODE, hashcode);
-            request.put(FieldsNames.USERNAME, username);
-            request.put(FieldsNames.ROOM_NAME, roomName);
-            request.put(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_LIST_RECEIVED);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return request;
     }
 
 
@@ -191,7 +155,8 @@ public class RoomActivity extends ActionBarActivity {
 
             if(firstTime) {
                 try {
-                    serverCommunicationThread.send(createListReceivedRequest());
+                    serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS),
+                            new JSONd(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_LIST_RECEIVED)));
                 } catch (NotConnectedException e) {
                     e.printStackTrace();
                 }
