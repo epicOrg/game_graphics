@@ -170,7 +170,7 @@ public class GraphicsView extends GLSurfaceView {
                 }
             }
 
-            groundNode = new GroundGenerator(FundamentalGenerator.getModel(context, program, R.drawable.ground_texture_04, "Ground.obj"))
+            groundNode = new GroundGenerator(FundamentalGenerator.getModel(context, program, R.drawable.ground_texture_02, "Ground.obj"))
                     .getGroundNode(0, 0, groundWidth, groundHeight, -1);
             map.loadMap(cm, context);
             sky = new Sky(context, program, me.getStatus().getPosition());
