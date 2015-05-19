@@ -42,6 +42,7 @@ public class ServerCommunicationThread extends Thread {
 
     public static final int SERVER_PORT = 7007;
 
+    private static String serverAddres;
     private static ServerCommunicationThread instance;
 
     private ArrayList<ServerCommunicationThreadListener> threadListeners;
@@ -53,18 +54,8 @@ public class ServerCommunicationThread extends Thread {
     private PrintWriter writer;
     private ServiceChooser serviceChooser = new ServiceChooser();
 
-    private String serverAddres;
-
     private ServerCommunicationThread() {
 
-    }
-
-    public String getServerAddres() {
-        return serverAddres;
-    }
-
-    public void setServerAddres(String serverAddres) {
-        this.serverAddres = serverAddres;
     }
 
     @Override
@@ -182,6 +173,14 @@ public class ServerCommunicationThread extends Thread {
             instance.threadListeners = new ArrayList<>();
         }
         return instance;
+    }
+
+    public static String getServerAddres() {
+        return serverAddres;
+    }
+
+    public static void setServerAddres(String address) {
+        serverAddres = address;
     }
 
     public void addServerCommunicationThreadListener(ServerCommunicationThreadListener l) {
