@@ -4,8 +4,10 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import game.GameManager;
 import game.Room;
 import game.graphics.Map;
@@ -14,6 +16,7 @@ import game.player.Player;
 import game.views.MessageScreen;
 import login.interaction.FieldsNames;
 import login.services.Game;
+import shadow.math.SFVertex3f;
 
 /**
  * Created by Andrea on 22/04/2015.
@@ -30,10 +33,12 @@ public class GameHandler extends Handler {
     private int groundWidth = 0;
     private int groundHeight = 0;
 
+    private Player player;
     private GamePositionSender gamePositionSender;
     private MessageScreen messageScreen;
 
-    public GameHandler(GamePositionSender gamePositionSender, MessageScreen messageScreen) {
+    public GameHandler(Player player, GamePositionSender gamePositionSender, MessageScreen messageScreen) {
+        this.player = player;
         this.gamePositionSender = gamePositionSender;
         this.messageScreen = messageScreen;
     }
@@ -125,11 +130,14 @@ public class GameHandler extends Handler {
         map = new Map();
 
         for (Game.GameMapObject o : results.getGameMapObjects()) {
-            map.addObjects(MapObjects.get().getObjectFromNameAndData(o.object,o.position,o.size,o.texture));
+            map.addObjects(MapObjects.get().getObjectFromNameAndData(o.object, o.position, o.size, o.texture));
         }
 
         groundWidth = results.getWidth();
         groundHeight = results.getHeight();
+
+        // In attesa che Fabio termini il generatore
+        // player.getStatus().setPosition(new SFVertex3f(results.playerPositionX, results.playerPositionY, results.playerPositionZ));
 
         callOnMapReceived();
     }
@@ -143,7 +151,7 @@ public class GameHandler extends Handler {
 
         for (String s : gamePositionsObjectHashMap.keySet()) {
             Player p = room.getPlayerByUsername(s);
-            p.getStatus().getPosition().set(gamePositionsObjectHashMap.get(s).pos);
+            p.getStatus().setPosition(gamePositionsObjectHashMap.get(s).pos);
             p.getStatus().setDirection(gamePositionsObjectHashMap.get(s).dir);
         }
     }

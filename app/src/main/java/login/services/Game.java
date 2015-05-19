@@ -77,6 +77,7 @@ public class Game implements Service {
         GameMapResult gameMapResult = null;
         int width = 0;
         int height = 0;
+
         ArrayList<GameMapObject> gameMapObjects = new ArrayList<>();
         try {
             JSONArray jItems = json.getJSONArray(FieldsNames.GAME_ITEMS);
@@ -96,6 +97,16 @@ public class Game implements Service {
         }
 
         gameMapResult = new GameMapResult(width, height, gameMapObjects);
+
+        try {
+            JSONObject jPlayerPosition = json.getJSONObject(FieldsNames.GAME_PLAYER_POSITION);
+            gameMapResult.playerPositionX = (float) jPlayerPosition.getDouble(FieldsNames.GAME_X);
+            gameMapResult.playerPositionY = (float) jPlayerPosition.getDouble(FieldsNames.GAME_Y);
+            gameMapResult.playerPositionZ = (float) jPlayerPosition.getDouble(FieldsNames.GAME_Z);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return handler.obtainMessage(MAP, gameMapResult);
     }
 
@@ -158,6 +169,8 @@ public class Game implements Service {
 
         private int width, height;
         private ArrayList<GameMapObject> gameMapObjects;
+
+        public float playerPositionX, playerPositionY, playerPositionZ;
 
         public GameMapResult(int width, int height, ArrayList<GameMapObject> gameMapObjects) {
             this.width = width;

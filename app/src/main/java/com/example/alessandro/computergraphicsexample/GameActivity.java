@@ -129,7 +129,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         if (!noServer) {
             Log.d(LOG_TAG, "Starting GamePositionSender..");
             GamePositionSender gamePositionSender = new GamePositionSender(me, room.getName());
-            gameHandler = new GameHandler(gamePositionSender, messageScreen);
+            gameHandler = new GameHandler(me, gamePositionSender, messageScreen);
             gameHandler.addGameHandlerListeners(this);
 
             waiterGroup.addWaiter(gamePositionSender);
