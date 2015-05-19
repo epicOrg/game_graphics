@@ -137,7 +137,7 @@ public class GameHandler extends Handler {
         groundHeight = results.getHeight();
 
         // In attesa che Fabio termini il generatore
-        player.getStatus().getPosition().set(new SFVertex3f(results.playerPositionX, results.playerPositionY, results.playerPositionZ));
+        //player.getStatus().getPosition().set(new SFVertex3f(results.playerPositionX, results.playerPositionY, results.playerPositionZ));
 
         callOnMapReceived();
     }
