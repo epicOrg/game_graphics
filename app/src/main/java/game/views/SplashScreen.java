@@ -51,20 +51,6 @@ public class SplashScreen implements Waiter {
                 imageView.startAnimation(imageRotation);
             }
         });
-//                imageRotation.setAnimationListener(new Animation.AnimationListener() {
-//            @Override
-//            public void onAnimationStart(Animation animation) {
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animation animation) {
-//                imageView.startAnimation(imageRotation);
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animation animation) {
-//            }
-//        });
     }
 
     private void animateText() {
@@ -86,36 +72,6 @@ public class SplashScreen implements Waiter {
                 textView.startAnimation(fadeIn);
             }
         });
-
-//        fadeIn.setAnimationListener(new Animation.AnimationListener() {
-//            @Override
-//            public void onAnimationStart(Animation animation) {
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animation animation) {
-//                textView.startAnimation(fadeOut);
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animation animation) {
-//            }
-//        });
-
-//        fadeOut.setAnimationListener(new Animation.AnimationListener() {
-//            @Override
-//            public void onAnimationStart(Animation animation) {
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animation animation) {
-//                textView.startAnimation(fadeIn);
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animation animation) {
-//            }
-//        });
     }
 
     @Override

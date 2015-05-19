@@ -26,7 +26,7 @@ public class GameHandler extends Handler {
     public static final String LOG_TAG = "GameHandler";
 
     private ArrayList<GameHandlerListener> gameHandlerListeners = new ArrayList<>();
-    private GameManager gameManager = GameManager.getInstance();
+    private GameManager gameManager = GameManager.MANAGER;
 
     private Map map;
 
@@ -130,7 +130,7 @@ public class GameHandler extends Handler {
         map = new Map();
 
         for (Game.GameMapObject o : results.getGameMapObjects()) {
-            map.addObjects(MapObjects.get().getObjectFromNameAndData(o.object, o.position, o.size, o.texture));
+            map.addObjects(MapObjects.MAP.getObjectFromNameAndData(o.object, o.position, o.size, o.texture));
         }
 
         groundWidth = results.getWidth();
@@ -151,8 +151,8 @@ public class GameHandler extends Handler {
 
         for (String s : gamePositionsObjectHashMap.keySet()) {
             Player p = room.getPlayerByUsername(s);
-            p.getStatus().setPosition(gamePositionsObjectHashMap.get(s).pos);
-            p.getStatus().setDirection(gamePositionsObjectHashMap.get(s).dir);
+            p.getStatus().getPosition().set(gamePositionsObjectHashMap.get(s).pos);
+            p.getStatus().getDirection().set(gamePositionsObjectHashMap.get(s).dir);
         }
     }
 

@@ -17,6 +17,7 @@ import shadow.math.SFVertex3f;
 
 /**
  * Classe che si occupa di generare i 4 Button di controllo del movimento.
+ * @author Stefano De Pace
  */
 public class MoveButtonsGenerator {
 
@@ -41,7 +42,7 @@ public class MoveButtonsGenerator {
 
     /**
      * Genera i Button di movimento in una configurazione a croce, con alcuni parametri regolabili.
-     * @param center Posizione centrale dei Button.
+     * @param center Posizione centrale dei Button (la componente z non ha importanza).
      * @param scale Fattore di scala omogeneo dei Model dei Button.
      * @param distance Distanza tra i Button di movimento.
      */
@@ -52,9 +53,8 @@ public class MoveButtonsGenerator {
         parentNode.getRelativeTransform().setPosition(center);
         parentNode.getRelativeTransform().setMatrix(scalingMatrix);
 
-//        Model model = FundamentalGenerator.getColorModel(context, program, context.getResources().getColor(R.color.primary), "Arrow.obj");
         int color=context.getResources().getColor(R.color.primary);
-        Model model = FundamentalGenerator.getModelFromFileAndMaterial(context, MaterialKeeper.getInstance().getColorMaterial(context, program, color), "Arrow.obj");
+        Model model = FundamentalGenerator.getModelFromFileAndMaterial(context, MaterialKeeper.MATERIAL_KEEPER.getColorMaterial(program, color), "Arrow.obj");
 
         buttonMaster.setModel(model);
         buttonMaster.addButton(new Button("LEFT", new ButtonAction() {

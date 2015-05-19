@@ -15,7 +15,8 @@ import shadow.math.SFMatrix3f;
 import shadow.math.SFVertex3f;
 
 /**
- * Classe che si occupa di generare il button di pausa.
+ * Classe che si occupa di costruire il Button di pausa.
+ * @author Andrea
  */
 public class SettingsButtonsGenerator {
 
@@ -26,6 +27,13 @@ public class SettingsButtonsGenerator {
     private ButtonMaster buttonMaster;
     private SettingsScreen settingsScreen;
 
+    /**
+     * Crea un nuovo SettingsButtonsGenerator.
+     * @param context Context per recuperare le risorse.
+     * @param program ShadingProgram per rappresentare i Button.
+     * @param buttonMaster ButtonMaster a cui associare i Button di movimento.
+     * @param settingsScreen SettingScreen da mostrare quando si preme il pulsante.
+     */
     public SettingsButtonsGenerator(Context context, ShadingProgram program, ButtonMaster buttonMaster, SettingsScreen settingsScreen) {
         this.context = context;
         this.program = program;
@@ -33,14 +41,13 @@ public class SettingsButtonsGenerator {
         this.settingsScreen = settingsScreen;
     }
 
+    /**
+     * Genera i Button di pausa, con alcuni parametri regolabili.
+     * @param position Posizione del Button (la componente z non ha importanza).
+     * @param scale Fattore di scala omogeneo dei Model del Button.
+     */
     public void generate(SFVertex3f position, float scale) {
         Node parentNode = new Node();
-
-//        SFVertex3f parentPosition = new SFVertex3f(+1.1f, +0.6f, 0);
-//        SFMatrix3f scalingMatrix = SFMatrix3f.getScale(0.15f, 0.15f, 0.15f);
-
-//        parentNode.getRelativeTransform().setPosition(parentPosition);
-//        parentNode.getRelativeTransform().setMatrix(SFMatrix3f.getRotationY((float) (Math.PI / 2)).MultMatrix(scalingMatrix));
         parentNode.getRelativeTransform().setPosition(position);
         parentNode.getRelativeTransform().setMatrix(SFMatrix3f.getRotationY((float) (Math.PI / 2)).MultMatrix(SFMatrix3f.getScale(scale,scale,scale)));
 

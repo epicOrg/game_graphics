@@ -6,20 +6,13 @@ import java.util.HashMap;
 
 /**
  * Singleton che si occupa di gestire il database di MazeObjects e relative textures.
+ * @author Stefano De Pace
  */
-public class MapObjects {
+public enum  MapObjects {
+    MAP;
 
-    private static MapObjects instance=new MapObjects();
     private HashMap<String,MazeObject> map;
     private HashMap<String, Integer> codes;
-
-    /**
-     * Restituisce l'istanza di MapObjects.
-     * @return istanza di MapObjects.
-     */
-    public static MapObjects get(){
-        return instance;
-    }
 
     /**
      * Restituisce un MazeObject da una serie di dati

@@ -18,6 +18,7 @@ import shadow.graphics.SFImageFormat;
 
 /**
  * Classe utility con vari metodi statici usati spesso per generare Model e Node.
+ * @author: Andrea
  */
 public class FundamentalGenerator {
 
@@ -30,7 +31,7 @@ public class FundamentalGenerator {
      * @return Model generato.
      */
     public static Model getModel(Context context, ShadingProgram program, int textureId, String obj) {
-        return getModelFromFileAndMaterial(context, MaterialKeeper.getInstance().getMaterial(context, program, textureId), obj);
+        return getModelFromFileAndMaterial(context, MaterialKeeper.MATERIAL_KEEPER.getMaterial(context, program, textureId), obj);
     }
 
     /**

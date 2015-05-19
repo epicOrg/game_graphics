@@ -2,6 +2,7 @@ package game.controls;
 
 /**
  * Rappresenta un bottone che può eseguire un'azione, incapsulata in un ButtonAction.
+ * @author Stefano De Pace
  */
 public class Button {
 

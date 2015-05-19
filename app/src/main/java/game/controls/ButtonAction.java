@@ -2,6 +2,7 @@ package game.controls;
 
 /**
  * Interfaccia per oggetti che incapsulino un'azione.
+ * @author Stefano De Pace
  */
 public interface ButtonAction {
 

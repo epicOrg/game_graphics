@@ -65,14 +65,6 @@ public class PlayerStatus {
         return direction;
     }
 
-    public void setPosition(SFVertex3f position) {
-        this.position = position;
-    }
-
-    public void setDirection(SFVertex3f direction) {
-        this.direction = direction;
-    }
-
     @Override
     public String toString() {
         return "POS: " + getPosition().getX() + " - " + getPosition().getY() + " - " + getPosition().getZ() +

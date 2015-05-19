@@ -7,16 +7,30 @@ import sfogl.integration.Node;
 import shadow.math.SFTransform3f;
 
 /**
- * Created by Andrea on 26/03/2015.
+ * Gestisce la costruzione del terreno.
+ * @author Andrea
  */
 public class GroundGenerator {
 
     private Model model;
 
+    /**
+     * Crea un nuovo GroundGenerator dato un Model.
+     * @param model Model con cui costruire il terreno.
+     */
     public GroundGenerator(Model model) {
         this.model = model;
     }
 
+    /**
+     * Costruisce il terreno con una griglia quadrata di copie del Model dato, il tutto centrato in un punto.
+     * @param xCenter x del centro
+     * @param zCenter z del centro
+     * @param xSize dimensione x del terreno
+     * @param zSize dimensione z del terreno
+     * @param yCenter dimensione y del terreno
+     * @return restituisce il Node che contiene il terreno, con sottonodi disposti a griglia che rappresentano la varie parti.
+     */
     public Node getGroundNode(int xCenter, int zCenter, int xSize, int zSize, int yCenter) {
         Node node = new Node();
         node.setup();

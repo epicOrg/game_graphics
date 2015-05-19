@@ -208,7 +208,7 @@ public class RoomActivity extends ActionBarActivity {
             boolean result = (boolean) msg.obj;
 
             if (result) {
-                GameManager gameManager = GameManager.getInstance();
+                GameManager gameManager = GameManager.MANAGER;
                 gameManager.setRoom(currentRoom);
 
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);

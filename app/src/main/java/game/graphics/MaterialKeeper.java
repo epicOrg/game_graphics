@@ -11,27 +11,23 @@ import sfogl.integration.ShadingProgram;
 /**
  * Created by Andrea on 17/05/2015.
  */
-public class MaterialKeeper {
 
-    public static final String LOG_TAG = "MaterialKeeper";
+public enum MaterialKeeper {
+    MATERIAL_KEEPER;
 
-    public static MaterialKeeper instance = new MaterialKeeper();
+    public final String LOG_TAG = "MaterialKeeper";
 
     private HashMap<Integer, Material> mapFromResources = new HashMap<>();
     private HashMap<Integer, Material> mapFromColors = new HashMap<>();
 
-    private MaterialKeeper() {
-    }
-
-    public static MaterialKeeper getInstance() {
-        return instance;
+    MaterialKeeper() {
     }
 
     public Material getMaterial(Context context, ShadingProgram program, int textureId) {
         if (mapFromResources.containsKey(textureId))
             return mapFromResources.get(textureId);
         else {
-            BitmapTexture texture = TextureKeeper.getInstance().getTexture(context, textureId);
+            BitmapTexture texture = TextureKeeper.TEXTURE_KEEPER.getTexture(context,textureId);
             Material mat = new Material(program);
             mat.getTextures().add(texture);
             mapFromResources.put(textureId, mat);
@@ -39,11 +35,11 @@ public class MaterialKeeper {
         }
     }
 
-    public Material getColorMaterial(Context context, ShadingProgram program, int color) {
+    public Material getColorMaterial(ShadingProgram program, int color) {
         if (mapFromColors.containsKey(color))
             return mapFromColors.get(color);
         else {
-            BitmapTexture texture = TextureKeeper.getInstance().getColorTexture(context, color);
+            BitmapTexture texture = TextureKeeper.TEXTURE_KEEPER.getColorTexture(color);
             Material mat = new Material(program);
             mat.getTextures().add(texture);
             mapFromColors.put(color, mat);

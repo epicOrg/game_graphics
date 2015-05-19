@@ -85,7 +85,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         username = intent.getStringExtra(FieldsNames.USERNAME);
         hashcode = intent.getIntExtra(FieldsNames.HASHCODE, 0);
 
-        gameManager = GameManager.getInstance();
+        gameManager = GameManager.MANAGER;
 
         messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);

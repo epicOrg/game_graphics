@@ -120,8 +120,8 @@ public class GraphicsView extends GLSurfaceView {
         super.onPause();
 
         ShadersKeeper.clear();
-        MaterialKeeper.getInstance().clear();
-        TextureKeeper.getInstance().clear();
+        MaterialKeeper.MATERIAL_KEEPER.clear();
+        TextureKeeper.TEXTURE_KEEPER.clear();
     }
 
     @Override
@@ -157,7 +157,7 @@ public class GraphicsView extends GLSurfaceView {
 
             ShadersKeeper.loadPipelineShaders(context);
             program = ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER);
-            TextureKeeper.getInstance().reload(context);
+            TextureKeeper.TEXTURE_KEEPER.reload(context);
             glEnable(GLES20.GL_BLEND);
             glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);
 
@@ -192,7 +192,7 @@ public class GraphicsView extends GLSurfaceView {
             SettingsButtonsGenerator settingsButtonsGenerator = new SettingsButtonsGenerator(context, program, buttonMaster, settingsScreen);
             settingsButtonsGenerator.generate(new SFVertex3f(+1.1f, +0.6f, 0), 0.15f);
 
-            final ButtonsControl buttonsControl = new ButtonsControl(context, program, camera.getOrthoMatrix(), buttonMaster);
+            final ButtonsControl buttonsControl = new ButtonsControl(program, camera.getOrthoMatrix(), buttonMaster);
 
             queueEvent(new Runnable() {
                 @Override

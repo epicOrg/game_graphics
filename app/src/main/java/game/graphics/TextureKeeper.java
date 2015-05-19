@@ -15,22 +15,17 @@ import shadow.graphics.SFImageFormat;
 /**
  * Gestisce le texture caricate dalle risorse; permette di accedervi  senza doverle ricaricare più volte,
  * o di ricaricarle automaticamente tutte in caso di necessità.
+ * @author Stefano De Pace
  */
-public class TextureKeeper {
+public enum TextureKeeper{
+    TEXTURE_KEEPER;
 
-    public static final String LOG_TAG = "TextureKeeper";
+    public final String LOG_TAG = "TextureKeeper";
 
-    public static TextureKeeper instance=new TextureKeeper();
+    private  HashMap<Integer, BitmapTexture> mapFromResources = new HashMap<>();
+    private  HashMap<Integer, BitmapTexture> mapFromColors = new HashMap<>();
 
-    private  HashMap<Integer, BitmapTexture> mapFromResources = new HashMap<Integer, BitmapTexture>();
-    private  HashMap<Integer, BitmapTexture> mapFromColors = new HashMap<Integer, BitmapTexture>();
-
-    private TextureKeeper(){
-    }
-
-    public static TextureKeeper getInstance() {
-        return instance;
-    }
+    TextureKeeper(){;}
 
     /**
      * Carica una nuova texture da un'immagine nelle risorse, o restituisce la BitmapTexture
@@ -42,29 +37,20 @@ public class TextureKeeper {
     public BitmapTexture getTexture(Context context, int textureId) {
         if (mapFromResources.containsKey(textureId))
             return mapFromResources.get(textureId);
-        else {
-            BitmapTexture tex = getBitmapTextureFromResource(context, textureId);
-            Log.d(LOG_TAG, "Loaded Texture: " + textureId);
-            mapFromResources.put(textureId, tex);
-            return tex;
-        }
+        else
+            return loadTextureFromId(context, textureId, "Loaded Texture: " + textureId);
     }
 
     /**
      * Genera una texture da un colore e la memorizza; rappresenta un colore uniforme.
-     * @param context Context per ottenere le risorse.
      * @param color colore da cui ottenere la texture, rappresentato con un intero a 4 bit: (R,G,B,A).
      * @return BitmapTexture che rappresenta la texture caricata.
      */
-    public BitmapTexture getColorTexture(Context context, int color) {
+    public BitmapTexture getColorTexture(int color) {
         if (mapFromColors.containsKey(color))
             return mapFromColors.get(color);
-        else {
-            BitmapTexture tex = getBitmapTextureFromColor(color);
-            Log.d(LOG_TAG, "Loaded ColorTexture: " + color);
-            mapFromColors.put(color, tex);
-            return tex;
-        }
+        else
+            return loadColorTexture(color, "Loaded ColorTexture: " + color);
     }
 
     /**
@@ -73,16 +59,27 @@ public class TextureKeeper {
      */
     public void reload(Context context) {
         for (int i : mapFromResources.keySet()) {
-            BitmapTexture tex = getBitmapTextureFromResource(context, i);
-            Log.d(LOG_TAG, "Reloaded Texture: " + i);
-            mapFromResources.put(i, tex);
+            loadTextureFromId(context, i, "Reloaded Texture: " + i);
         }
-
         for (int color : mapFromColors.keySet()) {
-            BitmapTexture tex = getBitmapTextureFromColor(color);
-            Log.d(LOG_TAG, "Reloaded ColorTexture: " + color);
-            mapFromColors.put(color, tex);
+            loadColorTexture(color, "Reloaded ColorTexture: " + color);
         }
+    }
+
+    private BitmapTexture loadColorTexture(int color, String message){
+        BitmapTexture tex = getBitmapTextureFromColor(color);
+        if (message.length()>0)
+            Log.d(LOG_TAG, message);
+        mapFromColors.put(color, tex);
+        return tex;
+    }
+
+    private BitmapTexture loadTextureFromId(Context context, int textureId, String message){
+        BitmapTexture tex = getBitmapTextureFromResource(context, textureId);
+        if (message.length()>0)
+            Log.d(LOG_TAG, message);
+        mapFromResources.put(textureId, tex);
+        return tex;
     }
 
     private BitmapTexture getBitmapTextureFromResource(Context context, int textureId) {
@@ -107,5 +104,4 @@ public class TextureKeeper {
         mapFromResources.clear();
         mapFromColors.clear();
     }
-
 }

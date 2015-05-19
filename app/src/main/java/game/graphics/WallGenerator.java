@@ -48,7 +48,7 @@ public class WallGenerator {
         meshPos.init();
         Model modelPos = new Model();
         modelPos.setRootGeometry(meshPos);
-        modelPos.setMaterialComponent(MaterialKeeper.getInstance().getMaterial(context, program, texture));
+        modelPos.setMaterialComponent(MaterialKeeper.MATERIAL_KEEPER.getMaterial(context, program, texture));
         return modelPos;
     }
 

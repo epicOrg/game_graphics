@@ -55,7 +55,7 @@ public class SettingsScreen {
     }
 
     private void setup() {
-        gameManager = GameManager.getInstance();
+        gameManager = GameManager.MANAGER;
 
         SettingsContainer settingsContainer = new SettingsContainer(activity);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);

@@ -12,6 +12,7 @@ import shadow.math.SFVertex3f;
 
 /**
  * Mantiene un elenco di Button e li disegna.
+ * @author Stefano De Pace
  */
 public class ButtonMaster {
 

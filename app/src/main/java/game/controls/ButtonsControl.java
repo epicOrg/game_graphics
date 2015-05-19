@@ -32,12 +32,11 @@ public class ButtonsControl {
 
     /**
      * Crea un nuovo ButtonControl.
-     * @param context Context per ottenere le risorse.
      * @param program ShadingProgram da usare.
      * @param orthoMatrix Matrice di proiezione 2D dei Button.
      * @param buttonMaster ButtonMaster contenete i Button da controllare.
      */
-    public ButtonsControl(Context context, ShadingProgram program, float[] orthoMatrix, ButtonMaster buttonMaster) {
+    public ButtonsControl(ShadingProgram program, float[] orthoMatrix, ButtonMaster buttonMaster) {
         this.program = program;
         this.orthoMatrix = orthoMatrix;
         this.buttonMaster = buttonMaster;
@@ -45,7 +44,7 @@ public class ButtonsControl {
         for (Button b : buttonMaster.getButtons()) {
             n++;
             int color = generateNewColor(n);
-            buttonsMap.put(color, new ButtonControlObject(b, MaterialKeeper.getInstance().getColorMaterial(context, program, color)));
+            buttonsMap.put(color, new ButtonControlObject(b, MaterialKeeper.MATERIAL_KEEPER.getColorMaterial(program, color)));
         }
     }
 
