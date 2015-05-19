@@ -1,5 +1,7 @@
 package game.player;
 
+import android.util.Log;
+
 import game.physics.Circle;
 import game.physics.CollisionBox;
 import game.physics.CollisionMediator;
@@ -10,6 +12,8 @@ import shadow.math.SFVertex3f;
  * Created by Andrea on 28/03/2015.
  */
 public class PlayerStatus {
+
+    public static final String LOG_TAG = "PlayerStatus";
 
     private static final int NUMBER_OF_ANGLE_DIVISIONS = 50;
     private SFVertex3f position;
@@ -23,20 +27,25 @@ public class PlayerStatus {
     }
 
     public void move(SFVertex3f motion, CollisionMediator cm) {
+        circle.getPos().set(position);
         SFVertex3f circlePosition = circle.getPos(), originalPosition = new SFVertex3f(circlePosition);
         circlePosition.add3f(motion);
 
         CollisionBox box = cm.collide(circle);
         // Correct for obstacles
-        if (box != null)
+        if (box != null) {
             correctMotion(circlePosition, originalPosition, motion, box);
+        }
         box = cm.collide(circle);
         // Correct for junctions
-        if (box != null)
+        if (box != null){
             correctMotion(circlePosition, originalPosition, motion, box);
+        }
         // Reset if blocked, else update effective position
-        if (cm.collide(circle) != null)
+        CollisionBox box2=cm.collide(circle);
+        if (box2 != null) {
             circlePosition.set(originalPosition);
+        }
         else
             position.set(circlePosition);
     }

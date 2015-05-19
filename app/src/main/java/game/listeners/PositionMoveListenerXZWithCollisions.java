@@ -1,5 +1,7 @@
 package game.listeners;
 
+import android.util.Log;
+
 import game.physics.CollisionMediator;
 import game.player.PlayerStatus;
 import shadow.math.SFMatrix3f;
@@ -29,9 +31,7 @@ public class PositionMoveListenerXZWithCollisions implements PositionMoveListene
         tempVertex.normalize3f();
         tempVertex.mult(MOVE_SPEED * delta / 1000);
 
-        playerStatus.move(tempVertex,cm);
-
+        playerStatus.move(tempVertex, cm);
     }
-
 
 }

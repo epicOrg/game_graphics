@@ -174,8 +174,6 @@ public class GraphicsView extends GLSurfaceView {
                     .getGroundNode(0, 0, groundWidth, groundHeight, -1);
             map.loadMap(cm, context);
             sky = new Sky(context, program, me.getStatus().getPosition());
-
-            createMonkeys();
         }
 
         @Override
@@ -211,7 +209,6 @@ public class GraphicsView extends GLSurfaceView {
             program.setupProjection(camera.getResultMatrix());
             SFOGLSystemState.cleanupColorAndDepth(0, 0, 1, 1);
             sfs.applyState();
-            drawMonkeys();
 
             groundNode.draw();
             drawPlayers();
@@ -226,7 +223,6 @@ public class GraphicsView extends GLSurfaceView {
 
             buttonMaster.draw();
         }
-
 
         private void createMonkeys() {
             Model monkeyModel = FundamentalGenerator.getModel(context, program, R.drawable.animal_texture_01, "Monkey.obj");

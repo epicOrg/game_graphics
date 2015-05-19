@@ -120,7 +120,7 @@ public class Square implements CollisionBox{
 
     @Override
     public String toString() {
-        return "Square. Pos:" + pos.getX() + "," + pos.getY() + "," + pos.getZ();
+        return "Square. Pos:" + pos.getX() + "," + pos.getY() + "," + pos.getZ()+" squareDimension: ["+xSize+","+ySize+","+zSize+"]";
     }
 
 }

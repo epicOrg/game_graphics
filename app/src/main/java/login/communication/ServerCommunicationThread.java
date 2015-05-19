@@ -72,7 +72,7 @@ public class ServerCommunicationThread extends Thread {
                 line = reader.readLine();
                 if (line != null) {
                     received = new JSONObject(line);
-                    Log.d(LOG_TAG, "received: " + line);
+                    //Log.d(LOG_TAG, "received: " + line);
 
                     Service service = serviceChooser.setService(received);
                     service.setHandler(handler);
