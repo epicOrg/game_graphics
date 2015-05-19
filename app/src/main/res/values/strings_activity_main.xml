@@ -6,7 +6,7 @@
     <string name="prompt_password">Password</string>
     <string name="action_log_in">Login</string>
     <string name="action_sign_in_short">Next</string>
-    <string name="action_not_registered">Sing up</string>
+    <string name="action_not_registered">Sign up</string>
     <string name="action_remember_me">Remember me</string>
 
     <string name="error_invalid_email">Email invalid</string>

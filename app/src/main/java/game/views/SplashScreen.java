@@ -44,7 +44,7 @@ public class SplashScreen implements Waiter {
         final android.view.animation.Interpolator li = new LinearInterpolator();
         imageRotation.setInterpolator(li);
 
-        imageView.startAnimation(imageRotation);
+        // imageView.startAnimation(imageRotation);
         imageRotation.setAnimationListener(new AnimationAdapter() {
             @Override
             public void onAnimationEnd(Animation animation) {
@@ -84,13 +84,18 @@ public class SplashScreen implements Waiter {
         });
     }
 
-    public abstract class AnimationAdapter implements Animation.AnimationListener{
+    public abstract class AnimationAdapter implements Animation.AnimationListener {
         @Override
-        public void onAnimationStart(Animation animation) {}
+        public void onAnimationStart(Animation animation) {
+        }
+
         @Override
-        public void onAnimationEnd(Animation animation) {}
+        public void onAnimationEnd(Animation animation) {
+        }
+
         @Override
-        public void onAnimationRepeat(Animation animation) {}
+        public void onAnimationRepeat(Animation animation) {
+        }
     }
 
 }

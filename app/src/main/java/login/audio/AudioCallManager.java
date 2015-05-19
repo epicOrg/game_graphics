@@ -39,7 +39,7 @@ public class AudioCallManager {
 
     public void initAudioGroup() {
         audioGroup = new AudioGroup();
-        audioGroup.setMode(AudioGroup.MODE_ECHO_SUPPRESSION);
+        audioGroup.setMode(AudioGroup.MODE_NORMAL);
     }
 
     public int newAudioStream() throws UnknownHostException, SocketException {
