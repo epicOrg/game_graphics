@@ -247,7 +247,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
             request.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_MAP);
             request.put(FieldsNames.HASHCODE, hashcode);
             request.put(FieldsNames.USERNAME, username);
-            request.put(FieldsNames.ROOM_NAME, gameManager.getRoom());
+            request.put(FieldsNames.ROOM_NAME, gameManager.getRoom().getName());
         } catch (JSONException e) {
             e.printStackTrace();
         }
