@@ -99,10 +99,10 @@ public class Game implements Service {
         gameMapResult = new GameMapResult(width, height, gameMapObjects);
 
         try {
-            JSONObject jPlayerPosition = json.getJSONObject(FieldsNames.GAME_PLAYER_POSITION);
-            gameMapResult.playerPositionX = (float) jPlayerPosition.getDouble(FieldsNames.GAME_X);
-            gameMapResult.playerPositionY = (float) jPlayerPosition.getDouble(FieldsNames.GAME_Y);
-            gameMapResult.playerPositionZ = (float) jPlayerPosition.getDouble(FieldsNames.GAME_Z);
+            String jPlayerPosition = json.getString(FieldsNames.GAME_PLAYER_POSITION);
+            gameMapResult.playerPositionX = Float.parseFloat(jPlayerPosition.split(" ")[0]);
+            gameMapResult.playerPositionY = Float.parseFloat(jPlayerPosition.split(" ")[1]);
+            gameMapResult.playerPositionZ = Float.parseFloat(jPlayerPosition.split(" ")[2]);
         } catch (JSONException e) {
             e.printStackTrace();
         }

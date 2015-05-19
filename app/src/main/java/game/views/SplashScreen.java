@@ -44,7 +44,7 @@ public class SplashScreen implements Waiter {
         final android.view.animation.Interpolator li = new LinearInterpolator();
         imageRotation.setInterpolator(li);
 
-        // imageView.startAnimation(imageRotation);
+        imageView.startAnimation(imageRotation);
         imageRotation.setAnimationListener(new AnimationAdapter() {
             @Override
             public void onAnimationEnd(Animation animation) {
