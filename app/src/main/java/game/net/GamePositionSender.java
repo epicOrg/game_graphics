@@ -1,15 +1,8 @@
 package game.net;
 
-import android.util.Log;
-
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.concurrent.CountDownLatch;
-
 import game.JSONd;
 import game.RequestMaker;
-import game.Room;
 import game.Waiter;
 import game.player.Player;
 import game.player.PlayerStatus;
@@ -23,6 +16,7 @@ import login.interaction.FieldsNames;
 public class GamePositionSender implements Waiter {
 
     public static final String LOG_TAG = "GamePositionSender";
+    public static final long waitTime=100;
 
     private Player player;
     private String roomName;
@@ -46,21 +40,15 @@ public class GamePositionSender implements Waiter {
         public void run() {
              while (sending) {
                  PlayerStatus playerStatus = player.getStatus();
-                JSONObject request = requestMaker.getNewRequest(new JSONd(FieldsNames.SERVICE, FieldsNames.GAME),
+                 String[] names=new String[]{FieldsNames.GAME_X, FieldsNames.GAME_Y, FieldsNames.GAME_Z};
+                 JSONObject request = requestMaker.getNewRequest(new JSONd(FieldsNames.SERVICE, FieldsNames.GAME),
                         new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_POSITIONS),
                         new JSONd(FieldsNames.USERNAME, player.getName()),
                         new JSONd(FieldsNames.ROOM_NAME, roomName),
+                        new JSONd(FieldsNames.GAME_POSITION, requestMaker.getNewRequest(names, playerStatus.getPosition())),
+                        new JSONd(FieldsNames.GAME_DIRECTION, requestMaker.getNewRequest(names, playerStatus.getDirection()))
 
-                        new JSONd(FieldsNames.GAME_POSITION, requestMaker.getNewRequest(
-                                new JSONd(FieldsNames.GAME_X, playerStatus.getPosition().getX()),
-                                new JSONd(FieldsNames.GAME_Y, playerStatus.getPosition().getY()),
-                                new JSONd(FieldsNames.GAME_Z, playerStatus.getPosition().getZ()))),
-                        new JSONd(FieldsNames.GAME_DIRECTION, requestMaker.getNewRequest(
-                                new JSONd(FieldsNames.GAME_X, playerStatus.getDirection().getX()),
-                                new JSONd(FieldsNames.GAME_Y, playerStatus.getDirection().getY()),
-                                new JSONd(FieldsNames.GAME_Z, playerStatus.getDirection().getZ())))
                 );
-
                 try {
                     serverCommunicationThread.send(request);
                 } catch (NotConnectedException e) {
@@ -68,7 +56,7 @@ public class GamePositionSender implements Waiter {
                 }
 
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(waitTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

@@ -15,13 +15,10 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONObject;
-
 import java.util.HashMap;
 
 import game.JSONd;
 import game.RequestMaker;
-import game.net.LogHandler;
 import game.net.LoginHandler;
 import game.net.LoginHandlerListener;
 import login.communication.NotConnectedException;
@@ -94,14 +91,11 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
     }
 
     private void setThreadHandler() {
-//        LoginHandler loginHandler = new LoginHandler(this);
-//
-//        loginHandler.addLoginHandlerListeners(this);
-//        serverCommunicationThread.setHandler(loginHandler);
+        LoginHandler loginHandler = new LoginHandler(this);
 
-        LogHandler logHandler = new LogHandler(this);
-        logHandler.addLoginHandlerListeners(this);
-        serverCommunicationThread.setHandler(logHandler);
+        loginHandler.addLoginHandlerListeners(this);
+        serverCommunicationThread.setHandler(loginHandler);
+
     }
 
     @Override

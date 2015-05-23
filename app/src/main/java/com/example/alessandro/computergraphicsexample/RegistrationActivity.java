@@ -10,13 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import game.JSONd;
 import game.RequestMaker;
 import login.communication.NotConnectedException;
@@ -26,7 +21,6 @@ import login.interaction.FieldsNames;
 import login.interaction.ProgressShower;
 import login.interaction.RegistrationErrorStrings;
 import login.services.Register;
-import login.services.RegisterHandler;
 
 /**
  * A login screen that offers login via email/password.
@@ -59,9 +53,8 @@ public class RegistrationActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
-//        serverCommunicationThread.setHandler(new RegistrationHandler());
+        serverCommunicationThread.setHandler(new RegistrationHandler());
 
-        serverCommunicationThread.setHandler(new RegisterHandler(this, progressShower));
     }
 
     private void getViews() {

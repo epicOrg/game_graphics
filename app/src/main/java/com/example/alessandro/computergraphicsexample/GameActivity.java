@@ -137,9 +137,9 @@ public class GameActivity extends Activity implements GameHandlerListener {
         if (!noServer) {
             Log.d(LOG_TAG, "Starting GamePositionSender..");
             GamePositionSender gamePositionSender = new GamePositionSender(me, room.getName());
-            mapInterpreter=new MapInterpreter(me.getStatus(), this);
-            gameHandler = new GameHandler(new StatusInterpreter(messageScreen, gamePositionSender, this),
-                    mapInterpreter, new PositionsInterpreter(gameManager.getRoom()));
+
+            gameHandler=new GameHandler(me, gamePositionSender, messageScreen);
+            gameHandler.addGameHandlerListeners(this);
 
             waiterGroup.addWaiter(gamePositionSender);
             waiterGroup.addWaiter(new GameStatusWaiter(requestMaker));
@@ -168,8 +168,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
     }
 
-    private MapInterpreter mapInterpreter;
-
     private void initAudioSetting() {
         AudioCallManager audioCallManager = AudioCallManager.getInstance();
         audioCallManager.setContext(context);
@@ -194,9 +192,9 @@ public class GameActivity extends Activity implements GameHandlerListener {
         Log.d(LOG_TAG, "onMapReceived");
 
         Log.d(LOG_TAG, "Starting GraphicsView..");
-        int width = mapInterpreter.getGroundWidth();
-        int height = mapInterpreter.getGroundHeight();
-        graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), mapInterpreter.getMap(), startSignal, width, height, settingsScreen);
+        int width = gameHandler.getGroundWidth();
+        int height = gameHandler.getGroundHeight();
+        graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), gameHandler.getMap(), startSignal, width, height, settingsScreen);
         LinearLayout graphicsContainerLayout = (LinearLayout) findViewById(R.id.graphics_view_container);
         graphicsContainerLayout.addView(graphicsView);
     }

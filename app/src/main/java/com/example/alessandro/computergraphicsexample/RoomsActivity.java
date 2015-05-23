@@ -1,6 +1,5 @@
 package com.example.alessandro.computergraphicsexample;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,7 +19,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -32,7 +30,6 @@ import login.communication.NotConnectedException;
 import login.communication.ServerCommunicationThread;
 import login.interaction.FieldsNames;
 import login.interaction.RoomsErrorStrings;
-import login.services.RoomSHandler;
 import login.services.Rooms;
 
 /**
@@ -102,9 +99,7 @@ public class RoomsActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
-//        serverCommunicationThread.setHandler(new RoomsHandler());
-        serverCommunicationThread.setHandler(new RoomSHandler(rooms, this, roomsList, username, hashcode));
-
+        serverCommunicationThread.setHandler(new RoomsHandler());
 
         try {
             serverCommunicationThread.send(createListRequest());

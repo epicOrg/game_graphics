@@ -77,9 +77,6 @@ public class ServerCommunicationThread extends Thread {
                     Service service = serviceChooser.setService(received);
                     service.setHandler(handler);
                     service.start();
-
-//                    Se tutto funziona basterà la seguente riga di codice:
-//                    handler.obtainMessage(0, received).sendToTarget();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

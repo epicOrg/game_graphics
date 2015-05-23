@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 import login.interaction.FieldsNames;
+import shadow.math.SFVertex3f;
 
 /**
  * Created by depa on 19/05/15.
@@ -18,12 +19,6 @@ public class RequestMaker {
     private LinkedList<JSONd> defaultRequests;
 
     public RequestMaker() {
-    }
-
-    public RequestMaker withAddedRequests(JSONd... jsonds){
-        for (JSONd d: jsonds)
-            defaultRequests.add(d);
-        return this;
     }
 
     public RequestMaker(JSONd... defaultRequests) {
@@ -48,6 +43,20 @@ public class RequestMaker {
             for (JSONd d: jsoNcouples){
                 d.putrequest(request);
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return request;
+    }
+
+    public JSONObject getNewRequest(String[] names, SFVertex3f values) {
+        JSONObject request = new JSONObject();
+        try {
+            if (names.length<3)
+                throw new JSONException("ERROR with names");
+            new JSONd(names[0],values.getX()).putrequest(request);
+            new JSONd(names[1],values.getY()).putrequest(request);
+            new JSONd(names[2],values.getZ()).putrequest(request);
         } catch (JSONException e) {
             e.printStackTrace();
         }

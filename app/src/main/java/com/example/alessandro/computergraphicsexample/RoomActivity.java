@@ -16,9 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import game.GameManager;
 import game.JSONd;
 import game.RequestMaker;
@@ -29,7 +26,6 @@ import login.communication.NotConnectedException;
 import login.communication.ServerCommunicationThread;
 import login.interaction.FieldsNames;
 import login.services.CurrentRoom;
-import login.services.RooMHandler;
 
 /**
  * Created by Andrea on 18/04/2015.
@@ -71,8 +67,8 @@ public class RoomActivity extends ActionBarActivity {
         roomListsContainer = (LinearLayout) findViewById(R.id.room_lists_container);
         ImageButton fabImageButton = (ImageButton) findViewById(R.id.action_new_rom);
 
-//        serverCommunicationThread.setHandler(new RoomHandler());
-        serverCommunicationThread.setHandler(new RooMHandler(currentRoom, username, roomName, hashcode, roomListsContainer, this, roomStatus, requestMaker));
+        serverCommunicationThread.setHandler(new RoomHandler());
+
         try {
             serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_PLAYER_LIST)));
         } catch (NotConnectedException e) {
@@ -143,7 +139,7 @@ public class RoomActivity extends ActionBarActivity {
             for (Team t : currentRoom.getTeams()) {
                 ListView listView = new ListView(context);
                 roomListsContainer.addView(listView);
-                ArrayAdapter<Player> adapter = new ArrayAdapter<Player>(context, android.R.layout.simple_list_item_1, t.getPlayers());
+                ArrayAdapter<Player> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, t.getPlayers());
 
                 TextView textView = new TextView(context);
                 textView.setText(t.getName());
