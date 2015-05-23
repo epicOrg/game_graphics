@@ -1,5 +1,7 @@
 package game.Interpreters;
 
+import android.os.Message;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,6 +13,7 @@ import game.graphics.MapObjects;
 import game.net.GameHandlerListener;
 import game.player.PlayerStatus;
 import login.interaction.FieldsNames;
+import login.services.Game;
 
 /**
  * Created by depa on 23/05/15.
@@ -29,42 +32,27 @@ public class MapInterpreter implements Interpreter{
     }
 
     @Override
-    public String getKey() {
-        return FieldsNames.GAME_MAP;
+    public int getKey() {
+        return Game.MAP;
     }
 
     @Override
-    public void interpret(JSONObject json) {
-
+    public void interpret(Message msg) {
+        //Log.d(LOG_TAG, "processMapMessage");
+        Game.GameMapResult results = (Game.GameMapResult) msg.obj;
         map = new Map();
 
-        try {
-            JSONArray jItems = json.getJSONArray(FieldsNames.GAME_ITEMS);
-            for (int i = 0; i < jItems.length(); i++) {
-                JSONObject jObject = jItems.getJSONObject(i);
-                String object = jObject.getString(FieldsNames.GAME_OBJECT);
-                String texture = jObject.getString(FieldsNames.GAME_TEXTURE);
-                String position = jObject.getString(FieldsNames.GAME_POSITION);
-                String size = jObject.getString(FieldsNames.GAME_SIZE);
-                map.addObjects(MapObjects.MAP.getObjectFromNameAndData(object, position, size, texture));
-            }
-
-            groundWidth = json.getInt(FieldsNames.GAME_WIDTH);
-            groundHeight = json.getInt(FieldsNames.GAME_HEIGHT);
-
-            String jPlayerPosition = json.getString(FieldsNames.GAME_PLAYER_POSITION);
-            float playerPositionX = Float.parseFloat(jPlayerPosition.split(" ")[0]);
-            float playerPositionY = Float.parseFloat(jPlayerPosition.split(" ")[1]);
-            float playerPositionZ = Float.parseFloat(jPlayerPosition.split(" ")[2]);
-
-            status.getPosition().set3f(playerPositionX, playerPositionY, playerPositionZ);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
+        for (Game.GameMapObject o : results.getGameMapObjects()) {
+            map.addObjects(MapObjects.MAP.getObjectFromNameAndData(o.object, o.position, o.size, o.texture));
         }
 
+        groundWidth = results.getWidth();
+        groundHeight = results.getHeight();
+
+        status.getPosition().set3f(results.playerPositionX, results.playerPositionY, results.playerPositionZ);
+
         for (GameHandlerListener l : gameHandlerListeners)
-            l.onMapReceived();
+           l.onMapReceived();
     }
 
     public Map getMap() {

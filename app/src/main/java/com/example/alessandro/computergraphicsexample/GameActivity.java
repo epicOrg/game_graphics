@@ -9,16 +9,11 @@ import android.util.Log;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
-
 import game.GameManager;
 import game.Interpreters.MapInterpreter;
 import game.Interpreters.PositionsInterpreter;
@@ -75,6 +70,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
     private Context context;
     private RequestMaker requestMaker;
+    private MapInterpreter mapInterpreter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,8 +134,12 @@ public class GameActivity extends Activity implements GameHandlerListener {
             Log.d(LOG_TAG, "Starting GamePositionSender..");
             GamePositionSender gamePositionSender = new GamePositionSender(me, room.getName());
 
-            gameHandler=new GameHandler(me, gamePositionSender, messageScreen);
-            gameHandler.addGameHandlerListeners(this);
+//            gameHandler=new GameHandler(me, gamePositionSender, messageScreen);
+//            gameHandler.addGameHandlerListeners(this);
+
+            mapInterpreter=new MapInterpreter(me.getStatus(), this);
+            gameHandler=new GameHandler(new StatusInterpreter(messageScreen, gamePositionSender, this), mapInterpreter,
+                    new PositionsInterpreter(gameManager.getRoom()));
 
             waiterGroup.addWaiter(gamePositionSender);
             waiterGroup.addWaiter(new GameStatusWaiter(requestMaker));
@@ -192,9 +192,9 @@ public class GameActivity extends Activity implements GameHandlerListener {
         Log.d(LOG_TAG, "onMapReceived");
 
         Log.d(LOG_TAG, "Starting GraphicsView..");
-        int width = gameHandler.getGroundWidth();
-        int height = gameHandler.getGroundHeight();
-        graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), gameHandler.getMap(), startSignal, width, height, settingsScreen);
+        int width = mapInterpreter.getGroundWidth();
+        int height = mapInterpreter.getGroundHeight();
+        graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), mapInterpreter.getMap(), startSignal, width, height, settingsScreen);
         LinearLayout graphicsContainerLayout = (LinearLayout) findViewById(R.id.graphics_view_container);
         graphicsContainerLayout.addView(graphicsView);
     }

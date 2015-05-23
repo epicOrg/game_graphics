@@ -1,13 +1,13 @@
 package game.Interpreters;
 
-import org.json.JSONObject;
+import android.os.Message;
 
 /**
  * Created by depa on 23/05/15.
  */
 public interface Interpreter {
 
-    String getKey();
-    void interpret(JSONObject json);
+    int getKey();
+    void interpret(Message msg);
 
 }

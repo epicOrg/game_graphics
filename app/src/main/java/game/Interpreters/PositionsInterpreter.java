@@ -1,12 +1,17 @@
 package game.Interpreters;
 
+import android.os.Message;
 import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+
 import game.Room;
 import game.player.Player;
 import login.interaction.FieldsNames;
+import login.services.Game;
 import shadow.math.SFVertex3f;
 
 /**
@@ -22,38 +27,20 @@ public class PositionsInterpreter implements  Interpreter{
     }
 
     @Override
-    public String getKey() {
-        return FieldsNames.GAME_POSITIONS;
+    public int getKey() {
+        return Game.POSITIONS;
     }
 
     @Override
-    public void interpret(JSONObject json) {
-        Log.d(LOG_TAG, "processPositionsMessage");
+    public void interpret(Message msg) {
+        //Log.d(LOG_TAG, "processPositionsMessage");
+        Game.GamePositionsResult results = (Game.GamePositionsResult) msg.obj;
+        HashMap<String, Game.GamePositionsObject> gamePositionsObjectHashMap = results.getGamePositionsObjectHashMap();
 
-        try {
-            JSONArray jPlayers = json.getJSONArray(FieldsNames.GAME_PLAYERS);
-
-            for (int i = 0; i < jPlayers.length(); i++) {
-                JSONObject jPlayer = jPlayers.getJSONObject(i);
-                String username = jPlayer.getString(FieldsNames.USERNAME);
-                JSONObject pos = jPlayer.getJSONObject(FieldsNames.GAME_POSITION);
-                JSONObject dir = jPlayer.getJSONObject(FieldsNames.GAME_DIRECTION);
-
-                float xPos = Float.parseFloat(pos.getString(FieldsNames.GAME_X));
-                float yPos = Float.parseFloat(pos.getString(FieldsNames.GAME_Y)) - 1.5f;
-                float zPos = Float.parseFloat(pos.getString(FieldsNames.GAME_Z));
-                float xDir = Float.parseFloat(dir.getString(FieldsNames.GAME_X));
-                float yDir = Float.parseFloat(dir.getString(FieldsNames.GAME_Y)) - 1.5f;
-                float zDir = Float.parseFloat(dir.getString(FieldsNames.GAME_Z));
-
-                Player p = room.getPlayerByUsername(username);
-                p.getStatus().getPosition().set(new SFVertex3f(xPos,yPos,zPos));
-                p.getStatus().getDirection().set(new SFVertex3f(xDir,yDir,zDir));
-
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
+        for (String s : gamePositionsObjectHashMap.keySet()) {
+            Player p = room.getPlayerByUsername(s);
+            p.getStatus().getPosition().set(gamePositionsObjectHashMap.get(s).pos);
+            p.getStatus().getDirection().set(gamePositionsObjectHashMap.get(s).dir);
         }
     }
 }

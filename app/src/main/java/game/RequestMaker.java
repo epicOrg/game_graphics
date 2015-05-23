@@ -1,14 +1,9 @@
 package game;
 
-import android.content.Intent;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Arrays;
 import java.util.LinkedList;
-
-import login.interaction.FieldsNames;
 import shadow.math.SFVertex3f;
 
 /**
