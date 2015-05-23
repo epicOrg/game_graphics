@@ -1,7 +1,12 @@
 package game;
 
+import android.content.Intent;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Arrays;
+import java.util.LinkedList;
 
 import login.interaction.FieldsNames;
 
@@ -10,13 +15,19 @@ import login.interaction.FieldsNames;
  */
 public class RequestMaker {
 
-    private JSONd[] defaultRequests;
+    private LinkedList<JSONd> defaultRequests;
 
     public RequestMaker() {
     }
 
+    public RequestMaker withAddedRequests(JSONd... jsonds){
+        for (JSONd d: jsonds)
+            defaultRequests.add(d);
+        return this;
+    }
+
     public RequestMaker(JSONd... defaultRequests) {
-        this.defaultRequests=defaultRequests;
+        this.defaultRequests=new LinkedList<>(Arrays.asList(defaultRequests));
     }
 
     public JSONObject getNewRequestWithDefaultRequests(JSONd...jsoNcouples) {

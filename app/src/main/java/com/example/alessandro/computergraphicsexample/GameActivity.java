@@ -88,16 +88,18 @@ public class GameActivity extends Activity implements GameHandlerListener {
         gameManager = GameManager.MANAGER;
         username = intent.getStringExtra(FieldsNames.USERNAME);
         hashcode = intent.getIntExtra(FieldsNames.HASHCODE, 0);
-        requestMaker=new RequestMaker(new JSONd(FieldsNames.USERNAME, username),
-                new JSONd(FieldsNames.HASHCODE, hashcode),
-                new JSONd(FieldsNames.ROOM_NAME, gameManager.getRoom().getName()));
-
+        RequestMaker tempMaker=new RequestMaker(new JSONd(FieldsNames.USERNAME, username),
+                new JSONd(FieldsNames.HASHCODE, hashcode));
+        requestMaker=tempMaker.withAddedRequests(new JSONd(FieldsNames.ROOM_NAME, gameManager.getRoom().getName()));
+//        requestMaker=new RequestMaker(new JSONd(FieldsNames.USERNAME, username),
+//                new JSONd(FieldsNames.HASHCODE, hashcode),
+//                new JSONd(FieldsNames.ROOM_NAME, gameManager.getRoom().getName()));
 
 
         messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
         messageScreen = new MessageScreen(this, Color.argb(128, 0xCD, 0xDC, 0x39), messageContainer);
-        settingsScreen = new SettingsScreen(this, menuContainer, username, hashcode, gameManager.getRoom().getName());
+        settingsScreen = new SettingsScreen(this, menuContainer, requestMaker);
 
         if (noServer) {
             gameManager.setRoom(new Room("TestRoom", 10, 2));
@@ -140,7 +142,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
             gameHandler.addGameHandlerListeners(this);
 
             waiterGroup.addWaiter(gamePositionSender);
-            waiterGroup.addWaiter(new GameStatusWaiter(room.getName(), username, hashcode));
+            waiterGroup.addWaiter(new GameStatusWaiter(requestMaker));
         }
 
         waiterGroup.startWaiting();
@@ -188,12 +190,11 @@ public class GameActivity extends Activity implements GameHandlerListener {
     @Override
     public void onMapReceived() {
         Log.d(LOG_TAG, "onMapReceived");
-        gameManager.setMap(gameHandler.getMap());
 
         Log.d(LOG_TAG, "Starting GraphicsView..");
         int width = gameHandler.getGroundWidth();
         int height = gameHandler.getGroundHeight();
-        graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), gameManager.getMap(), startSignal, width, height, settingsScreen);
+        graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), gameHandler.getMap(), startSignal, width, height, settingsScreen);
         LinearLayout graphicsContainerLayout = (LinearLayout) findViewById(R.id.graphics_view_container);
         graphicsContainerLayout.addView(graphicsView);
     }
@@ -235,20 +236,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
         if (graphicsView != null)
             graphicsView.onPause();
     }
-
-//    private JSONObject createMapRequest() {
-//        JSONObject request = new JSONObject();
-//        try {
-//            request.put(FieldsNames.SERVICE, FieldsNames.GAME);
-//            request.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_MAP);
-//            request.put(FieldsNames.HASHCODE, hashcode);
-//            request.put(FieldsNames.USERNAME, username);
-//            request.put(FieldsNames.ROOM_NAME, gameManager.getRoom().getName());
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        return request;
-//    }
 
     @Override
     public void onBackPressed() {

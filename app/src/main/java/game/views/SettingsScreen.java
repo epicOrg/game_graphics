@@ -18,6 +18,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import game.GameManager;
+import game.JSONd;
+import game.RequestMaker;
 import game.Team;
 import game.player.Player;
 import login.audio.AudioCallManager;
@@ -36,18 +38,15 @@ public class SettingsScreen {
 
     private Activity activity;
     private LinearLayout container;
-    private String username, roomName;
-    private int hashcode;
+    private RequestMaker requestMaker;
 
     private SettingsScreen settingsScreen;
     private GameManager gameManager;
 
-    public SettingsScreen(Activity activity, LinearLayout container, String username, int hashcode, String roomName) {
+    public SettingsScreen(Activity activity, LinearLayout container, RequestMaker requestMaker) {
         this.activity = activity;
         this.container = container;
-        this.username = username;
-        this.hashcode = hashcode;
-        this.roomName = roomName;
+        this.requestMaker=requestMaker;
 
         settingsScreen = this;
 
@@ -87,7 +86,9 @@ public class SettingsScreen {
             public void onClick(View view) {
                 Toast.makeText(activity, "Quitting..", Toast.LENGTH_SHORT).show();
                 try {
-                    serverCommunicationThread.send(createExitRequest());
+                    serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.GAME),
+                            new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS),
+                            new JSONd(FieldsNames.GAME_EXIT, true)));
                 } catch (NotConnectedException e) {
                     e.printStackTrace();
                 }
@@ -147,20 +148,7 @@ public class SettingsScreen {
         });
     }
 
-    private JSONObject createExitRequest() {
-        JSONObject request = new JSONObject();
-        try {
-            request.put(FieldsNames.SERVICE, FieldsNames.GAME);
-            request.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS);
-            request.put(FieldsNames.HASHCODE, hashcode);
-            request.put(FieldsNames.USERNAME, username);
-            request.put(FieldsNames.ROOM_NAME, roomName);
-            request.put(FieldsNames.GAME_EXIT, true);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return request;
-    }
+
 
     public void hide() {
         Log.d(LOG_TAG, "hide");
