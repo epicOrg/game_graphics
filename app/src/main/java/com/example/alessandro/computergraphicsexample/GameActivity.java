@@ -20,6 +20,9 @@ import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
 
 import game.GameManager;
+import game.Interpreters.MapInterpreter;
+import game.Interpreters.PositionsInterpreter;
+import game.Interpreters.StatusInterpreter;
 import game.JSONd;
 import game.RequestMaker;
 import game.Room;
@@ -88,13 +91,9 @@ public class GameActivity extends Activity implements GameHandlerListener {
         gameManager = GameManager.MANAGER;
         username = intent.getStringExtra(FieldsNames.USERNAME);
         hashcode = intent.getIntExtra(FieldsNames.HASHCODE, 0);
-        RequestMaker tempMaker=new RequestMaker(new JSONd(FieldsNames.USERNAME, username),
-                new JSONd(FieldsNames.HASHCODE, hashcode));
-        requestMaker=tempMaker.withAddedRequests(new JSONd(FieldsNames.ROOM_NAME, gameManager.getRoom().getName()));
-//        requestMaker=new RequestMaker(new JSONd(FieldsNames.USERNAME, username),
-//                new JSONd(FieldsNames.HASHCODE, hashcode),
-//                new JSONd(FieldsNames.ROOM_NAME, gameManager.getRoom().getName()));
-
+        requestMaker=new RequestMaker(new JSONd(FieldsNames.USERNAME, username),
+                new JSONd(FieldsNames.HASHCODE, hashcode),
+                new JSONd(FieldsNames.ROOM_NAME, gameManager.getRoom().getName()));
 
         messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
@@ -138,8 +137,9 @@ public class GameActivity extends Activity implements GameHandlerListener {
         if (!noServer) {
             Log.d(LOG_TAG, "Starting GamePositionSender..");
             GamePositionSender gamePositionSender = new GamePositionSender(me, room.getName());
-            gameHandler = new GameHandler(me, gamePositionSender, messageScreen);
-            gameHandler.addGameHandlerListeners(this);
+            mapInterpreter=new MapInterpreter(me.getStatus(), this);
+            gameHandler = new GameHandler(new StatusInterpreter(messageScreen, gamePositionSender, this),
+                    mapInterpreter, new PositionsInterpreter(gameManager.getRoom()));
 
             waiterGroup.addWaiter(gamePositionSender);
             waiterGroup.addWaiter(new GameStatusWaiter(requestMaker));
@@ -168,6 +168,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
     }
 
+    private MapInterpreter mapInterpreter;
+
     private void initAudioSetting() {
         AudioCallManager audioCallManager = AudioCallManager.getInstance();
         audioCallManager.setContext(context);
@@ -192,9 +194,9 @@ public class GameActivity extends Activity implements GameHandlerListener {
         Log.d(LOG_TAG, "onMapReceived");
 
         Log.d(LOG_TAG, "Starting GraphicsView..");
-        int width = gameHandler.getGroundWidth();
-        int height = gameHandler.getGroundHeight();
-        graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), gameHandler.getMap(), startSignal, width, height, settingsScreen);
+        int width = mapInterpreter.getGroundWidth();
+        int height = mapInterpreter.getGroundHeight();
+        graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), mapInterpreter.getMap(), startSignal, width, height, settingsScreen);
         LinearLayout graphicsContainerLayout = (LinearLayout) findViewById(R.id.graphics_view_container);
         graphicsContainerLayout.addView(graphicsView);
     }
