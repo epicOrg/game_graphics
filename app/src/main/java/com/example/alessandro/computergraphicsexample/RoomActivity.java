@@ -29,6 +29,7 @@ import login.communication.NotConnectedException;
 import login.communication.ServerCommunicationThread;
 import login.interaction.FieldsNames;
 import login.services.CurrentRoom;
+import login.services.RooMHandler;
 
 /**
  * Created by Andrea on 18/04/2015.
@@ -70,7 +71,8 @@ public class RoomActivity extends ActionBarActivity {
         roomListsContainer = (LinearLayout) findViewById(R.id.room_lists_container);
         ImageButton fabImageButton = (ImageButton) findViewById(R.id.action_new_rom);
 
-        serverCommunicationThread.setHandler(new RoomHandler());
+//        serverCommunicationThread.setHandler(new RoomHandler());
+        serverCommunicationThread.setHandler(new RooMHandler(currentRoom, username, roomName, hashcode, roomListsContainer, this, roomStatus, requestMaker));
         try {
             serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_PLAYER_LIST)));
         } catch (NotConnectedException e) {

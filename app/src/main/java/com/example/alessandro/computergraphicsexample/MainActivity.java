@@ -21,6 +21,7 @@ import java.util.HashMap;
 
 import game.JSONd;
 import game.RequestMaker;
+import game.net.LogHandler;
 import game.net.LoginHandler;
 import game.net.LoginHandlerListener;
 import login.communication.NotConnectedException;
@@ -41,7 +42,7 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
 
     private Activity activity;
     private ServerCommunicationThread serverCommunicationThread;
-    private HashMap<Integer, View> views = new HashMap<Integer, View>();
+    private HashMap<Integer, View> views = new HashMap<>();
 
     private ProgressShower progressShower;
     private SharedPreferences loginPreference;
@@ -93,9 +94,14 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
     }
 
     private void setThreadHandler() {
-        LoginHandler loginHandler = new LoginHandler(this);
-        loginHandler.addLoginHandlerListeners(this);
-        serverCommunicationThread.setHandler(loginHandler);
+//        LoginHandler loginHandler = new LoginHandler(this);
+//
+//        loginHandler.addLoginHandlerListeners(this);
+//        serverCommunicationThread.setHandler(loginHandler);
+
+        LogHandler logHandler = new LogHandler(this);
+        logHandler.addLoginHandlerListeners(this);
+        serverCommunicationThread.setHandler(logHandler);
     }
 
     @Override

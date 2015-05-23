@@ -32,6 +32,7 @@ import login.communication.NotConnectedException;
 import login.communication.ServerCommunicationThread;
 import login.interaction.FieldsNames;
 import login.interaction.RoomsErrorStrings;
+import login.services.RoomSHandler;
 import login.services.Rooms;
 
 /**
@@ -51,7 +52,7 @@ public class RoomsActivity extends ActionBarActivity {
     private int hashcode;
 
     private Context context;
-    private Activity activity = this;
+//    private Activity activity = this;
     private String result;
     private RequestMaker requestMaker;
 
@@ -101,7 +102,10 @@ public class RoomsActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
-        serverCommunicationThread.setHandler(new RoomsHandler());
+//        serverCommunicationThread.setHandler(new RoomsHandler());
+        serverCommunicationThread.setHandler(new RoomSHandler(rooms, this, roomsList, username, hashcode));
+
+
         try {
             serverCommunicationThread.send(createListRequest());
         } catch (NotConnectedException e) {
@@ -231,7 +235,7 @@ public class RoomsActivity extends ActionBarActivity {
                 rooms.add(new Room(r.getName(), r.getMaxPlayers(), r.getCurrentPlayers()));
             }
 
-            adapter = new ArrayAdapter<Room>(context, android.R.layout.simple_list_item_1, rooms);
+            adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, rooms);
             roomsList.setAdapter(adapter);
         }
 

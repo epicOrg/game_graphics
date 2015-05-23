@@ -1,5 +1,7 @@
 package login.communication;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -7,6 +9,7 @@ import login.interaction.FieldsNames;
 import login.services.Audio;
 import login.services.CurrentRoom;
 import login.services.Game;
+import login.services.GenericService;
 import login.services.Login;
 import login.services.Polling;
 import login.services.Register;
@@ -24,13 +27,17 @@ public class ServiceChooser {
     public Service setService(JSONObject json) throws JSONException {
         switch (json.getString(FieldsNames.SERVICE)) {
             case FieldsNames.REGISTER:
-                return new Register(json);
+                Log.d("SERVICECHOOSER","REGISTER");
+                return new GenericService(json);//return new Register(json);
             case FieldsNames.LOGIN:
-                return new Login(json);
+                Log.d("SERVICECHOOSER","LOGIN");
+                return new GenericService(json);//return new Login(json);
             case FieldsNames.ROOMS:
-                return new Rooms(json);
+                Log.d("SERVICECHOOSER","ROOMS");
+                return new GenericService(json);//return new Rooms(json);
             case FieldsNames.CURRENT_ROOM:
-                return new CurrentRoom(json);
+                Log.d("SERVICECHOOSER","CURRENTROOM");
+                return new GenericService(json);//return new CurrentRoom(json);
             case FieldsNames.GAME:
                 return new Game(json);
             case FieldsNames.AUDIO:

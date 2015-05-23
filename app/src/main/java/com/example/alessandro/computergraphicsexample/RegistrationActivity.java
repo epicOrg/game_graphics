@@ -26,6 +26,7 @@ import login.interaction.FieldsNames;
 import login.interaction.ProgressShower;
 import login.interaction.RegistrationErrorStrings;
 import login.services.Register;
+import login.services.RegisterHandler;
 
 /**
  * A login screen that offers login via email/password.
@@ -37,7 +38,7 @@ public class RegistrationActivity extends ActionBarActivity {
      */
     private RegistrationActivity thisActivity = this;
     private ServerCommunicationThread serverCommunicationThread;
-    private HashMap<Integer, View> views = new HashMap<Integer, View>();
+    private HashMap<Integer, View> views = new HashMap<>();
     private ProgressShower progressShower;
     private RegistrationData registrationData;
 
@@ -58,7 +59,9 @@ public class RegistrationActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
-        serverCommunicationThread.setHandler(new RegistrationHandler());
+//        serverCommunicationThread.setHandler(new RegistrationHandler());
+
+        serverCommunicationThread.setHandler(new RegisterHandler(this, progressShower));
     }
 
     private void getViews() {
