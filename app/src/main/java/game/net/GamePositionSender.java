@@ -1,6 +1,7 @@
 package game.net;
 
 import org.json.JSONObject;
+
 import game.JSONd;
 import game.RequestMaker;
 import game.Waiter;
@@ -11,12 +12,15 @@ import login.communication.ServerCommunicationThread;
 import login.interaction.FieldsNames;
 
 /**
- * Created by Andrea on 29/04/2015.
+ * Class containing a thread which sends the current player's position and direction to the server.
+ *
+ * @author Andrea
  */
 public class GamePositionSender implements Waiter {
 
     public static final String LOG_TAG = "GamePositionSender";
-    public static final long waitTime=100;
+
+    public static final long waitTime = 100;
 
     private Player player;
     private String roomName;
@@ -24,13 +28,26 @@ public class GamePositionSender implements Waiter {
     private ServerCommunicationThread serverCommunicationThread = ServerCommunicationThread.getInstance();
 
     private boolean sending = true;
-    private RequestMaker requestMaker=new RequestMaker();
+    private RequestMaker requestMaker = new RequestMaker();
 
+    /**
+     * Constructs a sender for the specified player.
+     *
+     * @param player   player containing the position and direction to send
+     * @param roomName room containing the specified player
+     */
     public GamePositionSender(Player player, String roomName) {
         this.player = player;
         this.roomName = roomName;
     }
 
+    /**
+     * Set the status of the thread.
+     * <p>
+     * When stopped it can't be resumed.
+     *
+     * @param sending status of the thread
+     */
     public void setSending(boolean sending) {
         this.sending = sending;
     }
@@ -38,10 +55,10 @@ public class GamePositionSender implements Waiter {
     private Runnable sendPositionRunnable = new Runnable() {
         @Override
         public void run() {
-             while (sending) {
-                 PlayerStatus playerStatus = player.getStatus();
-                 String[] names=new String[]{FieldsNames.GAME_X, FieldsNames.GAME_Y, FieldsNames.GAME_Z};
-                 JSONObject request = requestMaker.getNewRequest(new JSONd(FieldsNames.SERVICE, FieldsNames.GAME),
+            while (sending) {
+                PlayerStatus playerStatus = player.getStatus();
+                String[] names = new String[]{FieldsNames.GAME_X, FieldsNames.GAME_Y, FieldsNames.GAME_Z};
+                JSONObject request = requestMaker.getNewRequest(new JSONd(FieldsNames.SERVICE, FieldsNames.GAME),
                         new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_POSITIONS),
                         new JSONd(FieldsNames.USERNAME, player.getName()),
                         new JSONd(FieldsNames.ROOM_NAME, roomName),
@@ -68,4 +85,5 @@ public class GamePositionSender implements Waiter {
     public void unleash() {
         new Thread(sendPositionRunnable).start();
     }
+
 }

@@ -1,18 +1,16 @@
 package game.net;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import game.JSONd;
 import game.RequestMaker;
 import game.Waiter;
-import login.audio.AudioCallManager;
 import login.communication.NotConnectedException;
 import login.communication.ServerCommunicationThread;
 import login.interaction.FieldsNames;
 
 /**
- * Created by Andrea on 04/05/2015.
+ * Class which sends a "GAME_READY" message when asked.
+ *
+ * @author Andrea
  */
 public class GameStatusWaiter implements Waiter {
 
@@ -20,8 +18,13 @@ public class GameStatusWaiter implements Waiter {
 
     private RequestMaker requestMaker;
 
+    /**
+     * Construct a new GameStatusWaiter.
+     *
+     * @param requestMaker RequestMaker to be used to create the message
+     */
     public GameStatusWaiter(RequestMaker requestMaker) {
-        this.requestMaker=requestMaker;
+        this.requestMaker = requestMaker;
     }
 
     @Override

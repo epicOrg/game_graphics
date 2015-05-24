@@ -1,12 +1,25 @@
 package game.net;
 
 /**
- * Created by Andrea on 22/04/2015.
+ * Interface for objects containing actions to perform when some events about the Game happen.
+ *
+ * @author Andrea
  */
 public interface GameHandlerListener {
 
+    /**
+     * Perform actions after map was received from server.
+     */
     void onMapReceived();
+
+    /**
+     * Perform actions after "GAME_GO" message was received from server.
+     */
     void onGameGo();
+
+    /**
+     * Perform actions after "GAME_EXIT" message was received from server.
+     */
     void onGameFinish();
 
 }

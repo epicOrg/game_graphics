@@ -1,10 +1,15 @@
 package game;
 
 /**
- * Created by Andrea on 04/05/2015.
+ * Interface for objects containing an action to perform when asked.
+ *
+ * @author Andrea
  */
 public interface Waiter {
 
+    /**
+     * Perform the action associated with this Waiter.
+     */
     void unleash();
 
 }
