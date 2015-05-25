@@ -1,0 +1,20 @@
+Storie utente 2° ciclo:
+  - Come utente non registrato, voglio potermi registrare
+  - Come utente registrato, voglio non inserire la password a ogni accesso così da non doverla ricordare
+  - Come giocatore, voglio scegliere la stanza in cui entrare in una lista
+  - Come giocatore, voglio poter creare una nuova stanza
+  - Come proprietario, voglio che il gioco inizi appena raggiunto il numero di partecipanti
+  - Come proprietario, voglio che i giocatori possano iniziare a muoversi contemporaneamente
+  - Come giocatore, voglio essere in un labirinto con muri come ostacoli e passaggi, così da potermi muovere
+  - Come proprietario, voglio che l’ambiente di gioco sia il più verosimile possibile
+  - Come proprietario, voglio che il gioco termini quando i compagni di squadra si sono trovati in uno specifico punto del labirinto (oppure altre modalità di gioco)
+  - Come giocatore, voglio vedere i miei compagni di squadra, così da poterli riconoscere
+  - Come giocatore, voglio poter parlare con i miei compagni di squadra, così da darci indicazioni
+  - Come giocatore, voglio poter uscire dal gioco
+  - Come proprietario, voglio che la mappa sia generata in modo casuale
+
+Storie utente 3° ciclo:
+  - Come proprietario, voglio che la mappa sia generata casualmente
+  - Come proprietario, voglio che le posizioni siano generate automaticamente
+  - Come giocatore, voglio poter cambiare il numero di persone nel team
+  - Come proprietario, voglio che ci sia una restrizione sui colori del nome, così che non si possano confondere con lo sfondo.
