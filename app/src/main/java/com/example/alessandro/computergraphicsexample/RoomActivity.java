@@ -28,7 +28,11 @@ import login.interaction.FieldsNames;
 import login.services.CurrentRoom;
 
 /**
- * Created by Andrea on 18/04/2015.
+ * Room screen: every user can see who is in the same room.
+ * Here teams are casually built.
+ *
+ * @author Torlaschi
+ * @date 18/04/2015
  */
 public class RoomActivity extends ActionBarActivity {
 
@@ -65,7 +69,7 @@ public class RoomActivity extends ActionBarActivity {
 
         roomStatus = (TextView) findViewById(R.id.room_status);
         roomListsContainer = (LinearLayout) findViewById(R.id.room_lists_container);
-        ImageButton fabImageButton = (ImageButton) findViewById(R.id.action_new_rom);
+        ImageButton fabImageButton = (ImageButton) findViewById(R.id.action_new_room);
 
         serverCommunicationThread.setHandler(new RoomHandler());
 

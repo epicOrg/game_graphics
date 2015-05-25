@@ -33,7 +33,12 @@ import login.interaction.RoomsErrorStrings;
 import login.services.Rooms;
 
 /**
- * Created by Andrea on 18/04/2015.
+ * In this screen the list of rooms is shown.
+ * Every user can create a new room or join to an existing one,
+ * if the maximum number of players hasn't been reached yet.
+ *
+ * @author Torlaschi
+ * @date 18/04/2015
  */
 public class RoomsActivity extends ActionBarActivity {
 
@@ -49,7 +54,6 @@ public class RoomsActivity extends ActionBarActivity {
     private int hashcode;
 
     private Context context;
-//    private Activity activity = this;
     private String result;
     private RequestMaker requestMaker;
 
@@ -58,7 +62,7 @@ public class RoomsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rooms);
 
-        ImageButton fabImageButton = (ImageButton) findViewById(R.id.action_new_rom);
+        ImageButton fabImageButton = (ImageButton) findViewById(R.id.action_new_room);
 
         fabImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +124,7 @@ public class RoomsActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.action_new_rom:
+            case R.id.action_new_room:
                 showNewRoomDialog();
                 return true;
             case R.id.action_refresh:

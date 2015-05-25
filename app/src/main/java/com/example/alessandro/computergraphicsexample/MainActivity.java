@@ -30,8 +30,8 @@ import login.interaction.FieldsNames;
 import login.interaction.ProgressShower;
 
 /**
- * Activity di LogIn in cui l'utente inserisce l'username e la password per
- * essere riconosciuto dal server
+ * Login activity: the user inserts username and password
+ * to be recognized by server
  */
 public class MainActivity extends ActionBarActivity implements ServerCommunicationThreadListener, LoginHandlerListener {
 

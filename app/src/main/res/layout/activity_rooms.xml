@@ -16,7 +16,7 @@
     </ListView>
 
     <ImageButton
-        android:id="@+id/action_new_rom"
+        android:id="@+id/action_new_room"
         android:layout_width="@dimen/fab_button_diameter"
         android:layout_height="@dimen/fab_button_diameter"
         android:layout_alignParentRight="true"

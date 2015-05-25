@@ -12,6 +12,11 @@ import android.widget.EditText;
 
 import login.communication.ServerCommunicationThread;
 
+/**
+ * The user has to insert the address of the server he wants to
+ * communicate with.
+ */
+
 public class StartActivity extends ActionBarActivity {
 
     public static final String LOG_TAG = "MainActivity";

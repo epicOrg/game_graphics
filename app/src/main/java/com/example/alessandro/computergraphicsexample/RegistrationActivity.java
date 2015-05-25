@@ -23,7 +23,8 @@ import login.interaction.RegistrationErrorStrings;
 import login.services.Register;
 
 /**
- * A login screen that offers login via email/password.
+ * A login screen where the user can register with username,
+ * email and password.
  */
 public class RegistrationActivity extends ActionBarActivity {
 
