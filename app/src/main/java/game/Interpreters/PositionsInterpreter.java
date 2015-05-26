@@ -9,13 +9,17 @@ import game.player.Player;
 import game.net.services.Game;
 
 /**
- * Created by depa on 23/05/15.
+ * Interpreter that interpretes position data.
  */
 public class PositionsInterpreter implements  Interpreter{
 
     public static final String LOG_TAG = "PositionsInterpreter";
     private Room room;
 
+    /**
+     * Creates a new PositionInterpreter.
+     * @param room Room which contains players to which update position data.
+     */
     public PositionsInterpreter(Room room) {
         this.room = room;
     }
