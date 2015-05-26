@@ -5,6 +5,12 @@
     android:orientation="vertical"
     android:padding="24dp">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="50"
+        android:text="Name:" />
+
     <EditText
         android:id="@+id/rooms_new_room_name"
         android:layout_width="match_parent"
@@ -13,6 +19,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
         android:orientation="horizontal">
 
         <TextView
@@ -25,6 +32,7 @@
             android:id="@+id/rooms_new_room_max_teams"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="50"
             android:inputType="number" />
     </LinearLayout>
 
@@ -43,6 +51,7 @@
             android:id="@+id/rooms_new_room_max_players"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="50"
             android:inputType="number" />
     </LinearLayout>
 

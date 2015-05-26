@@ -72,7 +72,6 @@
 
             </RelativeLayout>
 
-
             <EditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
@@ -96,7 +95,6 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true" />
-
 
             <CheckBox
                 android:id="@+id/remeberMeBox"
