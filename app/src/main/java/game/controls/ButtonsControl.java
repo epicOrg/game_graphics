@@ -32,7 +32,8 @@ public class ButtonsControl {
     private ButtonMaster buttonMaster;
 
     /**
-     * It creates a nwe ButtonControl
+     * It creates a nwe ButtonControl.
+     *
      * @param program ShadingProgram to be used.
      * @param orthoMatrix 2D projection matrix.
      * @param buttonMaster ButtonMaster which contains the Button to be controlled.
@@ -52,6 +53,7 @@ public class ButtonsControl {
     /**
      * It sets (and updates) the ButtonControl if screen dimension has changed.
      * It needs to be called at the beginning.
+     *
      * @param width Screen width.
      * @param height Screen height.
      */
@@ -77,7 +79,7 @@ public class ButtonsControl {
     }
 
     /**
-     * @return 'true' if the point (touchX,touchY) is within a Button
+     * @return 'true' if the point (touchX,touchY) is within a Button.
      */
     public boolean isInsideAButton(float touchX, float touchY) {
         return getColorAt(touchX, touchY) != Color.rgb(0, 0, 0);

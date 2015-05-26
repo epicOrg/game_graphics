@@ -17,28 +17,25 @@ import sfogl2.SFOGLTextureModel;
 import shadow.graphics.SFImageFormat;
 
 /**
- * Classe utility con vari metodi statici usati spesso per generare Model e Node.
- * @author: Andrea
+ * Utility class with static methods which are used to generate Model and Node.
+ *
+ * @author Torlaschi
  */
 public class FundamentalGenerator {
 
     /**
-     * Costruisce un Model caricandolo da un file con una texture.
-     * @param context Context da cui caricare le risorse.
-     * @param program ShadingProgram con cui costruire il Material del Model.
-     * @param textureId Indice della texture per il Model.
-     * @param obj Nome del file contenente la geometria del Model.
-     * @return Model generato.
+     * It builds a Model from a file with a texture.
+     *
+     * @return The generated Model.
      */
     public static Model getModel(Context context, ShadingProgram program, int textureId, String obj) {
         return getModelFromFileAndMaterial(context, MaterialKeeper.MATERIAL_KEEPER.getMaterial(context, program, textureId), obj);
     }
 
     /**
-     * Costruisce un Model da un ArrayObject e da un Material dati.
-     * @param arrayObject ArrayObject da cui prendere la geometria del Model.
-     * @param material Material per il Model.
-     * @return Model generato.
+     * It builds a Model from an ArrayObject and a specified Material.
+     *
+     * @return The generated Model.
      */
     public static Model getModelFromArrayObjectAndMaterial(ArrayObject arrayObject, Material material){
         Mesh meshPos = new Mesh(arrayObject);
@@ -50,22 +47,22 @@ public class FundamentalGenerator {
     }
 
     /**
-     * Genera un Model caricandolo da file, ma con un Material dato.
-     * @param context Context da cui caricare le risorse.
-     * @param material Material con cui costruire il Model.
-     * @param obj Nome del file contenente la geometria del Model.
-     * @return Model generato.
+     * It builds a Model from a file with a specified Material.
+     *
+     * @param context Context from which resources can be loaded.
+     * @param material Material with which the Model is built.
+     * @param obj Name of the file which contains Model's geometry.
      */
     public static Model getModelFromFileAndMaterial(Context context, Material material, String obj){
         return getModelFromArrayObjectAndMaterial(ObjLoader.arrayObjectFromFile(context, obj)[0], material);
     }
 
     /**
-     * Costruisce un Node dato un ArrayObject e una Bitmap come texture.
-     * @param arrayObject ArrayObject da cui prendere la geometria del Model del Node.
-     * @param bitmap Bitmap da usare come texture per il Material del Node.
-     * @param program ShadingProgram con cui costruire il Material del Model del Node.
-     * @return Node generato.
+     * It builds a Node from an ArrayObject and a Bitmap as texture.
+     *
+     * @param arrayObject ArrayObject from which Node Model's geometry is get.
+     * @param bitmap Bitmap to be used as texture for Node Material.
+     * @param program ShadingProgram with who Node Model's Material is built.
      */
     public static Node generateNode(ArrayObject arrayObject, Bitmap bitmap, ShadingProgram program) {
         Node nodePos = new Node();

@@ -16,8 +16,9 @@ import shadow.math.SFMatrix3f;
 import shadow.math.SFVertex3f;
 
 /**
- * Classe che si occupa di generare i 4 Button di controllo del movimento.
- * @author Stefano De Pace
+ * This class creates the 4 Button of movement.
+ *
+ * @author De Pace
  */
 public class MoveButtonsGenerator {
 
@@ -27,11 +28,12 @@ public class MoveButtonsGenerator {
     private PositionMoveListenerInterface positionMoveListener;
 
     /**
-     * Crea un nuovo MoveButtonsGenerator.
-     * @param context Context per recuperare le risorse.
-     * @param program ShadingProgram per rappresentare i Button.
-     * @param buttonMaster ButtonMaster a cui associare i Button di movimento.
-     * @param positionMoveListener Interfaccia grazie al quale si associa l'azione di movimento ai Button.
+     * It creates a new MoveButtonsGenerator.
+     *
+     * @param context Context to find resources.
+     * @param program ShadingProgram to represent the Button.
+     * @param buttonMaster ButtonMaster which the movement Button has to be associated with.
+     * @param positionMoveListener Interface through which the movement action is associated with Button.
      */
     public MoveButtonsGenerator(Context context, ShadingProgram program, ButtonMaster buttonMaster, PositionMoveListenerInterface positionMoveListener) {
         this.context = context;
@@ -41,10 +43,11 @@ public class MoveButtonsGenerator {
     }
 
     /**
-     * Genera i Button di movimento in una configurazione a croce, con alcuni parametri regolabili.
-     * @param center Posizione centrale dei Button (la componente z non ha importanza).
-     * @param scale Fattore di scala omogeneo dei Model dei Button.
-     * @param distance Distanza tra i Button di movimento.
+     * It generates the movement Button in a cross configuration.
+     *
+     * @param center Central position of the Button.
+     * @param scale Scale factor.
+     * @param distance Distance between movement Button.
      */
     public void generate(SFVertex3f center, float scale, float distance) {
         Node parentNode = new Node();

@@ -12,6 +12,7 @@ import shadow.math.SFVertex3f;
 
 /**
  * It keeps a list of Button and draws them.
+ *
  * @author De Pace
  */
 public class ButtonMaster {
@@ -36,6 +37,7 @@ public class ButtonMaster {
      * It adds a Button, representing it with the last set Model.
      * The Button is represented with a Node placed and rotated compared with the parentNode.
      * It's useful to give a common pre-transformation to more Button.
+     *
      * @param button Button to be added.
      * @param position Button position relative to the parentNode.
      * @param angle Button rotation angle relative to the parentNode.
