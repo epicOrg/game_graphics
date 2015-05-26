@@ -10,7 +10,7 @@ import game.Interpreters.Interpreter;
 /**
  * Class containing a Map of Interpreter to read the messages sent from the server about the Game.
  *
- * @author Andrea
+ * @author Torlaschi
  */
 public class GameHandler extends Handler {
 

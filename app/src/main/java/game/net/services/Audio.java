@@ -13,7 +13,8 @@ import game.net.communication.ServerCommunicationThread;
 import game.net.interaction.FieldsNames;
 
 /**
- * Created by Luca on 02/05/2015.
+ * @author Micieli
+ * @date 02/05/2015
  */
 public class Audio implements Service {
 

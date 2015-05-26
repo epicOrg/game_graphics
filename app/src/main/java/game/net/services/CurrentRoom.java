@@ -14,7 +14,8 @@ import game.player.Player;
 import game.net.interaction.FieldsNames;
 
 /**
- * created by Luca on 31/03/2015
+ * @author Micieli
+ * @date 31/03/2015
  */
 
 public class CurrentRoom implements Service {

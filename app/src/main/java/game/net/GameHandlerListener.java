@@ -3,7 +3,7 @@ package game.net;
 /**
  * Interface for objects containing actions to perform when some events about the Game happen.
  *
- * @author Andrea
+ * @author Torlaschi
  */
 public interface GameHandlerListener {
 

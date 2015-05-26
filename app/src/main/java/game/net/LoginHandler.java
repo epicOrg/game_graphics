@@ -16,7 +16,7 @@ import game.net.services.Login;
 
 /**
  * Handler che permette la comunicazione tra il Thread di login attivato alla ricezione della risposta dal server e
- * l'Activity di login stessa ricevendo i risultati del Login
+ * l'Activity di login stessa ricevendo i risultati del Login.
  */
 public class LoginHandler extends Handler {
 

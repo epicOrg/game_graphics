@@ -10,7 +10,7 @@ import game.net.interaction.FieldsNames;
 
 /**
  * @author Noris
- * @since 2015-03-26
+ * @date 26/03/2015
  */
 
 public class Unknown implements Service {
@@ -39,7 +39,6 @@ public class Unknown implements Service {
             return jsonResponse;
 
         } catch (JSONException e) {
-            //TODO
             return new JSONObject();
         }
 

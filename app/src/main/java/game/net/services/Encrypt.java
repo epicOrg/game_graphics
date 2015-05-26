@@ -8,7 +8,8 @@ import org.json.JSONObject;
 import game.net.interaction.FieldsNames;
 
 /**
- * Created by Noris on 28/04/15.
+ * @author Noris
+ * @date 28/04/2015
  */
 public class Encrypt implements Service {
 

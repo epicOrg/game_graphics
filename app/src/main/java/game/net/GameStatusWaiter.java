@@ -10,7 +10,7 @@ import game.net.interaction.FieldsNames;
 /**
  * Class which sends a "GAME_READY" message when asked.
  *
- * @author Andrea
+ * @author Torlaschi
  */
 public class GameStatusWaiter implements Waiter {
 

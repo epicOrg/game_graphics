@@ -9,7 +9,8 @@ import org.json.JSONObject;
 import game.net.interaction.FieldsNames;
 
 /**
- * created by Luca on 31/03/2015
+ * @author Micieli
+ * @date 31/03/2015
  */
 
 public class Login implements Service {
@@ -39,7 +40,6 @@ public class Login implements Service {
             Message message = handler.obtainMessage(0, result);
             message.sendToTarget();
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

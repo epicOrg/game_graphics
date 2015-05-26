@@ -13,7 +13,8 @@ import java.util.Iterator;
 import game.net.interaction.FieldsNames;
 
 /**
- * created by Luca on 31/03/2015
+ * @author Micieli
+ * @date 31/03/2015
  */
 
 public class Rooms implements Service {

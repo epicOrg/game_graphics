@@ -14,7 +14,7 @@ import game.net.interaction.FieldsNames;
 /**
  * Class containing a thread which sends the current player's position and direction to the server.
  *
- * @author Andrea
+ * @author Torlaschi
  */
 public class GamePositionSender implements Waiter {
 

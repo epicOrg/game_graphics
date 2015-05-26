@@ -10,10 +10,9 @@ import game.net.communication.ServerCommunicationThread;
 import game.net.interaction.FieldsNames;
 
 /**
- *
  * Polling service respond to Server request, in order to confirm that I am alive.
  *
- * @author Luca
+ * @author Micieli
  */
 public class Polling implements Service {
 
@@ -35,8 +34,6 @@ public class Polling implements Service {
 
         try {
             response.put(FieldsNames.SERVICE,FieldsNames.POLLING);
-            //response.put(FieldsNames.USERNAME,username);
-            //response.put(FieldsNames.HASHCODE,hascode);
         } catch (JSONException e) {
             e.printStackTrace();
         }
