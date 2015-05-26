@@ -6,10 +6,10 @@ import java.util.List;
 import shadow.math.SFVertex3f;
 
 /**
- * Mediatore che gestisce il sistema di collisioni, memorizzando tutti gli oggetti che devono essere controllati,
- * e implementando il sistema SAT.
- * @author Stefano De Pace
+ * It's a mediator which manages the collision system, saving all the object that must be checked
+ * and implementing SAT system.
  *
+ * @author De Pace
  */
 public class CollisionMediator {
 
@@ -18,18 +18,18 @@ public class CollisionMediator {
     private List<CollisionBox> list=new LinkedList<>();
 
     /**
-     * Aggiunge una CollisionBox all'elenco degli oggetti nel sistema di collision checking.
-     * @param c CollisionBox da aggiungere all'elenco degli oggetti.
+     * Adds a CollisionBox to the list of objects in the system of collision checking.
+     *
+     * @param c CollisionBox to be added to the list of objects.
      */
     public void addObject(CollisionBox c){
         list.add(c);
     }
 
     /**
-     * Controlla se una data CollisionBox fa collisione con una presente nel sistema.
-     * @param box CollisionBox per cui cercare collisioni.
-     * @return la prima CollisionBox nel sistema con cui si registra una collisione:
-     * se non vi sono collisioni restituisce null.
+     * Checks if a specific CollisionBox collides with another one in the system.
+     *
+     * @return The first CollisionBox in the system with which a collision has happened.
      */
     public CollisionBox collide(CollisionBox box){
         for (CollisionBox b : list) {
@@ -42,12 +42,10 @@ public class CollisionMediator {
     }
 
     /**
-     * Controlla se vi è una collisione fra le due CollisionBox date; il risultato è indipendente
-     * dall'ordine, tuttavia una forma curva potrebbe velocizzare il processo se assegnata per prima.
-     * @param box1 prima CollisionBox di cui controllare la collisione.
-     * @param box2 seconda CollisionBox di cui controllare la collisione.
-     * @return restituisce true se registra collisione tra le due CollisionBox,
-     * false altrimenti.
+     * Check if there is a collision between the two specified CollisionBox.
+     * The result is independent from the order.
+     *
+     * @return 'true' if there is a collision.
      */
     public static boolean checkCollision(CollisionBox box1, CollisionBox box2){
         SFVertex3f temp=new SFVertex3f(box2.getPos());
@@ -58,7 +56,7 @@ public class CollisionMediator {
     }
 
     /**
-     * Svuota la lista delle CollisionBox.
+     * Empties the list of CollisionBox.
      */
     public void clear(){
         list.clear();

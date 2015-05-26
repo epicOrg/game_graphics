@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import game.player.Player;
 
 /**
- * Created by Andrea on 18/04/2015.
+ * This class represents the room in which the users enter.
+ * Here the teams are created.
+ *
+ * @author Torlaschi
+ * @date 18/04/2015
  */
 public class Room {
 

@@ -11,7 +11,7 @@ import game.net.communication.RequestMaker;
  * Singleton which mantains user data while advancing in the activities. It also creates RequestMaker with
  * all the added data, or with the requested data.
  *
- * @author Stefano De Pace
+ * @author De Pace
  */
 public enum UserData {
     DATA;

@@ -6,7 +6,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * Class containing a list of Waiter and a CountDownLatch that identifies the condition when start the waiters.
  *
- * @author Andrea
+ * @author Torlaschi
  */
 public class WaiterGroup {
 

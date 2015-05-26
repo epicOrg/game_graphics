@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import game.player.Player;
 
 /**
- * Created by Andrea on 23/04/2015.
+ * @author Torlaschi
+ * @date 23/04/2015
  */
 public class Team {
 

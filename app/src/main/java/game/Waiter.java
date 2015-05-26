@@ -3,7 +3,7 @@ package game;
 /**
  * Interface for objects containing an action to perform when asked.
  *
- * @author Andrea
+ * @author Torlaschi
  */
 public interface Waiter {
 

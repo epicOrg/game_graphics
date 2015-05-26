@@ -4,7 +4,10 @@ import game.physics.Circle;
 import shadow.math.SFVertex3f;
 
 /**
- * Created by Andrea on 28/03/2015.
+ * This class represent a User: its features are name and status.
+ *
+ * @author Torlaschi
+ * @date 28/03/2015
  */
 public class Player {
 

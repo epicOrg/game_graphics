@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import shadow.math.SFVertex3f;
 
 /**
- * Rappresenta una scatola di collisione rettangolare.
- * @author Stefano De Pace
+ * This class represent a rectangular collision box.
  *
+ * @author De Pace
  */
 public class Square implements CollisionBox{
 
@@ -15,11 +15,12 @@ public class Square implements CollisionBox{
     private float xSize, ySize, zSize, radius;
 
     /**
-     * Costruisce una nuova CollisionBox di forma rettangolare.
-     * @param pos posizione del centro della CollisionBox.
-     * @param xSize dimensione x della CollisionBox.
-     * @param ySize dimensione y della CollisionBox.
-     * @param zSize dimensione z della CollisionBox.
+     * Builds a new rectangular CollisionBox.
+     *
+     * @param pos CollisionBox center position.
+     * @param xSize x CollisionBox dimension.
+     * @param ySize y CollisionBox dimension.
+     * @param zSize z CollisionBox dimension.
      */
     public Square(SFVertex3f pos, double xSize, double ySize, double zSize) {
         this.pos = pos;
@@ -95,24 +96,21 @@ public class Square implements CollisionBox{
     }
 
     /**
-     * Restituisce la dimensione lungo x della CollisionBox.
-     * @return la dimensione lungo x della CollisionBox.
+     * @return CollisionBox dimension along x.
      */
     public float getxSize() {
         return xSize;
     }
 
     /**
-     * Restituisce la dimensione lungo y della CollisionBox.
-     * @return la dimensione lungo y della CollisionBox.
+     * @return CollisionBox dimension along y.
      */
     public float getySize() {
         return ySize;
     }
 
     /**
-     * Restituisce la dimensione lungo z della CollisionBox.
-     * @return la dimensione lungo z della CollisionBox.
+     * @return CollisionBox dimension along z.
      */
     public float getzSize() {
         return zSize;

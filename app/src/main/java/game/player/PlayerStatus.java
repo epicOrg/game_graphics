@@ -7,7 +7,10 @@ import shadow.math.SFMatrix3f;
 import shadow.math.SFVertex3f;
 
 /**
- * Created by Andrea on 28/03/2015.
+ * This class manages the status of a Player.
+ *
+ * @author Torlaschi
+ * @date 28/03/2015
  */
 public class PlayerStatus {
 
@@ -31,7 +34,8 @@ public class PlayerStatus {
 
     public void move(SFVertex3f motion, CollisionMediator cm) {
         circle.getPos().set(position);
-        SFVertex3f circlePosition = circle.getPos(), originalPosition = new SFVertex3f(circlePosition);
+        SFVertex3f circlePosition = circle.getPos();
+        SFVertex3f originalPosition = new SFVertex3f(circlePosition);
         circlePosition.add3f(motion);
 
         CollisionBox box = cm.collide(circle);

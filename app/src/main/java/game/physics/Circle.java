@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import shadow.math.SFVertex3f;
 
 /**
- * Rappresenta una scatola di collisione circolare.
- * @author Stefano De Pace
+ * This class represents a cylindrical collision box.
  *
+ * @author De Pace
  */
 public class Circle implements CollisionBox{
 
@@ -14,9 +14,10 @@ public class Circle implements CollisionBox{
     private float radius;
 
     /**
-     * Costruisce una nuova CollisionBox circolare.
-     * @param pos Centro della CollisionBox.
-     * @param radius Raggio della CollisionBox.
+     * Builds a new circular CollisionBox.
+     *
+     * @param pos CollisionBox center.
+     * @param radius CollisionBox radius.
      */
     public Circle(SFVertex3f pos, double radius) {
         this.pos = pos;
