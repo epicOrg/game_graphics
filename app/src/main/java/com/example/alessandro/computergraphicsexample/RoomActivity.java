@@ -147,7 +147,7 @@ public class RoomActivity extends ActionBarActivity {
                 currentPlayers += t.getPlayers().size();
             }
 
-            roomStatus.setText("(" + currentPlayers + " / " + (results.getMaxPlayer() * results.getTeams().size()) + ")");
+            roomStatus.setText("(" + currentPlayers + " / " + results.getMaxPlayer() + ")");
 
             if (firstTime) {
                 try {
