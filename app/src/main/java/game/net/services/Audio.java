@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import game.net.audio.AudioCallManager;
+import game.audio.AudioCallManager;
 import game.net.communication.ServerCommunicationThread;
 import game.net.interaction.FieldsNames;
 

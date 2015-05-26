@@ -19,7 +19,7 @@ import game.Room;
 import game.Team;
 import game.UserData;
 import game.player.Player;
-import game.net.audio.AudioCallManager;
+import game.audio.AudioCallManager;
 import game.net.communication.NotConnectedException;
 import game.net.communication.ServerCommunicationThread;
 import game.net.interaction.FieldsNames;

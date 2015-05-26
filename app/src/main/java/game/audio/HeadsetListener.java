@@ -1,4 +1,4 @@
-package game.net.audio;
+package game.audio;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
