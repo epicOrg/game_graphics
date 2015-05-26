@@ -22,31 +22,6 @@ public class BitmapTexture implements SFInitiable {
     }
 
     public static BitmapTexture loadBitmapTexture(Bitmap image, int textureModel) {
-
-        int width = image.getWidth();
-        int height = image.getHeight();
-
-        int[] values = new int[width * height * 3];
-        int index = 0;
-        for (int j = 0; j < height; j++) {
-            for (int i = 0; i < width; i++) {
-                int color = image.getPixel(i, height - j - 1);
-                values[index] = (color & 0xff0000) >> 16;
-                index++;
-                values[index] = (color & 0xff00) >> 8;
-                index++;
-                values[index] = (color & 0xff);
-                index++;
-            }
-        }
-
-        SFBitmap bitmap = new SFBitmap();
-        bitmap.generateBitmap(width, height, values, SFImageFormat.RGB);
-        return new BitmapTexture(bitmap, textureModel);
-    }
-
-    public static BitmapTexture loadBitmapTextureWithAlpha(Bitmap image, int textureModel) {
-
         int width = image.getWidth();
         int height = image.getHeight();
 
@@ -91,4 +66,5 @@ public class BitmapTexture implements SFInitiable {
 
         bitmap = null;
     }
+
 }

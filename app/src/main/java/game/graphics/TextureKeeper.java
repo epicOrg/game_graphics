@@ -19,19 +19,19 @@ import shadow.graphics.SFImageFormat;
  *
  * @author De Pace
  */
-public enum TextureKeeper{
+public enum TextureKeeper {
     TEXTURE_KEEPER;
 
     public final String LOG_TAG = "TextureKeeper";
 
-    private  HashMap<Integer, BitmapTexture> mapFromResources = new HashMap<>();
-    private  HashMap<Integer, BitmapTexture> mapFromColors = new HashMap<>();
+    private HashMap<Integer, BitmapTexture> mapFromResources = new HashMap<>();
+    private HashMap<Integer, BitmapTexture> mapFromColors = new HashMap<>();
 
     /**
      * Loads a new texture from an image in the resources
      * or return the BitmapTexture if the image has lready been loaded.
      *
-     * @param context Context to find resources.
+     * @param context   Context to find resources.
      * @param textureId Image index in the resources.
      * @return BitmapTexture which represents the loaded texture.
      */
@@ -70,27 +70,30 @@ public enum TextureKeeper{
         }
     }
 
-    private BitmapTexture loadColorTexture(int color, String message){
+    private BitmapTexture loadColorTexture(int color, String message) {
         BitmapTexture tex = getBitmapTextureFromColor(color);
-        if (message.length()>0)
+
+        if (message.length() > 0)
             Log.d(LOG_TAG, message);
+
         mapFromColors.put(color, tex);
         return tex;
     }
 
-    private BitmapTexture loadTextureFromId(Context context, int textureId, String message){
+    private BitmapTexture loadTextureFromId(Context context, int textureId, String message) {
         BitmapTexture tex = getBitmapTextureFromResource(context, textureId);
-        if (message.length()>0)
+
+        if (message.length() > 0)
             Log.d(LOG_TAG, message);
+
         mapFromResources.put(textureId, tex);
         return tex;
     }
 
     private BitmapTexture getBitmapTextureFromResource(Context context, int textureId) {
-        int textureModel = SFOGLTextureModel.generateTextureObjectModel(SFImageFormat.RGB, GLES20.GL_REPEAT, GLES20.GL_REPEAT, GLES20.GL_LINEAR, GLES20.GL_LINEAR);
-        BitmapTexture tex = BitmapTexture.loadBitmapTexture(BitmapFactory.decodeResource(context.getResources(), textureId), textureModel);
-        tex.init();
-        return tex;
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), textureId);
+
+        return getBitmapTextureFromBitmap(bitmap);
     }
 
     private BitmapTexture getBitmapTextureFromColor(int color) {
@@ -98,9 +101,14 @@ public enum TextureKeeper{
         Bitmap bitmap = Bitmap.createBitmap(64, 64, conf);
         bitmap.eraseColor(color);
 
-        int textureModel = SFOGLTextureModel.generateTextureObjectModel(SFImageFormat.RGB, GLES20.GL_REPEAT, GLES20.GL_REPEAT, GLES20.GL_LINEAR, GLES20.GL_LINEAR);
+        return getBitmapTextureFromBitmap(bitmap);
+    }
+
+    private BitmapTexture getBitmapTextureFromBitmap(Bitmap bitmap) {
+        int textureModel = SFOGLTextureModel.generateTextureObjectModel(SFImageFormat.RGBA, GLES20.GL_REPEAT, GLES20.GL_REPEAT, GLES20.GL_LINEAR, GLES20.GL_LINEAR);
         BitmapTexture tex = BitmapTexture.loadBitmapTexture(bitmap, textureModel);
         tex.init();
+
         return tex;
     }
 
@@ -108,4 +116,5 @@ public enum TextureKeeper{
         mapFromResources.clear();
         mapFromColors.clear();
     }
+
 }

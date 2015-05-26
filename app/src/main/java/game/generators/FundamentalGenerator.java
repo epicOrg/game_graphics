@@ -67,7 +67,7 @@ public class FundamentalGenerator {
     public static Node generateNode(ArrayObject arrayObject, Bitmap bitmap, ShadingProgram program) {
         Node nodePos = new Node();
         int textureModel = SFOGLTextureModel.generateTextureObjectModel(SFImageFormat.RGBA, GLES20.GL_CLAMP_TO_EDGE, GLES20.GL_CLAMP_TO_EDGE, GLES20.GL_LINEAR, GLES20.GL_LINEAR);
-        BitmapTexture bitmapTexture = BitmapTexture.loadBitmapTextureWithAlpha(bitmap, textureModel);
+        BitmapTexture bitmapTexture = BitmapTexture.loadBitmapTexture(bitmap, textureModel);
         bitmapTexture.init();
 
         Material material = new Material(program);
