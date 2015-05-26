@@ -47,6 +47,8 @@ public class RoomActivity extends ActionBarActivity {
     private Context context;
     private RequestMaker requestMaker;
 
+    private boolean isStartingGame = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,11 +107,13 @@ public class RoomActivity extends ActionBarActivity {
     protected void onStop() {
         super.onStop();
 
-        try {
-            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS),
-                    new JSONd(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_EXIT)));
-        } catch (NotConnectedException e) {
-            e.printStackTrace();
+        if (!isStartingGame) {
+            try {
+                serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS),
+                        new JSONd(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_EXIT)));
+            } catch (NotConnectedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -154,7 +158,7 @@ public class RoomActivity extends ActionBarActivity {
                 currentPlayers += t.getPlayers().size();
             }
 
-            roomStatus.setText("(" + currentPlayers + " / " + results.getMaxPlayer() + ")");
+            roomStatus.setText("(" + currentPlayers + " / " + (results.getMaxPlayer() * currentRoom.getTeams().size()) + ")");
 
             if (firstTime) {
                 try {
@@ -180,6 +184,7 @@ public class RoomActivity extends ActionBarActivity {
             if (result) {
                 UserData.DATA.addData(FieldsNames.CURRENT_ROOM, currentRoom);
 
+                isStartingGame = true;
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
                 startActivity(intent);
             }
