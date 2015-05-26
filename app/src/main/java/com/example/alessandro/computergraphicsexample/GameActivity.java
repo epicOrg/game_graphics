@@ -48,7 +48,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
     public static final String LOG_TAG = "GameActivity";
 
     private ServerCommunicationThread serverCommunicationThread = ServerCommunicationThread.getInstance();
-    private BackgroundSound backgroundSound;
     private GameHandler gameHandler;
 
     private CountDownLatch startSignal = new CountDownLatch(1);
@@ -57,6 +56,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
     private LinearLayout menuContainer;
 
     private HeadsetListener headsetListener;
+    private BackgroundSound backgroundSound;
 
     private MessageScreen messageScreen;
     private SettingsScreen settingsScreen;
@@ -86,6 +86,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         settingsScreen = new SettingsScreen(this, menuContainer, requestMaker);
 
         backgroundSound = new BackgroundSound(context, new GameSoundtracks(R.raw.soundtrack_01, R.raw.soundtrack_02).getSoundtracks(context));
+        backgroundSound.start();
 
         SFVertex3f position = new SFVertex3f(5, 0.5f, -7);
         SFVertex3f direction = new SFVertex3f(-1, -0.25f, 0);
@@ -197,7 +198,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
     @Override
     protected void onResume() {
         super.onResume();
-        backgroundSound.start();
 
         if (graphicsView != null)
             graphicsView.onResume();
@@ -206,7 +206,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
     @Override
     protected void onPause() {
         super.onPause();
-        backgroundSound.stop();
 
         if (graphicsView != null)
             graphicsView.onPause();

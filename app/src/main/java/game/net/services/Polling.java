@@ -11,12 +11,11 @@ import game.net.interaction.FieldsNames;
 
 /**
  *
- * Polling service respond to Server request, in order to
+ * Polling service respond to Server request, in order to confirm that I am alive.
  *
- * Created by Luca on 11/05/2015.
+ * @author Luca
  */
 public class Polling implements Service {
-
 
     public Polling(JSONObject json) {
 

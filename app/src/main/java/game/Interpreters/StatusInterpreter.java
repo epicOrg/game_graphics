@@ -6,22 +6,23 @@ import android.util.Log;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+
 import game.net.GameHandlerListener;
 import game.net.GamePositionSender;
-import game.views.MessageScreen;
 import game.net.interaction.FieldsNames;
 import game.net.services.Game;
+import game.views.MessageScreen;
 
 /**
  * Created by depa on 23/05/15.
  */
-public class StatusInterpreter implements Interpreter{
+public class StatusInterpreter implements Interpreter {
 
     public static final String LOG_TAG = "StatusInterpreter";
-    public static final long waitTime=5000;
+    public static final long waitTime = 5000;
     private MessageScreen messageScreen;
     private GamePositionSender gamePositionSender;
-    private LinkedList<GameHandlerListener> gameHandlerListeners =new LinkedList<>();
+    private LinkedList<GameHandlerListener> gameHandlerListeners = new LinkedList<>();
 
     public StatusInterpreter(MessageScreen messageScreen, GamePositionSender gamePositionSender, GameHandlerListener... gameHandlerListeners) {
         this.messageScreen = messageScreen;
@@ -39,13 +40,13 @@ public class StatusInterpreter implements Interpreter{
 //        Log.d(LOG_TAG, "processStatusMessage");
         Game.GameStatusResult results = (Game.GameStatusResult) msg.obj;
 
-        if (results.isGo())
+        if (results.go)
             Log.d(LOG_TAG, "results.isGo");
         for (GameHandlerListener l : gameHandlerListeners)
             l.onGameGo();
-        if (results.getGameEnd() != null) {
+        if (results.gameEnd != null) {
             Log.d(LOG_TAG, "results.getGameEnd");
-            String gameEnd = results.getGameEnd();
+            String gameEnd = results.gameEnd;
             switch (gameEnd) {
                 case FieldsNames.GAME_WIN:
                     messageScreen.setText("YOU WIN!", Color.GREEN);

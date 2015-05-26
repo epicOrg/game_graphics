@@ -8,8 +8,8 @@ import java.util.LinkedList;
 import game.graphics.Map;
 import game.graphics.MapObjects;
 import game.net.GameHandlerListener;
-import game.player.PlayerStatus;
 import game.net.services.Game;
+import game.player.PlayerStatus;
 
 /**
  * Interpreter that interprets map data.
@@ -46,12 +46,12 @@ public class MapInterpreter implements Interpreter {
         Game.GameMapResult results = (Game.GameMapResult) msg.obj;
         map = new Map();
 
-        for (Game.GameMapObject o : results.getGameMapObjects()) {
+        for (Game.GameMapObject o : results.gameMapObjects) {
             map.addObjects(MapObjects.MAP.getObjectFromNameAndData(o.object, o.position, o.size, o.texture));
         }
 
-        groundWidth = results.getWidth();
-        groundHeight = results.getHeight();
+        groundWidth = results.width;
+        groundHeight = results.height;
 
         status.setPositionValue(results.playerPositionX, results.playerPositionY, results.playerPositionZ);
 

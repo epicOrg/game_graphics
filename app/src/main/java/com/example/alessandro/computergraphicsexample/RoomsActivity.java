@@ -23,11 +23,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import game.net.communication.JSONd;
-import game.net.communication.RequestMaker;
 import game.Room;
 import game.UserData;
+import game.net.communication.JSONd;
 import game.net.communication.NotConnectedException;
+import game.net.communication.RequestMaker;
 import game.net.communication.ServerCommunicationThread;
 import game.net.interaction.FieldsNames;
 import game.net.interaction.RoomsErrorStrings;
@@ -52,7 +52,6 @@ public class RoomsActivity extends ActionBarActivity {
     private ArrayList<Room> rooms = new ArrayList<>();
 
     private Context context;
-    private String result;
     private RequestMaker requestMaker;
 
     @Override
@@ -69,10 +68,8 @@ public class RoomsActivity extends ActionBarActivity {
             }
         });
 
-
         context = this;
-        requestMaker= UserData.DATA.getRequestMaker();
-
+        requestMaker = UserData.DATA.getRequestMaker();
 
         roomsList = (ListView) findViewById(R.id.rooms_list);
         roomsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -176,15 +173,20 @@ public class RoomsActivity extends ActionBarActivity {
 
         final EditText newRoomName = (EditText) dialogView.findViewById(R.id.rooms_new_room_name);
 
+        final EditText maxPlayers = (EditText) dialogView.findViewById(R.id.rooms_new_room_max_players);
+        final EditText maxTeams = (EditText) dialogView.findViewById(R.id.rooms_new_room_max_teams);
+
         b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int whichButton) {
-                result = newRoomName.getText().toString();
+                String roomName = newRoomName.getText().toString();
 
                 try {
                     serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.ROOMS),
                             new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_CREATE),
-                            new JSONd(FieldsNames.ROOM_NAME, result)));
+                            new JSONd(FieldsNames.ROOM_NAME, roomName),
+                            new JSONd(FieldsNames.ROOM_TEAMS_DIMENSION, Integer.parseInt(maxPlayers.getText().toString())),
+                            new JSONd(FieldsNames.ROOM_TEAMS_NUMBER, Integer.parseInt(maxTeams.getText().toString()))));
                 } catch (NotConnectedException e) {
                     Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
                     e.printStackTrace();
@@ -196,9 +198,9 @@ public class RoomsActivity extends ActionBarActivity {
         b.create().show();
     }
 
-    private JSONObject createListRequest(){
+    private JSONObject createListRequest() {
         return requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.ROOMS),
-            new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOMS_LIST));
+                new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOMS_LIST));
     }
 
 

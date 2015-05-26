@@ -146,28 +146,20 @@ public class Game implements Service {
 
     public class GameStatusResult {
 
-        private boolean go;
-        private String gameEnd;
+        public boolean go;
+        public String gameEnd;
 
         public GameStatusResult(boolean go, String gameEnd) {
             this.go = go;
             this.gameEnd = gameEnd;
         }
 
-        public boolean isGo() {
-            return go;
-        }
-
-        public String getGameEnd() {
-            return gameEnd;
-        }
-
     }
 
     public class GameMapResult {
 
-        private int width, height;
-        private ArrayList<GameMapObject> gameMapObjects;
+        public int width, height;
+        public ArrayList<GameMapObject> gameMapObjects;
 
         public float playerPositionX, playerPositionY, playerPositionZ;
 
@@ -175,18 +167,6 @@ public class Game implements Service {
             this.width = width;
             this.height = height;
             this.gameMapObjects = gameMapObjects;
-        }
-
-        public int getWidth() {
-            return width;
-        }
-
-        public int getHeight() {
-            return height;
-        }
-
-        public ArrayList<GameMapObject> getGameMapObjects() {
-            return gameMapObjects;
         }
 
     }

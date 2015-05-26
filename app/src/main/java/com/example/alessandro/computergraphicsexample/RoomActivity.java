@@ -10,21 +10,21 @@ import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import game.net.communication.JSONd;
-import game.net.communication.RequestMaker;
+
 import game.Room;
 import game.Team;
 import game.UserData;
-import game.player.Player;
+import game.net.communication.JSONd;
 import game.net.communication.NotConnectedException;
+import game.net.communication.RequestMaker;
 import game.net.communication.ServerCommunicationThread;
 import game.net.interaction.FieldsNames;
 import game.net.services.CurrentRoom;
+import game.player.Player;
 
 /**
  * Room screen: every user can see who is in the same room.
@@ -55,11 +55,10 @@ public class RoomActivity extends ActionBarActivity {
         context = this;
 
         UserData.DATA.addData(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
-        requestMaker= UserData.DATA.getRequestMaker();
+        requestMaker = UserData.DATA.getRequestMaker();
 
         roomStatus = (TextView) findViewById(R.id.room_status);
         roomListsContainer = (LinearLayout) findViewById(R.id.room_lists_container);
-        ImageButton fabImageButton = (ImageButton) findViewById(R.id.action_new_room);
 
         serverCommunicationThread.setHandler(new RoomHandler());
 
@@ -125,7 +124,7 @@ public class RoomActivity extends ActionBarActivity {
                 firstTime = true;
 
             CurrentRoom.CurrentRoomResult results = (CurrentRoom.CurrentRoomResult) msg.obj;
-            currentRoom = new Room((String)UserData.DATA.getData(FieldsNames.ROOM_NAME), results.getMaxPlayer(), results.getTeams());
+            currentRoom = new Room((String) UserData.DATA.getData(FieldsNames.ROOM_NAME), results.getMaxPlayer(), results.getTeams());
 
             int currentPlayers = 0;
 
@@ -145,7 +144,7 @@ public class RoomActivity extends ActionBarActivity {
 
             roomStatus.setText("(" + currentPlayers + " / " + results.getMaxPlayer() + ")");
 
-            if(firstTime) {
+            if (firstTime) {
                 try {
                     serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS),
                             new JSONd(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_LIST_RECEIVED)));
@@ -167,7 +166,7 @@ public class RoomActivity extends ActionBarActivity {
             boolean result = (boolean) msg.obj;
 
             if (result) {
-                UserData.DATA.addData(FieldsNames.CURRENT_ROOM,currentRoom);
+                UserData.DATA.addData(FieldsNames.CURRENT_ROOM, currentRoom);
 
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
                 startActivity(intent);

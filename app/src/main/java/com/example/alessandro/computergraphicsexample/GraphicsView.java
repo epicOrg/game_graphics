@@ -36,14 +36,11 @@ import game.listeners.TouchListenerInterface;
 import game.physics.CollisionMediator;
 import game.player.Player;
 import game.views.SettingsScreen;
-import sfogl.integration.Model;
 import sfogl.integration.Node;
 import sfogl.integration.ShadingProgram;
 import sfogl2.SFOGLState;
 import sfogl2.SFOGLStateEngine;
 import sfogl2.SFOGLSystemState;
-import shadow.math.SFMatrix3f;
-import shadow.math.SFTransform3f;
 import shadow.math.SFVertex3f;
 
 import static android.opengl.GLES20.GL_CULL_FACE;
@@ -52,7 +49,7 @@ import static android.opengl.GLES20.glEnable;
 import static android.opengl.GLES20.glViewport;
 
 /**
- * Created by Alessandro on 13/03/15.
+ *
  */
 public class GraphicsView extends GLSurfaceView {
 
@@ -110,11 +107,6 @@ public class GraphicsView extends GLSurfaceView {
         super.onResume();
     }
 
-    public void drawPlayers() {
-        for (PlayerView view : playerViews)
-            view.draw();
-    }
-
     @Override
     public void onPause() {
         super.onPause();
@@ -145,11 +137,9 @@ public class GraphicsView extends GLSurfaceView {
 
         private ShadingProgram program;
         private Sky sky;
-        private Node node, groundNode;
+        private Node groundNode;
         private ButtonMaster buttonMaster;
         private ArrayList<TextLabel> labels = new ArrayList<>();
-
-        private float t = 0;
 
         @Override
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -170,8 +160,7 @@ public class GraphicsView extends GLSurfaceView {
                 }
             }
 
-            groundNode = new GroundGenerator(FundamentalGenerator.getModel(context, program, R.drawable.ground_texture_02, "Ground.obj"))
-                    .getGroundNode(0, 0, groundWidth, groundHeight, -1);
+            groundNode = new GroundGenerator(FundamentalGenerator.getModel(context, program, R.drawable.ground_texture_02, "Ground.obj")).getGroundNode(0, 0, groundWidth, groundHeight, -1);
             map.loadMap(cm, context);
             sky = new Sky(context, program, me.getStatus().getPosition());
         }
@@ -219,34 +208,12 @@ public class GraphicsView extends GLSurfaceView {
             }
 
             program.setupProjection(camera.getOrthoMatrix());
-
             buttonMaster.draw();
         }
 
-        private void createMonkeys() {
-            Model monkeyModel = FundamentalGenerator.getModel(context, program, R.drawable.animal_texture_01, "Monkey.obj");
-
-            node = new Node();
-            node.setModel(monkeyModel);
-            node.getRelativeTransform().setPosition(0.5f, 0.5f, -6.5f);
-
-            Node anotherNode = new Node();
-
-            anotherNode.setModel(monkeyModel);
-            anotherNode.getRelativeTransform().setPosition(1, 1, 0);
-            anotherNode.getRelativeTransform().setMatrix(SFMatrix3f.getScale(0.3f, 0.2f, 0.1f));
-            node.getSonNodes().add(anotherNode);
-        }
-
-        private void drawMonkeys() {
-            t += 0.01f;
-            float rotation = 0.2f + t;
-            float scaling = 0.3f;
-            SFMatrix3f matrix3f = SFMatrix3f.getScale(scaling, scaling, scaling);
-            matrix3f = matrix3f.MultMatrix(SFMatrix3f.getRotationY(rotation));
-            node.getRelativeTransform().setMatrix(matrix3f);
-            node.updateTree(new SFTransform3f());
-            node.draw();
+        public void drawPlayers() {
+            for (PlayerView view : playerViews)
+                view.draw();
         }
 
     }

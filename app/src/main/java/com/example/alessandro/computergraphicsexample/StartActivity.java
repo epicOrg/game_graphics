@@ -24,7 +24,6 @@ public class StartActivity extends ActionBarActivity {
     private static final String KEY_SERVER_ADDRESS = "serverAddress";
 
     private Activity activity;
-    private ServerCommunicationThread serverCommunicationThread;
 
     private EditText serverAddress;
     private Button serverAddressButton;
@@ -63,4 +62,5 @@ public class StartActivity extends ActionBarActivity {
 
         serverAddress.setText(preferences.getString(KEY_SERVER_ADDRESS, ""));
     }
+
 }
