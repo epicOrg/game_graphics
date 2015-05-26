@@ -29,7 +29,7 @@ public class SettingsButtonsGenerator {
     private SettingsScreen settingsScreen;
 
     /**
-     * It creates a new SettingsButtonGenerator.
+     * Creates a new SettingsButtonGenerator.
      *
      * @param context Context to find resources.
      * @param program ShadingProgram to represent the Button.
@@ -44,7 +44,7 @@ public class SettingsButtonsGenerator {
     }
 
     /**
-     * It creates pause Button.
+     * Creates pause Button.
      *
      * @param position Button position.
      * @param scale Scale factor.

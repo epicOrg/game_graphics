@@ -16,14 +16,14 @@ public class GroundGenerator {
     private Model model;
 
     /**
-     * It creates a new GroundGenerator from a specified Model.
+     * Creates a new GroundGenerator from a specified Model.
      */
     public GroundGenerator(Model model) {
         this.model = model;
     }
 
     /**
-     * It builds the ground with a squared grid of Model's copies.
+     * Builds the ground with a squared grid of Model's copies.
      * It is centered in a specified position.
      *
      * @param xCenter x of the center.

@@ -28,7 +28,7 @@ public class MoveButtonsGenerator {
     private PositionMoveListenerInterface positionMoveListener;
 
     /**
-     * It creates a new MoveButtonsGenerator.
+     * Creates a new MoveButtonsGenerator.
      *
      * @param context Context to find resources.
      * @param program ShadingProgram to represent the Button.
@@ -43,7 +43,7 @@ public class MoveButtonsGenerator {
     }
 
     /**
-     * It generates the movement Button in a cross configuration.
+     * Generates the movement Button in a cross configuration.
      *
      * @param center Central position of the Button.
      * @param scale Scale factor.

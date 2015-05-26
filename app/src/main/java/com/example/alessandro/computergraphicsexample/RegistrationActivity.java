@@ -29,7 +29,7 @@ import game.net.services.Register;
 public class RegistrationActivity extends ActionBarActivity {
 
     /**
-     * Keep track of the login task to ensure we can cancel it if requested.
+     * Keeps track of the login task to ensure we can cancel it if requested.
      */
     private RegistrationActivity thisActivity = this;
     private ServerCommunicationThread serverCommunicationThread;

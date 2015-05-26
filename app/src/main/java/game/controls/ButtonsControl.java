@@ -32,7 +32,7 @@ public class ButtonsControl {
     private ButtonMaster buttonMaster;
 
     /**
-     * It creates a nwe ButtonControl.
+     * Creates a nwe ButtonControl.
      *
      * @param program ShadingProgram to be used.
      * @param orthoMatrix 2D projection matrix.
@@ -51,8 +51,8 @@ public class ButtonsControl {
     }
 
     /**
-     * It sets (and updates) the ButtonControl if screen dimension has changed.
-     * It needs to be called at the beginning.
+     * Sets (and updates) the ButtonControl if screen dimension has changed.
+     * Needs to be called at the beginning.
      *
      * @param width Screen width.
      * @param height Screen height.

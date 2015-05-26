@@ -23,7 +23,7 @@ public class ButtonMaster {
     private ArrayList<Node> parentNodes;
 
     /**
-     * It creates a new ButtonMaster.
+     * Creates a new ButtonMaster.
      */
     public ButtonMaster() {
         parentNodes = new ArrayList<>();
@@ -34,9 +34,9 @@ public class ButtonMaster {
     }
 
     /**
-     * It adds a Button, representing it with the last set Model.
+     * Adds a Button, representing it with the last set Model.
      * The Button is represented with a Node placed and rotated compared with the parentNode.
-     * It's useful to give a common pre-transformation to more Button.
+     * Is useful to give a common pre-transformation to more Button.
      *
      * @param button Button to be added.
      * @param position Button position relative to the parentNode.
@@ -72,7 +72,7 @@ public class ButtonMaster {
     }
 
     /**
-     * It draws every Button.
+     * Draws every Button.
      */
     public void draw() {
         for (Node n : parentNodes) {

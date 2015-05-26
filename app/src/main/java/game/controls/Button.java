@@ -13,7 +13,7 @@ public class Button {
     private boolean needToBeReady;
 
     /**
-     * It creates a new Button.
+     * Creates a new Button.
      *
      * @param name Button's name.
      * @param action ButtonAction which represents the action to perform when pressed.
@@ -32,7 +32,7 @@ public class Button {
     }
 
     /**
-     * It performs the action which is encapsulated in ButtonAction.
+     * Performs the action which is encapsulated in ButtonAction.
      *
      * @param parameter Contingent parameter for the action.
      */
@@ -41,14 +41,14 @@ public class Button {
     }
 
     /**
-     * @return It returns 'true' if the Button operates with continuous pressure.
+     * @return 'true' if the Button operates with continuous pressure.
      */
     public boolean isContinuousPressing() {
         return continuousPressing;
     }
 
     /**
-     * @return It returns 'true' if the Button can be disabled.
+     * @return 'true' if the Button can be disabled.
      */
     public boolean isNeedToBeReady() {
         return needToBeReady;

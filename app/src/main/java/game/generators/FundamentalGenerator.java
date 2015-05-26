@@ -24,7 +24,7 @@ import shadow.graphics.SFImageFormat;
 public class FundamentalGenerator {
 
     /**
-     * It builds a Model from a file with a texture.
+     * Builds a Model from a file with a texture.
      *
      * @return The generated Model.
      */
@@ -33,7 +33,7 @@ public class FundamentalGenerator {
     }
 
     /**
-     * It builds a Model from an ArrayObject and a specified Material.
+     * Builds a Model from an ArrayObject and a specified Material.
      *
      * @return The generated Model.
      */
@@ -47,7 +47,7 @@ public class FundamentalGenerator {
     }
 
     /**
-     * It builds a Model from a file with a specified Material.
+     * Builds a Model from a file with a specified Material.
      *
      * @param context Context from which resources can be loaded.
      * @param material Material with which the Model is built.
@@ -58,7 +58,7 @@ public class FundamentalGenerator {
     }
 
     /**
-     * It builds a Node from an ArrayObject and a Bitmap as texture.
+     * Builds a Node from an ArrayObject and a Bitmap as texture.
      *
      * @param arrayObject ArrayObject from which Node Model's geometry is get.
      * @param bitmap Bitmap to be used as texture for Node Material.

@@ -125,7 +125,7 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
     }
 
     /**
-     * Invocato per attivare/disattivare la funzione RememberMe
+     * Is called to activate/deactivate the RememberMe function.
      */
     public void rememberMe(View view) {
         CheckBox rememberBox = (CheckBox) findViewById(R.id.remeberMeBox);
@@ -148,7 +148,7 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
     }
 
     /**
-     * Passa all'Activity di registrazione, invocato dalll'apposto bottone
+     * Changes to the registration activity.
      */
     public void notRegistered(View view) {
         Intent intent = new Intent(this, RegistrationActivity.class);
@@ -156,7 +156,7 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
     }
 
     /**
-     * Avvia il Login inviando la richiesta al server
+     * Starts the login sending the request to the server.
      */
     public void attemptLogin(View view) {
         ((TextView) views.get(R.id.username)).setError(null);
