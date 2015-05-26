@@ -10,7 +10,8 @@ import android.widget.TextView;
 import game.Waiter;
 
 /**
- * Created by Andrea on 12/05/2015.
+ * @author Torlaschi
+ * @date 12/05/2015
  */
 public class MessageScreen implements Waiter {
 

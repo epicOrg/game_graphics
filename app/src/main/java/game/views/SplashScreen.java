@@ -14,7 +14,8 @@ import com.example.alessandro.computergraphicsexample.R;
 import game.Waiter;
 
 /**
- * Created by Andrea on 22/04/2015.
+ * @author Torlaschi
+ * @date 22/04/2015
  */
 public class SplashScreen implements Waiter {
 

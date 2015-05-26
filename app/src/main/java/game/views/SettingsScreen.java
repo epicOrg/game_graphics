@@ -25,7 +25,8 @@ import game.net.communication.ServerCommunicationThread;
 import game.net.interaction.FieldsNames;
 
 /**
- * Created by Andrea on 12/05/2015.
+ * @author Torlaschi
+ * @date 12/05/2015
  */
 public class SettingsScreen {
 
@@ -142,8 +143,6 @@ public class SettingsScreen {
             }
         });
     }
-
-
 
     public void hide() {
         Log.d(LOG_TAG, "hide");
