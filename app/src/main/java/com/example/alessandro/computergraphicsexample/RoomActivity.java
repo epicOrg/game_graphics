@@ -168,9 +168,9 @@ public class RoomActivity extends ActionBarActivity {
             if (result) {
                 UserData.DATA.addData(FieldsNames.CURRENT_ROOM, currentRoom);
 
+                finish();
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
                 startActivity(intent);
-                finish();
             }
         }
 
