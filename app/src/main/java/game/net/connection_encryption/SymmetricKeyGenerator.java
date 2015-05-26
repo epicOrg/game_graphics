@@ -7,7 +7,8 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
 /**
- * Created by Noris on 27/04/15.
+ * @author Noris
+ * @date 27/04/2015
  */
 public class SymmetricKeyGenerator implements ISymmetricKeyGenerator {
 
@@ -24,7 +25,6 @@ public class SymmetricKeyGenerator implements ISymmetricKeyGenerator {
             key = keyGenerator.generateKey();
 
         } catch (NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

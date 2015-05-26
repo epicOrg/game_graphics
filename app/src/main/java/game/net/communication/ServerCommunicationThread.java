@@ -25,16 +25,17 @@ import static game.net.communication.ServerCommunicationThreadState.CONNECTED;
 import static game.net.communication.ServerCommunicationThreadState.CONNECTING;
 import static game.net.communication.ServerCommunicationThreadState.NOT_CONNECTED;
 
-
 /**
- * Classe di gestione scambio dati con il server
+ * This class manages exchange of data between client and server.
  * <p/>
- * Metododo di utilizzo:
- * All'avvio dell'applicazione va avviato il thread recuperandone l'istanza con l'apposito metodo e
- * chiamando il metodo run()
- * e ogni volta che cambio activity devo settare il context!!!
+ * How to use:
+ * at the application launch, the thread has to be started getting the instance with the appropriated method
+ * and calling the run() method.
+ * Every time the activity changes, the context must be set.
  * <p/>
- * Created by Luca on 31/03/2015.
+ *
+ * @author Micieli
+ * @date 31/03/2015
  */
 public class ServerCommunicationThread extends Thread {
 

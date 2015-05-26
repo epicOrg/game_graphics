@@ -16,7 +16,7 @@ import game.net.services.Unknown;
 
 /**
  * @author Noris
- * @since 2015-03-26
+ * @date 26/03/2015
  */
 
 public class ServiceChooser {

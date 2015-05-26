@@ -1,7 +1,8 @@
 package game.net.connection_encryption;
 
 /**
- * Created by Noris on 27/04/15.
+ * @author Noris
+ * @date 27/04/2015
  */
 public class StringConverter {
 

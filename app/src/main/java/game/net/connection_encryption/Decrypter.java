@@ -11,7 +11,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- * Created by Noris on 27/04/15.
+ * @author Noris
+ * @date 27/04/2015
  */
 public class Decrypter {
 
@@ -33,19 +34,14 @@ public class Decrypter {
             decryptedData = cipher.doFinal(encryptedData);
 
         } catch (InvalidKeyException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (NoSuchPaddingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalBlockSizeException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (BadPaddingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -60,7 +56,6 @@ public class Decrypter {
             return new String(decryptedData, "UTF-8");
 
         } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
             return null;
         }
     }

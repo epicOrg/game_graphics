@@ -8,7 +8,8 @@ import android.util.Log;
 import java.io.IOException;
 
 /**
- * Created by Andrea on 14/04/2015.
+ * @author Torlaschi
+ * @date 14/04/2015
  */
 public class BackgroundSound {
 

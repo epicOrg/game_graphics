@@ -10,6 +10,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
+ * This class provides an encryption.
+ *
  * Created by Noris on 27/04/15.
  */
 public class Encrypter {
@@ -22,6 +24,9 @@ public class Encrypter {
         this.asymmetricKey = asymmetricKey;
     }
 
+    /**
+     * @param uncryptedString String to encrypt.
+     */
     public void encrypt(String uncryptedString) {
 
         byte[] uncryptedData = uncryptedString.getBytes();
@@ -33,19 +38,14 @@ public class Encrypter {
             cryptedData = cipher.doFinal(uncryptedData);
 
         } catch (InvalidKeyException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (NoSuchPaddingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalBlockSizeException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (BadPaddingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

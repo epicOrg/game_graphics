@@ -5,7 +5,8 @@ import java.security.Key;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * Created by Noris on 28/04/15.
+ * @author Noris
+ * @date 28/04/2015
  */
 public class KeyConverter {
 

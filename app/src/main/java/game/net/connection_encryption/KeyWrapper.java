@@ -9,7 +9,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- * Created by Noris on 27/04/15.
+ * @author Noris
+ * @author 27/04/2015
  */
 
 public class KeyWrapper {
@@ -31,16 +32,12 @@ public class KeyWrapper {
             wrappedKey = cipher.wrap(symmetricKey);
 
         } catch (InvalidKeyException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (NoSuchPaddingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalBlockSizeException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

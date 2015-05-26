@@ -1,7 +1,8 @@
 package game.net.communication;
 
 /**
- * Created by Andrea on 18/04/2015.
+ * @author Torlaschi
+ * @date 18/04/2015
  */
 public interface ServerCommunicationThreadListener {
 

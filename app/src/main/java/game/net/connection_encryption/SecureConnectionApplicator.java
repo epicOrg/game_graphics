@@ -6,7 +6,8 @@ import org.json.JSONObject;
 import game.net.interaction.FieldsNames;
 
 /**
- * Created by Noris on 27/04/15.
+ * @author Noris
+ * @date 27/04/2015
  */
 public class SecureConnectionApplicator {
 

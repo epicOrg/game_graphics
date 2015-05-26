@@ -1,8 +1,11 @@
 package game.net.communication;
 
 /**
- * Created by Andrea on 24/04/2015.
+ * @author Torlaschi
+ * @date 24/04/2015
  */
 public enum ServerCommunicationThreadState {
-    CONNECTING, CONNECTED, NOT_CONNECTED
+    CONNECTING,
+    CONNECTED,
+    NOT_CONNECTED
 }

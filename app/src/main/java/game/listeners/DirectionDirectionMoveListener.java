@@ -5,7 +5,8 @@ import shadow.math.SFTransform3f;
 import shadow.math.SFVertex3f;
 
 /**
- * Created by Andrea on 28/03/2015.
+ * @author Torlaschi
+ * @date 28/03/2015
  */
 public class DirectionDirectionMoveListener implements DirectionMoveListenerInterface {
 

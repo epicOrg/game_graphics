@@ -8,7 +8,8 @@ import game.controls.Button;
 import game.controls.ButtonsControl;
 
 /**
- * Created by Andrea on 01/04/2015.
+ * @author Torlaschi
+ * @date 01/04/2015
  */
 public class TouchListener implements TouchListenerInterface {
 

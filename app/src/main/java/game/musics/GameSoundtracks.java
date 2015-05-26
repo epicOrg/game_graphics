@@ -4,7 +4,8 @@ import android.content.Context;
 import android.net.Uri;
 
 /**
- * Created by Andrea on 17/04/2015.
+ * @author Torlaschi
+ * @date 17/04/2015
  */
 public class GameSoundtracks {
 
