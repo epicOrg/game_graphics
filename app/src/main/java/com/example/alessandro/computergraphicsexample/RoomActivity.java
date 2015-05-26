@@ -47,9 +47,12 @@ public class RoomActivity extends ActionBarActivity {
     private Context context;
     private RequestMaker requestMaker;
 
+    private boolean areWeReturning = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_room);
         context = this;
@@ -99,7 +102,6 @@ public class RoomActivity extends ActionBarActivity {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
-
 
     public class RoomHandler extends Handler {
 
@@ -167,7 +169,7 @@ public class RoomActivity extends ActionBarActivity {
 
             if (result) {
                 UserData.DATA.addData(FieldsNames.CURRENT_ROOM, currentRoom);
-
+                
                 finish();
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
                 startActivity(intent);
