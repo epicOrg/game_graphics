@@ -1,8 +1,8 @@
 package game.net.interaction;
 
 /**
- * @author	Noris
- * @since	2015-03-30
+ * @author Noris
+ * @date 30/03/2015
  */
 
 public class FieldsValues {

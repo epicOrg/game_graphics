@@ -6,8 +6,9 @@ import com.example.alessandro.computergraphicsexample.R;
 import java.util.HashMap;
 
 /**
- * @author Luca
- * @since 2015-03-31
+ * This class manages the error message shown in case of error in registration context.
+ * @author Micieli
+ * @date 31/03/2015
  */
 
 public class RegistrationErrorStrings {

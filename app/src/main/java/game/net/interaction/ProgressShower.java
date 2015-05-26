@@ -7,10 +7,10 @@ import android.os.Build;
 import android.view.View;
 
 /**
- * Created by Luca on 31/03/2015.
+ * @author Micieli
+ * @date 31/03/2015
  */
-public class
-        ProgressShower {
+public class ProgressShower {
 
     private View mLoginFormView;
     private View mProgressView;

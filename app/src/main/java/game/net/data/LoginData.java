@@ -10,7 +10,10 @@ import com.example.alessandro.computergraphicsexample.R;
 import java.util.HashMap;
 
 /**
- * Created by Luca on 27/03/2015.
+ * This class gets the username and the password the user inserted.
+ *
+ * @author Micieli
+ * @date 27/03/2015
  */
 public class LoginData {
 
@@ -40,6 +43,9 @@ public class LoginData {
         return password;
     }
 
+    /**
+     * Checks the data: it throws specific exception if a format is not valid.
+     */
     public boolean checkData(Context context, HashMap<Integer, View> views) {
         boolean cancel = false;
 

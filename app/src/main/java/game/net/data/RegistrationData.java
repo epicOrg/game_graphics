@@ -11,7 +11,10 @@ import com.example.alessandro.computergraphicsexample.R;
 import java.util.HashMap;
 
 /**
- * Created by Luca on 27/03/2015.
+ * This class gets the registration data.
+ *
+ * @author Micieli
+ * @date 27/03/2015
  */
 public class RegistrationData extends LoginData {
 

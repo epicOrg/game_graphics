@@ -6,8 +6,10 @@ import com.example.alessandro.computergraphicsexample.R;
 import java.util.HashMap;
 
 /**
- * @author Luca
- * @since 2015-03-31
+ * This class manages the error message shown in case of error in room context.
+ *
+ * @author Micieli
+ * @since 31/03/2015
  */
 
 public class RoomsErrorStrings {
