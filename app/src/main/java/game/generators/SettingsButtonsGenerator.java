@@ -15,8 +15,9 @@ import shadow.math.SFMatrix3f;
 import shadow.math.SFVertex3f;
 
 /**
- * Classe che si occupa di costruire il Button di pausa.
- * @author Andrea
+ * This class builds the pause Button.
+ *
+ * @author Torlaschi
  */
 public class SettingsButtonsGenerator {
 
@@ -28,11 +29,12 @@ public class SettingsButtonsGenerator {
     private SettingsScreen settingsScreen;
 
     /**
-     * Crea un nuovo SettingsButtonsGenerator.
-     * @param context Context per recuperare le risorse.
-     * @param program ShadingProgram per rappresentare i Button.
-     * @param buttonMaster ButtonMaster a cui associare i Button di movimento.
-     * @param settingsScreen SettingScreen da mostrare quando si preme il pulsante.
+     * It creates a new SettingsButtonGenerator.
+     *
+     * @param context Context to find resources.
+     * @param program ShadingProgram to represent the Button.
+     * @param buttonMaster ButtonMaster which the movement Button has to be associated with.
+     * @param settingsScreen SettingScreen to be shown when the Button is pressed.
      */
     public SettingsButtonsGenerator(Context context, ShadingProgram program, ButtonMaster buttonMaster, SettingsScreen settingsScreen) {
         this.context = context;
@@ -42,9 +44,10 @@ public class SettingsButtonsGenerator {
     }
 
     /**
-     * Genera i Button di pausa, con alcuni parametri regolabili.
-     * @param position Posizione del Button (la componente z non ha importanza).
-     * @param scale Fattore di scala omogeneo dei Model del Button.
+     * It creates pause Button.
+     *
+     * @param position Button position.
+     * @param scale Scale factor.
      */
     public void generate(SFVertex3f position, float scale) {
         Node parentNode = new Node();
