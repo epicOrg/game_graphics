@@ -2,18 +2,19 @@ package com.example.alessandro.computergraphicsexample;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
+
 import game.Interpreters.MapInterpreter;
 import game.Interpreters.PositionsInterpreter;
 import game.Interpreters.StatusInterpreter;
@@ -23,7 +24,6 @@ import game.Room;
 import game.Team;
 import game.UserData;
 import game.WaiterGroup;
-import game.graphics.Map;
 import game.musics.BackgroundSound;
 import game.musics.GameSoundtracks;
 import game.net.GameHandler;
@@ -49,7 +49,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
     private ServerCommunicationThread serverCommunicationThread = ServerCommunicationThread.getInstance();
     private BackgroundSound backgroundSound;
-//    private GameManager gameManager;
     private GameHandler gameHandler;
 
     private CountDownLatch startSignal = new CountDownLatch(1);
@@ -79,9 +78,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         headsetListener = new HeadsetListener(context);
         headsetListener.init();
 
-        Intent intent = getIntent();
-        boolean noServer = intent.getBooleanExtra("NO_SERVER", false);
-        requestMaker= UserData.DATA.getRequestMakerWithData(FieldsNames.USERNAME, FieldsNames.HASHCODE, FieldsNames.ROOM_NAME);
+        requestMaker = UserData.DATA.getRequestMakerWithData(FieldsNames.USERNAME, FieldsNames.HASHCODE, FieldsNames.ROOM_NAME);
 
         messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
@@ -94,7 +91,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         SFVertex3f direction = new SFVertex3f(-1, -0.25f, 0);
 
         me = new Player(new PlayerStatus(direction, new Circle(position, 0.75)), "Me");
-        Room room = (Room)UserData.DATA.getData(FieldsNames.CURRENT_ROOM);
+        Room room = (Room) UserData.DATA.getData(FieldsNames.CURRENT_ROOM);
         ArrayList<Team> teams = room.getTeams();
         if (teams != null)
             for (Team team : teams)
@@ -118,39 +115,29 @@ public class GameActivity extends Activity implements GameHandlerListener {
         messageScreen.setText("Waiting for other players..", getResources().getColor(R.color.primary_text));
         waiterGroup.addWaiter(messageScreen);
 
-        if (!noServer) {
-            Log.d(LOG_TAG, "Starting GamePositionSender..");
-            GamePositionSender gamePositionSender = new GamePositionSender(me, room.getName());
+        Log.d(LOG_TAG, "Starting GamePositionSender..");
+        GamePositionSender gamePositionSender = new GamePositionSender(me, room.getName());
 
-            mapInterpreter=new MapInterpreter(me.getStatus(), this);
-            gameHandler=new GameHandler(new StatusInterpreter(messageScreen, gamePositionSender, this), mapInterpreter,
-                    new PositionsInterpreter((Room)UserData.DATA.getData(FieldsNames.CURRENT_ROOM)));
+        mapInterpreter = new MapInterpreter(me.getStatus(), this);
+        gameHandler = new GameHandler(new StatusInterpreter(messageScreen, gamePositionSender, this), mapInterpreter,
+                new PositionsInterpreter((Room) UserData.DATA.getData(FieldsNames.CURRENT_ROOM)));
 
-            waiterGroup.addWaiter(gamePositionSender);
-            waiterGroup.addWaiter(new GameStatusWaiter(requestMaker));
-        }
+        waiterGroup.addWaiter(gamePositionSender);
+        waiterGroup.addWaiter(new GameStatusWaiter(requestMaker));
 
         waiterGroup.startWaiting();
 
-
-        if (noServer) {
-            Map map = new Map();
-            DebugUtils.fillMap(map, 20);
-            DebugUtils.startGame(this, otherPlayers, map, 20, 20, startSignal);
-        } else {
-            serverCommunicationThread.setHandler(gameHandler);
-            Log.d(LOG_TAG, "Starting Audio..");
-            initAudioSetting();
-            Log.d(LOG_TAG, "Asking Map..");
-            try {
-                serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.GAME),
-                        new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_MAP)));
-            } catch (NotConnectedException e) {
-                Toast.makeText(this, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
+        serverCommunicationThread.setHandler(gameHandler);
+        Log.d(LOG_TAG, "Starting Audio..");
+        initAudioSetting();
+        Log.d(LOG_TAG, "Asking Map..");
+        try {
+            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.GAME),
+                    new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_MAP)));
+        } catch (NotConnectedException e) {
+            Toast.makeText(this, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
         }
-
     }
 
     private void initAudioSetting() {
@@ -180,7 +167,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         int width = mapInterpreter.getGroundWidth();
         int height = mapInterpreter.getGroundHeight();
 
-        graphicsView = new GraphicsView(context, me, ((Room)UserData.DATA.getData(FieldsNames.CURRENT_ROOM)).getTeams(),
+        graphicsView = new GraphicsView(context, me, ((Room) UserData.DATA.getData(FieldsNames.CURRENT_ROOM)).getTeams(),
                 mapInterpreter.getMap(), startSignal, width, height, settingsScreen);
 
         LinearLayout graphicsContainerLayout = (LinearLayout) findViewById(R.id.graphics_view_container);
