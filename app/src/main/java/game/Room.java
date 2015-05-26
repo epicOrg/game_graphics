@@ -29,8 +29,8 @@ public class Room {
         this.teams = teams;
 
         currentPlayers = 0;
-        for(Team t : teams){
-            for(Player p : t.getPlayers()){
+        for (Team t : teams) {
+            for (Player p : t.getPlayers()) {
                 currentPlayers++;
             }
         }
@@ -60,14 +60,14 @@ public class Room {
         return teams;
     }
 
-    public void addTeam(Team t){
+    public void addTeam(Team t) {
         teams.add(t);
     }
 
-    public Player getPlayerByUsername(String username){
-        for(Team t: teams)
-            for(Player p : t.getPlayers())
-                if(p.getName().equals(username))
+    public Player getPlayerByUsername(String username) {
+        for (Team t : teams)
+            for (Player p : t.getPlayers())
+                if (p.getName().equals(username))
                     return p;
 
         return null;

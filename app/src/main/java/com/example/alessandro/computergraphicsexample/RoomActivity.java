@@ -47,6 +47,8 @@ public class RoomActivity extends ActionBarActivity {
     private Context context;
     private RequestMaker requestMaker;
 
+    private boolean isStartingGame = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +106,16 @@ public class RoomActivity extends ActionBarActivity {
     @Override
     protected void onStop() {
         super.onStop();
+
+        if (!isStartingGame) {
+            try {
+                serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS),
+                        new JSONd(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_EXIT)));
+            } catch (NotConnectedException e) {
+                Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+            }
+        }
     }
 
     public class RoomHandler extends Handler {
@@ -173,6 +185,7 @@ public class RoomActivity extends ActionBarActivity {
             if (result) {
                 UserData.DATA.addData(FieldsNames.CURRENT_ROOM, currentRoom);
 
+                isStartingGame = true;
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
                 startActivity(intent);
             }
