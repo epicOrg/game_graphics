@@ -1,7 +1,5 @@
 package game.player;
 
-import android.util.Log;
-
 import game.physics.Circle;
 import game.physics.CollisionBox;
 import game.physics.CollisionMediator;
@@ -24,6 +22,11 @@ public class PlayerStatus {
         this.position = new SFVertex3f(circle.getPos());
         this.direction = direction;
         this.circle = circle;
+    }
+
+    public void setPositionValue(float x, float y, float z){
+        position.set3f(x, y, z);
+        circle.getPos().set3f(x, y, z);
     }
 
     public void move(SFVertex3f motion, CollisionMediator cm) {

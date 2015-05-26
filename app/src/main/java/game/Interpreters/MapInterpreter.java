@@ -44,7 +44,7 @@ public class MapInterpreter implements Interpreter{
         groundWidth = results.getWidth();
         groundHeight = results.getHeight();
 
-        status.getPosition().set3f(results.playerPositionX, results.playerPositionY, results.playerPositionZ);
+        status.setPositionValue(results.playerPositionX, results.playerPositionY, results.playerPositionZ);
 
         for (GameHandlerListener l : gameHandlerListeners)
            l.onMapReceived();

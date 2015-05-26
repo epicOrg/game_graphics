@@ -9,42 +9,42 @@ import java.util.HashMap;
  *
  * @author Stefano De Pace
  */
-public enum  MapObjects {
+public enum MapObjects {
     MAP;
 
-    private HashMap<String,MazeObject> map;
+    private HashMap<String, MazeObject> map;
     private HashMap<String, Integer> codes;
 
     /**
      * Restituisce un MazeObject da una serie di dati
      *
-     * @param object Nome del MazeObject
+     * @param object   Nome del MazeObject
      * @param position Posizione del MazeObject
-     * @param size Dimensioni del MazeObject
-     * @param texture nome della texture del MazeObject
+     * @param size     Dimensioni del MazeObject
+     * @param texture  nome della texture del MazeObject
      * @return MazeObject ricostruito dai dati.
      */
-    public MazeObject getObjectFromNameAndData(String object, String position, String size, String texture){
+    public MazeObject getObjectFromNameAndData(String object, String position, String size, String texture) {
         return map.get(object).cloneFromData(position, size, getTextureIdFromString(texture));
     }
 
-    private int getTextureIdFromString(String s){
+    private int getTextureIdFromString(String s) {
         return codes.get(s);
     }
 
-    private MapObjects(){
+    private MapObjects() {
         fillObjects();
         fillTextures();
     }
 
-    private void fillObjects(){
-        map=new HashMap<>();
-        map.put("Wall",new Wall(null, 0));
+    private void fillObjects() {
+        map = new HashMap<>();
+        map.put("Wall", new Wall(null, 0));
         map.put("Obstacle", new Obstacle(null, 0, 0));
         map.put("Vase", new Vase(null, 0, 0));
     }
 
-    private void fillTextures(){
+    private void fillTextures() {
         codes = new HashMap<>();
         codes.put("wall_texture_01", R.drawable.wall_texture_01);
         codes.put("wall_texture_02", R.drawable.wall_texture_02);
