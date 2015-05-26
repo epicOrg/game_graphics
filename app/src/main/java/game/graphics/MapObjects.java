@@ -5,9 +5,9 @@ import com.example.alessandro.computergraphicsexample.R;
 import java.util.HashMap;
 
 /**
- * Singleton che si occupa di gestire il database di MazeObjects e relative textures.
+ * It's a singleton that manages the MazeObject database and the relative textures.
  *
- * @author Stefano De Pace
+ * @author De Pace
  */
 public enum MapObjects {
     MAP;
@@ -16,13 +16,11 @@ public enum MapObjects {
     private HashMap<String, Integer> codes;
 
     /**
-     * Restituisce un MazeObject da una serie di dati
-     *
-     * @param object   Nome del MazeObject
-     * @param position Posizione del MazeObject
-     * @param size     Dimensioni del MazeObject
-     * @param texture  nome della texture del MazeObject
-     * @return MazeObject ricostruito dai dati.
+     * @param object MazeObject name.
+     * @param position MazeObject position.
+     * @param size MazeObject dimension.
+     * @param texture MazeObject texture's name.
+     * @return MazeObject which is built from the specified parameters.
      */
     public MazeObject getObjectFromNameAndData(String object, String position, String size, String texture) {
         return map.get(object).cloneFromData(position, size, getTextureIdFromString(texture));

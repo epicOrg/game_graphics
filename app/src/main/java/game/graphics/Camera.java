@@ -8,9 +8,9 @@ import static android.opengl.Matrix.orthoM;
 import static android.opengl.Matrix.setLookAtM;
 
 /**
- * Oggetto telecamera, si occupa di gestire le matrici per la proiezione 3D e 2D, seguendo la posizione di un Player.
- * @author Stefano De Pace
+ * Video camera: it manages the matrices for 3D and 2D projections following the position of a Player.
  *
+ * @author De Pace
  */
 public class Camera {
 
@@ -21,13 +21,14 @@ public class Camera {
     private float znear,zfar,k;
 
     /**
-     * Crea un nuovo oggetto telecamera che guarda dalla posizione di un Player, in base alla sua direzione.
-     * @param player il Player da seguire,
-     * @param znear minima distanza di un oggetto dalla telecamera per essere visualizzato
-     *              nella proiezione 3D.
-     * @param zfar massima distanza di un oggetto dalla telecamera per essere visualizzato
-     *              nella proiezione 3D.
-     * @param angle angolo di visione della proiezione 3D tra alto-basso e destra-sinistra in gradi.
+     * Creates a new camera object from a Player position, on the strength of its direction.
+     *
+     * @param player The Player to be followed.
+     * @param znear Minimum distance between an object and the camera
+     *              to have the object displayed in the 3D projection.
+     * @param zfar Maximum distance between an object and the camera
+     *              to have the object displayed in the 3D projection.
+     * @param angle Vision angle of the 3D projection between up-down and right-left, expressed in degrees.
      */
     public Camera(Player player, float znear, float zfar, float angle){
         this.me=player;
@@ -37,8 +38,10 @@ public class Camera {
     }
 
     /**
-     * Aggiorna le matrici di proiezione 3D e 2D, da chiamare se le dimensioni dello schermo cambiano.
-     * @param ratio rapporto larghezza/altezza dello schermo.
+     * Updated the matrices of the 3D and 2D projection.
+     * Has to be invoked if screen dimension changes.
+     *
+     * @param ratio Screen width/height ratio.
      */
     public void updateMatrices(float ratio){
         setProjection(ratio);
@@ -46,16 +49,14 @@ public class Camera {
     }
 
     /**
-     * Restituisce la matrice di proiezione 2D.
-     * @return la matrice di proiezione 2D.
+     * @return 2D projection matrix.
      */
     public float[] getOrthoMatrix(){
         return orthoMatrix;
     }
 
     /**
-     * Restituisce la matrice di proiezione 3D, ricalcolata sulla pozione corrente del Player.
-     * @return matrice di proiezione 3D corrente.
+     * @return Current 3D projection matrix.
      */
     public float[] getResultMatrix(){
         setResultMatrix();

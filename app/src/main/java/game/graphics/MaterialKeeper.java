@@ -9,7 +9,8 @@ import sfogl.integration.Material;
 import sfogl.integration.ShadingProgram;
 
 /**
- * Created by Andrea on 17/05/2015.
+ * @author Torlaschi
+ * @date 17/05/2015
  */
 
 public enum MaterialKeeper {
