@@ -5,49 +5,52 @@ import android.content.Context;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+
 import game.physics.CollisionBox;
 import game.physics.CollisionMediator;
 import sfogl.integration.Node;
 import shadow.math.SFTransform3f;
 
 /**
- * Mappa che raccoglie i MazeObject, ha il compito di caricarli nel sistema di collisioni e rappresentarli.
- * @author Stefano De Pace
+ * Map that contains all the MazeObjects, loads them in the collision system and draws them.
  *
+ * @author Stefano De Pace
  */
 public class Map {
 
-    private LinkedList<MazeObject> list=new LinkedList<>();
-    private Node mainNode=new Node();
+    private LinkedList<MazeObject> list = new LinkedList<>();
+    private Node mainNode = new Node();
 
     /**
-     * Aggiunge una serie di MazeObject alla Map.
-     * @param ms uno o più MazeObject da aggiungere alla Map.
+     * Adds some MazeObjects to the Map.
+     *
+     * @param ms one or more MazeObject to add to the Map.
      */
-    public void addObjects(MazeObject... ms){
-        Collections.addAll(list,ms);
+    public void addObjects(MazeObject... ms) {
+        Collections.addAll(list, ms);
     }
 
     /**
-     * Carica le CollisionBox dei MazeObject che non sono null nel CollisionMediator dato, e
-     * carica i loro Node per il rendering.
-     * @param cm CollisionMediator dove inserire le CollisionBox dei MazeObject.
-     * @param context Context da cui ricavare le risorse per rappresentare i MazeObject.
+     * Loads all the MazeObject's CollisionBoxes that are not null in the given CollisionMediator, and
+     * loads their Nodes for the rendering.
+     *
+     * @param cm      CollisionMediator where to insert the MazeObject's CollisionBox.
+     * @param context Context from which to get the resources to represent the MazeObjects.
      */
-    public void loadMap(CollisionMediator cm, Context context){
-        List<Node> ln=mainNode.getSonNodes();
-        for (MazeObject m: list){
-            CollisionBox cb=m.getBox();
-            if (cb!=null)
+    public void loadMap(CollisionMediator cm, Context context) {
+        List<Node> ln = mainNode.getSonNodes();
+        for (MazeObject m : list) {
+            CollisionBox cb = m.getBox();
+            if (cb != null)
                 cm.addObject(cb);
             ln.add(m.getNode(context));
         }
     }
 
     /**
-     * Disegna la Map, quindi tutti i nodi associati ad ogni MazeObject.
+     * Draw the Map, namely every MazeObject's Node.
      */
-    public void draw(){
+    public void draw() {
         mainNode.updateTree(new SFTransform3f());
         mainNode.draw();
     }
