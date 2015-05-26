@@ -48,6 +48,8 @@ public class CollisionMediator {
      * @return 'true' if there is a collision.
      */
     public static boolean checkCollision(CollisionBox box1, CollisionBox box2){
+        if (box1==null || box2==null)
+            return false;
         SFVertex3f temp=new SFVertex3f(box2.getPos());
         float d=box1.getRadius()+box2.getRadius();
         temp.subtract(box1.getPos());
