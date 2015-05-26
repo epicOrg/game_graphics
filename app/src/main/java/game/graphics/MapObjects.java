@@ -38,10 +38,9 @@ public enum MapObjects {
     private void fillObjects() {
         map = new HashMap<>();
         map.put("Wall", new Wall(null, 0));
-//        map.put("Obstacle", new Obstacle(null, 0, 0));
-//        map.put("Vase", new Vase(null, 0, 0));
         map.put("Column", new Obstacle(null, 0, 0, "Obstacle01.obj"));
         map.put("Vase", new Obstacle(null, 0, 0, "vase.obj"));
+        map.put("Meat", new Decoration(null, "Meat.obj", 0, 0, 0));
 
     }
 
