@@ -1,14 +1,14 @@
 package game.controls;
 
 /**
- * Interfaccia per oggetti che incapsulino un'azione.
- * @author Stefano De Pace
+ * Interface for objects which encapsulates an action.
+ * @author De Pace
  */
 public interface ButtonAction {
 
     /**
-     * Azione invocabile.
-     * @param parameter Generico parametro per una azione.
+     * An action which can be invoked.
+     * @param parameter Generic parameter for an action.
      */
     void action(Object parameter);
 

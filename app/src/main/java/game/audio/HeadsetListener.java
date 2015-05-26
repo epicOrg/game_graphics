@@ -7,7 +7,8 @@ import android.content.IntentFilter;
 import android.media.AudioManager;
 
 /**
- * Created by Luca on 13/05/2015.
+ * @author Micieli
+ * @date 13/05/2015
  */
 public class HeadsetListener extends BroadcastReceiver {
 

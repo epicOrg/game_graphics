@@ -1,8 +1,8 @@
 package game.controls;
 
 /**
- * Rappresenta un bottone che può eseguire un'azione, incapsulata in un ButtonAction.
- * @author Stefano De Pace
+ * A button that performs an action which is encapsulated in a ButtonAction.
+ * @author De Pace
  */
 public class Button {
 
@@ -12,11 +12,11 @@ public class Button {
     private boolean needToBeReady;
 
     /**
-     * Crea un nuovo Button.
-     * @param name Nome del Button.
-     * @param action ButtjonAction che rappresenta l'azione da eseguire quando viene premuto.
-     * @param continuousPressing Parametro che indica se il Button funziona con pressione continua.
-     * @param needToBeReady Pamrametro che marca un Button che può essere disabilitato all'occorrenza.
+     * It creates a new Button.
+     * @param name Button's name.
+     * @param action ButtonAction which represents the action to perform when pressed
+     * @param continuousPressing Parameter which indicates if the button operates with continuous pressure
+     * @param needToBeReady Parameter which marks a Button that can be disabled when needed
      */
     public Button(String name, ButtonAction action, boolean continuousPressing, boolean needToBeReady) {
         this.name = name;
@@ -26,7 +26,6 @@ public class Button {
     }
 
     /**
-     * Restituisce il nome del Button dato alla creazione.
      * @return nome del Button dato alla creazione.
      */
     public String getName() {
@@ -34,24 +33,22 @@ public class Button {
     }
 
     /**
-     * Esegue l'azione incapsulata nel ButtonAction.
-     * @param parameter Eventuale parametro per l'azione.
+     * It performs the action which is encapsulated in ButtonAction.
+     * @param parameter Contingent parameter for the action.
      */
     public void execute(Object parameter) {
         action.action(parameter);
     }
 
     /**
-     * Restituisce true se il Button funziona con pressione continua.
-     * @return Restituisce true se il Button funziona con pressione continua.
+     * @return It returns 'true' if the Button se il Button operates with continuous pressure.
      */
     public boolean isContinuousPressing() {
         return continuousPressing;
     }
 
     /**
-     * Restituisce se il Button può essere disabilitato.
-     * @return Restituisce se il Button può essere disabilitato.
+     * @return It returns 'true' if the Button can be disabled.
      */
     public boolean isNeedToBeReady() {
         return needToBeReady;

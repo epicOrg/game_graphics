@@ -15,7 +15,8 @@ import java.net.UnknownHostException;
 import game.net.communication.ServerCommunicationThread;
 
 /**
- * Created by Luca on 30/03/2015.
+ * @author Micieli
+ * @date 30/03/2015
  */
 public class AudioCallManager {
 

@@ -16,7 +16,8 @@ import sfogl.integration.ShadingProgram;
 import sfogl2.SFOGLSystemState;
 
 /**
- * Permette di controllare se i Button sullo schermo associati ad un ButtonMaster sono premuti attraverso la tecnica del colorpicking.
+ * It allows to control if the Button, which are associated with a ButtonMaster,
+ * are pressed through colorpicking.
  */
 public class ButtonsControl {
 
@@ -31,10 +32,10 @@ public class ButtonsControl {
     private ButtonMaster buttonMaster;
 
     /**
-     * Crea un nuovo ButtonControl.
-     * @param program ShadingProgram da usare.
-     * @param orthoMatrix Matrice di proiezione 2D dei Button.
-     * @param buttonMaster ButtonMaster contenete i Button da controllare.
+     * It creates a nwe ButtonControl
+     * @param program ShadingProgram to be used.
+     * @param orthoMatrix 2D projection matrix.
+     * @param buttonMaster ButtonMaster which contains the Button to be controlled.
      */
     public ButtonsControl(ShadingProgram program, float[] orthoMatrix, ButtonMaster buttonMaster) {
         this.program = program;
@@ -49,9 +50,10 @@ public class ButtonsControl {
     }
 
     /**
-     * Setta ed eventualmente riaggiorna il ButtonControl in caso di cambiamento di dimensioni dello schermo. Va chiamato all'inizio.
-     * @param width Larghezza dello schermo.
-     * @param height Altezza dello schermo.
+     * It sets (and updates) the ButtonControl if screen dimension has changed.
+     * It needs to be called at the beginning.
+     * @param width Screen width.
+     * @param height Screen height.
      */
     public void update(int width, int height) {
         program.setupProjection(orthoMatrix);
@@ -75,20 +77,14 @@ public class ButtonsControl {
     }
 
     /**
-     * Controlla se la posizione data è all'interno di uno dei Button.
-     * @param touchX Posizione x da controllare.
-     * @param touchY Posizione y da controllare.
-     * @return Ritorna vero se il punto (touchX,touchY) è all'interno di un Button.
+     * @return 'true' if the point (touchX,touchY) is within a Button
      */
     public boolean isInsideAButton(float touchX, float touchY) {
         return getColorAt(touchX, touchY) != Color.rgb(0, 0, 0);
     }
 
     /**
-     * Restituisce il Button nella posizione data. Se c'è in base a isInsideButton.
-     * @param touchX Posizione x da controllare.
-     * @param touchY Posizione y da controllare.
-     * @return Ritorna il Button nella posizione (touchX,touchY). Ritorna null se non ve ne è nessuno.
+     * @return The Button in the specified position (touchX,touchY).
      */
     public Button getPressedButton(float touchX, float touchY) {
         return buttonsMap.get(getColorAt(touchX, touchY)).button;
