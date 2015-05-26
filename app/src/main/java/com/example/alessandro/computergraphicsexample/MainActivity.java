@@ -17,8 +17,8 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
-import game.JSONd;
-import game.RequestMaker;
+import game.net.communication.JSONd;
+import game.net.communication.RequestMaker;
 import game.net.LoginHandler;
 import game.net.LoginHandlerListener;
 import game.net.communication.NotConnectedException;

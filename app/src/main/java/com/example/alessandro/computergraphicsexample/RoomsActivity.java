@@ -23,8 +23,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import game.JSONd;
-import game.RequestMaker;
+import game.net.communication.JSONd;
+import game.net.communication.RequestMaker;
 import game.Room;
 import game.UserData;
 import game.net.communication.NotConnectedException;

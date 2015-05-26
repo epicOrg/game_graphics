@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import game.net.communication.JSONd;
+import game.net.communication.RequestMaker;
+
 /**
  * Created by depa on 26/05/15.
  */

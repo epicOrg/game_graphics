@@ -2,8 +2,8 @@ package game.net;
 
 import org.json.JSONObject;
 
-import game.JSONd;
-import game.RequestMaker;
+import game.net.communication.JSONd;
+import game.net.communication.RequestMaker;
 import game.Waiter;
 import game.player.Player;
 import game.player.PlayerStatus;

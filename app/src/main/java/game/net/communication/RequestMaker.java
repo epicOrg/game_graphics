@@ -1,4 +1,4 @@
-package game;
+package game.net.communication;
 
 import android.util.Log;
 

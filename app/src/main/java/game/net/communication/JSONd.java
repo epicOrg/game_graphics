@@ -1,4 +1,4 @@
-package game;
+package game.net.communication;
 
 import org.json.JSONException;
 import org.json.JSONObject;

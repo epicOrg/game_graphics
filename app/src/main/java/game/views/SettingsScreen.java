@@ -13,8 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alessandro.computergraphicsexample.R;
-import game.JSONd;
-import game.RequestMaker;
+import game.net.communication.JSONd;
+import game.net.communication.RequestMaker;
 import game.Room;
 import game.Team;
 import game.UserData;
@@ -38,7 +38,6 @@ public class SettingsScreen {
     private RequestMaker requestMaker;
 
     private SettingsScreen settingsScreen;
-//    private GameManager gameManager;
 
     public SettingsScreen(Activity activity, LinearLayout container, RequestMaker requestMaker) {
         this.activity = activity;
@@ -51,8 +50,6 @@ public class SettingsScreen {
     }
 
     private void setup() {
-//        gameManager = GameManager.MANAGER;
-
         SettingsContainer settingsContainer = new SettingsContainer(activity);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         settingsContainer.setLayoutParams(layoutParams);

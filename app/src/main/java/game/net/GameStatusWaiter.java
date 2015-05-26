@@ -1,7 +1,7 @@
 package game.net;
 
-import game.JSONd;
-import game.RequestMaker;
+import game.net.communication.JSONd;
+import game.net.communication.RequestMaker;
 import game.Waiter;
 import game.net.communication.NotConnectedException;
 import game.net.communication.ServerCommunicationThread;
