@@ -65,6 +65,8 @@ public class AudioCallManager {
 
         if (audio.isWiredHeadsetOn())
             audio.setSpeakerphoneOn(false);
+        else
+            audio.setSpeakerphoneOn(true);
     }
 
     public void releaseResources() {
