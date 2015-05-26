@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 /**
  * Singleton che si occupa di gestire il database di MazeObjects e relative textures.
+ *
  * @author Stefano De Pace
  */
 public enum  MapObjects {
@@ -16,6 +17,7 @@ public enum  MapObjects {
 
     /**
      * Restituisce un MazeObject da una serie di dati
+     *
      * @param object Nome del MazeObject
      * @param position Posizione del MazeObject
      * @param size Dimensioni del MazeObject

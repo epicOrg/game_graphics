@@ -165,7 +165,7 @@ public class GraphicsView extends GLSurfaceView {
                 for (Player player : team.getPlayers()) {
                     if (!player.getName().equals(me.getName())) {
                         playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
-                        labels.add(new TextLabel(0.6f, 0.6f, 0.5f, me.getStatus().getDirection(), player.getStatus().getPosition(), player.getName(), team.getColor()));
+                        labels.add(new TextLabel(30, 0.14f, 0.5f, me.getStatus().getDirection(), player.getStatus().getPosition(), player.getName(), team.getColor()));
                     }
                 }
             }
@@ -205,7 +205,6 @@ public class GraphicsView extends GLSurfaceView {
 
         @Override
         public void onDrawFrame(GL10 gl) {
-            sky.draw();
             program.setupProjection(camera.getResultMatrix());
             SFOGLSystemState.cleanupColorAndDepth(0, 0, 1, 1);
             sfs.applyState();

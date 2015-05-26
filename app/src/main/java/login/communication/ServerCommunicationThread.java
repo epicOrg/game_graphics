@@ -39,6 +39,7 @@ import static login.communication.ServerCommunicationThreadState.NOT_CONNECTED;
 public class ServerCommunicationThread extends Thread {
 
     public static final String LOG_TAG = "ServerCommunicationT";
+    public static final int WAIT_TIME = 5000;
 
     public static final int SERVER_PORT = 7007;
 
@@ -93,7 +94,7 @@ public class ServerCommunicationThread extends Thread {
 
         try {
             socket = new Socket();
-            socket.connect(new InetSocketAddress(InetAddress.getByName(serverAddres), SERVER_PORT), 5000);
+            socket.connect(new InetSocketAddress(InetAddress.getByName(serverAddres), SERVER_PORT), WAIT_TIME);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new PrintWriter(socket.getOutputStream(), true);
             setStateAndUpdate(CONNECTED);

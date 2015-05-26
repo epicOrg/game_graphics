@@ -14,7 +14,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
-import game.GameManager;
 import game.Interpreters.MapInterpreter;
 import game.Interpreters.PositionsInterpreter;
 import game.Interpreters.StatusInterpreter;
@@ -22,6 +21,7 @@ import game.JSONd;
 import game.RequestMaker;
 import game.Room;
 import game.Team;
+import game.UserData;
 import game.WaiterGroup;
 import game.graphics.Map;
 import game.musics.BackgroundSound;
@@ -49,7 +49,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
     private ServerCommunicationThread serverCommunicationThread = ServerCommunicationThread.getInstance();
     private BackgroundSound backgroundSound;
-    private GameManager gameManager;
+//    private GameManager gameManager;
     private GameHandler gameHandler;
 
     private CountDownLatch startSignal = new CountDownLatch(1);
@@ -61,9 +61,6 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
     private MessageScreen messageScreen;
     private SettingsScreen settingsScreen;
-
-    private String username;
-    private int hashcode;
 
     private Player me;
     private ArrayList<Player> otherPlayers = new ArrayList<>();
@@ -84,21 +81,12 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
         Intent intent = getIntent();
         boolean noServer = intent.getBooleanExtra("NO_SERVER", false);
-        gameManager = GameManager.MANAGER;
-        username = intent.getStringExtra(FieldsNames.USERNAME);
-        hashcode = intent.getIntExtra(FieldsNames.HASHCODE, 0);
-        requestMaker=new RequestMaker(new JSONd(FieldsNames.USERNAME, username),
-                new JSONd(FieldsNames.HASHCODE, hashcode),
-                new JSONd(FieldsNames.ROOM_NAME, gameManager.getRoom().getName()));
+        requestMaker= UserData.DATA.getRequestMakerWithData(FieldsNames.USERNAME, FieldsNames.HASHCODE, FieldsNames.ROOM_NAME);
 
         messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
         messageScreen = new MessageScreen(this, Color.argb(128, 0xCD, 0xDC, 0x39), messageContainer);
         settingsScreen = new SettingsScreen(this, menuContainer, requestMaker);
-
-        if (noServer) {
-            gameManager.setRoom(new Room("TestRoom", 10, 2));
-        }
 
         backgroundSound = new BackgroundSound(context, new GameSoundtracks(R.raw.soundtrack_01, R.raw.soundtrack_02).getSoundtracks(context));
 
@@ -106,7 +94,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         SFVertex3f direction = new SFVertex3f(-1, -0.25f, 0);
 
         me = new Player(new PlayerStatus(direction, new Circle(position, 0.75)), "Me");
-        Room room = gameManager.getRoom();
+        Room room = (Room)UserData.DATA.getData(FieldsNames.CURRENT_ROOM);
         ArrayList<Team> teams = room.getTeams();
         if (teams != null)
             for (Team team : teams)
@@ -115,7 +103,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         Iterator<Player> iterator = otherPlayers.iterator();
         while (iterator.hasNext()) {
             Player p = iterator.next();
-            if (p.getName().equals(username)) {
+            if (p.getName().equals(UserData.DATA.getData(FieldsNames.USERNAME))) {
                 me = p;
                 iterator.remove();
             }
@@ -134,12 +122,9 @@ public class GameActivity extends Activity implements GameHandlerListener {
             Log.d(LOG_TAG, "Starting GamePositionSender..");
             GamePositionSender gamePositionSender = new GamePositionSender(me, room.getName());
 
-//            gameHandler=new GameHandler(me, gamePositionSender, messageScreen);
-//            gameHandler.addGameHandlerListeners(this);
-
             mapInterpreter=new MapInterpreter(me.getStatus(), this);
             gameHandler=new GameHandler(new StatusInterpreter(messageScreen, gamePositionSender, this), mapInterpreter,
-                    new PositionsInterpreter(gameManager.getRoom()));
+                    new PositionsInterpreter((Room)UserData.DATA.getData(FieldsNames.CURRENT_ROOM)));
 
             waiterGroup.addWaiter(gamePositionSender);
             waiterGroup.addWaiter(new GameStatusWaiter(requestMaker));
@@ -194,7 +179,10 @@ public class GameActivity extends Activity implements GameHandlerListener {
         Log.d(LOG_TAG, "Starting GraphicsView..");
         int width = mapInterpreter.getGroundWidth();
         int height = mapInterpreter.getGroundHeight();
-        graphicsView = new GraphicsView(context, me, gameManager.getRoom().getTeams(), mapInterpreter.getMap(), startSignal, width, height, settingsScreen);
+
+        graphicsView = new GraphicsView(context, me, ((Room)UserData.DATA.getData(FieldsNames.CURRENT_ROOM)).getTeams(),
+                mapInterpreter.getMap(), startSignal, width, height, settingsScreen);
+
         LinearLayout graphicsContainerLayout = (LinearLayout) findViewById(R.id.graphics_view_container);
         graphicsContainerLayout.addView(graphicsView);
     }

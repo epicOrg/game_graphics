@@ -20,4 +20,8 @@ public class JSONd {
         request.put(name, value);
     }
 
+    public String toString(){
+        return "["+name+";"+value+"]";
+    }
+
 }

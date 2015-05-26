@@ -1,5 +1,7 @@
 package game;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Arrays;
@@ -11,10 +13,8 @@ import shadow.math.SFVertex3f;
  */
 public class RequestMaker {
 
+    public static final String LOG_TAG = "RequestMaker";
     private LinkedList<JSONd> defaultRequests;
-
-    public RequestMaker() {
-    }
 
     public RequestMaker(JSONd... defaultRequests) {
         this.defaultRequests=new LinkedList<>(Arrays.asList(defaultRequests));
@@ -23,6 +23,9 @@ public class RequestMaker {
     public JSONObject getNewRequestWithDefaultRequests(JSONd...jsoNcouples) {
         JSONObject request = getNewRequest(jsoNcouples);
         try {
+            for (JSONd d: defaultRequests){
+                Log.d(LOG_TAG,"JSONd: "+d);
+            }
             for (JSONd d: defaultRequests){
                 d.putrequest(request);
             }

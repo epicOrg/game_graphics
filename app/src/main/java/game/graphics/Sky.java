@@ -2,22 +2,12 @@ package game.graphics;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
-import android.opengl.GLES20;
-
 import com.example.alessandro.computergraphicsexample.R;
-
 import java.util.List;
-
 import game.generators.FundamentalGenerator;
 import sfogl.integration.ArrayObject;
-import sfogl.integration.BitmapTexture;
-import sfogl.integration.Material;
-import sfogl.integration.Mesh;
-import sfogl.integration.Model;
 import sfogl.integration.Node;
 import sfogl.integration.ShadingProgram;
-import sfogl2.SFOGLTextureModel;
-import shadow.graphics.SFImageFormat;
 import shadow.math.SFMatrix3f;
 import shadow.math.SFTransform3f;
 import shadow.math.SFVertex3f;

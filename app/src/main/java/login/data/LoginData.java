@@ -14,6 +14,8 @@ import java.util.HashMap;
  */
 public class LoginData {
 
+    public static final int MIN_LENGHT=8;
+
     private String username;
     private String password;
 
@@ -23,7 +25,7 @@ public class LoginData {
     }
 
     private boolean isPasswordLognEnought() {
-        return password.length() > 7;
+        return password.length() >= MIN_LENGHT;
     }
 
     private boolean isPasswordValid() {

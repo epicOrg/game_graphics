@@ -10,6 +10,7 @@ import com.example.alessandro.computergraphicsexample.RoomsActivity;
 
 import java.util.ArrayList;
 
+import game.UserData;
 import login.interaction.FieldsNames;
 import login.services.Login;
 
@@ -44,8 +45,8 @@ public class LoginHandler extends Handler {
                 l.onLoginComplete(true);
 
             Intent intent = new Intent(context, RoomsActivity.class);
-            intent.putExtra(FieldsNames.USERNAME, result.getUsername());
-            intent.putExtra(FieldsNames.HASHCODE, result.getHashcode());
+            UserData.DATA.addData(FieldsNames.USERNAME, result.getUsername());
+            UserData.DATA.addData(FieldsNames.HASHCODE, result.getHashcode());
             context.startActivity(intent);
         } else {
             for (LoginHandlerListener l : loginHandlerListeners)

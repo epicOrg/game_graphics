@@ -13,14 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alessandro.computergraphicsexample.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import game.GameManager;
 import game.JSONd;
 import game.RequestMaker;
+import game.Room;
 import game.Team;
+import game.UserData;
 import game.player.Player;
 import login.audio.AudioCallManager;
 import login.communication.NotConnectedException;
@@ -41,7 +38,7 @@ public class SettingsScreen {
     private RequestMaker requestMaker;
 
     private SettingsScreen settingsScreen;
-    private GameManager gameManager;
+//    private GameManager gameManager;
 
     public SettingsScreen(Activity activity, LinearLayout container, RequestMaker requestMaker) {
         this.activity = activity;
@@ -54,7 +51,7 @@ public class SettingsScreen {
     }
 
     private void setup() {
-        gameManager = GameManager.MANAGER;
+//        gameManager = GameManager.MANAGER;
 
         SettingsContainer settingsContainer = new SettingsContainer(activity);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -116,7 +113,8 @@ public class SettingsScreen {
         playersContainer.setLayoutParams(playersLayout);
         playersContainer.setOrientation(LinearLayout.VERTICAL);
 
-        for (Team t : gameManager.getRoom().getTeams()) {
+        Room room=(Room) UserData.DATA.getData(FieldsNames.CURRENT_ROOM);
+        for (Team t : room.getTeams()) {
             TextView teamName = new TextView(activity);
             teamName.setText(t.getName());
             teamName.setTypeface(teamName.getTypeface(), Typeface.BOLD);

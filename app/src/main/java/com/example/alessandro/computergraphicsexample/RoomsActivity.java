@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import game.JSONd;
 import game.RequestMaker;
 import game.Room;
+import game.UserData;
 import login.communication.NotConnectedException;
 import login.communication.ServerCommunicationThread;
 import login.interaction.FieldsNames;
@@ -50,9 +51,6 @@ public class RoomsActivity extends ActionBarActivity {
     private ArrayAdapter<Room> adapter;
     private ArrayList<Room> rooms = new ArrayList<>();
 
-    private String username;
-    private int hashcode;
-
     private Context context;
     private String result;
     private RequestMaker requestMaker;
@@ -73,12 +71,7 @@ public class RoomsActivity extends ActionBarActivity {
 
 
         context = this;
-
-        Intent intent = getIntent();
-        username = intent.getStringExtra(FieldsNames.USERNAME);
-        hashcode = intent.getIntExtra(FieldsNames.HASHCODE, 0);
-        requestMaker=new RequestMaker(new JSONd(FieldsNames.USERNAME, username),
-                new JSONd(FieldsNames.HASHCODE, hashcode));
+        requestMaker= UserData.DATA.getRequestMaker();
 
 
         roomsList = (ListView) findViewById(R.id.rooms_list);
@@ -242,9 +235,7 @@ public class RoomsActivity extends ActionBarActivity {
             Rooms.RoomJoinResult roomJoinResult = (Rooms.RoomJoinResult) msg.obj;
             if (roomJoinResult.getResult()) {
                 Intent intent = new Intent(context, RoomActivity.class);
-                intent.putExtra(FieldsNames.USERNAME, username);
-                intent.putExtra(FieldsNames.HASHCODE, hashcode);
-                intent.putExtra(FieldsNames.ROOM_NAME, roomJoinResult.getName());
+                UserData.DATA.addData(FieldsNames.ROOM_NAME, roomJoinResult.getName());
                 startActivity(intent);
             } else {
                 Toast.makeText(context, getString(R.string.rooms_join_error), Toast.LENGTH_LONG).show();

@@ -15,12 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import game.GameManager;
 import game.JSONd;
 import game.RequestMaker;
 import game.Room;
 import game.Team;
+import game.UserData;
 import game.player.Player;
 import login.communication.NotConnectedException;
 import login.communication.ServerCommunicationThread;
@@ -45,9 +44,6 @@ public class RoomActivity extends ActionBarActivity {
 
     private Room currentRoom;
 
-    private String username, roomName;
-    private int hashcode;
-
     private Context context;
     private RequestMaker requestMaker;
 
@@ -58,14 +54,8 @@ public class RoomActivity extends ActionBarActivity {
         setContentView(R.layout.activity_room);
         context = this;
 
-        Intent intent = getIntent();
-        username = intent.getStringExtra(FieldsNames.USERNAME);
-        hashcode = intent.getIntExtra(FieldsNames.HASHCODE, 0);
-        roomName = intent.getStringExtra(FieldsNames.ROOM_NAME);
-        requestMaker=new RequestMaker(new JSONd(FieldsNames.USERNAME, username),
-                new JSONd(FieldsNames.HASHCODE, hashcode),
-                new JSONd(FieldsNames.ROOM_NAME, roomName),
-                new JSONd(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM));
+        UserData.DATA.addData(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
+        requestMaker= UserData.DATA.getRequestMaker();
 
         roomStatus = (TextView) findViewById(R.id.room_status);
         roomListsContainer = (LinearLayout) findViewById(R.id.room_lists_container);
@@ -80,7 +70,7 @@ public class RoomActivity extends ActionBarActivity {
             e.printStackTrace();
         }
 
-        getSupportActionBar().setTitle(getString(R.string.room_title) + ": " + roomName);
+        getSupportActionBar().setTitle(getString(R.string.room_title) + ": " + UserData.DATA.getData(FieldsNames.ROOM_NAME));
     }
 
     @Override
@@ -135,7 +125,7 @@ public class RoomActivity extends ActionBarActivity {
                 firstTime = true;
 
             CurrentRoom.CurrentRoomResult results = (CurrentRoom.CurrentRoomResult) msg.obj;
-            currentRoom = new Room(roomName, results.getMaxPlayer(), results.getTeams());
+            currentRoom = new Room((String)UserData.DATA.getData(FieldsNames.ROOM_NAME), results.getMaxPlayer(), results.getTeams());
 
             int currentPlayers = 0;
 
@@ -177,12 +167,9 @@ public class RoomActivity extends ActionBarActivity {
             boolean result = (boolean) msg.obj;
 
             if (result) {
-                GameManager gameManager = GameManager.MANAGER;
-                gameManager.setRoom(currentRoom);
+                UserData.DATA.addData(FieldsNames.CURRENT_ROOM,currentRoom);
 
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
-                intent.putExtra(FieldsNames.USERNAME, username);
-                intent.putExtra(FieldsNames.HASHCODE, hashcode);
                 startActivity(intent);
             }
         }
