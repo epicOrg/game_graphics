@@ -18,6 +18,7 @@ public class Obstacle implements MazeObject {
     private Circle c;
     private int texture_id;
     private float height;
+    private String model;
 
     /**
      * Creates a new Obstacle from specified dimension and texture.
@@ -26,16 +27,19 @@ public class Obstacle implements MazeObject {
      * @param height Height in y direction.
      * @param texture_id Texture indes.
      */
-    public Obstacle(Circle c, double height, int texture_id) {
+    public Obstacle(Circle c, double height, int texture_id, String model) {
         this.c = c;
         this.texture_id = texture_id;
         this.height = (float) height / 2;
+        this.model=model;
     }
 
     public Node getNode(Context context) {
         Node node = new Node();
+//        node.setModel(FundamentalGenerator.getModel(context, ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER),
+//                texture_id, "Obstacle01.obj"));
         node.setModel(FundamentalGenerator.getModel(context, ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER),
-                texture_id, "Obstacle01.obj"));
+                texture_id, model));
         node.getRelativeTransform().setPosition(c.getPos());
         node.getRelativeTransform().setMatrix(SFMatrix3f.getScale(c.getRadius(), height, c.getRadius()));
         return node;
@@ -52,7 +56,7 @@ public class Obstacle implements MazeObject {
         float posZ = Float.parseFloat(position.split(" ")[2]);
         float sizeX = Float.parseFloat(size.split(" ")[0]);
         float sizeY = Float.parseFloat(size.split(" ")[1]);
-        return new Obstacle(new Circle(new SFVertex3f(posX, posY, posZ), sizeX), sizeY, textureId);
+        return new Obstacle(new Circle(new SFVertex3f(posX, posY, posZ), sizeX), sizeY, textureId, model);
     }
 }
 
