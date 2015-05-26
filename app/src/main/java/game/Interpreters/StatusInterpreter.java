@@ -14,7 +14,9 @@ import game.net.services.Game;
 import game.views.MessageScreen;
 
 /**
- * Created by depa on 23/05/15.
+ * Interpreter to interpret status data.
+ *
+ * @author Stefano De Pace
  */
 public class StatusInterpreter implements Interpreter {
 
@@ -24,6 +26,13 @@ public class StatusInterpreter implements Interpreter {
     private GamePositionSender gamePositionSender;
     private LinkedList<GameHandlerListener> gameHandlerListeners = new LinkedList<>();
 
+    /**
+     * Creates a new StatusInterpreter.
+     *
+     * @param messageScreen        MessageScreen that shows the status.
+     * @param gamePositionSender   GamePositionSender to stop sending position data.
+     * @param gameHandlerListeners GameHandlerListeners to call at game start and end.
+     */
     public StatusInterpreter(MessageScreen messageScreen, GamePositionSender gamePositionSender, GameHandlerListener... gameHandlerListeners) {
         this.messageScreen = messageScreen;
         this.gamePositionSender = gamePositionSender;
