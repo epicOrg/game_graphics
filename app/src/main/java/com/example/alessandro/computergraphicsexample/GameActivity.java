@@ -36,11 +36,11 @@ import game.player.PlayerStatus;
 import game.views.MessageScreen;
 import game.views.SettingsScreen;
 import game.views.SplashScreen;
-import login.audio.AudioCallManager;
-import login.audio.HeadsetListener;
-import login.communication.NotConnectedException;
-import login.communication.ServerCommunicationThread;
-import login.interaction.FieldsNames;
+import game.net.audio.AudioCallManager;
+import game.net.audio.HeadsetListener;
+import game.net.communication.NotConnectedException;
+import game.net.communication.ServerCommunicationThread;
+import game.net.interaction.FieldsNames;
 import shadow.math.SFVertex3f;
 
 public class GameActivity extends Activity implements GameHandlerListener {

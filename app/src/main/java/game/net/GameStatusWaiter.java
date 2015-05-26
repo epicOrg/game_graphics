@@ -3,9 +3,9 @@ package game.net;
 import game.JSONd;
 import game.RequestMaker;
 import game.Waiter;
-import login.communication.NotConnectedException;
-import login.communication.ServerCommunicationThread;
-import login.interaction.FieldsNames;
+import game.net.communication.NotConnectedException;
+import game.net.communication.ServerCommunicationThread;
+import game.net.interaction.FieldsNames;
 
 /**
  * Class which sends a "GAME_READY" message when asked.

@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import login.communication.ServerCommunicationThread;
+import game.net.communication.ServerCommunicationThread;
 
 /**
  * The user has to insert the address of the server he wants to

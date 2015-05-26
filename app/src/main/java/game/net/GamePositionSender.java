@@ -7,9 +7,9 @@ import game.RequestMaker;
 import game.Waiter;
 import game.player.Player;
 import game.player.PlayerStatus;
-import login.communication.NotConnectedException;
-import login.communication.ServerCommunicationThread;
-import login.interaction.FieldsNames;
+import game.net.communication.NotConnectedException;
+import game.net.communication.ServerCommunicationThread;
+import game.net.interaction.FieldsNames;
 
 /**
  * Class containing a thread which sends the current player's position and direction to the server.

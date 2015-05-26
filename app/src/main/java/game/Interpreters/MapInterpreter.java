@@ -2,18 +2,13 @@ package game.Interpreters;
 
 import android.os.Message;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import game.graphics.Map;
 import game.graphics.MapObjects;
 import game.net.GameHandlerListener;
 import game.player.PlayerStatus;
-import login.interaction.FieldsNames;
-import login.services.Game;
+import game.net.services.Game;
 
 /**
  * Created by depa on 23/05/15.

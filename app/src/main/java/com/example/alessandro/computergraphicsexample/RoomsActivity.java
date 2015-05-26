@@ -27,11 +27,11 @@ import game.JSONd;
 import game.RequestMaker;
 import game.Room;
 import game.UserData;
-import login.communication.NotConnectedException;
-import login.communication.ServerCommunicationThread;
-import login.interaction.FieldsNames;
-import login.interaction.RoomsErrorStrings;
-import login.services.Rooms;
+import game.net.communication.NotConnectedException;
+import game.net.communication.ServerCommunicationThread;
+import game.net.interaction.FieldsNames;
+import game.net.interaction.RoomsErrorStrings;
+import game.net.services.Rooms;
 
 /**
  * In this screen the list of rooms is shown.

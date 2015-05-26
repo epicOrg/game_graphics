@@ -11,8 +11,8 @@ import com.example.alessandro.computergraphicsexample.RoomsActivity;
 import java.util.ArrayList;
 
 import game.UserData;
-import login.interaction.FieldsNames;
-import login.services.Login;
+import game.net.interaction.FieldsNames;
+import game.net.services.Login;
 
 /**
  * Handler che permette la comunicazione tra il Thread di login attivato alla ricezione della risposta dal server e

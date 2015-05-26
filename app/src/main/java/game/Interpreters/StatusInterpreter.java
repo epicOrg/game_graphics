@@ -3,16 +3,14 @@ package game.Interpreters;
 import android.graphics.Color;
 import android.os.Message;
 import android.util.Log;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import game.net.GameHandlerListener;
 import game.net.GamePositionSender;
 import game.views.MessageScreen;
-import login.interaction.FieldsNames;
-import login.services.Game;
+import game.net.interaction.FieldsNames;
+import game.net.services.Game;
 
 /**
  * Created by depa on 23/05/15.

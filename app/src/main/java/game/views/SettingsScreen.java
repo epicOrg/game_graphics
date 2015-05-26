@@ -19,10 +19,10 @@ import game.Room;
 import game.Team;
 import game.UserData;
 import game.player.Player;
-import login.audio.AudioCallManager;
-import login.communication.NotConnectedException;
-import login.communication.ServerCommunicationThread;
-import login.interaction.FieldsNames;
+import game.net.audio.AudioCallManager;
+import game.net.communication.NotConnectedException;
+import game.net.communication.ServerCommunicationThread;
+import game.net.interaction.FieldsNames;
 
 /**
  * Created by Andrea on 12/05/2015.

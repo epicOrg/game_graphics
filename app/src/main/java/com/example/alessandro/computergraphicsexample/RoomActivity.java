@@ -21,10 +21,10 @@ import game.Room;
 import game.Team;
 import game.UserData;
 import game.player.Player;
-import login.communication.NotConnectedException;
-import login.communication.ServerCommunicationThread;
-import login.interaction.FieldsNames;
-import login.services.CurrentRoom;
+import game.net.communication.NotConnectedException;
+import game.net.communication.ServerCommunicationThread;
+import game.net.interaction.FieldsNames;
+import game.net.services.CurrentRoom;
 
 /**
  * Room screen: every user can see who is in the same room.

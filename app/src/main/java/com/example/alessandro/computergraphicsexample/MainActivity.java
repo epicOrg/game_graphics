@@ -21,13 +21,13 @@ import game.JSONd;
 import game.RequestMaker;
 import game.net.LoginHandler;
 import game.net.LoginHandlerListener;
-import login.communication.NotConnectedException;
-import login.communication.ServerCommunicationThread;
-import login.communication.ServerCommunicationThreadListener;
-import login.communication.ServerCommunicationThreadState;
-import login.data.LoginData;
-import login.interaction.FieldsNames;
-import login.interaction.ProgressShower;
+import game.net.communication.NotConnectedException;
+import game.net.communication.ServerCommunicationThread;
+import game.net.communication.ServerCommunicationThreadListener;
+import game.net.communication.ServerCommunicationThreadState;
+import game.net.data.LoginData;
+import game.net.interaction.FieldsNames;
+import game.net.interaction.ProgressShower;
 
 /**
  * Login activity: the user inserts username and password

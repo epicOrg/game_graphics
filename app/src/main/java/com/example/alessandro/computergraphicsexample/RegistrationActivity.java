@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import game.JSONd;
 import game.RequestMaker;
-import login.communication.NotConnectedException;
-import login.communication.ServerCommunicationThread;
-import login.data.RegistrationData;
-import login.interaction.FieldsNames;
-import login.interaction.ProgressShower;
-import login.interaction.RegistrationErrorStrings;
-import login.services.Register;
+import game.net.communication.NotConnectedException;
+import game.net.communication.ServerCommunicationThread;
+import game.net.data.RegistrationData;
+import game.net.interaction.FieldsNames;
+import game.net.interaction.ProgressShower;
+import game.net.interaction.RegistrationErrorStrings;
+import game.net.services.Register;
 
 /**
  * A login screen where the user can register with username,
