@@ -13,9 +13,11 @@ import sfogl2.SFOGLTextureModel;
 import shadow.graphics.SFImageFormat;
 
 /**
- * Gestisce le texture caricate dalle risorse; permette di accedervi  senza doverle ricaricare più volte,
- * o di ricaricarle automaticamente tutte in caso di necessità.
- * @author Stefano De Pace
+ * It manages the texture loaded from resources.
+ * It allows to access the texture without load them several times or
+ * automatically load them when needed.
+ *
+ * @author De Pace
  */
 public enum TextureKeeper{
     TEXTURE_KEEPER;
@@ -25,14 +27,13 @@ public enum TextureKeeper{
     private  HashMap<Integer, BitmapTexture> mapFromResources = new HashMap<>();
     private  HashMap<Integer, BitmapTexture> mapFromColors = new HashMap<>();
 
-    TextureKeeper(){;}
-
     /**
-     * Carica una nuova texture da un'immagine nelle risorse, o restituisce la BitmapTexture
-     * se l'immagine è già stata caricata.
-     * @param context Context per ottenere le risorse.
-     * @param textureId indice dell'immagine nelle risorse.
-     * @return BitmapTexture che rappresenta la texture caricata.
+     * Loads a new texture from an image in the resources
+     * or return the BitmapTexture if the image has lready been loaded.
+     *
+     * @param context Context to find resources.
+     * @param textureId Image index in the resources.
+     * @return BitmapTexture which represents the loaded texture.
      */
     public BitmapTexture getTexture(Context context, int textureId) {
         if (mapFromResources.containsKey(textureId))
@@ -42,9 +43,11 @@ public enum TextureKeeper{
     }
 
     /**
-     * Genera una texture da un colore e la memorizza; rappresenta un colore uniforme.
-     * @param color colore da cui ottenere la texture, rappresentato con un intero a 4 bit: (R,G,B,A).
-     * @return BitmapTexture che rappresenta la texture caricata.
+     * Creates a texture from a color and stores it.
+     * Represents a uniform color.
+     *
+     * @param color Color from which the texture is obtained.
+     * @return BitmapTexture which represents the loaded texture.
      */
     public BitmapTexture getColorTexture(int color) {
         if (mapFromColors.containsKey(color))
@@ -54,8 +57,9 @@ public enum TextureKeeper{
     }
 
     /**
-     * Ricarica tutte le immagini già caricate in precedenza, in caso di necessità.
-     * @param context Context per ottenere le risorse.
+     * Loads every loaded image, when neede.
+     *
+     * @param context Context to find resources.
      */
     public void reload(Context context) {
         for (int i : mapFromResources.keySet()) {

@@ -13,7 +13,7 @@ import shadow.math.SFTransform3f;
 import shadow.math.SFVertex3f;
 
 /**
- * Rappresenta una Label di testo orientata dinamicamente secondo una direzione data.
+ * It represents a text label dynamically oriented on the basis of a specified direction.
  *
  * @author Stefano De Pace
  */
@@ -24,16 +24,15 @@ public class TextLabel {
     private float h;
 
     /**
-     * Crea una nuova TextLabel.
+     * Creates a new textLabel
      *
-     * @param textSize  Dimensione del testo: influenza la qualità in pixel, non le dimensioni effettive.
-     * @param height    Altezza della TextLabel: è un valore medio, la dimensione effettiva si adatta
-     *                  rispetto ad un testo con lettere più o meno alte.
-     * @param h         Altezza in y a cui la TextLabel si posiziona.
-     * @param direction La TextLabel si orienta in modo da essere visibile guardando verso questa direzione.
-     * @param position  Posizione della TextLabel (vengono considerate solo le componenti x,z la componente y è data da h).
-     * @param text      Testo che appare sulla TextLabel.
-     * @param color     Colore del testo.
+     * @param textSize Text dimension.
+     * @param height TextLabel height.
+     * @param h Vertical TextLabel position.
+     * @param direction TextLabel is oriented in order to be visible looking int this direction.
+     * @param position TextLabel position.
+     * @param text TextLabel text.
+     * @param color Text color.
      */
     public TextLabel(int textSize, float height, float h, SFVertex3f direction, SFVertex3f position, String text, int color) {
         this.direction = direction;
@@ -43,16 +42,14 @@ public class TextLabel {
     }
 
     /**
-     * Cambia la posizione della TextLabel.
-     *
-     * @param position posizione della TextLabel.
+     * Changes the TextLabel position.
      */
     public void setPosition(SFVertex3f position) {
         this.position = position;
     }
 
     /**
-     * Disegna la TextLabel.
+     * Draws the TextLabel.
      */
     public void draw() {
         node.getRelativeTransform().setPosition(new SFVertex3f(position.getX(), h, position.getZ()));

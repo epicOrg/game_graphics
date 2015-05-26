@@ -9,9 +9,9 @@ import shadow.math.SFMatrix3f;
 import shadow.math.SFVertex3f;
 
 /**
- * Ostacolo cilindrico: vaso.
+ * Cylindrical obstacle: vase.
  *
- * @author Irene
+ * @author Rocca
  */
 public class Vase implements MazeObject {
 
@@ -20,11 +20,11 @@ public class Vase implements MazeObject {
     private float height;
 
     /**
-     * Crea un nuovo Vase di dimensioni e texture dati.
+     * Creates a new Vase of specified dimension and texture.
      *
-     * @param c          Circle che costituisce la CollisionBox e determina le dimensioni nel piano xz.
-     * @param height     altezza nella direzione y.
-     * @param texture_id indice della texture nelle risorse.
+     * @param c Circle which makes up the CollisionBox and defines the dimension of xz plane.
+     * @param height Height in y direction.
+     * @param texture_id Texture indes.
      */
     public Vase(Circle c, double height, int texture_id) {
         this.c = c;

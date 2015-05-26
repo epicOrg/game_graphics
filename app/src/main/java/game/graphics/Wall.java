@@ -7,9 +7,9 @@ import sfogl.integration.Node;
 import shadow.math.SFVertex3f;
 
 /**
- * Rappresenta un muro a forma di parallelepipedo.
- * @author Stefano De Pace
+ * It represents a wall with the form of a parallelepiped.
  *
+ * @author De Pace
  */
 public class Wall implements MazeObject{
 
@@ -17,11 +17,10 @@ public class Wall implements MazeObject{
     private int textureID;
 
     /**
-     * Crea un nuovo muro, di dimensioni proporzionali a quelle dello Square dato.
-     * @param box Square che rappresenta la scatola di collisione del Wall, così come
-     *            le sue dimensioni e posizione.
-     * @param textureID Indice nelle risorse della texture che rappresenta la faccia di un Wall
-     *                  di dimensioni unitarie; viene ripetuta proporzionalmente alle dimensioni.
+     * Creates a new wall. Its dimension is proportional to those of the specific Square.
+     *
+     * @param box Square which represent the wall collision box.
+     * @param textureID Index of the texture which represent the wall face.
      */
     public Wall(Square box, int textureID){
         this.box=box;

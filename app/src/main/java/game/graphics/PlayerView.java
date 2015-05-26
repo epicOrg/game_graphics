@@ -11,7 +11,8 @@ import shadow.math.SFTransform3f;
 import shadow.math.SFVertex3f;
 
 /**
- * Created by depa on 21/04/15.
+ * @author De Pace
+ * @date 21/04/15
  */
 public class PlayerView {
 

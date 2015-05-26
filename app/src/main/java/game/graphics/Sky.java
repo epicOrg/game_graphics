@@ -13,7 +13,8 @@ import shadow.math.SFTransform3f;
 import shadow.math.SFVertex3f;
 
 /**
- * Created by Andrea on 31/03/2015.
+ * @author Torlaschi
+ * @date 31/03/2015
  */
 public class Sky {
 
