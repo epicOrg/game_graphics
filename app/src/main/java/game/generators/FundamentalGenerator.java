@@ -76,4 +76,5 @@ public class FundamentalGenerator {
 
         return nodePos;
     }
+
 }
