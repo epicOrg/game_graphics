@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -47,8 +46,6 @@ public class RoomActivity extends ActionBarActivity {
 
     private Context context;
     private RequestMaker requestMaker;
-
-    private boolean isStartingGame = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -107,15 +104,6 @@ public class RoomActivity extends ActionBarActivity {
     @Override
     protected void onStop() {
         super.onStop();
-
-        if (!isStartingGame) {
-            try {
-                serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS),
-                        new JSONd(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_EXIT)));
-            } catch (NotConnectedException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     public class RoomHandler extends Handler {
@@ -158,7 +146,7 @@ public class RoomActivity extends ActionBarActivity {
 
                 currentPlayers += t.getPlayers().size();
             }
-            
+
             roomStatus.setText("(" + currentPlayers + " / " + (results.getMaxPlayer() * results.getTeams().size()) + ")");
 
             if (firstTime) {
@@ -185,7 +173,6 @@ public class RoomActivity extends ActionBarActivity {
             if (result) {
                 UserData.DATA.addData(FieldsNames.CURRENT_ROOM, currentRoom);
 
-                isStartingGame = true;
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
                 startActivity(intent);
             }
