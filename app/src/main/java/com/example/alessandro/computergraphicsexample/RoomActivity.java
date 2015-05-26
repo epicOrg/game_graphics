@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -157,8 +158,8 @@ public class RoomActivity extends ActionBarActivity {
 
                 currentPlayers += t.getPlayers().size();
             }
-
-            roomStatus.setText("(" + currentPlayers + " / " + (results.getMaxPlayer() * currentRoom.getTeams().size()) + ")");
+            
+            roomStatus.setText("(" + currentPlayers + " / " + (results.getMaxPlayer() * results.getTeams().size()) + ")");
 
             if (firstTime) {
                 try {
