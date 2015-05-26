@@ -61,11 +61,10 @@ public class AudioCallManager {
         Log.d(LOG_TAG, "ServerPort: " + serverPort);
         audioStream.associate(serverIp, serverPort);
         audioStream.join(audioGroup);
-        AudioManager Audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        Audio.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        AudioManager audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
-        if (Audio.isWiredHeadsetOn())
-            Audio.setSpeakerphoneOn(false);
+        if (audio.isWiredHeadsetOn())
+            audio.setSpeakerphoneOn(false);
     }
 
     public void releaseResources() {

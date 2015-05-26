@@ -47,8 +47,6 @@ public class RoomActivity extends ActionBarActivity {
     private Context context;
     private RequestMaker requestMaker;
 
-    private boolean areWeReturning = false;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +99,18 @@ public class RoomActivity extends ActionBarActivity {
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        try {
+            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS),
+                    new JSONd(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_EXIT)));
+        } catch (NotConnectedException e) {
+            e.printStackTrace();
+        }
     }
 
     public class RoomHandler extends Handler {
@@ -169,8 +179,7 @@ public class RoomActivity extends ActionBarActivity {
 
             if (result) {
                 UserData.DATA.addData(FieldsNames.CURRENT_ROOM, currentRoom);
-                
-                finish();
+
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
                 startActivity(intent);
             }
