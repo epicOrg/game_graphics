@@ -170,6 +170,7 @@ public class RoomActivity extends ActionBarActivity {
 
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
                 startActivity(intent);
+                finish();
             }
         }
 

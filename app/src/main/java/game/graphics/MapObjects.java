@@ -53,6 +53,7 @@ public enum MapObjects {
         codes.put("hedge_texture_02_1", R.drawable.hedge_texture_02_1);
         codes.put("hedge_texture_02_2", R.drawable.hedge_texture_02_2);
         codes.put("vase_texture", R.drawable.vase_texture);
+        codes.put("meat_texture_01", R.drawable.meat_texture_01);
     }
 
 }
