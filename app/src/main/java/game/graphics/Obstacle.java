@@ -36,8 +36,6 @@ public class Obstacle implements MazeObject {
 
     public Node getNode(Context context) {
         Node node = new Node();
-//        node.setModel(FundamentalGenerator.getModel(context, ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER),
-//                texture_id, "Obstacle01.obj"));
         node.setModel(FundamentalGenerator.getModel(context, ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER),
                 texture_id, model));
         node.getRelativeTransform().setPosition(c.getPos());

@@ -1,16 +1,14 @@
 package game.graphics;
 
 import android.content.Context;
-
 import game.generators.FundamentalGenerator;
-import game.physics.Circle;
 import game.physics.CollisionBox;
 import sfogl.integration.Node;
 import shadow.math.SFMatrix3f;
 import shadow.math.SFVertex3f;
 
 /**
- * Ostacolo senza collisione.
+ * Decoration Object. Basically a collision-free MazeObject with customizable 3D model.
  *
  * @author Stefano De Pace
  */
@@ -19,13 +17,21 @@ public class Decoration implements MazeObject {
     private int texture_id;
     private String model;
     private SFVertex3f position;
-    private float scaleX, scaleY;
+    private float scaleXZ, scaleY;
 
-    public Decoration(SFVertex3f position, String model, int texture_id, float scalex, float scaley) {
+    /**
+     * Creates a new Decoration.
+     * @param position Position of the Deceoration.
+     * @param model String name of the 3D model file to represent this Decoration.
+     * @param texture_id Id of the texture that represents this Decoration.
+     * @param scalexz Scale factor on the x-z plane.
+     * @param scaley Scale factor in the y direction.
+     */
+    public Decoration(SFVertex3f position, String model, int texture_id, float scalexz, float scaley) {
         this.texture_id = texture_id;
         this.model=model;
         this.position=position;
-        this.scaleX=scalex;
+        this.scaleXZ=scalexz;
         this.scaleY=scaley;
     }
 
@@ -34,7 +40,7 @@ public class Decoration implements MazeObject {
         node.setModel(FundamentalGenerator.getModel(context, ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER),
                 texture_id, model));
         node.getRelativeTransform().setPosition(position);
-        node.getRelativeTransform().setMatrix(SFMatrix3f.getScale(scaleX, scaleY, scaleX));
+        node.getRelativeTransform().setMatrix(SFMatrix3f.getScale(scaleXZ, scaleY, scaleXZ));
         return node;
     }
 
