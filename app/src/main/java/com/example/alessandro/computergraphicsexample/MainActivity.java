@@ -31,7 +31,7 @@ import game.net.interaction.ProgressShower;
 
 /**
  * Login activity: the user inserts username and password
- * to be recognized by server
+ * to be recognized by server.
  */
 public class MainActivity extends ActionBarActivity implements ServerCommunicationThreadListener, LoginHandlerListener {
 
