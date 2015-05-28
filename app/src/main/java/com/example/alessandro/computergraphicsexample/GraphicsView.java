@@ -12,6 +12,7 @@ import java.util.concurrent.CountDownLatch;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import game.Configurations;
 import game.Team;
 import game.controls.ButtonMaster;
 import game.controls.ButtonsControl;
@@ -175,7 +176,10 @@ public class GraphicsView extends GLSurfaceView {
 
             buttonMaster = new ButtonMaster();
             MoveButtonsGenerator moveButtonsGenerator = new MoveButtonsGenerator(context, program, buttonMaster, positionMoveListener);
-            moveButtonsGenerator.generate(new SFVertex3f(-1f, -0.50f, 1), 0.15f, 2);
+//            moveButtonsGenerator.generate(new SFVertex3f(-1f, -0.50f, 1), 0.15f, 2);
+            moveButtonsGenerator.generate(new SFVertex3f(Configurations.CONF.getFloat(context,"gui","xMove"),Configurations.CONF.getFloat(context,"gui","yMove"),
+                    Configurations.CONF.getFloat(context,"gui","zMove")), Configurations.CONF.getFloat(context,"gui","scaleMove"),
+                    Configurations.CONF.getFloat(context,"gui","distanceMove"));
             SettingsButtonsGenerator settingsButtonsGenerator = new SettingsButtonsGenerator(context, program, buttonMaster, settingsScreen);
             settingsButtonsGenerator.generate(new SFVertex3f(+1.1f, +0.6f, 0), 0.15f);
 
