@@ -29,7 +29,7 @@ public enum TextureKeeper {
 
     /**
      * Loads a new texture from an image in the resources
-     * or return the BitmapTexture if the image has lready been loaded.
+     * or return the BitmapTexture if the image has already been loaded.
      *
      * @param context   Context to find resources.
      * @param textureId Image index in the resources.

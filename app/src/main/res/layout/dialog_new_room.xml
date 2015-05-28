@@ -31,7 +31,8 @@
                     android:layout_width="match_parent"
                     android:hint="Name"
                     android:layout_height="wrap_content"
-                    android:layout_weight="50" />
+                    android:layout_weight="50"
+                    android:text="Room1" />
             </LinearLayout>
 
             <LinearLayout
@@ -53,7 +54,7 @@
                     android:hint="Num. Teams"
                     android:layout_weight="50"
                     android:inputType="number"
-                    android:text="2" />
+                    android:text="1" />
             </LinearLayout>
 
             <LinearLayout
@@ -75,7 +76,7 @@
                     android:hint="Num. Players"
                     android:layout_weight="50"
                     android:inputType="number"
-                    android:text="3" />
+                    android:text="2" />
             </LinearLayout>
 
         </LinearLayout>

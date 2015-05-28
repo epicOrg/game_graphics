@@ -3,3 +3,7 @@ yMove -0.5
 zMove 1
 scaleMove 0.15
 distanceMove 2
+xSet 1.1
+ySet 0.6
+zSet 0
+scaleSet 0.15

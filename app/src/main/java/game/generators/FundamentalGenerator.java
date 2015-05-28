@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.opengl.GLES20;
 
 import game.graphics.MaterialKeeper;
+import game.graphics.ModelKeeper;
 import objLoader.ObjLoader;
 import sfogl.integration.ArrayObject;
 import sfogl.integration.BitmapTexture;
@@ -26,6 +27,10 @@ public class FundamentalGenerator {
     /**
      * Builds a Model from a file with a texture.
      *
+     * @param context   Context from which to load the file.
+     * @param program   Shader to use in the Material of the Model.
+     * @param textureId Id of the texture to use for the Material of the Model.
+     * @param obj       Name of the file that contains the Model geometry.
      * @return The generated Model.
      */
     public static Model getModel(Context context, ShadingProgram program, int textureId, String obj) {
@@ -33,36 +38,22 @@ public class FundamentalGenerator {
     }
 
     /**
-     * Builds a Model from an ArrayObject and a specified Material.
-     *
-     * @return The generated Model.
-     */
-    public static Model getModelFromArrayObjectAndMaterial(ArrayObject arrayObject, Material material){
-        Mesh meshPos = new Mesh(arrayObject);
-        meshPos.init();
-        Model modelPos = new Model();
-        modelPos.setRootGeometry(meshPos);
-        modelPos.setMaterialComponent(material);
-        return modelPos;
-    }
-
-    /**
      * Builds a Model from a file with a specified Material.
      *
-     * @param context Context from which resources can be loaded.
+     * @param context  Context from which resources can be loaded.
      * @param material Material with which the Model is built.
-     * @param obj Name of the file which contains Model's geometry.
+     * @param obj      Name of the file which contains Model's geometry.
      */
-    public static Model getModelFromFileAndMaterial(Context context, Material material, String obj){
-        return getModelFromArrayObjectAndMaterial(ObjLoader.arrayObjectFromFile(context, obj)[0], material);
+    public static Model getModelFromFileAndMaterial(Context context, Material material, String obj) {
+        return ModelKeeper.MODEL_KEEPER.getModel(context, obj, material);
     }
 
     /**
      * Builds a Node from an ArrayObject and a Bitmap as texture.
      *
      * @param arrayObject ArrayObject from which Node Model's geometry is get.
-     * @param bitmap Bitmap to be used as texture for Node Material.
-     * @param program ShadingProgram with who Node Model's Material is built.
+     * @param bitmap      Bitmap to be used as texture for Node Material.
+     * @param program     ShadingProgram with who Node Model's Material is built.
      */
     public static Node generateNode(ArrayObject arrayObject, Bitmap bitmap, ShadingProgram program) {
         Node nodePos = new Node();
@@ -72,7 +63,7 @@ public class FundamentalGenerator {
 
         Material material = new Material(program);
         material.getTextures().add(bitmapTexture);
-        nodePos.setModel(getModelFromArrayObjectAndMaterial(arrayObject, material));
+        nodePos.setModel(ModelKeeper.MODEL_KEEPER.getModelFromArrayObjectAndMaterial(arrayObject, material));
 
         return nodePos;
     }
