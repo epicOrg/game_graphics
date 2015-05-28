@@ -10,7 +10,8 @@ import org.json.JSONObject;
  */
 public class JSONd {
 
-    private String name;
+    //private String name;
+    private Enum name;
     private Object value;
 
     /**
@@ -19,7 +20,7 @@ public class JSONd {
      * @param name  String that maps the value of the request.
      * @param value Value of the request.
      */
-    public JSONd(String name, Object value) {
+    public JSONd(Enum name, Object value) {
         this.name = name;
         this.value = value;
     }
@@ -31,7 +32,7 @@ public class JSONd {
      * @throws JSONException
      */
     public void putrequest(JSONObject request) throws JSONException {
-        request.put(name, value);
+        request.put(name.toString(), value);
     }
 
     public String toString() {

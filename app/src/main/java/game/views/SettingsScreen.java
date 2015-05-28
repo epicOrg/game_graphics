@@ -18,6 +18,8 @@ import game.net.communication.RequestMaker;
 import game.Room;
 import game.Team;
 import game.UserData;
+import game.net.fieldsnames.GameFields;
+import game.net.fieldsnames.ServicesFields;
 import game.player.Player;
 import game.audio.AudioCallManager;
 import game.net.communication.NotConnectedException;
@@ -81,9 +83,9 @@ public class SettingsScreen {
             public void onClick(View view) {
                 Toast.makeText(activity, "Quitting..", Toast.LENGTH_SHORT).show();
                 try {
-                    serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.GAME),
-                            new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS),
-                            new JSONd(FieldsNames.GAME_EXIT, true)));
+                    serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE, ServicesFields.GAME.toString()),
+                            new JSONd(ServicesFields.SERVICE_TYPE, GameFields.GAME_STATUS.toString()),
+                            new JSONd(GameFields.GAME_EXIT, true)));
                 } catch (NotConnectedException e) {
                     e.printStackTrace();
                 }
@@ -111,7 +113,7 @@ public class SettingsScreen {
         playersContainer.setLayoutParams(playersLayout);
         playersContainer.setOrientation(LinearLayout.VERTICAL);
 
-        Room room=(Room) UserData.DATA.getData(FieldsNames.CURRENT_ROOM);
+        Room room=(Room) UserData.DATA.getData(ServicesFields.CURRENT_ROOM);
         for (Team t : room.getTeams()) {
             TextView teamName = new TextView(activity);
             teamName.setText(t.getName());

@@ -6,6 +6,7 @@ import android.os.Message;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import game.net.fieldsnames.CommonFields;
 import game.net.interaction.FieldsNames;
 
 /**
@@ -30,11 +31,11 @@ public class Login implements Service {
 
     private void readFields() {
         try {
-            boolean value = json.getBoolean(FieldsNames.NO_ERRORS);
+            boolean value = json.getBoolean(CommonFields.NO_ERRORS.toString());
 
             LoginResult result;
-            String username = json.getString(FieldsNames.USERNAME);
-            int hashcode = json.getInt(FieldsNames.HASHCODE);
+            String username = json.getString(CommonFields.USERNAME.toString());
+            int hashcode = json.getInt(CommonFields.HASHCODE.toString());
             result = new LoginResult(value, username, hashcode);
 
             Message message = handler.obtainMessage(0, result);

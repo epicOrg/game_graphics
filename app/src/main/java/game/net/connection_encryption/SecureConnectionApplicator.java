@@ -3,6 +3,8 @@ package game.net.connection_encryption;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import game.net.fieldsnames.EncryptFields;
+import game.net.fieldsnames.ServicesFields;
 import game.net.interaction.FieldsNames;
 
 /**
@@ -19,30 +21,30 @@ public class SecureConnectionApplicator {
 
     public JSONObject encrypt(JSONObject jsonRequest) throws JSONException {
 
-        if (jsonRequest.has(FieldsNames.SERVICE) &&
-                jsonRequest.getString(FieldsNames.SERVICE).equals(FieldsNames.ENCRYPT))
+        if (jsonRequest.has(ServicesFields.SERVICE.toString()) &&
+                jsonRequest.getString(ServicesFields.SERVICE.toString()).equals(ServicesFields.ENCRYPT.toString()))
             return jsonRequest;
 
-        String uncryptedRequest = jsonRequest.getString(FieldsNames.ENCRYPTED_MESSAGE);
+        String uncryptedRequest = jsonRequest.getString(EncryptFields.ENCRYPTED_MESSAGE.toString());
         String encryptedRequest = connectionEncrypter.encryptRequest(uncryptedRequest);
 
         JSONObject jsonEncryptedRequest = new JSONObject();
-        jsonEncryptedRequest.put(FieldsNames.ENCRYPTED_MESSAGE, encryptedRequest);
+        jsonEncryptedRequest.put(EncryptFields.ENCRYPTED_MESSAGE.toString(), encryptedRequest);
 
         return jsonEncryptedRequest;
     }
 
     public JSONObject decrypt(JSONObject jsonResponse) throws JSONException {
 
-        if (jsonResponse.has(FieldsNames.PUBLIC_KEY)) {
+        if (jsonResponse.has(EncryptFields.PUBLIC_KEY.toString())) {
 
             connectionEncrypter.setPublicKey(jsonResponse
-                    .getString(FieldsNames.PUBLIC_KEY));
+                    .getString(EncryptFields.PUBLIC_KEY.toString()));
 
             return jsonResponse;
         }
 
-        String encryptedResponse = jsonResponse.getString(FieldsNames.ENCRYPTED_MESSAGE);
+        String encryptedResponse = jsonResponse.getString(EncryptFields.ENCRYPTED_MESSAGE.toString());
         String uncryptedResponse = connectionEncrypter.decryptResponse(encryptedResponse);
 
         return new JSONObject(uncryptedResponse);

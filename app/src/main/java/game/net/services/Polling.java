@@ -8,6 +8,7 @@ import game.UserData;
 import game.net.communication.JSONd;
 import game.net.communication.NotConnectedException;
 import game.net.communication.ServerCommunicationThread;
+import game.net.fieldsnames.ServicesFields;
 import game.net.interaction.FieldsNames;
 
 /**
@@ -31,7 +32,7 @@ public class Polling implements Service {
 
     private JSONObject generatePollingResponse() {
         JSONObject response = UserData.DATA.getRequestMaker().
-                getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.POLLING));
+                getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE, ServicesFields.POLLING.toString()));
         return response;
     }
 

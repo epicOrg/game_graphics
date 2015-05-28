@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 
 import game.audio.AudioCallManager;
 import game.net.communication.ServerCommunicationThread;
+import game.net.fieldsnames.AudioFields;
 import game.net.interaction.FieldsNames;
 
 /**
@@ -28,7 +29,7 @@ public class Audio implements Service {
     public void start() {
         AudioCallManager audioCallManager = AudioCallManager.getInstance();
         try {
-            int serverPort = jsonRequest.getInt(FieldsNames.AUDIO_PORT_SERVER);
+            int serverPort = jsonRequest.getInt(AudioFields.AUDIO_PORT_SERVER.toString());
             InetAddress serverIp = InetAddress.getByName(ServerCommunicationThread.getServerAddres());
             audioCallManager.setServerPort(serverPort);
             audioCallManager.setServerIp(serverIp);

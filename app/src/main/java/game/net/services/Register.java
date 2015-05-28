@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import game.net.fieldsnames.CommonFields;
 import game.net.interaction.FieldsNames;
 
 
@@ -32,7 +33,7 @@ public class Register implements Service {
     private void readFields() {
 
         try {
-            boolean value = json.getBoolean(FieldsNames.NO_ERRORS);
+            boolean value = json.getBoolean(CommonFields.NO_ERRORS.toString());
             Log.d("REGSTER_RESPONSE", json.toString());
             RegistrationResult result;
             if(value) {
@@ -48,8 +49,8 @@ public class Register implements Service {
     }
 
     private ArrayList<String> extractErrors() throws JSONException {
-        ArrayList<String> errorKinds = new ArrayList<String>();
-        JSONObject errorsObj = json.getJSONObject(FieldsNames.ERRORS);
+        ArrayList<String> errorKinds = new ArrayList<>();
+        JSONObject errorsObj = json.getJSONObject(CommonFields.ERRORS.toString());
         Iterator<String> errors = errorsObj.keys();
         while (errors.hasNext()){
             String errorName = errors.next();

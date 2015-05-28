@@ -5,6 +5,9 @@ import android.os.Handler;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import game.net.fieldsnames.CommonFields;
+import game.net.fieldsnames.EncryptFields;
+import game.net.fieldsnames.ServicesFields;
 import game.net.interaction.FieldsNames;
 
 /**
@@ -36,8 +39,8 @@ public class Encrypt implements Service {
     private JSONObject encryptionRequest() throws JSONException {
 
         JSONObject encryptionRequest = new JSONObject();
-        encryptionRequest.put(FieldsNames.SERVICE, FieldsNames.ENCRYPT);
-        encryptionRequest.put(FieldsNames.SERVICE_TYPE, FieldsNames.PUBLIC_KEY_REQUEST);
+        encryptionRequest.put(ServicesFields.SERVICE.toString(), ServicesFields.ENCRYPT.toString());
+        encryptionRequest.put(ServicesFields.SERVICE_TYPE.toString(), EncryptFields.PUBLIC_KEY_REQUEST.toString());
 
         return encryptionRequest;
     }

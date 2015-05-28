@@ -30,6 +30,11 @@ import game.net.GameHandler;
 import game.net.GameHandlerListener;
 import game.net.GamePositionSender;
 import game.net.GameStatusWaiter;
+import game.net.fieldsnames.AudioFields;
+import game.net.fieldsnames.CommonFields;
+import game.net.fieldsnames.GameFields;
+import game.net.fieldsnames.RoomFields;
+import game.net.fieldsnames.ServicesFields;
 import game.physics.Circle;
 import game.player.Player;
 import game.player.PlayerStatus;
@@ -78,7 +83,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         headsetListener = new HeadsetListener(context);
         headsetListener.init();
 
-        requestMaker = UserData.DATA.getRequestMakerWithData(FieldsNames.USERNAME, FieldsNames.HASHCODE, FieldsNames.ROOM_NAME);
+        requestMaker = UserData.DATA.getRequestMakerWithData(CommonFields.USERNAME, CommonFields.HASHCODE, RoomFields.ROOM_NAME);
 
         messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
@@ -92,7 +97,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         SFVertex3f direction = new SFVertex3f(-1, -0.25f, 0);
 
         me = new Player(new PlayerStatus(direction, new Circle(position, 0.75)), "Me");
-        Room room = (Room) UserData.DATA.getData(FieldsNames.CURRENT_ROOM);
+        Room room = (Room) UserData.DATA.getData(ServicesFields.CURRENT_ROOM);
         ArrayList<Team> teams = room.getTeams();
         if (teams != null)
             for (Team team : teams)
@@ -101,7 +106,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         Iterator<Player> iterator = otherPlayers.iterator();
         while (iterator.hasNext()) {
             Player p = iterator.next();
-            if (p.getName().equals(UserData.DATA.getData(FieldsNames.USERNAME))) {
+            if (p.getName().equals(UserData.DATA.getData(CommonFields.USERNAME))) {
                 me = p;
                 iterator.remove();
             }
@@ -121,7 +126,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
         mapInterpreter = new MapInterpreter(me.getStatus(), this);
         gameHandler = new GameHandler(new StatusInterpreter(messageScreen, gamePositionSender, this), mapInterpreter,
-                new PositionsInterpreter((Room) UserData.DATA.getData(FieldsNames.CURRENT_ROOM)));
+                new PositionsInterpreter((Room) UserData.DATA.getData(ServicesFields.CURRENT_ROOM)));
 
         waiterGroup.addWaiter(gamePositionSender);
         waiterGroup.addWaiter(new GameStatusWaiter(requestMaker));
@@ -133,8 +138,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
         initAudioSetting();
         Log.d(LOG_TAG, "Asking Map..");
         try {
-            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.GAME),
-                    new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_MAP)));
+            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE, ServicesFields.GAME.toString()),
+                    new JSONd(ServicesFields.SERVICE_TYPE, GameFields.GAME_MAP.toString())));
         } catch (NotConnectedException e) {
             Toast.makeText(this, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
             e.printStackTrace();
@@ -147,8 +152,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
         audioCallManager.initAudioGroup();
         try {
             int audioPort = audioCallManager.newAudioStream();
-            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.AUDIO),
-                    new JSONd(FieldsNames.AUDIO_PORT_CLIENT, audioPort)));
+            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE, ServicesFields.AUDIO.toString()),
+                    new JSONd(AudioFields.AUDIO_PORT_CLIENT, audioPort)));
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (SocketException e) {
@@ -168,7 +173,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         int width = mapInterpreter.getGroundWidth();
         int height = mapInterpreter.getGroundHeight();
 
-        graphicsView = new GraphicsView(context, me, ((Room) UserData.DATA.getData(FieldsNames.CURRENT_ROOM)).getTeams(),
+        graphicsView = new GraphicsView(context, me, ((Room) UserData.DATA.getData(ServicesFields.CURRENT_ROOM)).getTeams(),
                 mapInterpreter.getMap(), startSignal, width, height, settingsScreen);
 
         LinearLayout graphicsContainerLayout = (LinearLayout) findViewById(R.id.graphics_view_container);

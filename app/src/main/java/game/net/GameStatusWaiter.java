@@ -5,6 +5,8 @@ import game.net.communication.RequestMaker;
 import game.Waiter;
 import game.net.communication.NotConnectedException;
 import game.net.communication.ServerCommunicationThread;
+import game.net.fieldsnames.GameFields;
+import game.net.fieldsnames.ServicesFields;
 import game.net.interaction.FieldsNames;
 
 /**
@@ -30,9 +32,9 @@ public class GameStatusWaiter implements Waiter {
     @Override
     public void unleash() {
         try {
-            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.GAME),
-                    new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS),
-                    new JSONd(FieldsNames.GAME_READY, true)));
+            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE, ServicesFields.GAME.toString()),
+                    new JSONd(ServicesFields.SERVICE_TYPE, GameFields.GAME_STATUS.toString()),
+                    new JSONd(GameFields.GAME_READY, true)));
         } catch (NotConnectedException e) {
             e.printStackTrace();
         }

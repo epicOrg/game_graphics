@@ -22,6 +22,9 @@ import game.net.communication.JSONd;
 import game.net.communication.NotConnectedException;
 import game.net.communication.RequestMaker;
 import game.net.communication.ServerCommunicationThread;
+import game.net.fieldsnames.RoomFields;
+import game.net.fieldsnames.RoomsFields;
+import game.net.fieldsnames.ServicesFields;
 import game.net.interaction.FieldsNames;
 import game.net.services.CurrentRoom;
 import game.player.Player;
@@ -57,7 +60,7 @@ public class RoomActivity extends ActionBarActivity {
         setContentView(R.layout.activity_room);
         context = this;
 
-        UserData.DATA.addData(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
+        UserData.DATA.addData(ServicesFields.SERVICE, ServicesFields.CURRENT_ROOM);
         requestMaker = UserData.DATA.getRequestMaker();
 
         roomStatus = (TextView) findViewById(R.id.room_status);
@@ -66,13 +69,13 @@ public class RoomActivity extends ActionBarActivity {
         serverCommunicationThread.setHandler(new RoomHandler());
 
         try {
-            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_PLAYER_LIST)));
+            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE_TYPE, RoomFields.ROOM_PLAYER_LIST.toString())));
         } catch (NotConnectedException e) {
             Toast.makeText(this, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
 
-        getSupportActionBar().setTitle(getString(R.string.room_title) + ": " + UserData.DATA.getData(FieldsNames.ROOM_NAME));
+        getSupportActionBar().setTitle(getString(R.string.room_title) + ": " + UserData.DATA.getData(RoomFields.ROOM_NAME));
     }
 
     @Override
@@ -85,8 +88,8 @@ public class RoomActivity extends ActionBarActivity {
                 .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         try {
-                            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS),
-                                    new JSONd(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_EXIT)));
+                            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE_TYPE, RoomFields.ROOM_ACTIONS.toString()),
+                                    new JSONd(RoomFields.ROOM_ACTION, RoomFields.ROOM_EXIT.toString())));
                         } catch (NotConnectedException e) {
                             Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
                             e.printStackTrace();
@@ -109,8 +112,8 @@ public class RoomActivity extends ActionBarActivity {
 
         if (!isStartingGame) {
             try {
-                serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS),
-                        new JSONd(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_EXIT)));
+                serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE_TYPE, RoomFields.ROOM_ACTIONS.toString()),
+                        new JSONd(RoomFields.ROOM_ACTION, RoomFields.ROOM_EXIT.toString())));
             } catch (NotConnectedException e) {
                 Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
                 e.printStackTrace();
@@ -141,7 +144,7 @@ public class RoomActivity extends ActionBarActivity {
                 firstTime = true;
 
             CurrentRoom.CurrentRoomResult results = (CurrentRoom.CurrentRoomResult) msg.obj;
-            currentRoom = new Room((String) UserData.DATA.getData(FieldsNames.ROOM_NAME), results.getMaxPlayer(), results.getTeams());
+            currentRoom = new Room((String) UserData.DATA.getData(RoomFields.ROOM_NAME), results.getMaxPlayer(), results.getTeams());
 
             int currentPlayers = 0;
 
@@ -163,8 +166,8 @@ public class RoomActivity extends ActionBarActivity {
 
             if (firstTime) {
                 try {
-                    serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS),
-                            new JSONd(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_LIST_RECEIVED)));
+                    serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE_TYPE, RoomFields.ROOM_ACTIONS.toString()),
+                            new JSONd(RoomFields.ROOM_ACTION, RoomFields.ROOM_LIST_RECEIVED.toString())));
                 } catch (NotConnectedException e) {
                     e.printStackTrace();
                 }
@@ -183,7 +186,7 @@ public class RoomActivity extends ActionBarActivity {
             boolean result = (boolean) msg.obj;
 
             if (result) {
-                UserData.DATA.addData(FieldsNames.CURRENT_ROOM, currentRoom);
+                UserData.DATA.addData(ServicesFields.CURRENT_ROOM, currentRoom);
 
                 isStartingGame = true;
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);

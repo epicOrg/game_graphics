@@ -9,6 +9,7 @@ import java.util.LinkedList;
 
 import game.net.GameHandlerListener;
 import game.net.GamePositionSender;
+import game.net.fieldsnames.GameFields;
 import game.net.interaction.FieldsNames;
 import game.net.services.Game;
 import game.views.MessageScreen;
@@ -56,17 +57,17 @@ public class StatusInterpreter implements Interpreter {
         if (results.gameEnd != null) {
             Log.d(LOG_TAG, "results.getGameEnd");
             String gameEnd = results.gameEnd;
-            switch (gameEnd) {
-                case FieldsNames.GAME_WIN:
+            switch (GameFields.valueOf(gameEnd)) {
+                case GAME_WIN:
                     messageScreen.setText("YOU WIN!", Color.GREEN);
                     break;
-                case FieldsNames.GAME_DRAW:
+                case GAME_DRAW:
                     messageScreen.setText("YOU DIDN'T WIN and YOU DIDN'T LOSE!", Color.BLUE);
                     break;
-                case FieldsNames.GAME_LOSE:
+                case GAME_LOSE:
                     messageScreen.setText("YOU LOSE!", Color.RED);
                     break;
-                case FieldsNames.GAME_INTERRUPTED:
+                case GAME_INTERRUPTED:
                     messageScreen.setText("INTERRUPTED!", Color.BLACK);
                     break;
             }

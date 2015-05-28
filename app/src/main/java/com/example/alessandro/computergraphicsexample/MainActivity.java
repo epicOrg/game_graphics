@@ -26,6 +26,8 @@ import game.net.communication.ServerCommunicationThread;
 import game.net.communication.ServerCommunicationThreadListener;
 import game.net.communication.ServerCommunicationThreadState;
 import game.net.data.LoginData;
+import game.net.fieldsnames.CommonFields;
+import game.net.fieldsnames.ServicesFields;
 import game.net.interaction.FieldsNames;
 import game.net.interaction.ProgressShower;
 
@@ -118,8 +120,8 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
 
     private void checkRememberMe() {
         if (loginPreference.getBoolean("Remember", false)) {
-            ((TextView) views.get(R.id.username)).setText(loginPreference.getString(FieldsNames.USERNAME, "user"));
-            ((TextView) views.get(R.id.password)).setText(loginPreference.getString(FieldsNames.PASSWORD, "pass"));
+            ((TextView) views.get(R.id.username)).setText(loginPreference.getString(CommonFields.USERNAME.toString(), "user"));
+            ((TextView) views.get(R.id.password)).setText(loginPreference.getString(CommonFields.PASSWORD.toString(), "pass"));
             ((CheckBox) views.get(R.id.remeberMeBox)).setChecked(true);
         }
     }
@@ -140,8 +142,8 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
     private void saveRememberMeData() {
         if (loginPreference.getBoolean("Remember", false)) {
             SharedPreferences.Editor editor = loginPreference.edit();
-            editor.putString(FieldsNames.USERNAME, loginData.getUsername());
-            editor.putString(FieldsNames.PASSWORD, loginData.getPassword());
+            editor.putString(CommonFields.USERNAME.toString(), loginData.getUsername());
+            editor.putString(CommonFields.PASSWORD.toString(), loginData.getPassword());
             editor.commit();
             Log.d("REMEMBER", "fields saved");
         }
@@ -167,9 +169,9 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
         if (!cancel) {
             progressShower.showProgress(true);
             try {
-                serverCommunicationThread.send(requestMaker.getNewRequest(new JSONd(FieldsNames.SERVICE, FieldsNames.LOGIN),
-                        new JSONd(FieldsNames.USERNAME, loginData.getUsername()),
-                        new JSONd(FieldsNames.PASSWORD, loginData.getPassword())));
+                serverCommunicationThread.send(requestMaker.getNewRequest(new JSONd(ServicesFields.SERVICE, ServicesFields.LOGIN.toString()),
+                        new JSONd(CommonFields.USERNAME, loginData.getUsername()),
+                        new JSONd(CommonFields.PASSWORD, loginData.getPassword())));
             } catch (NotConnectedException e) {
                 progressShower.showProgress(false);
                 Toast.makeText(activity, getString(R.string.error_not_connected), Toast.LENGTH_SHORT).show();

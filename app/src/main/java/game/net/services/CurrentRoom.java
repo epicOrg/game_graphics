@@ -10,6 +10,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import game.Team;
+import game.net.fieldsnames.CommonFields;
+import game.net.fieldsnames.RoomFields;
+import game.net.fieldsnames.RoomsFields;
+import game.net.fieldsnames.ServicesFields;
 import game.player.Player;
 import game.net.interaction.FieldsNames;
 
@@ -42,11 +46,11 @@ public class CurrentRoom implements Service {
     private void readFields() {
         try {
             Message message = null;
-            switch (json.getString(FieldsNames.SERVICE_TYPE)) {
-                case FieldsNames.ROOM_PLAYER_LIST:
+            switch (RoomFields.valueOf(json.getString(ServicesFields.SERVICE_TYPE.toString()))) {
+                case ROOM_PLAYER_LIST:
                     message = getPlayerListMessage();
                     break;
-                case FieldsNames.ROOM_ACTIONS:
+                case ROOM_ACTIONS:
                     message = getActionsMessage();
                     break;
             }
@@ -60,22 +64,22 @@ public class CurrentRoom implements Service {
     private Message getPlayerListMessage() {
         CurrentRoomResult currentRoomResult = null;
         try {
-            int maxPlayers = json.getInt(FieldsNames.ROOM_MAX_PLAYERS);
+            int maxPlayers = json.getInt(RoomsFields.ROOM_MAX_PLAYERS.toString());
 
             ArrayList<Team> teams = new ArrayList<>();
-            JSONArray jTeams = json.getJSONArray(FieldsNames.ROOM_TEAM);
+            JSONArray jTeams = json.getJSONArray(RoomFields.ROOM_TEAM.toString());
             for (int i = 0; i < jTeams.length(); i++) {
                 JSONObject jTeam = jTeams.getJSONObject(i);
-                String name = jTeam.getString(FieldsNames.ROOM_NAME);
-                int color = Integer.parseInt(jTeam.getString(FieldsNames.ROOM_TEAM_COLOR));
+                String name = jTeam.getString(RoomFields.ROOM_NAME.toString());
+                int color = Integer.parseInt(jTeam.getString(RoomFields.ROOM_TEAM_COLOR.toString()));
 
                 Team team = new Team(name, color);
 
                 ArrayList<Player> players = new ArrayList<>();
-                JSONArray jPlayers = jTeam.getJSONArray(FieldsNames.LIST);
+                JSONArray jPlayers = jTeam.getJSONArray(CommonFields.LIST.toString());
                 for (int j = 0; j < jPlayers.length(); j++) {
                     JSONObject jPlayer = jPlayers.getJSONObject(j);
-                    String playerName = jPlayer.getString(FieldsNames.USERNAME);
+                    String playerName = jPlayer.getString(CommonFields.USERNAME.toString());
 
                     players.add(new Player(playerName));
                 }
@@ -94,11 +98,11 @@ public class CurrentRoom implements Service {
 
     private Message getActionsMessage() {
         try {
-            boolean result = json.getBoolean(FieldsNames.NO_ERRORS);
-            switch (json.getString(FieldsNames.ROOM_ACTION)) {
-                case FieldsNames.ROOM_START:
+            boolean result = json.getBoolean(CommonFields.NO_ERRORS.toString());
+            switch (RoomFields.valueOf(json.getString(RoomFields.ROOM_ACTION.toString()))) {
+                case ROOM_START:
                     return handler.obtainMessage(START, result);
-                case FieldsNames.ROOM_EXIT:
+                case ROOM_EXIT:
                     return handler.obtainMessage(EXIT, result);
             }
         } catch (JSONException e) {

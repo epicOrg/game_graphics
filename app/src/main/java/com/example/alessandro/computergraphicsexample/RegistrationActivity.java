@@ -17,6 +17,9 @@ import game.net.communication.RequestMaker;
 import game.net.communication.NotConnectedException;
 import game.net.communication.ServerCommunicationThread;
 import game.net.data.RegistrationData;
+import game.net.fieldsnames.CommonFields;
+import game.net.fieldsnames.RegisterFields;
+import game.net.fieldsnames.ServicesFields;
 import game.net.interaction.FieldsNames;
 import game.net.interaction.ProgressShower;
 import game.net.interaction.RegistrationErrorStrings;
@@ -86,10 +89,10 @@ public class RegistrationActivity extends ActionBarActivity {
         if (!cancel) {
             progressShower.showProgress(true);
             try {
-                serverCommunicationThread.send(requestMaker.getNewRequest(new JSONd(FieldsNames.SERVICE, FieldsNames.REGISTER),
-                        new JSONd(FieldsNames.EMAIL, registrationData.getEmail()),
-                        new JSONd(FieldsNames.USERNAME, registrationData.getUsername()),
-                        new JSONd(FieldsNames.PASSWORD, registrationData.getPassword())));
+                serverCommunicationThread.send(requestMaker.getNewRequest(new JSONd(ServicesFields.SERVICE, ServicesFields.REGISTER.toString()),
+                        new JSONd(RegisterFields.EMAIL, registrationData.getEmail()),
+                        new JSONd(CommonFields.USERNAME, registrationData.getUsername()),
+                        new JSONd(CommonFields.PASSWORD, registrationData.getPassword())));
             } catch (NotConnectedException e) {
                 Toast.makeText(thisActivity, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
                 e.printStackTrace();

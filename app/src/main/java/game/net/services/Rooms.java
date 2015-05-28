@@ -10,6 +10,10 @@ import org.json.JSONObject;
 
 import java.util.Iterator;
 
+import game.net.fieldsnames.CommonFields;
+import game.net.fieldsnames.RoomFields;
+import game.net.fieldsnames.RoomsFields;
+import game.net.fieldsnames.ServicesFields;
 import game.net.interaction.FieldsNames;
 
 /**
@@ -41,14 +45,14 @@ public class Rooms implements Service {
     private void readFields() {
         try {
             Message message = null;
-            switch (json.getString(FieldsNames.SERVICE_TYPE)) {
-                case FieldsNames.ROOMS_LIST:
+            switch (RoomsFields.valueOf(json.getString(ServicesFields.SERVICE_TYPE.toString()))) {
+                case ROOMS_LIST:
                     message = getRoomListMessage();
                     break;
-                case FieldsNames.ROOM_CREATE:
+                case ROOM_CREATE:
                     message = getRoomCreateMessage();
                     break;
-                case FieldsNames.ROOM_JOIN:
+                case ROOM_JOIN:
                     message = getJoinMessage();
                     break;
             }
@@ -60,7 +64,7 @@ public class Rooms implements Service {
     }
 
     private Message getRoomListMessage() throws JSONException {
-        JSONObject object = json.getJSONObject(FieldsNames.LIST);
+        JSONObject object = json.getJSONObject(CommonFields.LIST.toString());
         RoomsResult[] roomsResults = new RoomsResult[object.length()];
         Iterator<String> iterator = object.keys();
 
@@ -70,8 +74,8 @@ public class Rooms implements Service {
 
             JSONObject curObj = object.getJSONObject(name);
 
-            int maxPlayers = curObj.getInt(FieldsNames.ROOM_MAX_PLAYERS);
-            int currentPlayers = curObj.getInt(FieldsNames.ROOM_CURRENT_PLAYERS);
+            int maxPlayers = curObj.getInt(RoomsFields.ROOM_MAX_PLAYERS.toString());
+            int currentPlayers = curObj.getInt(RoomsFields.ROOM_CURRENT_PLAYERS.toString());
             roomsResults[count++] = new RoomsResult(name, maxPlayers, currentPlayers);
         }
 
@@ -80,12 +84,12 @@ public class Rooms implements Service {
 
     private Message getRoomCreateMessage() throws JSONException {
         String[] errorsResults;
-        if (json.getBoolean(FieldsNames.NO_ERRORS)) {
+        if (json.getBoolean(CommonFields.NO_ERRORS.toString())) {
             errorsResults = new String[]{};
             Log.d(LOG_TAG, "Room created");
         } else {
-            JSONObject errorsObject = json.getJSONObject(FieldsNames.ERRORS);
-            JSONArray errorsArray = errorsObject.getJSONArray(FieldsNames.ERRORS);
+            JSONObject errorsObject = json.getJSONObject(CommonFields.ERRORS.toString());
+            JSONArray errorsArray = errorsObject.getJSONArray(CommonFields.ERRORS.toString());
             errorsResults = new String[errorsArray.length()];
             for (int i = 0; i < errorsArray.length(); i++) {
                 errorsResults[i] = errorsArray.getString(i);
@@ -96,8 +100,8 @@ public class Rooms implements Service {
     }
 
     private Message getJoinMessage() throws JSONException {
-        String name = json.getString(FieldsNames.ROOM_NAME);
-        boolean result = json.getBoolean(FieldsNames.RESULT);
+        String name = json.getString(RoomFields.ROOM_NAME.toString());
+        boolean result = json.getBoolean(CommonFields.RESULT.toString());
 
         return handler.obtainMessage(JOIN, new RoomJoinResult(name, result));
     }

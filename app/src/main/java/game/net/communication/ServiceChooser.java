@@ -3,6 +3,7 @@ package game.net.communication;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import game.net.fieldsnames.ServicesFields;
 import game.net.interaction.FieldsNames;
 import game.net.services.Audio;
 import game.net.services.CurrentRoom;
@@ -22,20 +23,20 @@ import game.net.services.Unknown;
 public class ServiceChooser {
 
     public Service setService(JSONObject json) throws JSONException {
-        switch (json.getString(FieldsNames.SERVICE)) {
-            case FieldsNames.REGISTER:
+        switch (ServicesFields.valueOf(json.getString(ServicesFields.SERVICE.toString()))) {
+            case REGISTER:
                 return new Register(json);
-            case FieldsNames.LOGIN:
+            case LOGIN:
                 return new Login(json);
-            case FieldsNames.ROOMS:
+            case ROOMS:
                 return new Rooms(json);
-            case FieldsNames.CURRENT_ROOM:
+            case CURRENT_ROOM:
                 return new CurrentRoom(json);
-            case FieldsNames.GAME:
+            case GAME:
                 return new Game(json);
-            case FieldsNames.AUDIO:
+            case AUDIO:
                 return new Audio(json);
-            case FieldsNames.POLLING:
+            case POLLING:
                 return new Polling(json);
             default:
                 //TODO

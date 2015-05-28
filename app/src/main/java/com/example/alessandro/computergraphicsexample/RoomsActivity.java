@@ -29,6 +29,9 @@ import game.net.communication.JSONd;
 import game.net.communication.NotConnectedException;
 import game.net.communication.RequestMaker;
 import game.net.communication.ServerCommunicationThread;
+import game.net.fieldsnames.RoomFields;
+import game.net.fieldsnames.RoomsFields;
+import game.net.fieldsnames.ServicesFields;
 import game.net.interaction.FieldsNames;
 import game.net.interaction.RoomsErrorStrings;
 import game.net.services.Rooms;
@@ -76,9 +79,9 @@ public class RoomsActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                    serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.ROOMS),
-                            new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_JOIN),
-                            new JSONd(FieldsNames.ROOM_NAME, rooms.get(position).getName())));
+                    serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE, ServicesFields.ROOMS.toString()),
+                            new JSONd(ServicesFields.SERVICE_TYPE, RoomsFields.ROOM_JOIN.toString()),
+                            new JSONd(RoomFields.ROOM_NAME, rooms.get(position).getName())));
                 } catch (NotConnectedException e) {
                     Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
                     e.printStackTrace();
@@ -153,7 +156,7 @@ public class RoomsActivity extends ActionBarActivity {
     }
 
     private void createLogoutRequest() {
-        JSONObject logoutRequest = requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.LOGOUT));
+        JSONObject logoutRequest = requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE, ServicesFields.LOGOUT.toString()));
 
         try {
             serverCommunicationThread.send(logoutRequest);
@@ -182,11 +185,11 @@ public class RoomsActivity extends ActionBarActivity {
                 String roomName = newRoomName.getText().toString();
 
                 try {
-                    serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.ROOMS),
-                            new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_CREATE),
-                            new JSONd(FieldsNames.ROOM_NAME, roomName),
-                            new JSONd(FieldsNames.ROOM_TEAMS_DIMENSION, Integer.parseInt(maxPlayers.getText().toString())),
-                            new JSONd(FieldsNames.ROOM_TEAMS_NUMBER, Integer.parseInt(maxTeams.getText().toString()))));
+                    serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE, ServicesFields.ROOMS.toString()),
+                            new JSONd(ServicesFields.SERVICE_TYPE, RoomsFields.ROOM_CREATE.toString()),
+                            new JSONd(RoomFields.ROOM_NAME, roomName),
+                            new JSONd(RoomsFields.ROOM_TEAMS_DIMENSION, Integer.parseInt(maxPlayers.getText().toString())),
+                            new JSONd(RoomsFields.ROOM_TEAMS_NUMBER, Integer.parseInt(maxTeams.getText().toString()))));
                 } catch (NotConnectedException e) {
                     Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
                     e.printStackTrace();
@@ -199,8 +202,8 @@ public class RoomsActivity extends ActionBarActivity {
     }
 
     private JSONObject createListRequest() {
-        return requestMaker.getNewRequestWithDefaultRequests(new JSONd(FieldsNames.SERVICE, FieldsNames.ROOMS),
-                new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.ROOMS_LIST));
+        return requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE, ServicesFields.ROOMS.toString()),
+                new JSONd(ServicesFields.SERVICE_TYPE, RoomsFields.ROOMS_LIST.toString()));
     }
 
 
@@ -237,7 +240,7 @@ public class RoomsActivity extends ActionBarActivity {
             Rooms.RoomJoinResult roomJoinResult = (Rooms.RoomJoinResult) msg.obj;
             if (roomJoinResult.getResult()) {
                 Intent intent = new Intent(context, RoomActivity.class);
-                UserData.DATA.addData(FieldsNames.ROOM_NAME, roomJoinResult.getName());
+                UserData.DATA.addData(RoomFields.ROOM_NAME, roomJoinResult.getName());
                 startActivity(intent);
             } else {
                 Toast.makeText(context, getString(R.string.rooms_join_error), Toast.LENGTH_LONG).show();

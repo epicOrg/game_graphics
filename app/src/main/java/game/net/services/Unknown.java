@@ -6,6 +6,7 @@ import android.os.Handler;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import game.net.fieldsnames.ServicesFields;
 import game.net.interaction.FieldsNames;
 
 /**
@@ -35,7 +36,7 @@ public class Unknown implements Service {
 
         try {
 
-            jsonResponse.put(FieldsNames.SERVICE, FieldsNames.UNKNOWN);
+            jsonResponse.put(ServicesFields.SERVICE.toString(), ServicesFields.UNKNOWN.toString());
             return jsonResponse;
 
         } catch (JSONException e) {

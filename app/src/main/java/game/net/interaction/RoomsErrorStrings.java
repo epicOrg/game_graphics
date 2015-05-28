@@ -5,6 +5,9 @@ import com.example.alessandro.computergraphicsexample.R;
 
 import java.util.HashMap;
 
+import game.net.fieldsnames.RoomFields;
+import game.net.fieldsnames.RoomsFields;
+
 /**
  * This class manages the error message shown in case of error in room context.
  *
@@ -21,8 +24,8 @@ public class RoomsErrorStrings {
     }
 
     private void createMap() {
-        errors.put(FieldsNames.ROOM_CREATE_ERROR_ALREADY_PRESENT, R.string.rooms_create_error_alreadypresent);
-        errors.put(FieldsNames.ROOM_CREATE_ERROR_INVALID_NAME, R.string.rooms_create_error_invalidname);
+        errors.put(RoomsFields.ROOM_CREATE_ERROR_ALREADY_PRESENT.toString(), R.string.rooms_create_error_alreadypresent);
+        errors.put(RoomsFields.ROOM_CREATE_ERROR_INVALID_NAME.toString(), R.string.rooms_create_error_invalidname);
     }
 
     public int getStringIdByError(String error) {

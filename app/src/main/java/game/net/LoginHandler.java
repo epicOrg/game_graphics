@@ -11,6 +11,7 @@ import com.example.alessandro.computergraphicsexample.RoomsActivity;
 import java.util.ArrayList;
 
 import game.UserData;
+import game.net.fieldsnames.CommonFields;
 import game.net.interaction.FieldsNames;
 import game.net.services.Login;
 
@@ -45,8 +46,8 @@ public class LoginHandler extends Handler {
                 l.onLoginComplete(true);
 
             Intent intent = new Intent(context, RoomsActivity.class);
-            UserData.DATA.addData(FieldsNames.USERNAME, result.getUsername());
-            UserData.DATA.addData(FieldsNames.HASHCODE, result.getHashcode());
+            UserData.DATA.addData(CommonFields.USERNAME, result.getUsername());
+            UserData.DATA.addData(CommonFields.HASHCODE, result.getHashcode());
             context.startActivity(intent);
         } else {
             for (LoginHandlerListener l : loginHandlerListeners)

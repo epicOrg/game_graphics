@@ -70,7 +70,7 @@ public class RequestMaker {
      * @param values SFVertex3f that contains the values for the request.
      * @return the generated JSONObject that contains the given requests.
      */
-    public JSONObject getNewRequest(String[] names, SFVertex3f values) {
+    public JSONObject getNewRequest(Enum[] names, SFVertex3f values) {
         JSONObject request = new JSONObject();
         try {
             if (names.length < 3)

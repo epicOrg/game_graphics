@@ -5,6 +5,10 @@ import org.json.JSONObject;
 import game.net.communication.JSONd;
 import game.net.communication.RequestMaker;
 import game.Waiter;
+import game.net.fieldsnames.CommonFields;
+import game.net.fieldsnames.GameFields;
+import game.net.fieldsnames.RoomFields;
+import game.net.fieldsnames.ServicesFields;
 import game.player.Player;
 import game.player.PlayerStatus;
 import game.net.communication.NotConnectedException;
@@ -57,13 +61,13 @@ public class GamePositionSender implements Waiter {
         public void run() {
             while (sending) {
                 PlayerStatus playerStatus = player.getStatus();
-                String[] names = new String[]{FieldsNames.GAME_X, FieldsNames.GAME_Y, FieldsNames.GAME_Z};
-                JSONObject request = requestMaker.getNewRequest(new JSONd(FieldsNames.SERVICE, FieldsNames.GAME),
-                        new JSONd(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_POSITIONS),
-                        new JSONd(FieldsNames.USERNAME, player.getName()),
-                        new JSONd(FieldsNames.ROOM_NAME, roomName),
-                        new JSONd(FieldsNames.GAME_POSITION, requestMaker.getNewRequest(names, playerStatus.getPosition())),
-                        new JSONd(FieldsNames.GAME_DIRECTION, requestMaker.getNewRequest(names, playerStatus.getDirection()))
+                Enum[] names = new Enum[]{GameFields.GAME_X, GameFields.GAME_Y, GameFields.GAME_Z};
+                JSONObject request = requestMaker.getNewRequest(new JSONd(ServicesFields.SERVICE, ServicesFields.GAME.toString()),
+                        new JSONd(ServicesFields.SERVICE_TYPE, GameFields.GAME_POSITIONS.toString()),
+                        new JSONd(CommonFields.USERNAME, player.getName()),
+                        new JSONd(RoomFields.ROOM_NAME, roomName),
+                        new JSONd(GameFields.GAME_POSITION, requestMaker.getNewRequest(names, playerStatus.getPosition())),
+                        new JSONd(GameFields.GAME_DIRECTION, requestMaker.getNewRequest(names, playerStatus.getDirection()))
 
                 );
                 try {

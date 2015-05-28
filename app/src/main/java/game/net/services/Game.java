@@ -10,6 +10,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import game.net.fieldsnames.CommonFields;
+import game.net.fieldsnames.GameFields;
+import game.net.fieldsnames.ServicesFields;
 import game.net.interaction.FieldsNames;
 import shadow.math.SFVertex3f;
 
@@ -37,14 +40,14 @@ public class Game implements Service {
     private void readFields() {
         try {
             Message message = null;
-            switch (json.getString(FieldsNames.SERVICE_TYPE)) {
-                case FieldsNames.GAME_STATUS:
+            switch (GameFields.valueOf(json.getString(ServicesFields.SERVICE_TYPE.toString()))) {
+                case GAME_STATUS:
                     message = getGameStatusMessage();
                     break;
-                case FieldsNames.GAME_MAP:
+                case GAME_MAP:
                     message = getGameMapMessage();
                     break;
-                case FieldsNames.GAME_POSITIONS:
+                case GAME_POSITIONS:
                     message = getGamePositionsMessage();
                     break;
             }
@@ -60,10 +63,10 @@ public class Game implements Service {
         boolean go = false;
         String gameEnd = null;
         try {
-            if (json.has(FieldsNames.GAME_GO))
-                go = json.getBoolean(FieldsNames.GAME_GO);
-            if (json.has(FieldsNames.GAME_END))
-                gameEnd = json.getString(FieldsNames.GAME_END);
+            if (json.has(GameFields.GAME_GO.toString()))
+                go = json.getBoolean(GameFields.GAME_GO.toString());
+            if (json.has(GameFields.GAME_END.toString()))
+                gameEnd = json.getString(GameFields.GAME_END.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -79,18 +82,18 @@ public class Game implements Service {
 
         ArrayList<GameMapObject> gameMapObjects = new ArrayList<>();
         try {
-            JSONArray jItems = json.getJSONArray(FieldsNames.GAME_ITEMS);
+            JSONArray jItems = json.getJSONArray(GameFields.GAME_ITEMS.toString());
             for (int i = 0; i < jItems.length(); i++) {
                 JSONObject jObject = jItems.getJSONObject(i);
-                String object = jObject.getString(FieldsNames.GAME_OBJECT);
-                String texture = jObject.getString(FieldsNames.GAME_TEXTURE);
-                String position = jObject.getString(FieldsNames.GAME_POSITION);
-                String size = jObject.getString(FieldsNames.GAME_SIZE);
+                String object = jObject.getString(GameFields.GAME_OBJECT.toString());
+                String texture = jObject.getString(GameFields.GAME_TEXTURE.toString());
+                String position = jObject.getString(GameFields.GAME_POSITION.toString());
+                String size = jObject.getString(GameFields.GAME_SIZE.toString());
                 gameMapObjects.add(new GameMapObject(object, texture, position, size));
             }
 
-            width = json.getInt(FieldsNames.GAME_WIDTH);
-            height = json.getInt(FieldsNames.GAME_HEIGHT);
+            width = json.getInt(GameFields.GAME_WIDTH.toString());
+            height = json.getInt(GameFields.GAME_HEIGHT.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -98,7 +101,7 @@ public class Game implements Service {
         gameMapResult = new GameMapResult(width, height, gameMapObjects);
 
         try {
-            String jPlayerPosition = json.getString(FieldsNames.GAME_PLAYER_POSITION);
+            String jPlayerPosition = json.getString(GameFields.GAME_PLAYER_POSITION.toString());
             gameMapResult.playerPositionX = Float.parseFloat(jPlayerPosition.split(" ")[0]);
             gameMapResult.playerPositionY = Float.parseFloat(jPlayerPosition.split(" ")[1]);
             gameMapResult.playerPositionZ = Float.parseFloat(jPlayerPosition.split(" ")[2]);
@@ -114,20 +117,20 @@ public class Game implements Service {
         HashMap<String, GamePositionsObject> gamePositionsObjectHashMap = new HashMap<>();
 
         try {
-            JSONArray jPlayers = json.getJSONArray(FieldsNames.GAME_PLAYERS);
+            JSONArray jPlayers = json.getJSONArray(GameFields.GAME_PLAYERS.toString());
 
             for (int i = 0; i < jPlayers.length(); i++) {
                 JSONObject jPlayer = jPlayers.getJSONObject(i);
-                String username = jPlayer.getString(FieldsNames.USERNAME);
-                JSONObject pos = jPlayer.getJSONObject(FieldsNames.GAME_POSITION);
-                JSONObject dir = jPlayer.getJSONObject(FieldsNames.GAME_DIRECTION);
+                String username = jPlayer.getString(CommonFields.USERNAME.toString());
+                JSONObject pos = jPlayer.getJSONObject(GameFields.GAME_POSITION.toString());
+                JSONObject dir = jPlayer.getJSONObject(GameFields.GAME_DIRECTION.toString());
 
-                float xPos = Float.parseFloat(pos.getString(FieldsNames.GAME_X));
-                float yPos = Float.parseFloat(pos.getString(FieldsNames.GAME_Y)) - 1.5f;
-                float zPos = Float.parseFloat(pos.getString(FieldsNames.GAME_Z));
-                float xDir = Float.parseFloat(dir.getString(FieldsNames.GAME_X));
-                float yDir = Float.parseFloat(dir.getString(FieldsNames.GAME_Y)) - 1.5f;
-                float zDir = Float.parseFloat(dir.getString(FieldsNames.GAME_Z));
+                float xPos = Float.parseFloat(pos.getString(GameFields.GAME_X.toString()));
+                float yPos = Float.parseFloat(pos.getString(GameFields.GAME_Y.toString())) - 1.5f;
+                float zPos = Float.parseFloat(pos.getString(GameFields.GAME_Z.toString()));
+                float xDir = Float.parseFloat(dir.getString(GameFields.GAME_X.toString()));
+                float yDir = Float.parseFloat(dir.getString(GameFields.GAME_Y.toString())) - 1.5f;
+                float zDir = Float.parseFloat(dir.getString(GameFields.GAME_Z.toString()));
 
                 gamePositionsObjectHashMap.put(username, new GamePositionsObject(new SFVertex3f(xPos, yPos, zPos), new SFVertex3f(xDir, yDir, zDir)));
             }
