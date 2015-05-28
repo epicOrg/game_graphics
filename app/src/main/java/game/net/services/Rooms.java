@@ -64,7 +64,7 @@ public class Rooms implements Service {
     }
 
     private Message getRoomListMessage() throws JSONException {
-        JSONObject object = json.getJSONObject(CommonFields.LIST.toString());
+        JSONObject object = json.getJSONObject(RoomsFields.ROOMS_LIST.toString());
         RoomsResult[] roomsResults = new RoomsResult[object.length()];
         Iterator<String> iterator = object.keys();
 
