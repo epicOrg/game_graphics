@@ -15,8 +15,8 @@ import game.net.fieldsnames.CommonFields;
 import game.net.services.Login;
 
 /**
- * Handler che permette la comunicazione tra il Thread di login attivato alla ricezione della risposta dal server e
- * l'Activity di login stessa ricevendo i risultati del Login.
+ * Handler which allows the communication between login Thread, activated
+ * when server response is received, and login Activity when Login data are received.
  */
 public class LoginHandler extends Handler {
 

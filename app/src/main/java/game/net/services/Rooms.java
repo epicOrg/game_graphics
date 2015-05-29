@@ -53,7 +53,6 @@ public class Rooms implements Service {
             }
             message.sendToTarget();
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

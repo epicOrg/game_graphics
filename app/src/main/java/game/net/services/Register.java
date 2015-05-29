@@ -13,12 +13,10 @@ import java.util.Iterator;
 
 import game.net.fieldsnames.CommonFields;
 
-
 public class Register implements Service {
 	
 	private JSONObject json;
 	private Handler handler;
-
 	
 	@Override
 	public void start(JSONObject json) {
@@ -30,7 +28,7 @@ public class Register implements Service {
 
         try {
             boolean value = json.getBoolean(CommonFields.NO_ERRORS.toString());
-            Log.d("REGSTER_RESPONSE", json.toString());
+            Log.d("REGISTER_RESPONSE", json.toString());
             RegistrationResult result;
             if(value) {
                 result = new RegistrationResult(true, null);

@@ -16,32 +16,22 @@ import game.net.fieldsnames.ServicesFields;
 public class Unknown implements Service {
 
     @Override
-    public void start(JSONObject json) {
-        //return getResponse().toString();
-    }
+    public void start(JSONObject json) { }
 
     @Override
-    public void setHandler(Handler handler) {
+    public void setHandler(Handler handler) { }
 
-    }
-
-    public void setContext(Context context) {
-
-    }
+    public void setContext(Context context) { }
 
     private JSONObject getResponse() {
 
         JSONObject jsonResponse = new JSONObject();
 
         try {
-
             jsonResponse.put(ServicesFields.SERVICE.toString(), ServicesFields.UNKNOWN.toString());
             return jsonResponse;
-
         } catch (JSONException e) {
             return new JSONObject();
         }
-
     }
-
 }
