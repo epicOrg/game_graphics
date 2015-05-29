@@ -8,7 +8,7 @@ import game.net.communication.JSONd;
 import game.net.communication.RequestMaker;
 
 /**
- * Singleton which mantains user data while advancing in the activities. It also creates RequestMaker with
+ * Singleton which maintains user data while advancing in the activities. It also creates RequestMaker with
  * all the added data, or with the requested data.
  *
  * @author De Pace

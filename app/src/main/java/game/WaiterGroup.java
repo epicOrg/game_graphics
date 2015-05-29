@@ -17,7 +17,7 @@ public class WaiterGroup {
     /**
      * Constructs an empty group of waiters associated with the condition of the CountDownLatch.
      *
-     * @param countDownLatch CountDownLatch that identifies the condition when start the waiters
+     * @param countDownLatch CountDownLatch that identifies the condition when start the waiters.
      */
     public WaiterGroup(CountDownLatch countDownLatch) {
         this.countDownLatch = countDownLatch;
@@ -26,7 +26,7 @@ public class WaiterGroup {
     /**
      * Adds a Waiter to the group.
      *
-     * @param w Waiter to be added to the group
+     * @param w Waiter to be added to the group.
      */
     public void addWaiter(Waiter w) {
         waiters.add(w);

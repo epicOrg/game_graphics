@@ -10,7 +10,9 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 /**
- * Created by depa on 27/05/15.
+ * Singleton for the operations of configuration.
+ *
+ * @author De Pace
  */
 public enum Configurations {
     CONF;
@@ -69,5 +71,4 @@ public enum Configurations {
     private void loadMap(String filename, HashMap<String,String> map){
         configurations.put(filename,map);
     }
-
 }
