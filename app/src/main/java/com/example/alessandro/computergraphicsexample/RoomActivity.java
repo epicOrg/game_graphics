@@ -23,9 +23,7 @@ import game.net.communication.NotConnectedException;
 import game.net.communication.RequestMaker;
 import game.net.communication.ServerCommunicationThread;
 import game.net.fieldsnames.RoomFields;
-import game.net.fieldsnames.RoomsFields;
 import game.net.fieldsnames.ServicesFields;
-import game.net.interaction.FieldsNames;
 import game.net.services.CurrentRoom;
 import game.player.Player;
 
@@ -51,6 +49,7 @@ public class RoomActivity extends ActionBarActivity {
     private RequestMaker requestMaker;
 
     private boolean isStartingGame = false;
+    private boolean isExitingGame = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,7 +109,7 @@ public class RoomActivity extends ActionBarActivity {
     protected void onStop() {
         super.onStop();
 
-        if (!isStartingGame) {
+        if (!isStartingGame && !isExitingGame) {
             try {
                 serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE_TYPE, RoomFields.ROOM_ACTIONS.toString()),
                         new JSONd(RoomFields.ROOM_ACTION, RoomFields.ROOM_EXIT.toString())));
@@ -178,6 +177,7 @@ public class RoomActivity extends ActionBarActivity {
             boolean result = (boolean) msg.obj;
 
             if (result) {
+                isExitingGame = true;
                 finish();
             }
         }
@@ -195,4 +195,5 @@ public class RoomActivity extends ActionBarActivity {
         }
 
     }
+
 }

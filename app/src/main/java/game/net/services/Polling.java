@@ -21,7 +21,7 @@ import game.net.interaction.FieldsNames;
  */
 public class Polling implements Service {
 
-    public static final String LOG_TAG = "polling";
+    public static final String LOG_TAG = "Polling";
 
     @Override
     public void start(JSONObject json) {
@@ -43,4 +43,5 @@ public class Polling implements Service {
     public void setHandler(Handler handler) {
 
     }
+
 }
