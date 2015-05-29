@@ -9,9 +9,9 @@ import shadow.math.SFMatrix3f;
 import shadow.math.SFVertex3f;
 
 /**
- * Decoration Object. Basically a collision-free MazeObject with customizable 3D model.
+ * Decoration of Object. Basically a collision-free MazeObject with customizable 3D model.
  *
- * @author Stefano De Pace
+ * @author De Pace
  */
 public class Decoration implements MazeObject {
 
@@ -23,11 +23,11 @@ public class Decoration implements MazeObject {
     /**
      * Creates a new Decoration.
      *
-     * @param position   Position of the Deceoration.
-     * @param model      String name of the 3D model file to represent this Decoration.
+     * @param position Position of the Decoration.
+     * @param model String name of the 3D model file to represent this Decoration.
      * @param texture_id Id of the texture that represents this Decoration.
-     * @param scalexz    Scale factor on the x-z plane.
-     * @param scaley     Scale factor in the y direction.
+     * @param scalexz Scale factor on the x-z plane.
+     * @param scaley  Scale factor in the y direction.
      */
     public Decoration(SFVertex3f position, String model, int texture_id, float scalexz, float scaley) {
         this.texture_id = texture_id;
