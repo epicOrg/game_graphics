@@ -48,11 +48,8 @@ public class Encrypt implements Service {
             keyGenerator.generateKey();
             SecretKey privateKey = new SymmetricKeyGenerator().getKey();
             KeyWrapper wrapper = new KeyWrapper(privateKey);
-            Log.d(LOG_TAG, KeyConverter.stringToKey(publicKey,"RSA").getAlgorithm());
-            Log.d(LOG_TAG, KeyConverter.stringToKey(publicKey,"RSA").getFormat());
-            Log.d(LOG_TAG, KeyConverter.stringToKey(publicKey,"RSA").getEncoded().toString());
 
-            wrapper.wrapKey(KeyConverter.stringToKey(publicKey,"RSA"));
+            wrapper.wrapKey(KeyConverter.stringToPublicKey(publicKey));
             String privateWrapped = wrapper.getWrappedKeyString();
 
             RequestMaker requestMaker = UserData.DATA.getRequestMaker();
