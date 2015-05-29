@@ -11,8 +11,6 @@ import game.net.fieldsnames.ServicesFields;
  */
 public class EncryptInitializer {
 
-
-
     public void initConnection(){
 
         RequestMaker requestMaker = UserData.DATA.getRequestMaker();

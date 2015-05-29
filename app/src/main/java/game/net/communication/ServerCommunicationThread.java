@@ -197,4 +197,8 @@ public class ServerCommunicationThread extends Thread {
     public void addServerCommunicationThreadListener(ServerCommunicationThreadListener l) {
         threadListeners.add(l);
     }
+
+    public void removeServerCommunicationThreadListener(ServerCommunicationThreadListener l) {
+        threadListeners.remove(l);
+    }
 }

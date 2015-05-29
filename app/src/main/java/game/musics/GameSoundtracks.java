@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.Uri;
 
 /**
+ * This class manages the soundtrack files.
+ *
  * @author Torlaschi
  * @date 17/04/2015
  */
@@ -16,6 +18,9 @@ public class GameSoundtracks {
         this.soundtrackIds=soundtrackIds;
     }
 
+    /**
+     * @return Vector which contains the Uri of every soundtrack files.
+     */
     public Uri[] getSoundtracks(Context context) {
         int n=soundtrackIds.length;
         Uri[] soundtracks=new Uri[n];

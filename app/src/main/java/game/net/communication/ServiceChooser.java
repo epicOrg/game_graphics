@@ -7,6 +7,8 @@ import game.net.fieldsnames.ServicesFields;
 import game.net.services.Service;
 
 /**
+ * Selector of a service from the JSONObject.
+ *
  * @author Noris
  * @date 26/03/2015
  */

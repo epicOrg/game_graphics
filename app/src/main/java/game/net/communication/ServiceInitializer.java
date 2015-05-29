@@ -14,6 +14,9 @@ import game.net.services.Service;
 import game.net.services.Unknown;
 
 /**
+ * This class creates and initializes the specific service
+ * from the ServicesFields.
+ *
  * Created by depa on 29/05/15.
  */
 public class ServiceInitializer {

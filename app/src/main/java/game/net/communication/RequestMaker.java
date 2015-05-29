@@ -11,7 +11,7 @@ import shadow.math.SFVertex3f;
 /**
  * Class used to automatize JSON requests, encapsulating default requests.
  *
- * @author Stefano De Pace
+ * @author De Pace
  */
 public class RequestMaker {
 

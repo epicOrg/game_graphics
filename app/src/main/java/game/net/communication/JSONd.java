@@ -6,11 +6,10 @@ import org.json.JSONObject;
 /**
  * Class that encapsulates a JSON request, an automatically translates it to a JSONObject.
  *
- * @author Stefano De Pace
+ * @author De Pace
  */
 public class JSONd {
 
-    //private String name;
     private Enum name;
     private Object value;
 

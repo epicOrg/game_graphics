@@ -8,6 +8,9 @@ import android.util.Log;
 import java.io.IOException;
 
 /**
+ * This class manages the background sound the player will hear
+ * during the loading.
+ *
  * @author Torlaschi
  * @date 14/04/2015
  */
