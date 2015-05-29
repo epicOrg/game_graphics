@@ -23,11 +23,8 @@ public class Polling implements Service {
 
     public static final String LOG_TAG = "polling";
 
-    public Polling(JSONObject json) {
-    }
-
     @Override
-    public void start() {
+    public void start(JSONObject json) {
         try {
             ServerCommunicationThread.getInstance().send(generatePollingResponse());
         } catch (NotConnectedException e) {

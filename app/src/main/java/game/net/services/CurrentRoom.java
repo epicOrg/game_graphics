@@ -33,13 +33,9 @@ public class CurrentRoom implements Service {
     private JSONObject json;
     private Handler handler;
 
-    public CurrentRoom(JSONObject json) {
-        super();
-        this.json = json;
-    }
-
     @Override
-    public void start() {
+    public void start(JSONObject json) {
+        this.json=json;
         readFields();
     }
 

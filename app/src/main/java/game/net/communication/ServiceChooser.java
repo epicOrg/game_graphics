@@ -2,18 +2,9 @@ package game.net.communication;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import java.util.HashMap;
 import game.net.fieldsnames.ServicesFields;
-import game.net.services.Audio;
-import game.net.services.CurrentRoom;
-import game.net.services.Encrypt;
-import game.net.services.Game;
-import game.net.services.Login;
-import game.net.services.Polling;
-import game.net.services.Register;
-import game.net.services.Rooms;
 import game.net.services.Service;
-import game.net.services.Unknown;
 
 /**
  * @author Noris
@@ -22,27 +13,18 @@ import game.net.services.Unknown;
 
 public class ServiceChooser {
 
-    public Service setService(JSONObject json) throws JSONException {
-        switch (ServicesFields.valueOf(json.getString(ServicesFields.SERVICE.toString()))) {
-            case REGISTER:
-                return new Register(json);
-            case LOGIN:
-                return new Login(json);
-            case ROOMS:
-                return new Rooms(json);
-            case CURRENT_ROOM:
-                return new CurrentRoom(json);
-            case GAME:
-                return new Game(json);
-            case AUDIO:
-                return new Audio(json);
-            case POLLING:
-                return new Polling(json);
-            case ENCRYPT:
-                return new Encrypt(json);
-            default:
-                //TODO
-                return new Unknown();
-        }
+    private HashMap<Enum, Service> servicesMap=new HashMap<>();
+
+    public ServiceChooser(){
+        servicesMap=new ServiceInitializer().mapServices();
     }
+
+    public Service setService(JSONObject json) throws JSONException{
+        Service service=servicesMap.get(ServicesFields.valueOf(json.getString(ServicesFields.SERVICE.toString())));
+        if (service!=null)
+            return service;
+        else
+            return servicesMap.get(ServicesFields.UNKNOWN);
+    }
+
 }

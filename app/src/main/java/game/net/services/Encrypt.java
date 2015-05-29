@@ -34,13 +34,10 @@ public class Encrypt implements Service {
     private JSONObject jsonRequest;
     private JSONObject jsonResponse;
 
-    public Encrypt(JSONObject jsonResponse) {
-        super();
-        this.jsonResponse = jsonResponse;
-    }
-
     @Override
-    public void start() {
+    public void start(JSONObject json) {
+        //TODO è giusto??
+        this.jsonResponse=json;
 
         try {
             String publicKey = jsonResponse.getString(EncryptFields.PUBLIC_KEY.toString());

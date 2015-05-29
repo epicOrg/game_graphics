@@ -17,7 +17,7 @@ import game.net.interaction.FieldsNames;
 public class Unknown implements Service {
 
     @Override
-    public void start() {
+    public void start(JSONObject json) {
         //return getResponse().toString();
     }
 

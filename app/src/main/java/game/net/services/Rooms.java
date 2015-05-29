@@ -32,13 +32,9 @@ public class Rooms implements Service {
     private JSONObject json;
     private Handler handler;
 
-    public Rooms(JSONObject json) {
-        super();
-        this.json = json;
-    }
-
     @Override
-    public void start() {
+    public void start(JSONObject json) {
+        this.json=json;
         readFields();
     }
 

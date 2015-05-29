@@ -19,15 +19,12 @@ public class Register implements Service {
 	
 	private JSONObject json;
 	private Handler handler;
-	
-	public Register(JSONObject json) {
-		super();
-		this.json = json;
-	}
+
 	
 	@Override
-	public void start() {
-		readFields();
+	public void start(JSONObject json) {
+		this.json=json;
+        readFields();
 	}
 
     private void readFields() {
@@ -45,7 +42,9 @@ public class Register implements Service {
             }
             Message message= handler.obtainMessage(0,result);
             message.sendToTarget();
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private ArrayList<String> extractErrors() throws JSONException {

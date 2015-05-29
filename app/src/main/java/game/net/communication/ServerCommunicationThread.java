@@ -80,7 +80,7 @@ public class ServerCommunicationThread extends Thread {
 
                     Service service = serviceChooser.setService(received);
                     service.setHandler(handler);
-                    service.start();
+                    service.start(received);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

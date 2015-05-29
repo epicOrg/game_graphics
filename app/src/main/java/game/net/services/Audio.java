@@ -21,12 +21,9 @@ public class Audio implements Service {
 
     private JSONObject jsonRequest;
 
-    public Audio(JSONObject jsonRequest) {
-        this.jsonRequest = jsonRequest;
-    }
-
     @Override
-    public void start() {
+    public void start(JSONObject json) {
+        this.jsonRequest=json;
         AudioCallManager audioCallManager = AudioCallManager.getInstance();
         try {
             int serverPort = jsonRequest.getInt(AudioFields.AUDIO_PORT_SERVER.toString());

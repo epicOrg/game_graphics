@@ -19,13 +19,9 @@ public class Login implements Service {
     private JSONObject json;
     private Handler handler;
 
-    public Login(JSONObject json) {
-        super();
-        this.json = json;
-    }
-
     @Override
-    public void start() {
+    public void start(JSONObject json) {
+        this.json=json;
         readFields();
     }
 
