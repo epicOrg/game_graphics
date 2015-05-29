@@ -24,7 +24,6 @@ import game.player.Player;
 import game.audio.AudioCallManager;
 import game.net.communication.NotConnectedException;
 import game.net.communication.ServerCommunicationThread;
-import game.net.interaction.FieldsNames;
 
 /**
  * @author Torlaschi

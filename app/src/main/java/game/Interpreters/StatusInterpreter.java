@@ -10,7 +10,6 @@ import java.util.LinkedList;
 import game.net.GameHandlerListener;
 import game.net.GamePositionSender;
 import game.net.fieldsnames.GameFields;
-import game.net.interaction.FieldsNames;
 import game.net.services.Game;
 import game.views.MessageScreen;
 

@@ -7,7 +7,6 @@ import game.net.communication.NotConnectedException;
 import game.net.communication.ServerCommunicationThread;
 import game.net.fieldsnames.GameFields;
 import game.net.fieldsnames.ServicesFields;
-import game.net.interaction.FieldsNames;
 
 /**
  * Class which sends a "GAME_READY" message when asked.

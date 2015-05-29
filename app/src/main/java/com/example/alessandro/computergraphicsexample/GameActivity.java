@@ -45,7 +45,6 @@ import game.audio.AudioCallManager;
 import game.audio.HeadsetListener;
 import game.net.communication.NotConnectedException;
 import game.net.communication.ServerCommunicationThread;
-import game.net.interaction.FieldsNames;
 import shadow.math.SFVertex3f;
 
 public class GameActivity extends Activity implements GameHandlerListener {

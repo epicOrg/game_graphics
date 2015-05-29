@@ -20,7 +20,6 @@ import game.net.data.RegistrationData;
 import game.net.fieldsnames.CommonFields;
 import game.net.fieldsnames.RegisterFields;
 import game.net.fieldsnames.ServicesFields;
-import game.net.interaction.FieldsNames;
 import game.net.interaction.ProgressShower;
 import game.net.interaction.RegistrationErrorStrings;
 import game.net.services.Register;

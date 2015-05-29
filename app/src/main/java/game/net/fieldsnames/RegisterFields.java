@@ -1,7 +1,10 @@
 package game.net.fieldsnames;
 
-public enum RegisterFields {
+/**
+ * Possible registration fields.
+ */
 
+public enum RegisterFields {
 	
 	EMAIL,
 	REGISTER_SHORT,
@@ -9,5 +12,6 @@ public enum RegisterFields {
     REGISTER_INVALID_CHAR,
     REGISTER_INVALID_DOMAIN,
     REGISTER_SERVER_ERROR,
-    REGISTER_ALREADY_USED 
+    REGISTER_ALREADY_USED
+
 }

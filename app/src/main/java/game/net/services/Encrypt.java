@@ -1,7 +1,6 @@
 package game.net.services;
 
 import android.os.Handler;
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,10 +15,8 @@ import game.net.communication.ServerCommunicationThread;
 import game.net.connection_encryption.KeyConverter;
 import game.net.connection_encryption.KeyWrapper;
 import game.net.connection_encryption.SymmetricKeyGenerator;
-import game.net.fieldsnames.CommonFields;
 import game.net.fieldsnames.EncryptFields;
 import game.net.fieldsnames.ServicesFields;
-import game.net.interaction.FieldsNames;
 
 /**
  * @author Noris

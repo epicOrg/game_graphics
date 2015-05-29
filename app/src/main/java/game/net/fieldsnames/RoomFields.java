@@ -17,4 +17,5 @@ public enum RoomFields {
 	ROOM_LIST_RECEIVED,
 	ROOM_START,
 	ROOM_EXIT
+    
 }

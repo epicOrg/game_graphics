@@ -22,6 +22,9 @@ public class ProgressShower {
         this.shortAnimTime = shortAnimTime;
     }
 
+    /**
+     * Sets visibility and animations of mLoginFormView and mProgressView.
+     */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     public void showProgress(final boolean show) {
 

@@ -13,7 +13,6 @@ import java.util.HashMap;
 import game.net.fieldsnames.CommonFields;
 import game.net.fieldsnames.GameFields;
 import game.net.fieldsnames.ServicesFields;
-import game.net.interaction.FieldsNames;
 import shadow.math.SFVertex3f;
 
 public class Game implements Service {

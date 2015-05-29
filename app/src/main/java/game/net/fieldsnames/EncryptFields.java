@@ -1,8 +1,11 @@
 package game.net.fieldsnames;
 
+/**
+ * Possible encryption fields.
+ */
+
 public enum EncryptFields {
 
-	// Encrypt
     ENCRYPTED_MESSAGE,
     ENCRYPT_REQUEST,
     PUBLIC_KEY_REQUEST,

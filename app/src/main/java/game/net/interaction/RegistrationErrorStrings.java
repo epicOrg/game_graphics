@@ -9,7 +9,8 @@ import game.net.fieldsnames.CommonFields;
 import game.net.fieldsnames.RegisterFields;
 
 /**
- * This class manages the error message shown in case of error in registration context.
+ * This class manages the error messages shown in case of error during the registration.
+ *
  * @author Micieli
  * @date 31/03/2015
  */

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 import game.UserData;
 import game.net.fieldsnames.CommonFields;
-import game.net.interaction.FieldsNames;
 import game.net.services.Login;
 
 /**

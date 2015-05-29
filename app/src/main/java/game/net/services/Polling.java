@@ -1,7 +1,6 @@
 package game.net.services;
 
 import android.os.Handler;
-import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -12,7 +11,6 @@ import game.net.communication.RequestMaker;
 import game.net.communication.ServerCommunicationThread;
 import game.net.fieldsnames.CommonFields;
 import game.net.fieldsnames.ServicesFields;
-import game.net.interaction.FieldsNames;
 
 /**
  * Polling service respond to Server request, in order to confirm that I am alive.

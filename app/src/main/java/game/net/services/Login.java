@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import game.net.fieldsnames.CommonFields;
-import game.net.interaction.FieldsNames;
 
 /**
  * @author Micieli

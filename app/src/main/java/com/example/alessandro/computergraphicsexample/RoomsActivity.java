@@ -32,7 +32,6 @@ import game.net.communication.ServerCommunicationThread;
 import game.net.fieldsnames.RoomFields;
 import game.net.fieldsnames.RoomsFields;
 import game.net.fieldsnames.ServicesFields;
-import game.net.interaction.FieldsNames;
 import game.net.interaction.RoomsErrorStrings;
 import game.net.services.Rooms;
 

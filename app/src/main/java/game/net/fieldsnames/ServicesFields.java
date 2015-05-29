@@ -1,6 +1,10 @@
 package game.net.fieldsnames;
 
+/**
+ * Possible fields about services.
+ */
 public enum ServicesFields {
+
     SERVICE,
     SERVICE_TYPE,
     ENCRYPT,
@@ -14,4 +18,5 @@ public enum ServicesFields {
     AUDIO,
     POLLING,
     LOGOUT
+
 }

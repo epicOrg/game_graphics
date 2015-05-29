@@ -15,7 +15,6 @@ import game.net.fieldsnames.RoomFields;
 import game.net.fieldsnames.RoomsFields;
 import game.net.fieldsnames.ServicesFields;
 import game.player.Player;
-import game.net.interaction.FieldsNames;
 
 /**
  * @author Micieli

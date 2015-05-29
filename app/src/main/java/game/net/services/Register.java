@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import game.net.fieldsnames.CommonFields;
-import game.net.interaction.FieldsNames;
 
 
 public class Register implements Service {

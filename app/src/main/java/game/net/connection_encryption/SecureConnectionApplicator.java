@@ -5,7 +5,6 @@ import org.json.JSONObject;
 
 import game.net.fieldsnames.EncryptFields;
 import game.net.fieldsnames.ServicesFields;
-import game.net.interaction.FieldsNames;
 
 /**
  * @author Noris

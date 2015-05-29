@@ -13,7 +13,6 @@ import game.player.Player;
 import game.player.PlayerStatus;
 import game.net.communication.NotConnectedException;
 import game.net.communication.ServerCommunicationThread;
-import game.net.interaction.FieldsNames;
 
 /**
  * Class containing a thread which sends the current player's position and direction to the server.
