@@ -13,10 +13,6 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-/**
- * @author Noris
- * @date 27/04/2015
- */
 public class Decrypter {
 
     private Key asymmetricKey;
@@ -26,6 +22,9 @@ public class Decrypter {
         this.asymmetricKey = asymmetricKey;
     }
 
+    /**
+     * @param encryptedString String to decrypt.
+     */
     public void decrypt(String encryptedString) {
 
         byte[] encryptedData = new byte[0];
@@ -36,11 +35,9 @@ public class Decrypter {
         }
 
         try {
-
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.DECRYPT_MODE, asymmetricKey);
             decryptedData = cipher.doFinal(encryptedData);
-
         } catch (InvalidKeyException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
@@ -60,9 +57,7 @@ public class Decrypter {
 
     public String getDecryptedString() {
         try {
-
             return new String(decryptedData, "UTF-8");
-
         } catch (UnsupportedEncodingException e) {
             return null;
         }

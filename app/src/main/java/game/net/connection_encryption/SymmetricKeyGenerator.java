@@ -8,26 +8,17 @@ import java.security.SecureRandom;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
-/**
- * @author Noris
- * @date 27/04/2015
- */
 public class SymmetricKeyGenerator implements ISymmetricKeyGenerator {
 
     private SecretKey key;
 
     public void generateKey() {
-
         try {
-
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
             SecureRandom secureRandom = new SecureRandom();
 
             keyGenerator.init(secureRandom);
             key = keyGenerator.generateKey();
-
-
-
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

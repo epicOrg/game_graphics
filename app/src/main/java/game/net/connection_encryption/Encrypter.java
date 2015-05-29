@@ -11,11 +11,6 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-/**
- * This class provides an encryption.
- *
- * Created by Noris on 27/04/15.
- */
 public class Encrypter {
 
     private byte[] cryptedData;
@@ -34,11 +29,9 @@ public class Encrypter {
         byte[] uncryptedData = uncryptedString.getBytes();
 
         try {
-
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.ENCRYPT_MODE, asymmetricKey);
             cryptedData = cipher.doFinal(uncryptedData);
-
         } catch (InvalidKeyException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {

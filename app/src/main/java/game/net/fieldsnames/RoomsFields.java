@@ -1,19 +1,20 @@
 package game.net.fieldsnames;
 
+/**
+ * Possible fields about rooms: they include service type.
+ */
+
 public enum RoomsFields {
 
-	// Rooms/Room
-	// Others
 	ROOM_MAX_PLAYERS, 
 	
 
-	// Rooms
-	// Service Type
 	ROOMS_LIST, 
 	ROOM_CREATE, 
 	ROOM_JOIN,
-	// Others
-	ROOM_CURRENT_PLAYERS, 
+
+
+	ROOM_CURRENT_PLAYERS,
 	ROOM_CREATE_ERROR_INVALID_NAME, 
 	ROOM_CREATE_ERROR_ALREADY_PRESENT, 
 	ROOM_JOIN_ERROR_FULL, 

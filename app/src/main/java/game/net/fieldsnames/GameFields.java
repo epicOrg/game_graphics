@@ -1,15 +1,17 @@
 package game.net.fieldsnames;
 
+/**
+ * Possible fields about game: they include service type.
+ */
+
 public enum GameFields {
 
-	
-	// Game
-    // Service Type
      GAME_STATUS,
      GAME_MAP,
      GAME_POSITIONS,
      GAME_END,
-    // Others
+
+
      GAME_READY,
      GAME_GO,
      GAME_EXIT,

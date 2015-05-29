@@ -1,8 +1,11 @@
 package game.net.fieldsnames;
 
+/**
+ * Possible common fields.
+ */
+
 public enum CommonFields {
 	
-	 // Common
      IP_ADDRESS,
      RESULT,
      HASHCODE,

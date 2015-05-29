@@ -3,6 +3,9 @@ package game.net.connection_encryption;
 import java.security.Key;
 
 /**
+ * This class manages the encryption of the connection:
+ * it encrypts the request and decrypts the response.
+ *
  * @author Noris
  * @date 27/04/2015
  */
