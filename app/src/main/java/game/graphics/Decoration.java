@@ -1,6 +1,7 @@
 package game.graphics;
 
 import android.content.Context;
+
 import game.generators.FundamentalGenerator;
 import game.physics.CollisionBox;
 import sfogl.integration.Node;
@@ -21,20 +22,22 @@ public class Decoration implements MazeObject {
 
     /**
      * Creates a new Decoration.
-     * @param position Position of the Deceoration.
-     * @param model String name of the 3D model file to represent this Decoration.
+     *
+     * @param position   Position of the Deceoration.
+     * @param model      String name of the 3D model file to represent this Decoration.
      * @param texture_id Id of the texture that represents this Decoration.
-     * @param scalexz Scale factor on the x-z plane.
-     * @param scaley Scale factor in the y direction.
+     * @param scalexz    Scale factor on the x-z plane.
+     * @param scaley     Scale factor in the y direction.
      */
     public Decoration(SFVertex3f position, String model, int texture_id, float scalexz, float scaley) {
         this.texture_id = texture_id;
-        this.model=model;
-        this.position=position;
-        this.scaleXZ=scalexz;
-        this.scaleY=scaley;
+        this.model = model;
+        this.position = position;
+        this.scaleXZ = scalexz;
+        this.scaleY = scaley;
     }
 
+    @Override
     public Node getNode(Context context) {
         Node node = new Node();
         node.setModel(FundamentalGenerator.getModel(context, ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER),
@@ -44,6 +47,7 @@ public class Decoration implements MazeObject {
         return node;
     }
 
+    @Override
     public CollisionBox getBox() {
         return null;
     }

@@ -1,6 +1,7 @@
 package game.graphics;
 
 import android.content.Context;
+
 import game.physics.CollisionBox;
 import game.physics.Square;
 import sfogl.integration.Node;
@@ -11,7 +12,7 @@ import shadow.math.SFVertex3f;
  *
  * @author De Pace
  */
-public class Wall implements MazeObject{
+public class Wall implements MazeObject {
 
     private Square box;
     private int textureID;
@@ -19,26 +20,26 @@ public class Wall implements MazeObject{
     /**
      * Creates a new wall. Its dimension is proportional to those of the specific Square.
      *
-     * @param box Square which represent the wall collision box.
+     * @param box       Square which represent the wall collision box.
      * @param textureID Index of the texture which represent the wall face.
      */
-    public Wall(Square box, int textureID){
-        this.box=box;
-        this.textureID=textureID;
+    public Wall(Square box, int textureID) {
+        this.box = box;
+        this.textureID = textureID;
     }
 
     @Override
-    public Node getNode(Context context){
+    public Node getNode(Context context) {
         Node node = new Node();
-        node.setModel(new WallGenerator(context,ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER),
+        node.setModel(new WallGenerator(context, ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER),
                 textureID, box.getxSize(), box.getySize(), box.getzSize()).getModel());
-        SFVertex3f position=box.getPos();
-        node.getRelativeTransform().setPosition(position.getX(),position.getY(),position.getZ());
+        SFVertex3f position = box.getPos();
+        node.getRelativeTransform().setPosition(position.getX(), position.getY(), position.getZ());
         return node;
     }
 
     @Override
-    public CollisionBox getBox(){
+    public CollisionBox getBox() {
         return box;
     }
 
@@ -50,6 +51,6 @@ public class Wall implements MazeObject{
         float sizeX = Float.parseFloat(size.split(" ")[0]);
         float sizeY = Float.parseFloat(size.split(" ")[1]);
         float sizeZ = Float.parseFloat(size.split(" ")[2]);
-        return new Wall(new Square(new SFVertex3f(posX, posY, posZ),sizeX,sizeY,sizeZ), textureId);
+        return new Wall(new Square(new SFVertex3f(posX, posY, posZ), sizeX, sizeY, sizeZ), textureId);
     }
 }

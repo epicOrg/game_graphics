@@ -1,6 +1,7 @@
 package game.graphics;
 
 import android.content.Context;
+
 import game.generators.FundamentalGenerator;
 import game.physics.Circle;
 import game.physics.CollisionBox;
@@ -23,17 +24,18 @@ public class Obstacle implements MazeObject {
     /**
      * Creates a new Obstacle from specified dimension and texture.
      *
-     * @param c Circle which makes up the CollisionBox and defines the dimension of xz plane.
-     * @param height Height in y direction.
+     * @param c          Circle which makes up the CollisionBox and defines the dimension of xz plane.
+     * @param height     Height in y direction.
      * @param texture_id Texture indes.
      */
     public Obstacle(Circle c, double height, int texture_id, String model) {
         this.c = c;
         this.texture_id = texture_id;
         this.height = (float) height / 2;
-        this.model=model;
+        this.model = model;
     }
 
+    @Override
     public Node getNode(Context context) {
         Node node = new Node();
         node.setModel(FundamentalGenerator.getModel(context, ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER),
@@ -43,6 +45,7 @@ public class Obstacle implements MazeObject {
         return node;
     }
 
+    @Override
     public CollisionBox getBox() {
         return c;
     }
