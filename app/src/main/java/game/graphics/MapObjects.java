@@ -16,10 +16,10 @@ public enum MapObjects {
     private HashMap<String, Integer> codes;
 
     /**
-     * @param object MazeObject name.
+     * @param object   MazeObject name.
      * @param position MazeObject position.
-     * @param size MazeObject dimension.
-     * @param texture MazeObject texture's name.
+     * @param size     MazeObject dimension.
+     * @param texture  MazeObject texture's name.
      * @return MazeObject which is built from the specified parameters.
      */
     public MazeObject getObjectFromNameAndData(String object, String position, String size, String texture) {
@@ -30,7 +30,7 @@ public enum MapObjects {
         return codes.get(s);
     }
 
-    private MapObjects() {
+    MapObjects() {
         fillObjects();
         fillTextures();
     }
@@ -49,6 +49,8 @@ public enum MapObjects {
         codes.put("wall_texture_01", R.drawable.wall_texture_01);
         codes.put("wall_texture_02", R.drawable.wall_texture_02);
         codes.put("wall_texture_03", R.drawable.wall_texture_03);
+        codes.put("wall_texture_04", R.drawable.wall_texture_04);
+        codes.put("wall_texture_05", R.drawable.wall_texture_05);
         codes.put("obstacle_texture_01", R.drawable.obstacle_texture_01);
         codes.put("hedge_texture_01", R.drawable.hedge_texture_01);
         codes.put("hedge_texture_02", R.drawable.hedge_texture_02);

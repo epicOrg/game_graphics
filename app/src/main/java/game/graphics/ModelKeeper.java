@@ -53,5 +53,4 @@ public enum ModelKeeper {
         return modelPos;
     }
 
-
 }

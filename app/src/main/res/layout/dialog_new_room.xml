@@ -29,10 +29,10 @@
                 <EditText
                     android:id="@+id/rooms_new_room_name"
                     android:layout_width="match_parent"
-                    android:hint="Name"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
-                    android:text="Room1" />
+                    android:hint="Name"
+                    android:text="TheGreatRoom" />
             </LinearLayout>
 
             <LinearLayout
@@ -51,8 +51,8 @@
                     android:id="@+id/rooms_new_room_max_teams"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Num. Teams"
                     android:layout_weight="50"
+                    android:hint="Num. Teams"
                     android:inputType="number"
                     android:text="1" />
             </LinearLayout>
@@ -73,8 +73,8 @@
                     android:id="@+id/rooms_new_room_max_players"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Num. Players"
                     android:layout_weight="50"
+                    android:hint="Num. Players"
                     android:inputType="number"
                     android:text="2" />
             </LinearLayout>
