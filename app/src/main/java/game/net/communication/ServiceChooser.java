@@ -4,9 +4,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import game.net.fieldsnames.ServicesFields;
-import game.net.interaction.FieldsNames;
 import game.net.services.Audio;
 import game.net.services.CurrentRoom;
+import game.net.services.Encrypt;
 import game.net.services.Game;
 import game.net.services.Login;
 import game.net.services.Polling;
@@ -38,6 +38,8 @@ public class ServiceChooser {
                 return new Audio(json);
             case POLLING:
                 return new Polling(json);
+            case ENCRYPT:
+                return new Encrypt(json);
             default:
                 //TODO
                 return new Unknown();

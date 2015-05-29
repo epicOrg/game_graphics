@@ -1,5 +1,10 @@
 package game.net.connection_encryption;
 
+import android.util.Log;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
+
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -31,6 +36,9 @@ public class KeyWrapper {
             cipher.init(Cipher.WRAP_MODE, publicKey);
             wrappedKey = cipher.wrap(symmetricKey);
 
+
+            Log.d("KEYGENWRApped", wrappedKey.toString());
+
         } catch (InvalidKeyException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
@@ -48,7 +56,8 @@ public class KeyWrapper {
     }
 
     public String getWrappedKeyString() {
-        return StringConverter.encodeHexString(wrappedKey);
+        Log.d("KEYGENWRApped", wrappedKey.toString());
+        return Base64.encodeBase64String(wrappedKey);
     }
 
 }

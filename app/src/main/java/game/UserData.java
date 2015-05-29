@@ -17,7 +17,7 @@ public enum UserData {
     DATA;
 
     public static final String LOG_TAG = "UserData";
-    private HashMap<Enum, Object> dataMap = new HashMap<>();
+    private volatile HashMap<Enum, Object> dataMap = new HashMap<>();
 
     /**
      * Adds some data, mapped with a name.

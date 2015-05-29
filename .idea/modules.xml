@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/apache-commons-codec-1.10new/apache-commons-codec-1.10new.iml" filepath="$PROJECT_DIR$/apache-commons-codec-1.10new/apache-commons-codec-1.10new.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/game_graphics.iml" filepath="$PROJECT_DIR$/game_graphics.iml" />
     </modules>

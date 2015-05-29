@@ -1,5 +1,7 @@
 package game.net.connection_encryption;
 
+import org.apache.commons.codec.binary.Hex;
+
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -55,7 +57,7 @@ public class Encrypter {
     }
 
     public String getEncryptedString() {
-        return StringConverter.encodeHexString(cryptedData);
+        return Hex.encodeHexString(cryptedData);
     }
 
 }

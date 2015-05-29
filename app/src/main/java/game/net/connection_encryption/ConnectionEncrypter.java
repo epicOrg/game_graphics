@@ -29,7 +29,7 @@ public class ConnectionEncrypter {
     }
 
     public void setPublicKey(String publicKey) {
-        this.publicKey = KeyConverter.stringToKey(publicKey);
+        this.publicKey = KeyConverter.stringToKey(publicKey, "RSA");
     }
 
     public String getWrappedKey() {

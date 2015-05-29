@@ -67,6 +67,8 @@ public class ServerCommunicationThread extends Thread {
             return;
         }
 
+        //encrypt();
+
         String line;
         JSONObject received;
         while (true) {
@@ -89,6 +91,13 @@ public class ServerCommunicationThread extends Thread {
             }
         }
     }
+
+    private void encrypt() {
+        EncryptInitializer initializer = new EncryptInitializer();
+        initializer.initConnection();
+
+    }
+
 
     public void init() {
         setStateAndUpdate(CONNECTING);

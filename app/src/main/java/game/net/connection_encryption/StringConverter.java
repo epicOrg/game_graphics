@@ -1,5 +1,7 @@
 package game.net.connection_encryption;
 
+import org.apache.commons.codec.binary.Hex;
+
 /**
  * @author Noris
  * @date 27/04/2015
@@ -23,6 +25,7 @@ public class StringConverter {
             hexChars[j * 2] = hexArray[v >>> 4];
             hexChars[j * 2 + 1] = hexArray[v & 0x0F];
         }
+
 
         return new String(hexChars);
     }

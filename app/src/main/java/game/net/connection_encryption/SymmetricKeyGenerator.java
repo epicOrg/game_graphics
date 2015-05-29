@@ -1,5 +1,7 @@
 package game.net.connection_encryption;
 
+import android.util.Log;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
@@ -23,6 +25,8 @@ public class SymmetricKeyGenerator implements ISymmetricKeyGenerator {
 
             keyGenerator.init(secureRandom);
             key = keyGenerator.generateKey();
+
+
 
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
