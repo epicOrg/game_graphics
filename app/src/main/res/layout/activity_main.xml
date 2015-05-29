@@ -111,18 +111,6 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/log_in"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="50"
-                    android:background="@drawable/button_background"
-                    android:enabled="false"
-                    android:onClick="attemptLogin"
-                    android:text="@string/action_log_in"
-                    android:textColor="@color/icons" />
-
-
-                <Button
                     android:id="@+id/not_registered"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -131,6 +119,17 @@
                     android:enabled="false"
                     android:onClick="notRegistered"
                     android:text="@string/action_not_registered"
+                    android:textColor="@color/icons" />
+
+                <Button
+                    android:id="@+id/log_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:background="@drawable/button_background"
+                    android:enabled="false"
+                    android:onClick="attemptLogin"
+                    android:text="@string/action_log_in"
                     android:textColor="@color/icons" />
             </LinearLayout>
         </LinearLayout>

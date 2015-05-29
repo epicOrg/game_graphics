@@ -17,18 +17,17 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
-import game.net.communication.JSONd;
-import game.net.communication.RequestMaker;
 import game.net.LoginHandler;
 import game.net.LoginHandlerListener;
+import game.net.communication.JSONd;
 import game.net.communication.NotConnectedException;
+import game.net.communication.RequestMaker;
 import game.net.communication.ServerCommunicationThread;
 import game.net.communication.ServerCommunicationThreadListener;
 import game.net.communication.ServerCommunicationThreadState;
 import game.net.data.LoginData;
 import game.net.fieldsnames.CommonFields;
 import game.net.fieldsnames.ServicesFields;
-import game.net.interaction.FieldsNames;
 import game.net.interaction.ProgressShower;
 
 /**
@@ -48,7 +47,7 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
     private LoginData loginData;
 
     private boolean doubleBackToExitPressedOnce;
-    private RequestMaker requestMaker=new RequestMaker();
+    private RequestMaker requestMaker = new RequestMaker();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,9 +119,16 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
 
     private void checkRememberMe() {
         if (loginPreference.getBoolean("Remember", false)) {
-            ((TextView) views.get(R.id.username)).setText(loginPreference.getString(CommonFields.USERNAME.toString(), "user"));
-            ((TextView) views.get(R.id.password)).setText(loginPreference.getString(CommonFields.PASSWORD.toString(), "pass"));
-            ((CheckBox) views.get(R.id.remeberMeBox)).setChecked(true);
+            String username = loginPreference.getString(CommonFields.USERNAME.toString(), null);
+            String password = loginPreference.getString(CommonFields.PASSWORD.toString(), null);
+
+            if ((username != null) && (password != null)) {
+                ((TextView) views.get(R.id.username)).setText(username);
+                ((TextView) views.get(R.id.password)).setText(password);
+                ((CheckBox) views.get(R.id.remeberMeBox)).setChecked(true);
+            } else {
+                ((CheckBox) views.get(R.id.remeberMeBox)).setChecked(false);
+            }
         }
     }
 
