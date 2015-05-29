@@ -11,11 +11,6 @@ import game.net.GameHandlerListener;
 import game.net.services.Game;
 import game.player.PlayerStatus;
 
-/**
- * Interpreter that interprets map data.
- *
- * @author Stefano De Pace
- */
 public class MapInterpreter implements Interpreter {
 
     public static final String LOG_TAG = "MapInterpreter";
@@ -25,10 +20,10 @@ public class MapInterpreter implements Interpreter {
     private LinkedList<GameHandlerListener> gameHandlerListeners = new LinkedList<>();
 
     /**
-     * Creates anew MapInterpreter.
+     * Creates a new MapInterpreter.
      *
      * @param status               PlayerStatus to which assign the position given with map data.
-     * @param gameHandlerListeners GameHadlerListeners to call when the map data is received.
+     * @param gameHandlerListeners GameHandlerListeners to call when the map data is received.
      */
     public MapInterpreter(PlayerStatus status, GameHandlerListener... gameHandlerListeners) {
         this.status = status;
@@ -40,6 +35,9 @@ public class MapInterpreter implements Interpreter {
         return Game.MAP;
     }
 
+    /**
+     * Interprets the map.
+     */
     @Override
     public void interpret(Message msg) {
         //Log.d(LOG_TAG, "processMapMessage");

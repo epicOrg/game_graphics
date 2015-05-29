@@ -1,6 +1,8 @@
 package game.listeners;
 
 /**
+ * Listener for the events about movement's direction.
+ *
  * @author Torlaschi
  * @date 28/03/2015
  */

@@ -5,7 +5,7 @@ import android.os.Message;
 /**
  * Interface for interpreting messages.
  *
- * @author Stefano De Pace
+ * @author De Pace
  */
 public interface Interpreter {
 
@@ -17,7 +17,7 @@ public interface Interpreter {
     int getKey();
 
     /**
-     * Interpretes a message.
+     * Interprets a message.
      *
      * @param msg Message to interpret.
      */

@@ -11,7 +11,6 @@ import java.net.UnknownHostException;
 import game.audio.AudioCallManager;
 import game.net.communication.ServerCommunicationThread;
 import game.net.fieldsnames.AudioFields;
-import game.net.interaction.FieldsNames;
 
 /**
  * @author Micieli
@@ -27,7 +26,7 @@ public class Audio implements Service {
         AudioCallManager audioCallManager = AudioCallManager.getInstance();
         try {
             int serverPort = jsonRequest.getInt(AudioFields.AUDIO_PORT_SERVER.toString());
-            InetAddress serverIp = InetAddress.getByName(ServerCommunicationThread.getServerAddres());
+            InetAddress serverIp = InetAddress.getByName(ServerCommunicationThread.getServerAddress());
             audioCallManager.setServerPort(serverPort);
             audioCallManager.setServerIp(serverIp);
             audioCallManager.associateStream();

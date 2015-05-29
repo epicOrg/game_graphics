@@ -14,11 +14,6 @@ import game.net.interaction.FieldsNames;
 import game.net.services.Game;
 import game.views.MessageScreen;
 
-/**
- * Interpreter to interpret status data.
- *
- * @author Stefano De Pace
- */
 public class StatusInterpreter implements Interpreter {
 
     public static final String LOG_TAG = "StatusInterpreter";
@@ -45,6 +40,9 @@ public class StatusInterpreter implements Interpreter {
         return Game.STATUS;
     }
 
+    /**
+     * Interprets status data.
+     */
     @Override
     public void interpret(Message msg) {
 //        Log.d(LOG_TAG, "processStatusMessage");

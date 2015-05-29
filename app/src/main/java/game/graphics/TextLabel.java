@@ -15,7 +15,7 @@ import shadow.math.SFVertex3f;
 /**
  * It represents a text label dynamically oriented on the basis of a specified direction.
  *
- * @author Stefano De Pace
+ * @author De Pace
  */
 public class TextLabel {
 

@@ -4,10 +4,6 @@ import shadow.math.SFMatrix3f;
 import shadow.math.SFTransform3f;
 import shadow.math.SFVertex3f;
 
-/**
- * @author Torlaschi
- * @date 28/03/2015
- */
 public class DirectionDirectionMoveListener implements DirectionMoveListenerInterface {
 
     public static final String LOG_TAG = "DirectionDirectionMove";

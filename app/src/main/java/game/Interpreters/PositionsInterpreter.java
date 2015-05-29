@@ -8,9 +8,6 @@ import game.Room;
 import game.player.Player;
 import game.net.services.Game;
 
-/**
- * Interpreter that interpretes position data.
- */
 public class PositionsInterpreter implements  Interpreter{
 
     public static final String LOG_TAG = "PositionsInterpreter";
@@ -29,6 +26,9 @@ public class PositionsInterpreter implements  Interpreter{
         return Game.POSITIONS;
     }
 
+    /**
+     * Interprets position data.
+     */
     @Override
     public void interpret(Message msg) {
         //Log.d(LOG_TAG, "processPositionsMessage");

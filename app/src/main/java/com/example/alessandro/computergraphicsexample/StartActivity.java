@@ -45,7 +45,7 @@ public class StartActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 String serverAddressString = serverAddress.getText().toString().trim();
-                ServerCommunicationThread.setServerAddres(serverAddressString);
+                ServerCommunicationThread.setServerAddress(serverAddressString);
 
                 editor.putString(KEY_SERVER_ADDRESS, serverAddressString);
                 editor.apply();

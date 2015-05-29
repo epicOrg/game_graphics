@@ -57,7 +57,7 @@ public enum TextureKeeper {
     }
 
     /**
-     * Loads every loaded image, when neede.
+     * Loads every loaded image, when needed.
      *
      * @param context Context to find resources.
      */

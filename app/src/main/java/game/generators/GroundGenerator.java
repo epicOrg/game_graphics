@@ -7,7 +7,7 @@ import sfogl.integration.Node;
 import shadow.math.SFTransform3f;
 
 /**
- * It anages the ground building.
+ * It manages the ground building.
  *
  * @author Torlaschi
  */

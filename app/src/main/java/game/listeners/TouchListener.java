@@ -7,10 +7,6 @@ import android.view.MotionEvent;
 import game.controls.Button;
 import game.controls.ButtonsControl;
 
-/**
- * @author Torlaschi
- * @date 01/04/2015
- */
 public class TouchListener implements TouchListenerInterface {
 
     public static final String LOG_TAG = "TouchListener";

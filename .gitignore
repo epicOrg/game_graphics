@@ -4,3 +4,9 @@
 /.idea/libraries
 .DS_Store
 /build
+
+app/src/main/java/game/graphics/Decoration.java
+
+app/src/main/java/game/graphics/Obstacle.java
+
+app/src/main/java/game/graphics/Decoration.java

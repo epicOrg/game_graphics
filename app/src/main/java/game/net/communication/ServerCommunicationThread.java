@@ -44,7 +44,7 @@ public class ServerCommunicationThread extends Thread {
 
     public static final int SERVER_PORT = 7007;
 
-    private static String serverAddres;
+    private static String serverAddress;
     private static ServerCommunicationThread instance;
 
     private ArrayList<ServerCommunicationThreadListener> threadListeners;
@@ -104,7 +104,7 @@ public class ServerCommunicationThread extends Thread {
 
         try {
             socket = new Socket();
-            socket.connect(new InetSocketAddress(InetAddress.getByName(serverAddres), SERVER_PORT), WAIT_TIME);
+            socket.connect(new InetSocketAddress(InetAddress.getByName(serverAddress), SERVER_PORT), WAIT_TIME);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new PrintWriter(socket.getOutputStream(), true);
             setStateAndUpdate(CONNECTED);
@@ -186,20 +186,15 @@ public class ServerCommunicationThread extends Thread {
         return instance;
     }
 
-    public static String getServerAddres() {
-        return serverAddres;
+    public static String getServerAddress() {
+        return serverAddress;
     }
 
-    public static void setServerAddres(String address) {
-        serverAddres = address;
+    public static void setServerAddress(String address) {
+        serverAddress = address;
     }
 
     public void addServerCommunicationThreadListener(ServerCommunicationThreadListener l) {
         threadListeners.add(l);
     }
-
-    public void removeServerCommunicationThreadListener(ServerCommunicationThreadListener l) {
-        threadListeners.remove(l);
-    }
-
 }
