@@ -41,7 +41,7 @@ public enum MapObjects {
         map.put("Column", new Obstacle(null, 0, 0, "Obstacle01.obj"));
         map.put("Vase", new Obstacle(null, 0, 0, "vase.obj"));
         map.put("Meat", new Decoration(null, "Meat.obj", 0, 0, 0));
-
+        map.put("Carrot", new Decoration(null, "Carrot.obj", 0, 0, 0));
     }
 
     private void fillTextures() {
@@ -58,6 +58,7 @@ public enum MapObjects {
         codes.put("hedge_texture_02_2", R.drawable.hedge_texture_02_2);
         codes.put("vase_texture", R.drawable.vase_texture);
         codes.put("meat_texture_01", R.drawable.meat_texture_01);
+        codes.put("carrot_texture_01", R.drawable.carrot_texture_01);
     }
 
 }
