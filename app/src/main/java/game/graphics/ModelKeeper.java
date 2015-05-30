@@ -4,7 +4,6 @@ import android.content.Context;
 
 import java.util.HashMap;
 
-import sfogl.integration.ArrayObject;
 import sfogl.integration.Material;
 import sfogl.integration.Mesh;
 import sfogl.integration.Model;
@@ -47,6 +46,10 @@ public enum ModelKeeper {
         modelPos.setRootGeometry(meshPos);
         modelPos.setMaterialComponent(material);
         return modelPos;
+    }
+
+    public void clear() {
+        map.clear();
     }
 
     private class ModelData {

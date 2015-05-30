@@ -124,7 +124,7 @@ public class TouchListener implements TouchListenerInterface {
                         return;
                     }
 
-                    Log.d(LOG_TAG, "Pressed " + pressedButton.getName() + " button.");
+                    //Log.d(LOG_TAG, "Pressed " + pressedButton.getName() + " button.");
                     pressedButton.execute(TIME_SLEEP);
 
                     if (!pressedButton.isContinuousPressing())

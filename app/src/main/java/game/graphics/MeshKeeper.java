@@ -32,4 +32,8 @@ public enum MeshKeeper {
         }
     }
 
+    public void clear() {
+        map.clear();
+    }
+
 }

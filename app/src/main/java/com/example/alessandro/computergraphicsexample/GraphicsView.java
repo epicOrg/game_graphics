@@ -23,6 +23,8 @@ import game.generators.SettingsButtonsGenerator;
 import game.graphics.Camera;
 import game.graphics.Map;
 import game.graphics.MaterialKeeper;
+import game.graphics.MeshKeeper;
+import game.graphics.ModelKeeper;
 import game.graphics.PlayerView;
 import game.graphics.ShadersKeeper;
 import game.graphics.Sky;
@@ -113,8 +115,10 @@ public class GraphicsView extends GLSurfaceView {
         super.onPause();
 
         ShadersKeeper.clear();
+        MeshKeeper.MESH_KEEPER.clear();
         MaterialKeeper.MATERIAL_KEEPER.clear();
         TextureKeeper.TEXTURE_KEEPER.clear();
+        ModelKeeper.MODEL_KEEPER.clear();
     }
 
     @Override
@@ -176,12 +180,12 @@ public class GraphicsView extends GLSurfaceView {
 
             buttonMaster = new ButtonMaster();
             MoveButtonsGenerator moveButtonsGenerator = new MoveButtonsGenerator(context, program, buttonMaster, positionMoveListener);
-            moveButtonsGenerator.generate(new SFVertex3f(Configurations.CONF.getFloat(context,"gui","xMove"),Configurations.CONF.getFloat(context,"gui","yMove"),
-                    Configurations.CONF.getFloat(context,"gui","zMove")), Configurations.CONF.getFloat(context,"gui","scaleMove"),
-                    Configurations.CONF.getFloat(context,"gui","distanceMove"));
+            moveButtonsGenerator.generate(new SFVertex3f(Configurations.CONF.getFloat(context, "gui", "xMove"), Configurations.CONF.getFloat(context, "gui", "yMove"),
+                            Configurations.CONF.getFloat(context, "gui", "zMove")), Configurations.CONF.getFloat(context, "gui", "scaleMove"),
+                    Configurations.CONF.getFloat(context, "gui", "distanceMove"));
             SettingsButtonsGenerator settingsButtonsGenerator = new SettingsButtonsGenerator(context, program, buttonMaster, settingsScreen);
-            settingsButtonsGenerator.generate(new SFVertex3f(Configurations.CONF.getFloat(context,"gui","xSet"),Configurations.CONF.getFloat(context,"gui","ySet"),
-                    Configurations.CONF.getFloat(context,"gui","zSet")), Configurations.CONF.getFloat(context,"gui","scaleSet"));
+            settingsButtonsGenerator.generate(new SFVertex3f(Configurations.CONF.getFloat(context, "gui", "xSet"), Configurations.CONF.getFloat(context, "gui", "ySet"),
+                    Configurations.CONF.getFloat(context, "gui", "zSet")), Configurations.CONF.getFloat(context, "gui", "scaleSet"));
 
             final ButtonsControl buttonsControl = new ButtonsControl(program, camera.getOrthoMatrix(), buttonMaster);
 

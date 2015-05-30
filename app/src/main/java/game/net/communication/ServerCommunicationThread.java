@@ -76,7 +76,7 @@ public class ServerCommunicationThread extends Thread {
                 line = reader.readLine();
                 if (line != null) {
                     received = new JSONObject(line);
-                    Log.d(LOG_TAG, "received: " + line);
+                    //Log.d(LOG_TAG, "received: " + line);
 
                     Service service = serviceChooser.setService(received);
                     service.setHandler(handler);
@@ -145,7 +145,7 @@ public class ServerCommunicationThread extends Thread {
         if (writer == null || threadState != CONNECTED)
             throw new NotConnectedException();
 
-        Log.d(LOG_TAG, "send: " + object.toString());
+        //Log.d(LOG_TAG, "send: " + object.toString());
         writer.println(object.toString());
     }
 
