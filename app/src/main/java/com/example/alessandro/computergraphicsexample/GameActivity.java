@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
 
+import game.Configurations;
 import game.Room;
 import game.Team;
 import game.UserData;
@@ -79,6 +80,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
         setContentView(R.layout.activity_game);
         context = this;
 
+        Configurations.CONF.init("configurations", context);
+
         headsetListener = new HeadsetListener(context);
         headsetListener.init();
 
@@ -86,7 +89,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
         messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
-        messageScreen = new MessageScreen(this, Color.argb(128, 0xCD, 0xDC, 0x39), messageContainer);
+        messageScreen = new MessageScreen(this, Color.argb(Configurations.CONF.getInt("graphics","mScreenColA"), Configurations.CONF.getInt("graphics","mScreenColR"),
+                Configurations.CONF.getInt("graphics","mScreenColG"), Configurations.CONF.getInt("graphics","mScreenColB")), messageContainer);
         settingsScreen = new SettingsScreen(this, menuContainer, requestMaker);
 
         backgroundSound = new BackgroundSound(context, new GameSoundtracks(R.raw.soundtrack_01, R.raw.soundtrack_02).getSoundtracks(context));
@@ -95,7 +99,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         SFVertex3f position = new SFVertex3f(5, 0.5f, -7);
         SFVertex3f direction = new SFVertex3f(-1, -0.25f, 0);
 
-        me = new Player(new PlayerStatus(direction, new Circle(position, 0.75)), "Me");
+        me = new Player(new PlayerStatus(direction, new Circle(position, Configurations.CONF.getFloat("miscellaneous","playerRadius"))), "Me");
         Room room = (Room) UserData.DATA.getData(ServicesFields.CURRENT_ROOM);
         ArrayList<Team> teams = room.getTeams();
         if (teams != null)

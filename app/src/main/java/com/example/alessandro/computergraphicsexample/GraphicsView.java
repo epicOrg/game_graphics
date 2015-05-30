@@ -91,8 +91,6 @@ public class GraphicsView extends GLSurfaceView {
         this.startSignal = startSignal;
         this.groundWidth = groundWidth;
         this.groundHeight = groundHeight;
-
-        camera = new Camera(me, 0.125f, 200, 80);
         cm = new CollisionMediator();
 
         this.settingsScreen = settingsScreen;
@@ -145,6 +143,7 @@ public class GraphicsView extends GLSurfaceView {
         private Node groundNode;
         private ButtonMaster buttonMaster;
         private ArrayList<TextLabel> labels = new ArrayList<>();
+        private Camera camera;
 
         @Override
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -155,12 +154,16 @@ public class GraphicsView extends GLSurfaceView {
             TextureKeeper.TEXTURE_KEEPER.reload(context);
             glEnable(GLES20.GL_BLEND);
             glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);
+            camera = new Camera(me, Configurations.CONF.getFloat("graphics", "camZnear"), Configurations.CONF.getFloat("graphics", "camZfar"),
+                    Configurations.CONF.getFloat("graphics", "camAngle"));
 
             for (Team team : teams) {
                 for (Player player : team.getPlayers()) {
                     if (!player.getName().equals(me.getName())) {
                         playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
-                        labels.add(new TextLabel(30, 0.14f, 0.5f, me.getStatus().getDirection(), player.getStatus().getPosition(), player.getName(), team.getColor()));
+                        labels.add(new TextLabel(Configurations.CONF.getInt("graphics", "labelTextQuality"), Configurations.CONF.getFloat("graphics", "labelTextHeight"),
+                                Configurations.CONF.getFloat("graphics", "labelHeight"), me.getStatus().getDirection(),
+                                player.getStatus().getPosition(), player.getName(), team.getColor()));
                     }
                 }
             }
@@ -180,12 +183,12 @@ public class GraphicsView extends GLSurfaceView {
 
             buttonMaster = new ButtonMaster();
             MoveButtonsGenerator moveButtonsGenerator = new MoveButtonsGenerator(context, program, buttonMaster, positionMoveListener);
-            moveButtonsGenerator.generate(new SFVertex3f(Configurations.CONF.getFloat(context, "gui", "xMove"), Configurations.CONF.getFloat(context, "gui", "yMove"),
-                            Configurations.CONF.getFloat(context, "gui", "zMove")), Configurations.CONF.getFloat(context, "gui", "scaleMove"),
-                    Configurations.CONF.getFloat(context, "gui", "distanceMove"));
+            moveButtonsGenerator.generate(new SFVertex3f(Configurations.CONF.getFloat("gui", "xMove"), Configurations.CONF.getFloat( "gui", "yMove"),
+                            Configurations.CONF.getFloat("gui", "zMove")), Configurations.CONF.getFloat("gui", "scaleMove"),
+                    Configurations.CONF.getFloat("gui", "distanceMove"));
             SettingsButtonsGenerator settingsButtonsGenerator = new SettingsButtonsGenerator(context, program, buttonMaster, settingsScreen);
-            settingsButtonsGenerator.generate(new SFVertex3f(Configurations.CONF.getFloat(context, "gui", "xSet"), Configurations.CONF.getFloat(context, "gui", "ySet"),
-                    Configurations.CONF.getFloat(context, "gui", "zSet")), Configurations.CONF.getFloat(context, "gui", "scaleSet"));
+            settingsButtonsGenerator.generate(new SFVertex3f(Configurations.CONF.getFloat("gui", "xSet"), Configurations.CONF.getFloat("gui", "ySet"),
+                    Configurations.CONF.getFloat("gui", "zSet")), Configurations.CONF.getFloat("gui", "scaleSet"));
 
             final ButtonsControl buttonsControl = new ButtonsControl(program, camera.getOrthoMatrix(), buttonMaster);
 

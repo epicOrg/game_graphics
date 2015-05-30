@@ -1,0 +1,10 @@
+camZnear 0.125
+camZfar 200
+camAngle 80
+labelTextQuality 30
+labelTextHeight 0.14
+labelHeight 0.5
+mScreenColA 128
+mScreenColR 205
+mScreenColG 220
+mScreenColB 57
