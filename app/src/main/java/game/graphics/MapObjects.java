@@ -48,14 +48,8 @@ public enum MapObjects {
         codes = new HashMap<>();
         codes.put("wall_texture_01", R.drawable.wall_texture_01);
         codes.put("wall_texture_02", R.drawable.wall_texture_02);
-        codes.put("wall_texture_03", R.drawable.wall_texture_03);
-        codes.put("wall_texture_04", R.drawable.wall_texture_04);
-        codes.put("wall_texture_05", R.drawable.wall_texture_05);
         codes.put("obstacle_texture_01", R.drawable.obstacle_texture_01);
         codes.put("hedge_texture_01", R.drawable.hedge_texture_01);
-        codes.put("hedge_texture_02", R.drawable.hedge_texture_02);
-        codes.put("hedge_texture_02_1", R.drawable.hedge_texture_02_1);
-        codes.put("hedge_texture_02_2", R.drawable.hedge_texture_02_2);
         codes.put("vase_texture", R.drawable.vase_texture);
         codes.put("meat_texture_01", R.drawable.meat_texture_01);
         codes.put("carrot_texture_01", R.drawable.carrot_texture_01);
