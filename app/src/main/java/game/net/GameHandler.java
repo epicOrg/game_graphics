@@ -5,7 +5,8 @@ import android.os.Message;
 
 import java.util.HashMap;
 
-import game.Interpreters.Interpreter;
+import game.interpreters.Interpreter;
+
 
 /**
  * Class containing a Map of Interpreter to read the messages sent from the server about the Game.
