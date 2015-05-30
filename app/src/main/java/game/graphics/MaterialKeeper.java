@@ -21,9 +21,6 @@ public enum MaterialKeeper {
     private HashMap<Integer, Material> mapFromResources = new HashMap<>();
     private HashMap<Integer, Material> mapFromColors = new HashMap<>();
 
-    MaterialKeeper() {
-    }
-
     public Material getMaterial(Context context, ShadingProgram program, int textureId) {
         if (mapFromResources.containsKey(textureId))
             return mapFromResources.get(textureId);

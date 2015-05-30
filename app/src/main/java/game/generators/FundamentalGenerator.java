@@ -6,7 +6,6 @@ import android.opengl.GLES20;
 
 import game.graphics.MaterialKeeper;
 import game.graphics.ModelKeeper;
-import objLoader.ObjLoader;
 import sfogl.integration.ArrayObject;
 import sfogl.integration.BitmapTexture;
 import sfogl.integration.Material;
@@ -63,9 +62,18 @@ public class FundamentalGenerator {
 
         Material material = new Material(program);
         material.getTextures().add(bitmapTexture);
-        nodePos.setModel(ModelKeeper.MODEL_KEEPER.getModelFromArrayObjectAndMaterial(arrayObject, material));
+        nodePos.setModel(getModelFromArrayObjectAndMaterial(arrayObject, material));
 
         return nodePos;
+    }
+
+    private static Model getModelFromArrayObjectAndMaterial(ArrayObject arrayObject, Material material) {
+        Mesh meshPos = new Mesh(arrayObject);
+        meshPos.init();
+        Model modelPos = new Model();
+        modelPos.setRootGeometry(meshPos);
+        modelPos.setMaterialComponent(material);
+        return modelPos;
     }
 
 }

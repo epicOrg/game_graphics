@@ -1,8 +1,9 @@
 package game.graphics;
 
 import android.content.Context;
+
 import java.util.HashMap;
-import objLoader.ObjLoader;
+
 import sfogl.integration.ArrayObject;
 import sfogl.integration.Material;
 import sfogl.integration.Mesh;
@@ -16,7 +17,9 @@ import sfogl.integration.Model;
 public enum ModelKeeper {
     MODEL_KEEPER;
 
-    private HashMap<String, Model> map = new HashMap<>();
+    public final String LOG_TAG = "ModelKeeper";
+
+    private HashMap<ModelData, Model> map = new HashMap<>();
 
     /**
      * Builds a Model from file, or returns it immediately in case it was already loaded.
@@ -28,29 +31,53 @@ public enum ModelKeeper {
      * returned, regardless of the other parameters.
      */
     public Model getModel(Context context, String name, Material material) {
-        if (map.containsKey(name))
-            return map.get(name);
+        ModelData modelData = new ModelData(name, material);
+        if (map.containsKey(modelData))
+            return map.get(modelData);
         else {
-            Model model = getModelFromArrayObjectAndMaterial(ObjLoader.arrayObjectFromFile(context, name)[0], material);
-            map.put(name, model);
+            Model model = getModelFromObjectAndMaterial(context, name, material);
+            map.put(modelData, model);
             return model;
         }
     }
 
-    /**
-     * Builds a Model from an ArrayObject and a specified Material.
-     *
-     * @param arrayObject The ArrayObject which contains the entire Model geometry.
-     * @param material    Material to use to build the Model.
-     * @return The generated Model.
-     */
-    public Model getModelFromArrayObjectAndMaterial(ArrayObject arrayObject, Material material) {
-        Mesh meshPos = new Mesh(arrayObject);
-        meshPos.init();
+    private Model getModelFromObjectAndMaterial(Context context, String name, Material material) {
+        Mesh meshPos = MeshKeeper.MESH_KEEPER.getMesh(context, name);
         Model modelPos = new Model();
         modelPos.setRootGeometry(meshPos);
         modelPos.setMaterialComponent(material);
         return modelPos;
+    }
+
+    private class ModelData {
+
+        private String obj;
+        private Material material;
+
+        public ModelData(String obj, Material material) {
+            this.obj = obj;
+            this.material = material;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            ModelData modelData = (ModelData) o;
+
+            if (obj != null ? !obj.equals(modelData.obj) : modelData.obj != null) return false;
+            return !(material != null ? !material.equals(modelData.material) : modelData.material != null);
+
+        }
+
+        @Override
+        public int hashCode() {
+            int result = obj != null ? obj.hashCode() : 0;
+            result = 31 * result + (material != null ? material.hashCode() : 0);
+            return result;
+        }
+
     }
 
 }
