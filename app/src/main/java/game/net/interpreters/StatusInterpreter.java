@@ -1,4 +1,4 @@
-package game.interpreters;
+package game.net.interpreters;
 
 import android.graphics.Color;
 import android.os.Message;

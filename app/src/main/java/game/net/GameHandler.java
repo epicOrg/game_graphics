@@ -5,7 +5,7 @@ import android.os.Message;
 
 import java.util.HashMap;
 
-import game.interpreters.Interpreter;
+import game.net.interpreters.Interpreter;
 
 
 /**
