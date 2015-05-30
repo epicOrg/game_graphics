@@ -1,6 +1,7 @@
 package game.net.services;
 
 import android.os.Handler;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +23,7 @@ import game.net.fieldsnames.ServicesFields;
  * @author Noris
  * @date 28/04/2015
  */
+
 public class Encrypt implements Service {
 
     private static final String LOG_TAG = "encryption";
@@ -33,22 +35,26 @@ public class Encrypt implements Service {
 
     @Override
     public void start(JSONObject json) {
-        //TODO è giusto??
-        this.jsonResponse=json;
+        this.jsonResponse = json;
 
         try {
+
             String publicKey = jsonResponse.getString(EncryptFields.PUBLIC_KEY.toString());
+
             SymmetricKeyGenerator keyGenerator = new SymmetricKeyGenerator();
             keyGenerator.generateKey();
-            SecretKey privateKey = new SymmetricKeyGenerator().getKey();
-            KeyWrapper wrapper = new KeyWrapper(privateKey);
 
+            SecretKey symmetricKey = keyGenerator.getKey();
+
+            KeyWrapper wrapper = new KeyWrapper(symmetricKey);
             wrapper.wrapKey(KeyConverter.stringToPublicKey(publicKey));
+
             String privateWrapped = wrapper.getWrappedKeyString();
 
             RequestMaker requestMaker = UserData.DATA.getRequestMaker();
 
-            JSONObject request = requestMaker.getNewRequest(new JSONd(ServicesFields.SERVICE, ServicesFields.ENCRYPT),
+            JSONObject request = requestMaker.getNewRequest(
+                    new JSONd(ServicesFields.SERVICE, ServicesFields.ENCRYPT),
                     new JSONd(ServicesFields.SERVICE_TYPE, EncryptFields.WRAPPED_KEY),
                     new JSONd(EncryptFields.WRAPPED_KEY, privateWrapped));
 
@@ -61,7 +67,6 @@ public class Encrypt implements Service {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
     }
 

@@ -60,6 +60,40 @@ public class ServerCommunicationThread extends Thread {
 
     }
 
+    public static String getLocalIpAddress() {
+        try {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
+                        return inetAddress.getHostAddress().toString();
+                    }
+                }
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static ServerCommunicationThread getInstance() {
+        if (instance == null) {
+            instance = new ServerCommunicationThread();
+            instance.threadState = NOT_CONNECTED;
+            instance.threadListeners = new ArrayList<>();
+        }
+        return instance;
+    }
+
+    public static String getServerAddress() {
+        return serverAddress;
+    }
+
+    public static void setServerAddress(String address) {
+        serverAddress = address;
+    }
+
     @Override
     public void run() {
         init();
@@ -67,7 +101,7 @@ public class ServerCommunicationThread extends Thread {
             return;
         }
 
-        //encrypt();
+        encrypt();
 
         String line;
         JSONObject received;
@@ -97,7 +131,6 @@ public class ServerCommunicationThread extends Thread {
         initializer.initConnection();
 
     }
-
 
     public void init() {
         setStateAndUpdate(CONNECTING);
@@ -158,40 +191,6 @@ public class ServerCommunicationThread extends Thread {
 
     public ServerCommunicationThreadState getThreadState() {
         return threadState;
-    }
-
-    public static String getLocalIpAddress() {
-        try {
-            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
-                NetworkInterface intf = en.nextElement();
-                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
-                    InetAddress inetAddress = enumIpAddr.nextElement();
-                    if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
-                        return inetAddress.getHostAddress().toString();
-                    }
-                }
-            }
-        } catch (SocketException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static ServerCommunicationThread getInstance() {
-        if (instance == null) {
-            instance = new ServerCommunicationThread();
-            instance.threadState = NOT_CONNECTED;
-            instance.threadListeners = new ArrayList<>();
-        }
-        return instance;
-    }
-
-    public static String getServerAddress() {
-        return serverAddress;
-    }
-
-    public static void setServerAddress(String address) {
-        serverAddress = address;
     }
 
     public void addServerCommunicationThreadListener(ServerCommunicationThreadListener l) {

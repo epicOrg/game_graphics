@@ -1,6 +1,9 @@
 package game.net.connection_encryption;
 
+import android.util.Log;
+
 import java.security.Key;
+import java.security.PublicKey;
 
 /**
  * This class manages the encryption of the connection:
@@ -16,12 +19,15 @@ public class ConnectionEncrypter {
     private Encrypter encrypter;
     private Decrypter decrypter;
 
-    private Key publicKey;
+    private PublicKey publicKey;
 
     public ConnectionEncrypter(ISymmetricKeyGenerator symmetricKeyGenerator) {
 
         this.symmetricKeyGenerator = symmetricKeyGenerator;
         this.symmetricKeyGenerator.generateKey();
+
+        Log.d("superlol", symmetricKeyGenerator.getKey().toString());
+
 
         encrypter = new Encrypter(getSymmetricKey());
         decrypter = new Decrypter(getSymmetricKey());

@@ -14,11 +14,13 @@ public class SymmetricKeyGenerator implements ISymmetricKeyGenerator {
 
     public void generateKey() {
         try {
-            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+
             SecureRandom secureRandom = new SecureRandom();
 
+            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
             keyGenerator.init(secureRandom);
             key = keyGenerator.generateKey();
+
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

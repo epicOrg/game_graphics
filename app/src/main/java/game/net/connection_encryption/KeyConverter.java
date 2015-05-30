@@ -3,12 +3,13 @@ package game.net.connection_encryption;
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.codec.binary.Base64;
+import android.util.Base64;
 
 /**
  * @author Noris
@@ -18,12 +19,12 @@ import org.apache.commons.codec.binary.Base64;
 public class KeyConverter {
 
     public static String keyToString(Key key) {
-        return Base64.encodeBase64String(key.getEncoded());
+        return Base64.encodeToString(key.getEncoded(), Base64.CRLF);
     }
 
-    public static Key stringToPublicKey(String key) {
+    public static PublicKey stringToPublicKey(String key) {
 
-        byte[] decodedKey = Base64.decodeBase64(key);
+        byte[] decodedKey = Base64.decode(key, Base64.CRLF);
 
         X509EncodedKeySpec eks = new X509EncodedKeySpec(decodedKey);
 
@@ -46,7 +47,7 @@ public class KeyConverter {
 
     public static Key stringToSymmetricKey(String key) {
 
-        byte[] decodedKey = Base64.decodeBase64(key);
+        byte[] decodedKey = Base64.decode(key, Base64.CRLF);
         return new SecretKeySpec(decodedKey, "AES");
 
     }
