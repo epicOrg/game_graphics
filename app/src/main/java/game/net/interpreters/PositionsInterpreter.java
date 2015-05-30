@@ -11,6 +11,7 @@ import game.player.Player;
 public class PositionsInterpreter implements Interpreter {
 
     public static final String LOG_TAG = "PositionsInterpreter";
+
     private Room room;
 
     /**
@@ -42,4 +43,5 @@ public class PositionsInterpreter implements Interpreter {
             p.getStatus().getDirection().set(gamePositionsObjectHashMap.get(s).dir);
         }
     }
+
 }

@@ -11,7 +11,7 @@ public class TouchListener implements TouchListenerInterface {
 
     public static final String LOG_TAG = "TouchListener";
 
-    public static final long TIME_SLEEP = 10;
+    public static final long TIME_SLEEP = 20;
 
     private ButtonsControl buttonsControl;
     private DirectionMoveListenerInterface directionMoveListener;
