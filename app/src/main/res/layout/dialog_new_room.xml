@@ -32,6 +32,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
                     android:hint="Name"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
                     android:text="TheGreatRoom" />
             </LinearLayout>
 
@@ -53,6 +55,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
                     android:hint="Num. Teams"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
                     android:inputType="number"
                     android:text="1" />
             </LinearLayout>
@@ -75,6 +79,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
                     android:hint="Num. Players"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
                     android:inputType="number"
                     android:text="2" />
             </LinearLayout>

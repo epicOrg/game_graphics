@@ -19,7 +19,7 @@
 
     <string name="action_example">Example action</string>
     <string name="title_activity_call">CallActivity</string>
-    <string name="dialog_net_error">Netwok error , App will be closed</string>
+    <string name="dialog_net_error">Network error , App will be closed</string>
     <string name="action_game_graphics">Vai al game_graphics (DEBUG)</string>
     <string name="action_game_graphics_no_server">Vai al game_graphics - NoServer (DEBUG)</string>
 
