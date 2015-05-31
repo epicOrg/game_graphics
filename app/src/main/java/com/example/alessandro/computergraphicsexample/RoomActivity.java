@@ -15,6 +15,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import game.data.Room;
 import game.data.Team;
 import game.data.UserData;
@@ -38,18 +41,19 @@ public class RoomActivity extends ActionBarActivity {
 
     public static final String LOG_TAG = "RoomActivity";
 
+    private static final int START_DELAY = 5 * 1000;
+
     private ServerCommunicationThread serverCommunicationThread = ServerCommunicationThread.getInstance();
 
-    private TextView roomStatus;
-    private LinearLayout roomListsContainer;
-
     private Room currentRoom;
-
-    private Context context;
     private RequestMaker requestMaker;
-
     private boolean isStartingGame = false;
     private boolean isExitingGame = false;
+    private Timer startTimer;
+
+    private Context context;
+    private TextView roomStatus;
+    private LinearLayout roomListsContainer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,13 +90,7 @@ public class RoomActivity extends ActionBarActivity {
                 .setCancelable(false)
                 .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        try {
-                            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE_TYPE, RoomFields.ROOM_ACTIONS.toString()),
-                                    new JSONd(RoomFields.ROOM_ACTION, RoomFields.ROOM_EXIT.toString())));
-                        } catch (NotConnectedException e) {
-                            Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
-                            e.printStackTrace();
-                        }
+                        sendExitRequest();
                     }
                 })
                 .setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -110,17 +108,24 @@ public class RoomActivity extends ActionBarActivity {
         super.onStop();
 
         if (!isStartingGame && !isExitingGame) {
-            try {
-                serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE_TYPE, RoomFields.ROOM_ACTIONS.toString()),
-                        new JSONd(RoomFields.ROOM_ACTION, RoomFields.ROOM_EXIT.toString())));
-            } catch (NotConnectedException e) {
-                Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
+            sendExitRequest();
         }
     }
 
-    private class RoomHandler extends Handler {
+    private void sendExitRequest() {
+        if (startTimer != null) {
+            startTimer.cancel();
+        }
+        try {
+            serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE_TYPE, RoomFields.ROOM_ACTIONS.toString()),
+                    new JSONd(RoomFields.ROOM_ACTION, RoomFields.ROOM_EXIT.toString())));
+        } catch (NotConnectedException e) {
+            Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
+
+    public class RoomHandler extends Handler {
 
         @Override
         public void handleMessage(Message msg) {
@@ -188,9 +193,16 @@ public class RoomActivity extends ActionBarActivity {
             if (result) {
                 UserData.DATA.addData(ServicesFields.CURRENT_ROOM, currentRoom);
 
-                isStartingGame = true;
-                Intent intent = new Intent(getApplicationContext(), GameActivity.class);
-                startActivity(intent);
+                startTimer = new Timer();
+                startTimer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+
+                        isStartingGame = true;
+                        Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                        startActivity(intent);
+                    }
+                }, START_DELAY);
             }
         }
 
