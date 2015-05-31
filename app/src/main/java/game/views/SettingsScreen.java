@@ -3,6 +3,7 @@ package game.views;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.annotation.StringRes;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alessandro.computergraphicsexample.R;
+
 import game.net.communication.JSONd;
 import game.net.communication.RequestMaker;
 import game.Room;
@@ -72,15 +74,16 @@ public class SettingsScreen {
         muteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(activity, "Muting/UnMuting..", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, R.string.messageMuting, Toast.LENGTH_SHORT).show();
                 AudioCallManager.getInstance().muteUnMute();
 
             }
         });
+        final int s=R.string.messageQuitting;
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(activity, "Quitting..", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
                 try {
                     serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE, ServicesFields.GAME.toString()),
                             new JSONd(ServicesFields.SERVICE_TYPE, GameFields.GAME_STATUS.toString()),

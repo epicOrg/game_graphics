@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import game.Configurations;
+import game.Conf;
 import game.net.communication.ServerCommunicationThread;
 
 /**
@@ -35,7 +35,7 @@ public class StartActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         activity = this;
-        Configurations.CONF.init("configurations", this.getApplicationContext());
+        Conf.CONF.init(this.getApplicationContext());
 
         serverAddress = (EditText) findViewById(R.id.start_server_address);
         serverAddressButton = (Button) findViewById(R.id.start_server_address_button);

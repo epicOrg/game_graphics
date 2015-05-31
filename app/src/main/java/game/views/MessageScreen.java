@@ -53,6 +53,13 @@ public class MessageScreen implements Waiter {
         textView.setTextColor(textColor);
     }
 
+    public void setText(int text, int color) {
+        textColor = color;
+
+        textView.setText(text);
+        textView.setTextColor(textColor);
+    }
+
     public void show() {
         Log.d(LOG_TAG, "show");
         activity.runOnUiThread(new Runnable() {

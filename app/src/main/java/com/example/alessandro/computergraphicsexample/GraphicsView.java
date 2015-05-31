@@ -5,14 +5,11 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 import android.view.MotionEvent;
-
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
-
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
-
-import game.Configurations;
+import game.Conf;
 import game.Team;
 import game.controls.ButtonMaster;
 import game.controls.ButtonsControl;
@@ -154,15 +151,14 @@ public class GraphicsView extends GLSurfaceView {
             TextureKeeper.TEXTURE_KEEPER.reload(context);
             glEnable(GLES20.GL_BLEND);
             glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);
-            camera = new Camera(me, Configurations.CONF.getFloat("graphics", "camZnear"), Configurations.CONF.getFloat("graphics", "camZfar"),
-                    Configurations.CONF.getFloat("graphics", "camAngle"));
+            camera = new Camera(me, Conf.CONF.getFloat(R.dimen.camZnear), Conf.CONF.getFloat(R.dimen.camZfar), Conf.CONF.getFloat(R.dimen.camAngle));
 
             for (Team team : teams) {
                 for (Player player : team.getPlayers()) {
                     if (!player.getName().equals(me.getName())) {
                         playerViews.add(new PlayerView(player, context, R.drawable.rabbit_texture));
-                        labels.add(new TextLabel(Configurations.CONF.getInt("graphics", "labelTextQuality"), Configurations.CONF.getFloat("graphics", "labelTextHeight"),
-                                Configurations.CONF.getFloat("graphics", "labelHeight"), me.getStatus().getDirection(),
+                        labels.add(new TextLabel(Conf.CONF.getInt(R.integer.labelTextQuality), Conf.CONF.getFloat(R.dimen.labelTextHeight),
+                                Conf.CONF.getFloat(R.dimen.labelHeight), me.getStatus().getDirection(),
                                 player.getStatus().getPosition(), player.getName(), team.getColor()));
                     }
                 }
@@ -183,12 +179,11 @@ public class GraphicsView extends GLSurfaceView {
 
             buttonMaster = new ButtonMaster();
             MoveButtonsGenerator moveButtonsGenerator = new MoveButtonsGenerator(context, program, buttonMaster, positionMoveListener);
-            moveButtonsGenerator.generate(new SFVertex3f(Configurations.CONF.getFloat("gui", "xMove"), Configurations.CONF.getFloat( "gui", "yMove"),
-                            Configurations.CONF.getFloat("gui", "zMove")), Configurations.CONF.getFloat("gui", "scaleMove"),
-                    Configurations.CONF.getFloat("gui", "distanceMove"));
+            moveButtonsGenerator.generate(new SFVertex3f(Conf.CONF.getFloat(R.dimen.xMove), Conf.CONF.getFloat(R.dimen.yMove), Conf.CONF.getFloat(R.dimen.zMove)),
+                    Conf.CONF.getFloat(R.dimen.scaleMove), Conf.CONF.getFloat(R.dimen.distanceMove));
             SettingsButtonsGenerator settingsButtonsGenerator = new SettingsButtonsGenerator(context, program, buttonMaster, settingsScreen);
-            settingsButtonsGenerator.generate(new SFVertex3f(Configurations.CONF.getFloat("gui", "xSet"), Configurations.CONF.getFloat("gui", "ySet"),
-                    Configurations.CONF.getFloat("gui", "zSet")), Configurations.CONF.getFloat("gui", "scaleSet"));
+            settingsButtonsGenerator.generate(new SFVertex3f(Conf.CONF.getFloat(R.dimen.xSet), Conf.CONF.getFloat(R.dimen.ySet), Conf.CONF.getFloat(R.dimen.zSet)),
+                    Conf.CONF.getFloat(R.dimen.scaleSet));
 
             final ButtonsControl buttonsControl = new ButtonsControl(program, camera.getOrthoMatrix(), buttonMaster);
 

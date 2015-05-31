@@ -4,10 +4,12 @@ import android.graphics.Color;
 import android.os.Message;
 import android.util.Log;
 
+import com.example.alessandro.computergraphicsexample.R;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 
-import game.Configurations;
+import game.Conf;
 import game.net.GameHandlerListener;
 import game.net.GamePositionSender;
 import game.net.fieldsnames.GameFields;
@@ -17,11 +19,7 @@ import game.views.MessageScreen;
 public class StatusInterpreter implements Interpreter {
 
     public static final String LOG_TAG = "StatusInterpreter";
-    public static final long waitTime = Configurations.CONF.getInt("miscellaneous","endWaitTime");
-    public static final String messageWin=Configurations.CONF.getString("miscellaneous", "messageWin"),
-        messageLose=Configurations.CONF.getString("miscellaneous","messageLose"),
-        messageDraw=Configurations.CONF.getString("miscellaneous","messageDraw"),
-        messageInterrupted=Configurations.CONF.getString("miscellaneous","messageInterrupted");
+    public static final long waitTime = Conf.CONF.getInt(R.integer.endWaitTime);
     private MessageScreen messageScreen;
     private GamePositionSender gamePositionSender;
     private LinkedList<GameHandlerListener> gameHandlerListeners = new LinkedList<>();
@@ -61,16 +59,16 @@ public class StatusInterpreter implements Interpreter {
             String gameEnd = results.gameEnd;
             switch (GameFields.valueOf(gameEnd)) {
                 case GAME_WIN:
-                    messageScreen.setText(messageWin, Color.GREEN);
+                    messageScreen.setText(R.string.messageWin, Color.GREEN);
                     break;
                 case GAME_DRAW:
-                    messageScreen.setText(messageDraw, Color.BLUE);
+                    messageScreen.setText(R.string.messageDraw, Color.BLUE);
                     break;
                 case GAME_LOSE:
-                    messageScreen.setText(messageLose, Color.RED);
+                    messageScreen.setText(R.string.messageLose, Color.RED);
                     break;
                 case GAME_INTERRUPTED:
-                    messageScreen.setText(messageInterrupted, Color.BLACK);
+                    messageScreen.setText(R.string.messageInterrupted, Color.BLACK);
                     break;
             }
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="labelTextQuality">30</integer>
+    <item name="labelTextHeight" type="dimen" format="float">0.14</item>
+    <item name="labelHeight" type="dimen" format="float">0.5</item>
+    <integer name="mScreenColA">128</integer>
+    <integer name="mScreenColR">205</integer>
+    <integer name="mScreenColG">220</integer>
+    <integer name="mScreenColB">57</integer>
+    <item name="playerRadius" type="dimen" format="float">0.75</item>
+    <item name="camZnear" type="dimen" format="float">0.125</item>
+    <item name="camZfar" type="dimen" format="float">200</item>
+    <item name="camAngle" type="dimen" format="float">80</item>
+
+</resources>

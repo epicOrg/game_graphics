@@ -3,6 +3,8 @@ package game.net.communication;
 import android.os.Handler;
 import android.util.Log;
 
+import com.example.alessandro.computergraphicsexample.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,7 +21,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
-import game.Configurations;
+import game.Conf;
 import game.net.services.Service;
 
 import static game.net.communication.ServerCommunicationThreadState.CONNECTED;
@@ -41,9 +43,9 @@ import static game.net.communication.ServerCommunicationThreadState.NOT_CONNECTE
 public class ServerCommunicationThread extends Thread {
 
     public static final String LOG_TAG = "ServerCommunicationT";
-    public static final int WAIT_TIME = Configurations.CONF.getInt("miscellaneous","connectionWaitTime");
+    public static final int WAIT_TIME = Conf.CONF.getInt(R.integer.connectionWaitTime);
 
-    public static final int SERVER_PORT = Configurations.CONF.getInt("miscellaneous","serverPort");
+    public static final int SERVER_PORT = Conf.CONF.getInt(R.integer.serverPort);
 
     private static String serverAddress;
     private static ServerCommunicationThread instance;

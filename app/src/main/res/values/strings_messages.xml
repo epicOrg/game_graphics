@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="messageWait">Waiting for other players..</string>
+    <string name="messageWin">YOU WIN!</string>
+    <string name="messageDraw">YOU DIDN\'T WIN and YOU DIDN\'T LOSE!</string>
+    <string name="messageLose">YOU LOSE!</string>
+    <string name="messageInterrupted">INTERRUPTED!</string>
+    <string name="messageMuting">Muting/UnMuting..</string>
+    <string name="messageQuitting">Quitting..</string>
+
+</resources>
