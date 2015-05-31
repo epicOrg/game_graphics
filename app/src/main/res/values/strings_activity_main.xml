@@ -5,11 +5,11 @@
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="action_log_in">Login</string>
-    <string name="action_sign_in_short">Next</string>
+    <string name="action_next_field">Next</string>
     <string name="action_not_registered">Sign up</string>
     <string name="action_remember_me">Remember me</string>
 
-    <string name="error_invalid_email">Email invalid</string>
+    <string name="error_invalid_email">Invalid email</string>
     <string name="error_invalid_password">It must contain at least one number and a letter</string>
     <string name="error_short_password">It must contain at least 8 characters</string>
     <string name="error_incorrect_password">This password is incorrect</string>
@@ -21,7 +21,7 @@
     <string name="main_status_connecting">Connecting..</string>
     <string name="main_status_connected">Connected</string>
     <string name="main_status_not_connected">Not Connected</string>
-    <string name="main_status_press_to_rety">Press here to retry</string>
+    <string name="main_status_press_to_retry">Press here to retry</string>
 
     <string name="dialog_error">Error</string>
     <string name="dialog_try_again">Try again</string>

@@ -11,10 +11,10 @@
     <string name="error_passwords_different">Passwords do not match</string>
 
     <string name="email_not_valid">Invalid Email</string>
-    <string name="domain_not_vaid">Invalid email domain</string>
+    <string name="domain_not_valid">Invalid email domain</string>
     <string name="username_short">Username too short</string>
     <string name="username_long">Username too long</string>
-    <string name="username_invaid_char">The username contains invalid character</string>
+    <string name="username_invalid_char">The username contains invalid character</string>
     <string name="password_long">Password too long</string>
     <string name="email_already_used">Email already used</string>
     <string name="username_already_used">Username already used</string>

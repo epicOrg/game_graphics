@@ -125,9 +125,9 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
             if ((username != null) && (password != null)) {
                 ((TextView) views.get(R.id.username)).setText(username);
                 ((TextView) views.get(R.id.password)).setText(password);
-                ((CheckBox) views.get(R.id.remeberMeBox)).setChecked(true);
+                ((CheckBox) views.get(R.id.rememberMeBox)).setChecked(true);
             } else {
-                ((CheckBox) views.get(R.id.remeberMeBox)).setChecked(false);
+                ((CheckBox) views.get(R.id.rememberMeBox)).setChecked(false);
             }
         }
     }
@@ -136,7 +136,7 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
      * Is called to activate/deactivate the RememberMe function.
      */
     public void rememberMe(View view) {
-        CheckBox rememberBox = (CheckBox) findViewById(R.id.remeberMeBox);
+        CheckBox rememberBox = (CheckBox) findViewById(R.id.rememberMeBox);
         SharedPreferences.Editor editor = loginPreference.edit();
         if (rememberBox.isChecked())
             editor.putBoolean("Remember", true);
@@ -231,7 +231,7 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
         putViewIntoMap(R.id.main_refresh);
         putViewIntoMap(R.id.username);
         putViewIntoMap(R.id.password);
-        putViewIntoMap(R.id.remeberMeBox);
+        putViewIntoMap(R.id.rememberMeBox);
         putViewIntoMap(R.id.login_form);
         putViewIntoMap(R.id.login_progress);
     }

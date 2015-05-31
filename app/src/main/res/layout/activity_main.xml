@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:hint="@string/prompt_username"
-                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeActionLabel="@string/action_next_field"
                 android:imeOptions="actionUnspecified"
                 android:inputType="text"
                 android:maxLines="1"
@@ -90,14 +90,14 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_password"
                 android:imeActionId="@+id/login"
-                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeActionLabel="@string/action_next_field"
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true" />
 
             <CheckBox
-                android:id="@+id/remeberMeBox"
+                android:id="@+id/rememberMeBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
