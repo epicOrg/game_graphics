@@ -1,1 +1,10 @@
 playerRadius 0.75
+serverPort 7007
+connectionWaitTime 5000
+endWaitTime 5000
+messageWait Waiting for other players..
+messageWin YOU WIN!
+messageLose YOU LOSE!
+messageDraw YOU DIDN'T WIN and YOU DIDN'T LOSE!
+messageInterrupted INTERRUPTED!
+

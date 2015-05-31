@@ -1,5 +1,7 @@
 package game.graphics;
 
+import android.util.Log;
+
 import com.example.alessandro.computergraphicsexample.R;
 
 import java.util.HashMap;
@@ -12,6 +14,8 @@ import java.util.HashMap;
 public enum MapObjects {
     MAP;
 
+    public static final String LOG_TAG = "MapObjects";
+    public static final int DEFAULT_TEXTURE = R.drawable.wall_texture_01;
     private HashMap<String, MazeObject> map;
     private HashMap<String, Integer> codes;
 
@@ -23,11 +27,19 @@ public enum MapObjects {
      * @return MazeObject which is built from the specified parameters.
      */
     public MazeObject getObjectFromNameAndData(String object, String position, String size, String texture) {
-        return map.get(object).cloneFromData(position, size, getTextureIdFromString(texture));
+        if (map.containsKey(object))
+            return map.get(object).cloneFromData(position, size, getTextureIdFromString(texture));
+        else
+            throw new RuntimeException("Object: " + object + " not mapped!");
     }
 
     private int getTextureIdFromString(String s) {
-        return codes.get(s);
+        if (codes.containsKey(s))
+            return codes.get(s);
+        else{
+            Log.d(LOG_TAG,"Texture: "+s+" not mapped!");
+            return DEFAULT_TEXTURE;
+        }
     }
 
     MapObjects() {

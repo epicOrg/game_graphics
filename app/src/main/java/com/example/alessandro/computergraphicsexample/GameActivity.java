@@ -80,7 +80,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         setContentView(R.layout.activity_game);
         context = this;
 
-        Configurations.CONF.init("configurations", context);
+//        Configurations.CONF.init("configurations", context);
 
         headsetListener = new HeadsetListener(context);
         headsetListener.init();
@@ -121,7 +121,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         SplashScreen splashScreen = new SplashScreen(this, R.id.game_splash_container, R.id.game_splash_image, R.id.game_splash_text);
         splashScreen.animate();
         waiterGroup.addWaiter(splashScreen);
-        messageScreen.setText("Waiting for other players..", getResources().getColor(R.color.primary_text));
+        messageScreen.setText(Configurations.CONF.getString("miscellaneous","messageWait"), getResources().getColor(R.color.primary_text));
         waiterGroup.addWaiter(messageScreen);
 
         Log.d(LOG_TAG, "Starting GamePositionSender..");

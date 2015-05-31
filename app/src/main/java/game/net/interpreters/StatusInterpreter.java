@@ -7,6 +7,7 @@ import android.util.Log;
 import java.util.Arrays;
 import java.util.LinkedList;
 
+import game.Configurations;
 import game.net.GameHandlerListener;
 import game.net.GamePositionSender;
 import game.net.fieldsnames.GameFields;
@@ -16,7 +17,11 @@ import game.views.MessageScreen;
 public class StatusInterpreter implements Interpreter {
 
     public static final String LOG_TAG = "StatusInterpreter";
-    public static final long waitTime = 5000;
+    public static final long waitTime = Configurations.CONF.getInt("miscellaneous","endWaitTime");
+    public static final String messageWin=Configurations.CONF.getString("miscellaneous", "messageWin"),
+        messageLose=Configurations.CONF.getString("miscellaneous","messageLose"),
+        messageDraw=Configurations.CONF.getString("miscellaneous","messageDraw"),
+        messageInterrupted=Configurations.CONF.getString("miscellaneous","messageInterrupted");
     private MessageScreen messageScreen;
     private GamePositionSender gamePositionSender;
     private LinkedList<GameHandlerListener> gameHandlerListeners = new LinkedList<>();
@@ -56,16 +61,16 @@ public class StatusInterpreter implements Interpreter {
             String gameEnd = results.gameEnd;
             switch (GameFields.valueOf(gameEnd)) {
                 case GAME_WIN:
-                    messageScreen.setText("YOU WIN!", Color.GREEN);
+                    messageScreen.setText(messageWin, Color.GREEN);
                     break;
                 case GAME_DRAW:
-                    messageScreen.setText("YOU DIDN'T WIN and YOU DIDN'T LOSE!", Color.BLUE);
+                    messageScreen.setText(messageDraw, Color.BLUE);
                     break;
                 case GAME_LOSE:
-                    messageScreen.setText("YOU LOSE!", Color.RED);
+                    messageScreen.setText(messageLose, Color.RED);
                     break;
                 case GAME_INTERRUPTED:
-                    messageScreen.setText("INTERRUPTED!", Color.BLACK);
+                    messageScreen.setText(messageInterrupted, Color.BLACK);
                     break;
             }
 

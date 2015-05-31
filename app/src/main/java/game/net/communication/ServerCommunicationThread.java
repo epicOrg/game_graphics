@@ -19,6 +19,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
+import game.Configurations;
 import game.net.services.Service;
 
 import static game.net.communication.ServerCommunicationThreadState.CONNECTED;
@@ -40,9 +41,9 @@ import static game.net.communication.ServerCommunicationThreadState.NOT_CONNECTE
 public class ServerCommunicationThread extends Thread {
 
     public static final String LOG_TAG = "ServerCommunicationT";
-    public static final int WAIT_TIME = 5000;
+    public static final int WAIT_TIME = Configurations.CONF.getInt("miscellaneous","connectionWaitTime");
 
-    public static final int SERVER_PORT = 7007;
+    public static final int SERVER_PORT = Configurations.CONF.getInt("miscellaneous","serverPort");
 
     private static String serverAddress;
     private static ServerCommunicationThread instance;
