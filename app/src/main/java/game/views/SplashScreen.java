@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.alessandro.computergraphicsexample.R;
 
-import game.Waiter;
+import game.miscellaneous.Waiter;
 
 /**
  * @author Torlaschi

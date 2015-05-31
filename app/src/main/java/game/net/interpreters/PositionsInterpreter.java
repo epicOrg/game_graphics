@@ -4,7 +4,7 @@ import android.os.Message;
 
 import java.util.HashMap;
 
-import game.Room;
+import game.data.Room;
 import game.net.services.Game;
 import game.player.Player;
 

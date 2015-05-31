@@ -1,4 +1,4 @@
-package game;
+package game.miscellaneous;
 
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;

@@ -1,14 +1,13 @@
 package game.net.services;
 
 import android.os.Handler;
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.crypto.SecretKey;
 
-import game.UserData;
+import game.data.UserData;
 import game.net.communication.JSONd;
 import game.net.communication.NotConnectedException;
 import game.net.communication.RequestMaker;

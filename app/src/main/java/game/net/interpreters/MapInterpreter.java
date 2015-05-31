@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 import game.graphics.Map;
 import game.graphics.MapObjects;
-import game.net.GameHandlerListener;
+import game.net.handling.GameHandlerListener;
 import game.net.services.Game;
 import game.player.PlayerStatus;
 

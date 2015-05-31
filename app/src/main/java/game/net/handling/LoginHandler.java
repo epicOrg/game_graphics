@@ -1,4 +1,4 @@
-package game.net;
+package game.net.handling;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import com.example.alessandro.computergraphicsexample.RoomsActivity;
 
 import java.util.ArrayList;
 
-import game.UserData;
+import game.data.UserData;
 import game.net.fieldsnames.CommonFields;
 import game.net.services.Login;
 

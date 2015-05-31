@@ -1,11 +1,11 @@
-package game;
+package game.miscellaneous;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.TypedValue;
 
 /**
- * Class utility for quickly load a flaot from dimen resources.
+ * Class utility for quickly load a float from dimen resources.
  *
  * @author De Pace
  */

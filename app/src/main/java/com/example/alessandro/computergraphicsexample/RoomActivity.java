@@ -15,9 +15,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import game.Room;
-import game.Team;
-import game.UserData;
+import game.data.Room;
+import game.data.Team;
+import game.data.UserData;
 import game.net.communication.JSONd;
 import game.net.communication.NotConnectedException;
 import game.net.communication.RequestMaker;
@@ -120,7 +120,7 @@ public class RoomActivity extends ActionBarActivity {
         }
     }
 
-    public class RoomHandler extends Handler {
+    private class RoomHandler extends Handler {
 
         @Override
         public void handleMessage(Message msg) {

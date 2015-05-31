@@ -7,7 +7,7 @@ import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import game.Waiter;
+import game.miscellaneous.Waiter;
 
 /**
  * @author Torlaschi

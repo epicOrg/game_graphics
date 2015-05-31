@@ -2,8 +2,11 @@ package game.graphics;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+
 import com.example.alessandro.computergraphicsexample.R;
+
 import java.util.List;
+
 import game.generators.FundamentalGenerator;
 import sfogl.integration.ArrayObject;
 import sfogl.integration.Node;
@@ -117,6 +120,13 @@ public class Sky {
     private SFVertex3f position;
     private Node mainNode = new Node();
 
+    /**
+     * Creates a new Sky cube centered in the given position.
+     *
+     * @param context  Context from which to retrieve the resources.
+     * @param program  ShadingProgram to use for drawing the Sky.
+     * @param position position of the center of the Sky;
+     */
     public Sky(Context context, ShadingProgram program, SFVertex3f position) {
         this.program = program;
         this.context = context;
@@ -137,11 +147,14 @@ public class Sky {
         mainNode.getRelativeTransform().setMatrix(SFMatrix3f.getIdentity());
     }
 
-    private Node generateNode(ArrayObject arrayObject, int textureId){
+    private Node generateNode(ArrayObject arrayObject, int textureId) {
         return FundamentalGenerator.generateNode(arrayObject,
-                BitmapFactory.decodeResource(context.getResources(), textureId),ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER));
+                BitmapFactory.decodeResource(context.getResources(), textureId), ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER));
     }
 
+    /**
+     * Draws the Sky.
+     */
     public void draw() {
         mainNode.getRelativeTransform().setPosition(position.getX(), position.getY(), position.getZ());
         mainNode.updateTree(new SFTransform3f());

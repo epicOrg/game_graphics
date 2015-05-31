@@ -1,4 +1,4 @@
-package game;
+package game.miscellaneous;
 
 /**
  * Interface for objects containing an action to perform when asked.

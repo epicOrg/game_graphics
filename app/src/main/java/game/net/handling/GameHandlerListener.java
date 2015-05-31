@@ -1,4 +1,4 @@
-package game.net;
+package game.net.handling;
 
 /**
  * Interface for objects containing actions to perform when some events about the Game happen.

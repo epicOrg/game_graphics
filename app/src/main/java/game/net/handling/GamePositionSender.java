@@ -1,10 +1,10 @@
-package game.net;
+package game.net.handling;
 
 import org.json.JSONObject;
 
 import game.net.communication.JSONd;
 import game.net.communication.RequestMaker;
-import game.Waiter;
+import game.miscellaneous.Waiter;
 import game.net.fieldsnames.CommonFields;
 import game.net.fieldsnames.GameFields;
 import game.net.fieldsnames.RoomFields;

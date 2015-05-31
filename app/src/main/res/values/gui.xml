@@ -9,7 +9,6 @@
     <item name="xSet" type="dimen" format="float">1.1</item>
     <item name="ySet" type="dimen" format="float">0.6</item>
     <item name="zSet" type="dimen" format="float">0</item>
-    <item name="tSet" type="dimen" format="integer">0</item>
     <item name="scaleSet" type="dimen" format="float">0.15</item>
     <integer name="timeSleep">20</integer>
 

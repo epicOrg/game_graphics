@@ -2,7 +2,7 @@ package game.net.communication;
 
 import org.json.JSONObject;
 
-import game.UserData;
+import game.data.UserData;
 import game.net.fieldsnames.EncryptFields;
 import game.net.fieldsnames.ServicesFields;
 

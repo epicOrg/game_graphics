@@ -10,8 +10,8 @@ import com.example.alessandro.computergraphicsexample.R;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-import game.net.GameHandlerListener;
-import game.net.GamePositionSender;
+import game.net.handling.GameHandlerListener;
+import game.net.handling.GamePositionSender;
 import game.net.fieldsnames.GameFields;
 import game.net.services.Game;
 import game.views.MessageScreen;

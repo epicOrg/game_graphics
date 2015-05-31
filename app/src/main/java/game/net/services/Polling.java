@@ -4,7 +4,7 @@ import android.os.Handler;
 
 import org.json.JSONObject;
 
-import game.UserData;
+import game.data.UserData;
 import game.net.communication.JSONd;
 import game.net.communication.NotConnectedException;
 import game.net.communication.RequestMaker;

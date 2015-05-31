@@ -4,7 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Class that encapsulates a JSON request, an automatically translates it to a JSONObject.
+ * Class that encapsulates a JSON request, and automatically translates it to a JSONObject.
  *
  * @author De Pace
  */

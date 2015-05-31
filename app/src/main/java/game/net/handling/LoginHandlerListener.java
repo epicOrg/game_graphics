@@ -1,4 +1,4 @@
-package game.net;
+package game.net.handling;
 
 /**
  * Listener for Login Handler.

@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import game.Team;
+import game.data.Team;
 import game.net.fieldsnames.CommonFields;
 import game.net.fieldsnames.RoomFields;
 import game.net.fieldsnames.RoomsFields;

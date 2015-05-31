@@ -1,4 +1,4 @@
-package game.net;
+package game.net.handling;
 
 import android.os.Handler;
 import android.os.Message;
