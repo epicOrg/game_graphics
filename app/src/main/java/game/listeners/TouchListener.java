@@ -11,7 +11,6 @@ public class TouchListener implements TouchListenerInterface {
 
     public static final String LOG_TAG = "TouchListener";
 
-    public static final long TIME_SLEEP = 20;
 
     private ButtonsControl buttonsControl;
     private DirectionMoveListenerInterface directionMoveListener;
@@ -25,10 +24,12 @@ public class TouchListener implements TouchListenerInterface {
     private Thread moveThread;
 
     private boolean readyToPlay = false;
+    private long time_sleep;
 
-    public TouchListener(ButtonsControl buttonsControl, DirectionMoveListenerInterface directionMoveListener) {
+    public TouchListener(ButtonsControl buttonsControl, DirectionMoveListenerInterface directionMoveListener, int time_sleep) {
         this.buttonsControl = buttonsControl;
         this.directionMoveListener = directionMoveListener;
+        this.time_sleep = (long)time_sleep;
     }
 
     public void setReadyToPlay(boolean readyToPlay) {
@@ -125,13 +126,13 @@ public class TouchListener implements TouchListenerInterface {
                     }
 
                     //Log.d(LOG_TAG, "Pressed " + pressedButton.getName() + " button.");
-                    pressedButton.execute(TIME_SLEEP);
+                    pressedButton.execute(time_sleep);
 
                     if (!pressedButton.isContinuousPressing())
                         return;
 
                     try {
-                        Thread.sleep(TIME_SLEEP);
+                        Thread.sleep(time_sleep);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

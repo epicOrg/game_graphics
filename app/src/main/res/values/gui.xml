@@ -11,7 +11,7 @@
     <item name="zSet" type="dimen" format="float">0</item>
     <item name="tSet" type="dimen" format="integer">0</item>
     <item name="scaleSet" type="dimen" format="float">0.15</item>
-    <integer name="integer_name">30</integer>
+    <integer name="timeSleep">20</integer>
 
 
 </resources>

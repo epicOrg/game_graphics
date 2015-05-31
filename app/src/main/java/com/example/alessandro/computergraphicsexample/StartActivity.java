@@ -3,14 +3,13 @@ package com.example.alessandro.computergraphicsexample;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import game.Conf;
 import game.net.communication.ServerCommunicationThread;
 
 /**
@@ -35,7 +34,8 @@ public class StartActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         activity = this;
-        Conf.CONF.init(this.getApplicationContext());
+        Resources res=this.getResources();
+        ServerCommunicationThread.getInstance().init(res.getInteger(R.integer.connectionWaitTime), res.getInteger(R.integer.serverPort));
 
         serverAddress = (EditText) findViewById(R.id.start_server_address);
         serverAddressButton = (Button) findViewById(R.id.start_server_address_button);

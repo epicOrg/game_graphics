@@ -2,12 +2,8 @@ package game.net.communication;
 
 import android.os.Handler;
 import android.util.Log;
-
-import com.example.alessandro.computergraphicsexample.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,10 +16,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Enumeration;
-
-import game.Conf;
 import game.net.services.Service;
-
 import static game.net.communication.ServerCommunicationThreadState.CONNECTED;
 import static game.net.communication.ServerCommunicationThreadState.CONNECTING;
 import static game.net.communication.ServerCommunicationThreadState.NOT_CONNECTED;
@@ -43,9 +36,12 @@ import static game.net.communication.ServerCommunicationThreadState.NOT_CONNECTE
 public class ServerCommunicationThread extends Thread {
 
     public static final String LOG_TAG = "ServerCommunicationT";
-    public static final int WAIT_TIME = Conf.CONF.getInt(R.integer.connectionWaitTime);
+    public static final int WAIT_TIME = 5000;
 
-    public static final int SERVER_PORT = Conf.CONF.getInt(R.integer.serverPort);
+    public static final int SERVER_PORT = 7007;
+
+    private int waitTime;
+    private int serverPort;
 
     private static String serverAddress;
     private static ServerCommunicationThread instance;
@@ -61,6 +57,11 @@ public class ServerCommunicationThread extends Thread {
 
     private ServerCommunicationThread() {
 
+    }
+
+    public void init(int waitTime, int serverPort) {
+        this.waitTime = waitTime;
+        this.serverPort = serverPort;
     }
 
     public static String getLocalIpAddress() {
@@ -84,6 +85,8 @@ public class ServerCommunicationThread extends Thread {
         if (instance == null) {
             instance = new ServerCommunicationThread();
             instance.threadState = NOT_CONNECTED;
+            instance.serverPort=SERVER_PORT;
+            instance.waitTime=WAIT_TIME;
             instance.threadListeners = new ArrayList<>();
         }
         return instance;
@@ -135,12 +138,12 @@ public class ServerCommunicationThread extends Thread {
 
     }
 
-    public void init() {
+    private void init() {
         setStateAndUpdate(CONNECTING);
 
         try {
             socket = new Socket();
-            socket.connect(new InetSocketAddress(InetAddress.getByName(serverAddress), SERVER_PORT), WAIT_TIME);
+            socket.connect(new InetSocketAddress(InetAddress.getByName(serverAddress), serverPort), waitTime);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new PrintWriter(socket.getOutputStream(), true);
             setStateAndUpdate(CONNECTED);

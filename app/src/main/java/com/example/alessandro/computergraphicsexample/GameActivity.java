@@ -2,6 +2,7 @@ package com.example.alessandro.computergraphicsexample;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
 
-import game.Conf;
+import game.FloatLoader;
 import game.Room;
 import game.Team;
 import game.UserData;
@@ -79,6 +80,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_game);
         context = this;
+        Resources res=context.getResources();
+        FloatLoader fl=new FloatLoader(context);
 
         headsetListener = new HeadsetListener(context);
         headsetListener.init();
@@ -87,8 +90,8 @@ public class GameActivity extends Activity implements GameHandlerListener {
 
         messageContainer = (LinearLayout) findViewById(R.id.game_message_container);
         menuContainer = (LinearLayout) findViewById(R.id.game_menu_container);
-        messageScreen = new MessageScreen(this, Color.argb(Conf.CONF.getInt(R.integer.mScreenColA), Conf.CONF.getInt(R.integer.mScreenColR),
-                Conf.CONF.getInt(R.integer.mScreenColG), Conf.CONF.getInt(R.integer.mScreenColB)), messageContainer);
+        messageScreen = new MessageScreen(this, Color.argb(res.getInteger(R.integer.mScreenColA), res.getInteger(R.integer.mScreenColR),
+                res.getInteger(R.integer.mScreenColG), res.getInteger(R.integer.mScreenColB)), messageContainer);
         settingsScreen = new SettingsScreen(this, menuContainer, requestMaker);
 
         backgroundSound = new BackgroundSound(context, new GameSoundtracks(R.raw.soundtrack_01, R.raw.soundtrack_02).getSoundtracks(context));
@@ -97,7 +100,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         SFVertex3f position = new SFVertex3f(5, 0.5f, -7);
         SFVertex3f direction = new SFVertex3f(-1, -0.25f, 0);
 
-        me = new Player(new PlayerStatus(direction, new Circle(position, Conf.CONF.getFloat(R.dimen.playerRadius))), "Me");
+        me = new Player(new PlayerStatus(direction, new Circle(position, fl.getFloat(R.dimen.playerRadius))), "Me");
         Room room = (Room) UserData.DATA.getData(ServicesFields.CURRENT_ROOM);
         ArrayList<Team> teams = room.getTeams();
         if (teams != null)
@@ -126,7 +129,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         GamePositionSender gamePositionSender = new GamePositionSender(me, room.getName());
 
         mapInterpreter = new MapInterpreter(me.getStatus(), this);
-        gameHandler = new GameHandler(new StatusInterpreter(messageScreen, gamePositionSender, this), mapInterpreter,
+        gameHandler = new GameHandler(new StatusInterpreter(context, messageScreen, gamePositionSender, this), mapInterpreter,
                 new PositionsInterpreter((Room) UserData.DATA.getData(ServicesFields.CURRENT_ROOM)));
 
         waiterGroup.addWaiter(gamePositionSender);
