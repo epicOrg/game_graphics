@@ -30,6 +30,15 @@ public enum UserData {
     }
 
     /**
+     * Removes some data, previously mapped with a name. If the name is not mapped, it does nothing.
+     *
+     * @param name name to map the data.
+     */
+    public void removeData(Enum name) {
+        dataMap.remove(name);
+    }
+
+    /**
      * Returns some data from a given name.
      *
      * @param name name that maps the requested data.
@@ -64,6 +73,10 @@ public enum UserData {
         for (Enum s : it)
             jsonds.add(new JSONd(s, dataMap.get(s)));
         return new RequestMaker(jsonds.toArray(new JSONd[0]));
+    }
+
+    public String toString(){
+        return "[USERDATA: "+dataMap+"]";
     }
 
 }

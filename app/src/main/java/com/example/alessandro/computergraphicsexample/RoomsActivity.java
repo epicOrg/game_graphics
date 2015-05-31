@@ -29,6 +29,7 @@ import game.net.communication.JSONd;
 import game.net.communication.NotConnectedException;
 import game.net.communication.RequestMaker;
 import game.net.communication.ServerCommunicationThread;
+import game.net.fieldsnames.CommonFields;
 import game.net.fieldsnames.RoomFields;
 import game.net.fieldsnames.RoomsFields;
 import game.net.fieldsnames.ServicesFields;
@@ -140,6 +141,10 @@ public class RoomsActivity extends ActionBarActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 createLogoutRequest();
+
+                UserData.DATA.removeData(CommonFields.USERNAME);
+                UserData.DATA.removeData(CommonFields.HASHCODE);
+
                 finish();
             }
         });

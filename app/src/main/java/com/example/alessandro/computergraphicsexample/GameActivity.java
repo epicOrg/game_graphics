@@ -197,6 +197,9 @@ public class GameActivity extends Activity implements GameHandlerListener {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                UserData.DATA.removeData(ServicesFields.CURRENT_ROOM);
+                UserData.DATA.removeData(ServicesFields.SERVICE);
+                UserData.DATA.removeData(RoomFields.ROOM_NAME);
                 finish();
                 AudioCallManager.getInstance().releaseResources();
                 headsetListener.release();

@@ -183,6 +183,8 @@ public class RoomActivity extends ActionBarActivity {
 
             if (result) {
                 isExitingGame = true;
+                UserData.DATA.removeData(ServicesFields.SERVICE);
+                UserData.DATA.removeData(RoomFields.ROOM_NAME);
                 finish();
             }
         }

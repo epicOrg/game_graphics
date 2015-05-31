@@ -16,6 +16,8 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+
+import game.data.UserData;
 import game.net.services.Service;
 import static game.net.communication.ServerCommunicationThreadState.CONNECTED;
 import static game.net.communication.ServerCommunicationThreadState.CONNECTING;
@@ -184,7 +186,8 @@ public class ServerCommunicationThread extends Thread {
         if (writer == null || threadState != CONNECTED)
             throw new NotConnectedException();
 
-        //Log.d(LOG_TAG, "send: " + object.toString());
+        Log.d(LOG_TAG, "send: " + object.toString());
+        Log.d(LOG_TAG, UserData.DATA.toString());
         writer.println(object.toString());
     }
 
