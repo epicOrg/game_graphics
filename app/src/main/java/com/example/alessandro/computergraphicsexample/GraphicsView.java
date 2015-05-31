@@ -56,7 +56,6 @@ public class GraphicsView extends GLSurfaceView {
     public static final String LOG_TAG = "GraphicsView";
 
     private CountDownLatch startSignal;
-    private Camera camera;
     private Context context;
 
     private Player me;
@@ -94,7 +93,7 @@ public class GraphicsView extends GLSurfaceView {
 
         sfs = SFOGLStateEngine.glEnable(GL_CULL_FACE);
 
-        positionMoveListener = new PositionMoveListenerXZWithCollisions(me.getStatus(), cm);
+        positionMoveListener = new PositionMoveListenerXZWithCollisions(me.getStatus(), cm, Conf.CONF.getFloat(R.dimen.moveSpeed));
         directionMoveListener = new DirectionDirectionMoveListener(me.getStatus().getDirection(), getWidth(), getHeight());
 
         setRenderer(new GraphicsRenderer());

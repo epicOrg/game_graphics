@@ -10,14 +10,15 @@ import shadow.math.SFVertex3f;
 public class PositionMoveListenerXZWithCollisions implements PositionMoveListenerInterface {
 
     public static final String LOG_TAG = "PositionMoveListenerXZ";
-    private static float MOVE_SPEED = 3.00f; // Distance/s
+    private float moveSpeed;
 
     private PlayerStatus playerStatus;
     private CollisionMediator cm;
 
-    public PositionMoveListenerXZWithCollisions(PlayerStatus playerStatus, CollisionMediator cm) {
+    public PositionMoveListenerXZWithCollisions(PlayerStatus playerStatus, CollisionMediator cm, float moveSpeed) {
         this.playerStatus = playerStatus;
         this.cm = cm;
+        this.moveSpeed=moveSpeed;
     }
 
     @Override
@@ -26,7 +27,7 @@ public class PositionMoveListenerXZWithCollisions implements PositionMoveListene
         SFMatrix3f rotationMatrix = SFMatrix3f.getRotationY(angleXZ);
         SFVertex3f tempVertex = rotationMatrix.Mult(new SFVertex3f(playerStatus.getDirection().getX(), 0, playerStatus.getDirection().getZ()));
         tempVertex.normalize3f();
-        tempVertex.mult(MOVE_SPEED * delta / 1000);
+        tempVertex.mult(moveSpeed * delta / 1000);
 
         playerStatus.move(tempVertex, cm);
     }

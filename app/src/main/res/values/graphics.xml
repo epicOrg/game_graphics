@@ -9,6 +9,7 @@
     <integer name="mScreenColG">220</integer>
     <integer name="mScreenColB">57</integer>
     <item name="playerRadius" type="dimen" format="float">0.75</item>
+    <item name="moveSpeed" type="dimen" format="float">3</item>
     <item name="camZnear" type="dimen" format="float">0.125</item>
     <item name="camZfar" type="dimen" format="float">200</item>
     <item name="camAngle" type="dimen" format="float">80</item>
