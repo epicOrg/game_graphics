@@ -41,7 +41,7 @@ public class RoomActivity extends ActionBarActivity {
 
     public static final String LOG_TAG = "RoomActivity";
 
-    private static final int START_DELAY = 5 * 1000;
+    private int startDelay;
 
     private ServerCommunicationThread serverCommunicationThread = ServerCommunicationThread.getInstance();
 
@@ -62,6 +62,7 @@ public class RoomActivity extends ActionBarActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_room);
         context = this;
+        startDelay = getResources().getInteger(R.integer.startWaitTime);
 
         UserData.DATA.addData(ServicesFields.SERVICE, ServicesFields.CURRENT_ROOM);
         requestMaker = UserData.DATA.getRequestMaker();
@@ -83,24 +84,28 @@ public class RoomActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        if (startedGame){
+            Toast.makeText(this, getString(R.string.game_already_started), Toast.LENGTH_LONG).show();
+        }else{
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
-        alertDialogBuilder.setTitle(getString(R.string.room_exit_message));
-        alertDialogBuilder
-                .setCancelable(false)
-                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        sendExitRequest();
-                    }
-                })
-                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
+            alertDialogBuilder.setTitle(getString(R.string.room_exit_message));
+            alertDialogBuilder
+                    .setCancelable(false)
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            sendExitRequest();
+                        }
+                    })
+                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
 
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
     }
 
     @Override
@@ -111,6 +116,9 @@ public class RoomActivity extends ActionBarActivity {
             sendExitRequest();
         }
     }
+
+    private boolean startedGame = false;
+
 
     private void sendExitRequest() {
         if (startTimer != null) {
@@ -185,6 +193,7 @@ public class RoomActivity extends ActionBarActivity {
                 isExitingGame = true;
                 UserData.DATA.removeData(ServicesFields.SERVICE);
                 UserData.DATA.removeData(RoomFields.ROOM_NAME);
+                UserData.DATA.removeData(ServicesFields.CURRENT_ROOM);
                 finish();
             }
         }
@@ -194,7 +203,7 @@ public class RoomActivity extends ActionBarActivity {
 
             if (result) {
                 UserData.DATA.addData(ServicesFields.CURRENT_ROOM, currentRoom);
-
+                startedGame = true;
                 startTimer = new Timer();
                 startTimer.schedule(new TimerTask() {
                     @Override
@@ -204,7 +213,7 @@ public class RoomActivity extends ActionBarActivity {
                         Intent intent = new Intent(getApplicationContext(), GameActivity.class);
                         startActivity(intent);
                     }
-                }, START_DELAY);
+                }, startDelay);
             }
         }
 

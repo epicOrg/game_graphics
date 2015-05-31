@@ -49,6 +49,10 @@ public class StatusInterpreter implements Interpreter {
     @Override
     public void interpret(Message msg) {
 //        Log.d(LOG_TAG, "processStatusMessage");
+        if (!(msg.obj instanceof Game.GameStatusResult)) {
+            Log.d(LOG_TAG,"Error, wrong Handler for "+msg.obj);
+            return;
+        }
         Game.GameStatusResult results = (Game.GameStatusResult) msg.obj;
 
         if (results.go)

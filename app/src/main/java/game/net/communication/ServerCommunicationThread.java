@@ -186,8 +186,8 @@ public class ServerCommunicationThread extends Thread {
         if (writer == null || threadState != CONNECTED)
             throw new NotConnectedException();
 
-        Log.d(LOG_TAG, "send: " + object.toString());
-        Log.d(LOG_TAG, UserData.DATA.toString());
+//        Log.d(LOG_TAG, "send: " + object.toString());
+//        Log.d(LOG_TAG, UserData.DATA.toString());
         writer.println(object.toString());
     }
 

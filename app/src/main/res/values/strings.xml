@@ -7,6 +7,7 @@
     <string name="info_press_again_to_quit">Press again to exit</string>
 
     <string name="error_not_connected">Server not connected</string>
+    <string name="game_already_started">Game already started!</string>
     <string name="cancel">Cancel</string>
     <string name="logout">Logout</string>
     <string name="logout_confirm">Do you really want to exit?</string>

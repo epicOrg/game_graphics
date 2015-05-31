@@ -3,6 +3,7 @@
 
     <integer name="connectionWaitTime">5000</integer>
     <integer name="serverPort">7007</integer>
+    <integer name="startWaitTime">5000</integer>
     <integer name="endWaitTime">5000</integer>
 
 </resources>
