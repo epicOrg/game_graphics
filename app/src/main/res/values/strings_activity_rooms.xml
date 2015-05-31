@@ -4,7 +4,8 @@
 
     <string name="rooms_title">ROOMS LIST</string>
     <string name="rooms_create_error_alreadypresent">Room already present</string>
-    <string name="rooms_create_error_invalidname">Invalid room\'s name</string>
+    <string name="rooms_create_error_invalid_parameters">Invalid room\'s parameters</string>
+    <string name="rooms_create_error_invalid_name">Invalid room\'s name</string>
     <string name="rooms_join_error">Error joining the room</string>
     <string name="rooms_name">Name</string>
     <string name="rooms_create">Create</string>

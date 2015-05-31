@@ -181,14 +181,25 @@ public class RoomsActivity extends ActionBarActivity {
         b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int whichButton) {
-                String roomName = newRoomName.getText().toString();
+                String roomName;
+                int maxPlayersData, maxTeamsData;
+
+                try {
+                    roomName = newRoomName.getText().toString();
+                    maxPlayersData = Integer.parseInt(maxPlayers.getText().toString());
+                    maxTeamsData = Integer.parseInt(maxTeams.getText().toString());
+                } catch (Exception e) {
+                    Toast.makeText(context, getString(R.string.rooms_create_error_invalid_parameters), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                    return;
+                }
 
                 try {
                     serverCommunicationThread.send(requestMaker.getNewRequestWithDefaultRequests(new JSONd(ServicesFields.SERVICE, ServicesFields.ROOMS.toString()),
                             new JSONd(ServicesFields.SERVICE_TYPE, RoomsFields.ROOM_CREATE.toString()),
                             new JSONd(RoomFields.ROOM_NAME, roomName),
-                            new JSONd(RoomsFields.ROOM_TEAMS_DIMENSION, Integer.parseInt(maxPlayers.getText().toString())),
-                            new JSONd(RoomsFields.ROOM_TEAMS_NUMBER, Integer.parseInt(maxTeams.getText().toString()))));
+                            new JSONd(RoomsFields.ROOM_TEAMS_DIMENSION, maxPlayersData),
+                            new JSONd(RoomsFields.ROOM_TEAMS_NUMBER, maxTeamsData)));
                 } catch (NotConnectedException e) {
                     Toast.makeText(context, getString(R.string.error_not_connected), Toast.LENGTH_LONG).show();
                     e.printStackTrace();

@@ -5,7 +5,6 @@ import com.example.alessandro.computergraphicsexample.R;
 
 import java.util.HashMap;
 
-import game.net.fieldsnames.RoomFields;
 import game.net.fieldsnames.RoomsFields;
 
 /**
@@ -25,7 +24,7 @@ public class RoomsErrorStrings {
 
     private void createMap() {
         errors.put(RoomsFields.ROOM_CREATE_ERROR_ALREADY_PRESENT.toString(), R.string.rooms_create_error_alreadypresent);
-        errors.put(RoomsFields.ROOM_CREATE_ERROR_INVALID_NAME.toString(), R.string.rooms_create_error_invalidname);
+        errors.put(RoomsFields.ROOM_CREATE_ERROR_INVALID_NAME.toString(), R.string.rooms_create_error_invalid_name);
     }
 
     public int getStringIdByError(String error) {

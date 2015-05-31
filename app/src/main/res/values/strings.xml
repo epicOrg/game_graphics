@@ -2,26 +2,9 @@
 <resources>
 
     <string name="app_name">epicOrg</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
     <string name="info_press_again_to_quit">Press again to exit</string>
-
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_call">Call</string>
-    <string name="prompt_user_to_call">User to call</string>
-
-    <string name="action_example">Example action</string>
-    <string name="title_activity_call">CallActivity</string>
-    <string name="dialog_net_error">Network error , App will be closed</string>
-    <string name="action_game_graphics">Vai al game_graphics (DEBUG)</string>
-    <string name="action_game_graphics_no_server">Vai al game_graphics - NoServer (DEBUG)</string>
 
     <string name="error_not_connected">Server not connected</string>
     <string name="cancel">Cancel</string>
