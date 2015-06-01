@@ -1,9 +1,12 @@
 package game.net.connection_encryption;
 
-import android.util.Log;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.security.Key;
-import java.security.PublicKey;
+import javax.crypto.SecretKey;
+
+import game.net.fieldsnames.ServicesFields;
 
 /**
  * This class manages the encryption of the connection:
@@ -11,50 +14,76 @@ import java.security.PublicKey;
  *
  * @author Noris
  * @date 27/04/2015
+ * @see ISymmetricKeyGenerator
+ * @see Encrypter
+ * @see Decrypter
  */
+
 public class ConnectionEncrypter {
 
-    private ISymmetricKeyGenerator symmetricKeyGenerator;
+    private static SecretKey symmetricKey;
+    private static Encrypter encrypter;
+    private static Decrypter decrypter;
 
-    private Encrypter encrypter;
-    private Decrypter decrypter;
+    public static void init(ISymmetricKeyGenerator keyGenerator) {
 
-    private PublicKey publicKey;
+        keyGenerator.generateKey();
+        ConnectionEncrypter.symmetricKey = keyGenerator.getKey();
 
-    public ConnectionEncrypter(ISymmetricKeyGenerator symmetricKeyGenerator) {
-
-        this.symmetricKeyGenerator = symmetricKeyGenerator;
-        this.symmetricKeyGenerator.generateKey();
-
-        Log.d("superlol", symmetricKeyGenerator.getKey().toString());
-
-
-        encrypter = new Encrypter(getSymmetricKey());
-        decrypter = new Decrypter(getSymmetricKey());
+        encrypter = new Encrypter(symmetricKey);
+        decrypter = new Decrypter(symmetricKey);
     }
 
-    private Key getSymmetricKey() {
-        return symmetricKeyGenerator.getKey();
+    public static SecretKey getSymmetricKey() {
+        return symmetricKey;
     }
 
-    public void setPublicKey(String publicKey) {
-        this.publicKey = KeyConverter.stringToPublicKey(publicKey);
-    }
+    public static String encryptRequest(String request) {
 
-    public String getWrappedKey() {
-        KeyWrapper keyWrapper = new KeyWrapper(getSymmetricKey());
-        keyWrapper.wrapKey(publicKey);
-        return keyWrapper.getWrappedKeyString();
-    }
-
-    public String encryptRequest(String request) {
         encrypter.encrypt(request);
         return encrypter.getEncryptedString();
+
     }
 
-    public String decryptResponse(String response) {
+    public static String decryptResponse(String response) {
+
+        if (isJSONObject(response)) {
+
+            try {
+
+                JSONObject jsonResponse = new JSONObject(response);
+
+                if (jsonResponse.has(ServicesFields.SERVICE.toString()) && (
+                        jsonResponse.getString(ServicesFields.SERVICE.toString())
+                                .equals(ServicesFields.ENCRYPT.toString()) ||
+                                jsonResponse.getString(ServicesFields.SERVICE.toString())
+                                        .equals(ServicesFields.POLLING.toString()) ||
+                                jsonResponse.getString(ServicesFields.SERVICE.toString())
+                                        .equals(ServicesFields.CURRENT_ROOM.toString())))
+                    return response;
+
+            } catch (JSONException e) {
+            }
+        }
+
         decrypter.decrypt(response);
         return decrypter.getDecryptedString();
+
+    }
+
+    private static boolean isJSONObject(String string) {
+
+        try {
+            new JSONObject(string);
+        } catch (JSONException e1) {
+            try {
+                new JSONArray(string);
+            } catch (JSONException e2) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }

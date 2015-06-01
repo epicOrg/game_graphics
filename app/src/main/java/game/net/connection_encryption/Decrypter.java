@@ -1,8 +1,5 @@
 package game.net.connection_encryption;
 
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.Hex;
-
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -27,17 +24,14 @@ public class Decrypter {
      */
     public void decrypt(String encryptedString) {
 
-        byte[] encryptedData = new byte[0];
-        try {
-            encryptedData = Hex.decodeHex(encryptedString.toCharArray());
-        } catch (DecoderException e) {
-            e.printStackTrace();
-        }
+        byte[] encryptedData = StringConverter.stringToBytes(encryptedString);
 
         try {
-            Cipher cipher = Cipher.getInstance("AES");
+
+            Cipher cipher = Cipher.getInstance(EncryptionConst.SYMMETRIC_ALGORITHM);
             cipher.init(Cipher.DECRYPT_MODE, asymmetricKey);
             decryptedData = cipher.doFinal(encryptedData);
+
         } catch (InvalidKeyException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {

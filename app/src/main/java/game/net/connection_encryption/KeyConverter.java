@@ -9,29 +9,43 @@ import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.spec.SecretKeySpec;
 
-import android.util.Base64;
-
 /**
+ * Some useful Key conversion methods.
+ *
  * @author Noris
  * @date 2015/04/28
+ * @see StringConverter
+ * @see Key
  */
 
 public class KeyConverter {
 
+    /**
+     * Converts a Key into a string.
+     *
+     * @param key a generic Key
+     * @return a string encoding the Key
+     */
     public static String keyToString(Key key) {
-        return Base64.encodeToString(key.getEncoded(), Base64.CRLF);
+        return StringConverter.bytesToString(key.getEncoded());
     }
 
+    /**
+     * Convert a string, that encodes a PublicKey, into the PublicKey.
+     *
+     * @param key a string that encodes a PublicKey
+     * @return the PublicKey
+     */
     public static PublicKey stringToPublicKey(String key) {
 
-        byte[] decodedKey = Base64.decode(key, Base64.CRLF);
+        byte[] decodedKey = StringConverter.stringToBytes(key);
 
         X509EncodedKeySpec eks = new X509EncodedKeySpec(decodedKey);
 
         KeyFactory keyFactor = null;
 
         try {
-            keyFactor = KeyFactory.getInstance("RSA");
+            keyFactor = KeyFactory.getInstance(EncryptionConst.ASYMMETRIC_ALGORITHM);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -45,10 +59,16 @@ public class KeyConverter {
 
     }
 
+    /**
+     * Convert a string, that encodes a generic Key, into the Key.
+     *
+     * @param key a string that encodes a Key
+     * @return the Key
+     */
     public static Key stringToSymmetricKey(String key) {
 
-        byte[] decodedKey = Base64.decode(key, Base64.CRLF);
-        return new SecretKeySpec(decodedKey, "AES");
+        byte[] decodedKey = StringConverter.stringToBytes(key);
+        return new SecretKeySpec(decodedKey, EncryptionConst.SYMMETRIC_ALGORITHM);
 
     }
 

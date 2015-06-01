@@ -1,14 +1,13 @@
 package game.net.connection_encryption;
 
-import android.util.Base64;
-
 import java.security.InvalidKeyException;
-import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
 
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
 
 /**
  * @author Noris
@@ -17,19 +16,19 @@ import javax.crypto.NoSuchPaddingException;
 
 public class KeyWrapper {
 
-    private Key symmetricKey;
+    private SecretKey symmetricKey;
     private byte[] wrappedKey;
 
-    public KeyWrapper(Key symmetricKey) {
+    public KeyWrapper(SecretKey symmetricKey) {
         super();
         this.symmetricKey = symmetricKey;
     }
 
-    public void wrapKey(Key publicKey) {
+    public void wrapKey(PublicKey publicKey) {
 
         try {
 
-            Cipher cipher = Cipher.getInstance("RSA");
+            Cipher cipher = Cipher.getInstance(EncryptionConst.ASYMMETRIC_DECODE);
             cipher.init(Cipher.WRAP_MODE, publicKey);
             wrappedKey = cipher.wrap(symmetricKey);
 
@@ -50,7 +49,7 @@ public class KeyWrapper {
     }
 
     public String getWrappedKeyString() {
-        return Base64.encodeToString(wrappedKey, Base64.URL_SAFE);
+        return StringConverter.bytesToString(wrappedKey);
     }
 
 }

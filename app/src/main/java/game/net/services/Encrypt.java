@@ -5,16 +5,14 @@ import android.os.Handler;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.crypto.SecretKey;
-
 import game.data.UserData;
 import game.net.communication.JSONd;
 import game.net.communication.NotConnectedException;
 import game.net.communication.RequestMaker;
 import game.net.communication.ServerCommunicationThread;
+import game.net.connection_encryption.ConnectionEncrypter;
 import game.net.connection_encryption.KeyConverter;
 import game.net.connection_encryption.KeyWrapper;
-import game.net.connection_encryption.SymmetricKeyGenerator;
 import game.net.fieldsnames.EncryptFields;
 import game.net.fieldsnames.ServicesFields;
 
@@ -40,12 +38,7 @@ public class Encrypt implements Service {
 
             String publicKey = jsonResponse.getString(EncryptFields.PUBLIC_KEY.toString());
 
-            SymmetricKeyGenerator keyGenerator = new SymmetricKeyGenerator();
-            keyGenerator.generateKey();
-
-            SecretKey symmetricKey = keyGenerator.getKey();
-
-            KeyWrapper wrapper = new KeyWrapper(symmetricKey);
+            KeyWrapper wrapper = new KeyWrapper(ConnectionEncrypter.getSymmetricKey());
             wrapper.wrapKey(KeyConverter.stringToPublicKey(publicKey));
 
             String privateWrapped = wrapper.getWrappedKeyString();

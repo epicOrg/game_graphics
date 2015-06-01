@@ -1,7 +1,5 @@
 package game.net.connection_encryption;
 
-import org.apache.commons.codec.binary.Hex;
-
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -13,25 +11,26 @@ import javax.crypto.NoSuchPaddingException;
 
 public class Encrypter {
 
-    private byte[] cryptedData;
+    private byte[] encryptedData;
     private Key asymmetricKey;
 
     public Encrypter(Key asymmetricKey) {
-        super();
         this.asymmetricKey = asymmetricKey;
     }
 
     /**
-     * @param uncryptedString String to encrypt.
+     * @param unencryptedString String to encrypt.
      */
-    public void encrypt(String uncryptedString) {
+    public void encrypt(String unencryptedString) {
 
-        byte[] uncryptedData = uncryptedString.getBytes();
+        byte[] unencryptedData = unencryptedString.getBytes();
 
         try {
-            Cipher cipher = Cipher.getInstance("AES");
+
+            Cipher cipher = Cipher.getInstance(EncryptionConst.SYMMETRIC_ALGORITHM);
             cipher.init(Cipher.ENCRYPT_MODE, asymmetricKey);
-            cryptedData = cipher.doFinal(uncryptedData);
+            encryptedData = cipher.doFinal(unencryptedData);
+
         } catch (InvalidKeyException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
@@ -46,11 +45,11 @@ public class Encrypter {
     }
 
     public byte[] getEncryptedData() {
-        return cryptedData;
+        return encryptedData;
     }
 
     public String getEncryptedString() {
-        return Hex.encodeHexString(cryptedData);
+        return StringConverter.bytesToString(encryptedData);
     }
 
 }

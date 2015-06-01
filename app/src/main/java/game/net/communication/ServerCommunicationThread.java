@@ -19,7 +19,8 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
-import game.data.UserData;
+import game.net.connection_encryption.ConnectionEncrypter;
+import game.net.fieldsnames.ServicesFields;
 import game.net.services.Service;
 
 import static game.net.communication.ServerCommunicationThreadState.CONNECTED;
@@ -44,13 +45,10 @@ public class ServerCommunicationThread extends Thread {
     public static final int WAIT_TIME = 5000;
 
     public static final int SERVER_PORT = 7007;
-
-    private int waitTime;
-    private int serverPort;
-
     private static String serverAddress;
     private static ServerCommunicationThread instance;
-
+    private int waitTime;
+    private int serverPort;
     private ArrayList<ServerCommunicationThreadListener> threadListeners;
     private ServerCommunicationThreadState threadState;
 
@@ -62,17 +60,6 @@ public class ServerCommunicationThread extends Thread {
 
     private ServerCommunicationThread() {
 
-    }
-
-    /**
-     * Initilizes the <code>ServerCommunicationThread</code> with custom parameters.
-     *
-     * @param waitTime   time to wait while trying to connect to the server.
-     * @param serverPort port of the server to connect to.
-     */
-    public void init(int waitTime, int serverPort) {
-        this.waitTime = waitTime;
-        this.serverPort = serverPort;
     }
 
     /**
@@ -125,6 +112,17 @@ public class ServerCommunicationThread extends Thread {
         serverAddress = address;
     }
 
+    /**
+     * Initilizes the <code>ServerCommunicationThread</code> with custom parameters.
+     *
+     * @param waitTime   time to wait while trying to connect to the server.
+     * @param serverPort port of the server to connect to.
+     */
+    public void init(int waitTime, int serverPort) {
+        this.waitTime = waitTime;
+        this.serverPort = serverPort;
+    }
+
     @Override
     public void run() {
         init();
@@ -140,8 +138,9 @@ public class ServerCommunicationThread extends Thread {
             try {
                 line = reader.readLine();
                 if (line != null) {
-                    received = new JSONObject(line);
-                    //Log.d(LOG_TAG, "received: " + line);
+                    received = new JSONObject(ConnectionEncrypter.decryptResponse(line));
+                    // received = new JSONObject(line);
+                    //Log.d(LOG_TAG, "Received: " + line);
 
                     Service service = serviceChooser.setService(received);
                     service.setHandler(handler);
@@ -213,9 +212,20 @@ public class ServerCommunicationThread extends Thread {
         if (writer == null || threadState != CONNECTED)
             throw new NotConnectedException();
 
-//        Log.d(LOG_TAG, "send: " + object.toString());
-//        Log.d(LOG_TAG, UserData.DATA.toString());
-        writer.println(object.toString());
+        // Log.d(LOG_TAG, "Send: " + object.toString());
+        // Log.d(LOG_TAG, UserData.DATA.toString());
+
+        try {
+            if (object.getString(ServicesFields.SERVICE.toString()).equals(ServicesFields.ENCRYPT.toString())) {
+                writer.println(object.toString());
+            } else {
+                writer.println(ConnectionEncrypter.encryptRequest(object.toString()));
+            }
+        } catch (JSONException e) {
+            writer.println(object.toString());
+        }
+
+        // writer.println(object.toString());
     }
 
     private void setStateAndUpdate(ServerCommunicationThreadState state) {
