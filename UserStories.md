@@ -8,7 +8,7 @@ Storie Utente
 - Come utente non registrato, voglio potermi registrare.
 - Come proprietario, voglio poter parlare con con altri utenti.
 
-2 Ciclo
+2° Ciclo
 --------
 - Come utente registrato, voglio non inserire la password ad ogni accesso, così da non doverla riscrivere.
 - Come giocatore, voglio scegliere la stanza in cui entrare da una lista.
