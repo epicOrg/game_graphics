@@ -30,6 +30,7 @@ import game.net.data.LoginData;
 import game.net.fieldsnames.CommonFields;
 import game.net.fieldsnames.ServicesFields;
 import game.net.interaction.ProgressShower;
+import game.net.communication.ConnectionStateMap;
 
 /**
  * Login activity: the user inserts username and password
@@ -105,10 +106,13 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
 
             encryptionHandler = new EncryptionHandler(this);
         }
-        if (canLogin)
+        if (canLogin) {
             serverCommunicationThread.setHandler(loginHandler);
-        else
+            Log.d(LOG_TAG, "LOGINHANDLER");
+        } else {
             serverCommunicationThread.setHandler(encryptionHandler);
+            Log.d(LOG_TAG, "ENCRYPTIONHANDLER");
+        }
 
     }
 
@@ -229,25 +233,13 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
         });
     }
 
+    private ConnectionStateMap connectionStateMap = new ConnectionStateMap();
+
     private void updateThreadState(ServerCommunicationThreadState state) {
         TextView statusTextView = ((TextView) views.get(R.id.main_status));
-        switch (state) {
-            case CONNECTING:
-                statusTextView.setText(getString(R.string.main_status_connecting));
-                findViewById(R.id.log_in).setEnabled(false);
-                findViewById(R.id.not_registered).setEnabled(false);
-                break;
-            case CONNECTED:
-                statusTextView.setText(getString(R.string.main_status_connected));
-                findViewById(R.id.log_in).setEnabled(true);
-                findViewById(R.id.not_registered).setEnabled(true);
-                break;
-            case NOT_CONNECTED:
-                statusTextView.setText(getString(R.string.main_status_not_connected));
-                findViewById(R.id.log_in).setEnabled(false);
-                findViewById(R.id.not_registered).setEnabled(false);
-                break;
-        }
+        statusTextView.setText(getString(state.state));
+        findViewById(R.id.log_in).setEnabled(connectionStateMap.getConnectionStateLogin(state));
+        findViewById(R.id.not_registered).setEnabled(connectionStateMap.getConnectionStateRegistered(state));
     }
 
     private void getViews() {

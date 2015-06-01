@@ -6,12 +6,16 @@ import android.os.Message;
 import com.example.alessandro.computergraphicsexample.MainActivity;
 
 /**
- * Created by depa on 01/06/15.
+ * {@link Handler} for handle encryption state.
  */
 public class EncryptionHandler extends Handler{
 
     private MainActivity activity;
 
+    /**
+     * Creates a new <code>EncryptionHandler</code>.
+     * @param activity the <code>MainActivity</code> to which unblock login when ended encryption.
+     */
     public EncryptionHandler(MainActivity activity){
         this.activity=activity;
     }

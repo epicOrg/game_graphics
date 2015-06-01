@@ -25,6 +25,7 @@ import game.net.services.Service;
 
 import static game.net.communication.ServerCommunicationThreadState.CONNECTED;
 import static game.net.communication.ServerCommunicationThreadState.CONNECTING;
+import static game.net.communication.ServerCommunicationThreadState.ENCRYPTING;
 import static game.net.communication.ServerCommunicationThreadState.NOT_CONNECTED;
 
 /**
@@ -161,7 +162,8 @@ public class ServerCommunicationThread extends Thread {
     private void encrypt() {
         EncryptInitializer initializer = new EncryptInitializer();
         initializer.initConnection();
-
+        Log.d(LOG_TAG, "start encryption!");
+        setStateAndUpdate(ENCRYPTING);
     }
 
     private void init() {
@@ -212,7 +214,7 @@ public class ServerCommunicationThread extends Thread {
     }
 
     public void send(JSONObject object) throws NotConnectedException {
-        if (writer == null || threadState != CONNECTED)
+        if (writer == null || (threadState != CONNECTED && threadState != ENCRYPTING))
             throw new NotConnectedException();
 
         // Log.d(LOG_TAG, "Send: " + object.toString());
@@ -231,7 +233,7 @@ public class ServerCommunicationThread extends Thread {
         // writer.println(object.toString());
     }
 
-    private void setStateAndUpdate(ServerCommunicationThreadState state) {
+    public void setStateAndUpdate(ServerCommunicationThreadState state) {
         threadState = state;
         for (ServerCommunicationThreadListener l : threadListeners) {
             l.onThreadStateChanged(threadState);

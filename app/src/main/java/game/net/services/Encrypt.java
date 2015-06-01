@@ -12,6 +12,7 @@ import game.net.communication.JSONd;
 import game.net.communication.NotConnectedException;
 import game.net.communication.RequestMaker;
 import game.net.communication.ServerCommunicationThread;
+import game.net.communication.ServerCommunicationThreadState;
 import game.net.connection_encryption.ConnectionEncrypter;
 import game.net.connection_encryption.KeyConverter;
 import game.net.connection_encryption.KeyWrapper;
@@ -37,7 +38,6 @@ public class Encrypt implements Service {
         this.jsonResponse = json;
 
         try {
-
             String publicKey = jsonResponse.getString(EncryptFields.PUBLIC_KEY.toString());
 
             KeyWrapper wrapper = new KeyWrapper(ConnectionEncrypter.getSymmetricKey());
@@ -54,6 +54,7 @@ public class Encrypt implements Service {
 
             try {
                 ServerCommunicationThread.getInstance().send(request);
+                ServerCommunicationThread.getInstance().setStateAndUpdate(ServerCommunicationThreadState.CONNECTED);
                 Log.d(LOG_TAG, "Encryption ended!");
                 Message message = handler.obtainMessage(0, true);
                 message.sendToTarget();
