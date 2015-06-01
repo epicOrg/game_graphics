@@ -172,7 +172,7 @@ public class RoomsActivity extends ActionBarActivity {
 
     private void showNewRoomDialog() {
         AlertDialog.Builder b = new AlertDialog.Builder(context);
-        b.setTitle("Create new room");
+        b.setTitle(getString(R.string.rooms_create_dialog));
 
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_new_room, null);
@@ -183,7 +183,7 @@ public class RoomsActivity extends ActionBarActivity {
         final EditText maxPlayers = (EditText) dialogView.findViewById(R.id.rooms_new_room_max_players);
         final EditText maxTeams = (EditText) dialogView.findViewById(R.id.rooms_new_room_max_teams);
 
-        b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        b.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int whichButton) {
                 String roomName;
@@ -212,7 +212,7 @@ public class RoomsActivity extends ActionBarActivity {
                 dialog.cancel();
             }
         });
-        b.setNegativeButton("CANCEL", null);
+        b.setNegativeButton(getString(R.string.cancel), null);
         b.create().show();
     }
 

@@ -9,5 +9,6 @@
     <string name="rooms_join_error">Error joining the room</string>
     <string name="rooms_name">Name</string>
     <string name="rooms_create">Create</string>
+    <string name="rooms_create_dialog">Create New Room</string>
 
 </resources>
