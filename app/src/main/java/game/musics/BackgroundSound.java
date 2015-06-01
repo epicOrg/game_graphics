@@ -59,29 +59,47 @@ public class BackgroundSound {
         });
     }
 
+    /**
+     * Plays the music.
+     */
     public void start() {
         mediaPlayer.start();
         Log.d(LOG_TAG, "Soundtrack started.");
     }
 
+    /**
+     * Pauses the music.
+     */
     public void pause() {
         mediaPlayer.pause();
         Log.d(LOG_TAG, "Soundtrack paused.");
     }
 
+    /**
+     * Stops the music.
+     */
     public void stop() {
         mediaPlayer.stop();
         Log.d(LOG_TAG, "Soundtrack stopped.");
     }
 
+    /**
+     * Set music volume to 0.
+     */
     public void mute() {
         mediaPlayer.setVolume(0, 0);
     }
 
+    /**
+     * Unmutes music.
+     */
     public void unMute() {
         mediaPlayer.setVolume(1, 1);
     }
 
+    /**
+     * Releases the {@link MediaPlayer} used for playing music.
+     */
     public void release() {
         mediaPlayer.release();
     }

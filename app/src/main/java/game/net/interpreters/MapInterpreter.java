@@ -10,7 +10,7 @@ import game.net.services.Game;
 import game.player.PlayerStatus;
 
 /**
- * Responsible to create a <code>Map</code> from a <code>Message</code>.
+ * Responsible to create a {@link Map} from a {@link Message}.
  */
 public class MapInterpreter implements Interpreter {
 

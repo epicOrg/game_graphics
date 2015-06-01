@@ -7,7 +7,7 @@ import shadow.math.SFVertex3f;
 
 /**
  * It's a mediator which manages the collision system, saving all the object that must be checked
- * and implementing SAT system.
+ * and implementing SAT system; works with objects which implement the interface {@link CollisionBox}.
  *
  * @author De Pace
  */

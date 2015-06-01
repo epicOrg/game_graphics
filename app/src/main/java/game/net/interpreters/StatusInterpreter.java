@@ -17,7 +17,7 @@ import game.net.services.Game;
 import game.views.MessageScreen;
 
 /**
- * Responsible for intepreting <code>Message</code> about <code>Game.STATUS</code> data.
+ * Responsible for intepreting {@link Message} about game status data.
  */
 public class StatusInterpreter implements Interpreter {
 

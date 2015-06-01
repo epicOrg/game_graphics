@@ -9,8 +9,8 @@ import sfogl.integration.Material;
 import sfogl.integration.ShadingProgram;
 
 /**
- * Singleton that manages the <code>Material</code> loaded from files.
- * It allows to access the <code>Material</code> without load them several times or
+ * Singleton that manages the {@link Material} loaded from files.
+ * It allows to access the {@link Material}without load them several times or
  * automatically load them when needed.
  *
  * @author Torlaschi

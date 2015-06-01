@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import shadow.math.SFVertex3f;
 
 /**
- * Class used to automatize JSON requests, encapsulating default requests.
+ * Class used to automatize JSON requests, encapsulating default requests through the use of {@link JSONd}.
  *
  * @author De Pace
  */

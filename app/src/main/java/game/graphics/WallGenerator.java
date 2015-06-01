@@ -11,7 +11,7 @@ import sfogl.integration.Model;
 import sfogl.integration.ShadingProgram;
 
 /**
- * Utility class to generate a <code>Model</code> for parallelepiped with proportional texture.
+ * Utility class to generate a {@link Model} for parallelepiped with proportional texture.
  *
  * @author De Pace
  */

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * Class containing a list of <code>Waiter</code> and a <code>CountDownLatch</code> that identifies the condition when start the waiters.
+ * Class containing a list of {@link Waiter} and a {@link CountDownLatch} that identifies the condition when start the waiters.
  *
  * @author Torlaschi
  */

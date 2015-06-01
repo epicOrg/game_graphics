@@ -15,7 +15,7 @@ import game.net.communication.NotConnectedException;
 import game.net.communication.ServerCommunicationThread;
 
 /**
- * Class containing a thread which sends the current <code>Player</code> 's position and direction to the server.
+ * Class containing a thread which sends the current {@link Player}'s position and direction to the server.
  *
  * @author Torlaschi
  */

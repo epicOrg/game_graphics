@@ -3,7 +3,7 @@ package game.net.interpreters;
 import android.os.Message;
 
 /**
- * Interface for interpreting a <code>Message</code>.
+ * Interface for interpreting a {@link Message}.
  *
  * @author De Pace
  */

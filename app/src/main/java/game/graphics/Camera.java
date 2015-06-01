@@ -8,7 +8,7 @@ import static android.opengl.Matrix.orthoM;
 import static android.opengl.Matrix.setLookAtM;
 
 /**
- * Video camera: it manages the matrices for 3D and 2D projections following the position of a <code>Player</code>.
+ * Video camera: it manages the matrices for 3D and 2D projections following the position of a {@link Player}.
  *
  * @author De Pace
  */

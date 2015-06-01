@@ -9,8 +9,8 @@ import sfogl.integration.Mesh;
 import sfogl.integration.Model;
 
 /**
- * Singleton that manages the <code>Model</code> loaded from files.
- * It allows to access the <code>Model</code> without load them several times or
+ * Singleton that manages the {@link Model} loaded from files.
+ * It allows to access the {@link Model} without load them several times or
  * automatically load them when needed.
  */
 public enum ModelKeeper {

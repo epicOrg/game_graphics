@@ -5,13 +5,13 @@ import android.util.Log;
 import java.util.HashMap;
 
 /**
- * Generic class used to map generic resources from Strings.
+ * Generic class used to map generic resources from {@link String}.
  *
  * @author De Pace
  */
 public class MapResources<R> {
 
-    private HashMap<String, R> map = new HashMap();
+    private HashMap<String, R> map = new HashMap<>();
     private R defaultValue;
     private String resourceType, logtag;
 

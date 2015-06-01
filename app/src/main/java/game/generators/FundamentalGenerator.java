@@ -17,7 +17,7 @@ import sfogl2.SFOGLTextureModel;
 import shadow.graphics.SFImageFormat;
 
 /**
- * Utility class with static methods which are used to generate <code>Model</code> and <code>Node</code>.
+ * Utility class with static methods which are used to generate {@link Model}and {@link Node}.
  *
  * @author Torlaschi
  */

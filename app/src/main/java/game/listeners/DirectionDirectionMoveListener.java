@@ -6,6 +6,9 @@ import shadow.math.SFMatrix3f;
 import shadow.math.SFTransform3f;
 import shadow.math.SFVertex3f;
 
+/**
+ * Listener for motion of a {@link SFVertex3f} direction.
+ */
 public class DirectionDirectionMoveListener implements DirectionMoveListenerInterface {
 
     public static final String LOG_TAG = "DirectionDirectionMove";
@@ -16,6 +19,12 @@ public class DirectionDirectionMoveListener implements DirectionMoveListenerInte
 
     private float oldXZLenght;
 
+    /**
+     * Creates a new <code>DirectionDirectionMoveListener</code>.
+     * @param direction <code>SFVertex3f</code> direction to modify.
+     * @param displayWidth actual display width,
+     * @param displayHeight actual display height.
+     */
     public DirectionDirectionMoveListener(SFVertex3f direction, float displayWidth, float displayHeight) {
         this.direction = direction;
         this.moveFactorX = 1 / displayWidth;
@@ -24,6 +33,7 @@ public class DirectionDirectionMoveListener implements DirectionMoveListenerInte
         oldXZLenght = (float) Math.sqrt(direction.getX() * direction.getX() + direction.getZ() * direction.getZ());
     }
 
+    @Override
     public void update(int width, int height){
         this.moveFactorX = 1 /(float) width;
         this.moveFactorY = 1 /(float) height;

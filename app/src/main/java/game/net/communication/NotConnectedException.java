@@ -1,7 +1,7 @@
 package game.net.communication;
 
 /**
- * Specific <code>Exception</code> called in case the connection to the server ceases.
+ * Specific {@link Exception} called in case the connection to the server ceases.
  *
  * @author Micieli
  * @date 19/04/2015

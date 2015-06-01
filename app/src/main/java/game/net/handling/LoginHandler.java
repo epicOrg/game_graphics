@@ -5,18 +5,15 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-
 import com.example.alessandro.computergraphicsexample.RoomsActivity;
-
 import java.util.ArrayList;
-
 import game.data.UserData;
 import game.net.fieldsnames.CommonFields;
 import game.net.services.Login;
 
 /**
- * <code>Handler</code> which allows the communication between login thread, activated
- * when server response is received, and login <code>Activity</code> when login data are received.
+ * {@link Handler} which allows the communication between login thread, activated
+ * when server response is received, and login {@link android.app.Activity} when login data are received.
  */
 public class LoginHandler extends Handler {
 

@@ -7,6 +7,8 @@ import android.os.Build;
 import android.view.View;
 
 /**
+ * Shows an animation during some operation performing.
+ *
  * @author Micieli
  * @date 31/03/2015
  */
@@ -19,9 +21,9 @@ public class ProgressShower {
     /**
      * Creates a new <code>ProgressShower</code>, that shows animation during progresses.
      *
-     * @param mProgressView <code>View</code> that represents operation progressing.
+     * @param mProgressView  <code>View</code> that represents operation progressing.
      * @param mLoginFormView <code>View</code> associated with the current operation.
-     * @param shortAnimTime time of the animation.
+     * @param shortAnimTime  time of the animation.
      */
     public ProgressShower(View mProgressView, View mLoginFormView, int shortAnimTime) {
         this.mProgressView = mProgressView;

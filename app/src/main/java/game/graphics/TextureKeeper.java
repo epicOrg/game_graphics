@@ -14,7 +14,7 @@ import shadow.graphics.SFImageFormat;
 
 /**
  * It manages the texture loaded from resources.
- * It allows to access the texture without load them several times or
+ * It allows to access the texture as {@link BitmapTexture} without load them several times or
  * automatically load them when needed.
  *
  * @author De Pace

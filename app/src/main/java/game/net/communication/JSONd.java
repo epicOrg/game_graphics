@@ -4,7 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Class that encapsulates a JSON request, and automatically translates it to a <code>JSONObject</code>.
+ * Class that encapsulates a JSON request, and automatically translates it to a {@link JSONObject}.
  *
  * @author De Pace
  */
@@ -14,7 +14,7 @@ public class JSONd {
     private Object value;
 
     /**
-     * Creates a new JSONd, with represents a request with the given name and value.
+     * Creates a new <code>JSONd</code>, with represents a request with the given name and value.
      *
      * @param name  <code>Enum</code> that maps the value of the request.
      * @param value Value of the request.

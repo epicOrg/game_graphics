@@ -7,7 +7,7 @@ import shadow.math.SFMatrix3f;
 import shadow.math.SFVertex3f;
 
 /**
- * This class manages the status of a <code>Player</code>.
+ * This class manages the status of a {@link Player}.
  *
  * @author Torlaschi
  * @date 28/03/2015

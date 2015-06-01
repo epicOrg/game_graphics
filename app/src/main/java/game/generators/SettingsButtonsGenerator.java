@@ -15,7 +15,7 @@ import shadow.math.SFMatrix3f;
 import shadow.math.SFVertex3f;
 
 /**
- * This class builds the pause <code>Button</code>.
+ * This class builds the pause {@link Button}.
  *
  * @author Torlaschi
  */

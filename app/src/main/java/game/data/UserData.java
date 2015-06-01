@@ -3,12 +3,11 @@ package game.data;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
-
 import game.net.communication.JSONd;
 import game.net.communication.RequestMaker;
 
 /**
- * Singleton which maintains user data while advancing in the activities. It also creates <code>RequestMaker</code> with
+ * Singleton which maintains user data while advancing in the activities. It also creates {@link RequestMaker} with
  * all the added data, or with the requested data.
  *
  * @author De Pace

@@ -11,7 +11,7 @@ import game.net.services.Game;
 import game.player.Player;
 
 /**
- * Responsible for interpreting position data and updating all the other <code>Player</code>'s <code>PlayerStatus</code>.
+ * Responsible for interpreting position data and updating all the other {@link Player}'s {@link game.player.PlayerStatus}.
  */
 public class PositionsInterpreter implements Interpreter {
 

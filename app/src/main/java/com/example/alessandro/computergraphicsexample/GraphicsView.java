@@ -219,7 +219,7 @@ public class GraphicsView extends GLSurfaceView {
             buttonMaster.draw();
         }
 
-        public void drawPlayers() {
+        private void drawPlayers() {
             for (PlayerView view : playerViews)
                 view.draw();
         }

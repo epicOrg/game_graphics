@@ -11,7 +11,7 @@ import shadow.math.SFTransform3f;
 import shadow.math.SFVertex3f;
 
 /**
- * It keeps a list of <code>Button</code> and draws them.
+ * It keeps a list of {@link Button} and draws them.
  *
  * @author De Pace
  */
@@ -65,6 +65,7 @@ public class ButtonMaster {
     }
 
     /**
+     * @param button <code>Button</code> which <code>Node</code> representation is requested.
      * @return Node which represents the specified <code>Button</code>.
      */
     public Node getButtonNode(Button button) {

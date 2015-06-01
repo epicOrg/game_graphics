@@ -16,8 +16,8 @@ import sfogl.integration.ShadingProgram;
 import sfogl2.SFOGLSystemState;
 
 /**
- * It allows to control if the <code>Button</code>, which are associated with a <code>ButtonMaster</code>,
- * are pressed through colorpicking.
+ * It allows to control if the {@link Button}, which are associated with a {@link ButtonMaster},
+ *  are pressed through colorpicking.
  */
 public class ButtonsControl {
 

@@ -2,14 +2,12 @@ package game.net.handling;
 
 import android.os.Handler;
 import android.os.Message;
-
 import java.util.HashMap;
-
 import game.net.interpreters.Interpreter;
 
 
 /**
- * Class containing a Map of Interpreter to read the messages sent from the server about the Game.
+ * Class containing a map of {@link Interpreter} to read the messages sent from the server about the game.
  *
  * @author Torlaschi
  */
@@ -19,9 +17,9 @@ public class GameHandler extends Handler {
     private HashMap<Integer, Interpreter> map;
 
     /**
-     * Construct a new GameHandler.
+     * Construct a new <code>GameHandler</code>.
      *
-     * @param interpreters list of Interpreter to read messages from the server
+     * @param interpreters list of <code>Interpreter</code> to read messages from the server
      */
     public GameHandler(Interpreter... interpreters) {
         map = new HashMap<>();

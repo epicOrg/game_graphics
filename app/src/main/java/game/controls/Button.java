@@ -1,7 +1,7 @@
 package game.controls;
 
 /**
- * A button that performs an action which is encapsulated in a <code>ButtonAction</code>.
+ * A button that performs an action which is encapsulated in a {@link ButtonAction}.
  *
  * @author De Pace
  */
@@ -35,7 +35,7 @@ public class Button {
     }
 
     /**
-     * Performs the action which is encapsulated in <code>ButtonAction</code>.
+     * Performs the action which is encapsulated in the <code>ButtonAction</code>.
      *
      * @param parameter Contingent parameter for the action.
      */

@@ -15,8 +15,8 @@ import game.net.services.Service;
 import game.net.services.Unknown;
 
 /**
- * This class creates and initializes the specific <code>Service</code>
- * from the <code>ServicesFields</code> values.
+ * This class creates and initializes the specific {@link Service}
+ * from the {@link ServicesFields} values.
  *
  * @author De Pace
  */

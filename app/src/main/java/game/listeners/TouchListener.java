@@ -8,7 +8,7 @@ import game.controls.Button;
 import game.controls.ButtonsControl;
 
 /**
- * Performs direction motion actions and other actions given by the <code>Button</code> of a <code>ButtonsControl</code>.
+ * Performs direction motion actions and other actions given by the {@link Button} of a {@link ButtonsControl}.
  *
  * @author Torlaschi
  */

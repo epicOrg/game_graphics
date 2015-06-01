@@ -11,7 +11,7 @@ import shadow.math.SFTransform3f;
 import shadow.math.SFVertex3f;
 
 /**
- * Represents a graphical view of a <code>Player</code>.
+ * Represents a graphical view of a {@link Player}.
  *
  * @author De Pace
  * @date 21/04/15
