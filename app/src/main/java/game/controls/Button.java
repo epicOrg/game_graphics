@@ -4,6 +4,7 @@ package game.controls;
  * A button that performs an action which is encapsulated in a {@link ButtonAction}.
  *
  * @author De Pace
+ * @see ButtonAction
  */
 public class Button {
 

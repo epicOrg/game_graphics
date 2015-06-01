@@ -18,6 +18,10 @@ import game.views.MessageScreen;
 
 /**
  * Responsible for intepreting {@link Message} about game status data.
+ *
+ * @see MessageScreen
+ * @see GamePositionSender
+ * @see GameHandlerListener
  */
 public class StatusInterpreter implements Interpreter {
 

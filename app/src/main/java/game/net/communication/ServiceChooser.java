@@ -9,10 +9,11 @@ import game.net.fieldsnames.ServicesFields;
 import game.net.services.Service;
 
 /**
- * Selector of a service from the {@link JSONObject}.
+ * Selector of a {@link Service} from the {@link JSONObject}.
  *
  * @author Noris
  * @date 26/03/2015
+ * @see Service
  */
 
 public class ServiceChooser {

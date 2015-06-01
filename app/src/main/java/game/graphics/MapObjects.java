@@ -6,6 +6,7 @@ import com.example.alessandro.computergraphicsexample.R;
  * It's a singleton that manages the {@link MazeObject} database and the relative textures.
  *
  * @author De Pace
+ * @see MazeObject
  */
 public enum MapObjects {
     MAP;

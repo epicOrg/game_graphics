@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
+import game.net.data.Startable;
 import game.net.handling.EncryptionHandler;
 import game.net.handling.LoginHandler;
 import game.net.handling.LoginHandlerListener;
@@ -36,7 +37,7 @@ import game.net.communication.ConnectionStateMap;
  * Login activity: the user inserts username and password
  * to be recognized by server.
  */
-public class MainActivity extends ActionBarActivity implements ServerCommunicationThreadListener, LoginHandlerListener {
+public class MainActivity extends ActionBarActivity implements ServerCommunicationThreadListener, LoginHandlerListener, Startable {
 
     public static final String LOG_TAG = "MainActivity";
 
@@ -49,6 +50,11 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
     private LoginData loginData;
 
     private boolean doubleBackToExitPressedOnce;
+    private boolean canLogin = false;
+    private LoginHandler loginHandler;
+    private EncryptionHandler encryptionHandler;
+    private ConnectionStateMap connectionStateMap = new ConnectionStateMap();
+
     private RequestMaker requestMaker = new RequestMaker();
 
     @Override
@@ -94,11 +100,8 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
         setThreadHandler();
     }
 
-    private LoginHandler loginHandler;
-    private EncryptionHandler encryptionHandler;
 
     private void setThreadHandler() {
-//        LoginHandler loginHandler = new LoginHandler(this);
         if (loginHandler == null || encryptionHandler == null) {
             loginHandler = new LoginHandler(this);
 
@@ -180,9 +183,9 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
         startActivity(intent);
     }
 
-    private boolean canLogin = false;
 
-    public void letLogin() {
+    @Override
+    public void start(Object parameter) {
         canLogin = true;
         serverCommunicationThread.setHandler(loginHandler);
         Log.d(LOG_TAG, "can login!");
@@ -211,7 +214,7 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
                 }
             }
         } else
-            Toast.makeText(this, "Connection encryption in progress...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.encrypting_try_login), Toast.LENGTH_SHORT).show();
     }
 
 
@@ -232,8 +235,6 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
             }
         });
     }
-
-    private ConnectionStateMap connectionStateMap = new ConnectionStateMap();
 
     private void updateThreadState(ServerCommunicationThreadState state) {
         TextView statusTextView = ((TextView) views.get(R.id.main_status));

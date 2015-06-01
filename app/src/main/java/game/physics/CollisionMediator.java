@@ -10,6 +10,7 @@ import shadow.math.SFVertex3f;
  * and implementing SAT system; works with objects which implement the interface {@link CollisionBox}.
  *
  * @author De Pace
+ * @see CollisionBox
  */
 public class CollisionMediator {
 

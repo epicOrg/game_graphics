@@ -20,11 +20,12 @@ import shadow.graphics.SFImageFormat;
  * Utility class with static methods which are used to generate {@link Model}and {@link Node}.
  *
  * @author Torlaschi
+ * @see Node
  */
 public class FundamentalGenerator {
 
     /**
-     * Builds a Model from a file with a texture.
+     * Builds a <code>Model</code> from a file with a texture.
      *
      * @param context   <code>Context</code> from which to load the file.
      * @param program   <code>Shader</code> to use in the <code>Material</code> of the Model.

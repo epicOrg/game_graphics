@@ -10,6 +10,7 @@ import shadow.math.SFTransform3f;
  * It manages the ground building.
  *
  * @author Torlaschi
+ * @see Node
  */
 public class GroundGenerator {
 

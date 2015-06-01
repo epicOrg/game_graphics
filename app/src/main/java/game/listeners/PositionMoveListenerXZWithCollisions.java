@@ -11,6 +11,8 @@ import shadow.math.SFVertex3f;
  * Performs action of movement taking collisions into account.
  *
  * @author Torlaschi
+ * @see PlayerStatus
+ * @see CollisionMediator
  */
 public class PositionMoveListenerXZWithCollisions implements PositionMoveListenerInterface {
 

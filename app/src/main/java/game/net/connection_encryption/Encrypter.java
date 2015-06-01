@@ -10,7 +10,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- * Encrypts a string using a symmetric key.
+ * Encrypts a {@link String} using a symmetric {@link Key}.
  *
  * @author Noris
  * @date 27/04/2015
@@ -26,9 +26,9 @@ public class Encrypter {
     }
 
     /**
-     * Encrypts a string using a symmetric key.
+     * Encrypts a <code>String</code> using a symmetric <code>Key</code>.
      *
-     * @param unencryptedString the string to encrypt
+     * @param unencryptedString the <code>String</code> to encrypt.
      */
     public void encrypt(String unencryptedString) {
 

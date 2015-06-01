@@ -16,9 +16,10 @@ import shadow.math.SFMatrix3f;
 import shadow.math.SFVertex3f;
 
 /**
- * This class creates the 4 Button of movement.
+ * This class creates the 4 {@link Button} of movement.
  *
  * @author De Pace
+ * @see Button
  */
 public class MoveButtonsGenerator {
 

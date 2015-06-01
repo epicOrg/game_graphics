@@ -17,6 +17,7 @@
     <string name="error_server_unreachable">Unable to communicate with the server</string>
     <string name="error_communication">Unable to communicate with server</string>
     <string name="login_failed">Wrong username or password</string>
+    <string name="encrypting_try_login">Connection encryption in progress...</string>
 
     <string name="main_status_connecting">Connecting..</string>
     <string name="main_status_encrypting">Encrypting..</string>

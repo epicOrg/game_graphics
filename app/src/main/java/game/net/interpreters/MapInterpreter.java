@@ -1,8 +1,10 @@
 package game.net.interpreters;
 
 import android.os.Message;
+
 import java.util.Arrays;
 import java.util.LinkedList;
+
 import game.graphics.Map;
 import game.graphics.MapObjects;
 import game.net.handling.GameHandlerListener;
@@ -11,6 +13,8 @@ import game.player.PlayerStatus;
 
 /**
  * Responsible to create a {@link Map} from a {@link Message}.
+ *
+ * @see GameHandlerListener
  */
 public class MapInterpreter implements Interpreter {
 

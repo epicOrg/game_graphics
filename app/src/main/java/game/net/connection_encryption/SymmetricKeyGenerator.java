@@ -6,7 +6,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
 /**
- * Generate a symmetric key using {@link KeyGenerator}.
+ * Generate a symmetric {@link java.security.Key} using {@link KeyGenerator}.
  *
  * @author Noris
  * @date 27/04/2015

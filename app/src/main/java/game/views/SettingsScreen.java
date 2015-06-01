@@ -31,6 +31,7 @@ import game.net.communication.ServerCommunicationThread;
  *
  * @author Torlaschi
  * @date 12/05/2015
+ * @see RequestMaker
  */
 public class SettingsScreen {
 

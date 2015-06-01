@@ -12,6 +12,8 @@ import game.player.Player;
 
 /**
  * Responsible for interpreting position data and updating all the other {@link Player}'s {@link game.player.PlayerStatus}.
+ *
+ * @see Room
  */
 public class PositionsInterpreter implements Interpreter {
 

@@ -11,7 +11,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- * Decrypts a string using the symmetric key.
+ * Decrypts a {@link String} using the symmetric {@link Key}.
  *
  * @author Noris
  * @date 27/04/2015
@@ -27,11 +27,10 @@ public class Decrypter {
     }
 
     /**
-     * Decrypts a string using the symmetric key (obviously the key must be the
-     * same used to encrypt the string).
+     * Decrypts a <code>String</code> using the symmetric <code>Key</code> (obviously the <code>Key</code> must be the
+     * same used to encrypt the <code>String</code>).
      *
-     * @param encryptedString
-     *            the encrypted string
+     * @param encryptedString the encrypted <code>String</code>.
      */
     public void decrypt(String encryptedString) {
 
@@ -57,14 +56,14 @@ public class Decrypter {
     }
 
     /**
-     * @return the decrypted data
+     * @return the decrypted data.
      */
     public byte[] getDecryptedData() {
         return decryptedData;
     }
 
     /**
-     * @return the decrypted data in string format
+     * @return the decrypted data in string format.
      */
     public String getDecryptedString() {
         try {

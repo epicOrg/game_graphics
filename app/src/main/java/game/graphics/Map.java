@@ -15,6 +15,7 @@ import shadow.math.SFTransform3f;
  * Map that contains all the {@link MazeObject}, loads them in the collision system and draws them.
  *
  * @author Stefano De Pace
+ * @see MazeObject
  */
 public class Map {
 

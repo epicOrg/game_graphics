@@ -15,6 +15,7 @@ import shadow.math.SFVertex3f;
  *
  * @author De Pace
  * @date 21/04/15
+ * @see Player
  */
 public class PlayerView {
 
