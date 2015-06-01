@@ -1,7 +1,7 @@
 package game.controls;
 
 /**
- * A button that performs an action which is encapsulated in a ButtonAction.
+ * A button that performs an action which is encapsulated in a <code>ButtonAction</code>.
  *
  * @author De Pace
  */
@@ -13,12 +13,12 @@ public class Button {
     private boolean needToBeReady;
 
     /**
-     * Creates a new Button.
+     * Creates a new <code>Button</code>.
      *
-     * @param name Button's name.
-     * @param action ButtonAction which represents the action to perform when pressed.
-     * @param continuousPressing Parameter which indicates if the button operates with continuous pressure.
-     * @param needToBeReady Parameter which marks a Button that can be disabled when needed.
+     * @param name               <code>Button</code>'s name.
+     * @param action             <code>ButtonAction</code> which represents the action to perform when pressed.
+     * @param continuousPressing Parameter which indicates if the <code>Button</code> operates with continuous pressure.
+     * @param needToBeReady      Parameter which marks a <code>Button</code> that can be disabled when needed.
      */
     public Button(String name, ButtonAction action, boolean continuousPressing, boolean needToBeReady) {
         this.name = name;
@@ -27,12 +27,15 @@ public class Button {
         this.needToBeReady = needToBeReady;
     }
 
+    /**
+     * @return the <code>Button</code>'s name.
+     */
     public String getName() {
         return name;
     }
 
     /**
-     * Performs the action which is encapsulated in ButtonAction.
+     * Performs the action which is encapsulated in <code>ButtonAction</code>.
      *
      * @param parameter Contingent parameter for the action.
      */
@@ -41,14 +44,14 @@ public class Button {
     }
 
     /**
-     * @return 'true' if the Button operates with continuous pressure.
+     * @return 'true' if the <code>Button</code> operates with continuous pressure.
      */
     public boolean isContinuousPressing() {
         return continuousPressing;
     }
 
     /**
-     * @return 'true' if the Button can be disabled.
+     * @return 'true' if the <code>Button</code> can be disabled.
      */
     public boolean isNeedToBeReady() {
         return needToBeReady;

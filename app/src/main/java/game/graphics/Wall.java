@@ -18,10 +18,10 @@ public class Wall implements MazeObject {
     private int textureID;
 
     /**
-     * Creates a new wall. Its dimension is proportional to those of the specific Square.
+     * Creates a new wall. Its dimension is proportional to those of the specific <code>Square</code>.
      *
-     * @param box       Square which represent the wall collision box.
-     * @param textureID Index of the texture which represent the wall face.
+     * @param box       <code>Square</code> which represent the <code>Wall</code> collision box.
+     * @param textureID Index of the texture which represent the <code>Wall</code> face.
      */
     public Wall(Square box, int textureID) {
         this.box = box;

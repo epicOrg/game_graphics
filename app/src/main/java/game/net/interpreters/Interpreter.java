@@ -3,7 +3,7 @@ package game.net.interpreters;
 import android.os.Message;
 
 /**
- * Interface for interpreting messages.
+ * Interface for interpreting a <code>Message</code>.
  *
  * @author De Pace
  */
@@ -17,9 +17,9 @@ public interface Interpreter {
     int getKey();
 
     /**
-     * Interprets a message.
+     * Interprets a <code>Message</code>.
      *
-     * @param msg Message to interpret.
+     * @param msg <code>Message</code> to interpret.
      */
     void interpret(Message msg);
 

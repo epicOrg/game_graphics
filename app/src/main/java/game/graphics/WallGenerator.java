@@ -11,7 +11,7 @@ import sfogl.integration.Model;
 import sfogl.integration.ShadingProgram;
 
 /**
- * Utility class to generate Model for parallelepiped with proportional texture.
+ * Utility class to generate a <code>Model</code> for parallelepiped with proportional texture.
  *
  * @author De Pace
  */
@@ -30,8 +30,8 @@ public class WallGenerator {
     /**
      * Creates a new WallGenerator with the parameters to build a parallelepiped.
      *
-     * @param context Context to find resources.
-     * @param program ShadingProgram to obtain the shader for the texture.
+     * @param context <code>Context</code> to find resources.
+     * @param program <code>ShadingProgram</code> to obtain the shader for the texture.
      * @param texture Texture index.
      * @param w       x dimension of the parallelepiped.
      * @param h       y dimension of the parallelepiped.
@@ -51,7 +51,7 @@ public class WallGenerator {
     }
 
     /**
-     * @return Parallelepiped Model.
+     * @return Parallelepiped <code>Model</code>.
      */
     public Model getModel() {
         String dimensions = w + "," + h + "," + l;

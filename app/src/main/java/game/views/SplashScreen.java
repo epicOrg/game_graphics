@@ -14,6 +14,9 @@ import com.example.alessandro.computergraphicsexample.R;
 import game.miscellaneous.Waiter;
 
 /**
+ * Represents the loading screen fo the game. Has an animated image and text.
+ * The <code>unleash</code> operation corrisponds to the disappearing of the screen.
+ *
  * @author Torlaschi
  * @date 22/04/2015
  */
@@ -27,6 +30,14 @@ public class SplashScreen implements Waiter {
     private ImageView imageView;
     private TextView textView;
 
+    /**
+     * Creates a new <code>SplashScreen</code> with a given <code>ImageView</code> and <code>TextView</code>.
+     *
+     * @param activity      <code>Activity</code> on which thread the <code>SplashScreen</code> works.
+     * @param frameLayoutId id of the <code>FrameLayout</code> used to control the disappearing of the <code>SplashScreen</code>.
+     * @param imageViewId   id of the <code>ImageView</code> to draw the image on the <code>SplashScreen</code>.
+     * @param textViewId    id of the <code>TextView</code> to draw text on the <code>SplashScreen</code>.
+     */
     public SplashScreen(Activity activity, int frameLayoutId, int imageViewId, int textViewId) {
         frameLayout = (FrameLayout) activity.findViewById(frameLayoutId);
         imageView = (ImageView) activity.findViewById(imageViewId);
@@ -35,6 +46,9 @@ public class SplashScreen implements Waiter {
         this.activity = activity;
     }
 
+    /**
+     * Starts the <code>SplashScreen</code> animation.
+     */
     public void animate() {
         animateImage();
         animateText();

@@ -16,7 +16,7 @@ public class GroundGenerator {
     private Model model;
 
     /**
-     * Creates a new GroundGenerator from a specified Model.
+     * Creates a new <code>GroundGenerator</code> from a specified Model.
      */
     public GroundGenerator(Model model) {
         this.model = model;
@@ -28,9 +28,10 @@ public class GroundGenerator {
      *
      * @param xCenter x of the center.
      * @param zCenter z df the center.
-     * @param xSize Ground x dimension.
-     * @param zSize Ground z dimension.
+     * @param xSize   Ground x dimension.
+     * @param zSize   Ground z dimension.
      * @param yCenter Ground y dimension.
+     * @return the <node>Node</node> that represents the ground.
      */
     public Node getGroundNode(int xCenter, int zCenter, int xSize, int zSize, int yCenter) {
         Node node = new Node();

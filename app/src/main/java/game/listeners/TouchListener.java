@@ -7,6 +7,11 @@ import android.view.MotionEvent;
 import game.controls.Button;
 import game.controls.ButtonsControl;
 
+/**
+ * Performs direction motion actions and other actions given by the <code>Button</code> of a <code>ButtonsControl</code>.
+ *
+ * @author Torlaschi
+ */
 public class TouchListener implements TouchListenerInterface {
 
     public static final String LOG_TAG = "TouchListener";
@@ -26,10 +31,17 @@ public class TouchListener implements TouchListenerInterface {
     private boolean readyToPlay = false;
     private long time_sleep;
 
+    /**
+     * Creates a new <code>TouchListener</code>.
+     *
+     * @param buttonsControl        Control that contains the <code>Button</code> which <code>ButtonAction</code> are invoked when the listener detectes the pressing.
+     * @param directionMoveListener listener for direction move actions on the screen.
+     * @param time_sleep            time that indicates how long the pressed <code>Button</code> remains pressed, for <code>Button</code> that allow continuous pressing.
+     */
     public TouchListener(ButtonsControl buttonsControl, DirectionMoveListenerInterface directionMoveListener, int time_sleep) {
         this.buttonsControl = buttonsControl;
         this.directionMoveListener = directionMoveListener;
-        this.time_sleep = (long)time_sleep;
+        this.time_sleep = (long) time_sleep;
     }
 
     public void setReadyToPlay(boolean readyToPlay) {

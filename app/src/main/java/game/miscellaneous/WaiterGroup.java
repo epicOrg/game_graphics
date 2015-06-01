@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * Class containing a list of Waiter and a CountDownLatch that identifies the condition when start the waiters.
+ * Class containing a list of <code>Waiter</code> and a <code>CountDownLatch</code> that identifies the condition when start the waiters.
  *
  * @author Torlaschi
  */
@@ -15,16 +15,16 @@ public class WaiterGroup {
     private ArrayList<Waiter> waiters = new ArrayList<>();
 
     /**
-     * Constructs an empty group of waiters associated with the condition of the CountDownLatch.
+     * Constructs an empty group of <code>Waiter</code> associated with the condition of the <code>CountDownLatch</code>.
      *
-     * @param countDownLatch CountDownLatch that identifies the condition when start the waiters.
+     * @param countDownLatch <code>CountDownLatch</code> that identifies the condition when start all the <code>Waiter</code>.
      */
     public WaiterGroup(CountDownLatch countDownLatch) {
         this.countDownLatch = countDownLatch;
     }
 
     /**
-     * Adds a Waiter to the group.
+     * Adds a <code>Waiter</code> to the group.
      *
      * @param w Waiter to be added to the group.
      */
@@ -33,7 +33,7 @@ public class WaiterGroup {
     }
 
     /**
-     * Start the waiting of the waiters for the condition.
+     * Start the waiting of all the <code>Waiter</code> for the condition.
      */
     public void startWaiting() {
         new Thread(new Runnable() {

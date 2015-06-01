@@ -7,7 +7,7 @@ import shadow.math.SFMatrix3f;
 import shadow.math.SFVertex3f;
 
 /**
- * This class manages the status of a Player.
+ * This class manages the status of a <code>Player</code>.
  *
  * @author Torlaschi
  * @date 28/03/2015
@@ -21,17 +21,36 @@ public class PlayerStatus {
     private SFVertex3f direction;
     private Circle circle;
 
+    /**
+     * Creates a new <code>PlayerStatus</code> with a given direction and <code>Circle</code> as <code>CollisionBox</code>.
+     *
+     * @param direction Direction towards which the <code>Player</code> is looking.
+     * @param circle    Circle that represents the <code>Player</code>'s <code>CollisionBox</code>.
+     */
     public PlayerStatus(SFVertex3f direction, Circle circle) {
         this.position = new SFVertex3f(circle.getPos());
         this.direction = direction;
         this.circle = circle;
     }
 
-    public void setPositionValue(float x, float y, float z){
+    /**
+     * Sets <code>PlayerStatus</code> position.
+     *
+     * @param x x-component of the position.
+     * @param y y-component of the position.
+     * @param z z-component of the position.
+     */
+    public void setPositionValue(float x, float y, float z) {
         position.set3f(x, y, z);
         circle.getPos().set3f(x, y, z);
     }
 
+    /**
+     * Moves the <code>PlayerStatus</code> for a distance and direction given.
+     *
+     * @param motion represents direction and distance of motion.
+     * @param cm     manages the collisions with other <code>CollisionBox</code>.
+     */
     public void move(SFVertex3f motion, CollisionMediator cm) {
         circle.getPos().set(position);
         SFVertex3f circlePosition = circle.getPos();
@@ -45,15 +64,14 @@ public class PlayerStatus {
         }
         box = cm.collide(circle);
         // Correct for junctions
-        if (box != null){
+        if (box != null) {
             correctMotion(circlePosition, originalPosition, motion, box);
         }
         // Reset if blocked, else update effective position
-        CollisionBox box2=cm.collide(circle);
+        CollisionBox box2 = cm.collide(circle);
         if (box2 != null) {
             circlePosition.set(originalPosition);
-        }
-        else
+        } else
             position.set(circlePosition);
     }
 

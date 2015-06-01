@@ -15,12 +15,12 @@ public class Square implements CollisionBox{
     private float xSize, ySize, zSize, radius;
 
     /**
-     * Builds a new rectangular CollisionBox.
+     * Builds a new rectangular <code>CollisionBox</code>.
      *
-     * @param pos CollisionBox center position.
-     * @param xSize x CollisionBox dimension.
-     * @param ySize y CollisionBox dimension.
-     * @param zSize z CollisionBox dimension.
+     * @param pos <code>CollisionBox</code> center position.
+     * @param xSize x <code>CollisionBox</code> dimension.
+     * @param ySize y <code>CollisionBox</code> dimension.
+     * @param zSize z <code>CollisionBox</code> dimension.
      */
     public Square(SFVertex3f pos, double xSize, double ySize, double zSize) {
         this.pos = pos;

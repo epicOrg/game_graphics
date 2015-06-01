@@ -9,6 +9,10 @@ import sfogl.integration.Material;
 import sfogl.integration.ShadingProgram;
 
 /**
+ * Singleton that manages the <code>Material</code> loaded from files.
+ * It allows to access the <code>Material</code> without load them several times or
+ * automatically load them when needed.
+ *
  * @author Torlaschi
  * @date 17/05/2015
  */
@@ -25,7 +29,7 @@ public enum MaterialKeeper {
         if (mapFromResources.containsKey(textureId))
             return mapFromResources.get(textureId);
         else {
-            BitmapTexture texture = TextureKeeper.TEXTURE_KEEPER.getTexture(context,textureId);
+            BitmapTexture texture = TextureKeeper.TEXTURE_KEEPER.getTexture(context, textureId);
             Material mat = new Material(program);
             mat.getTextures().add(texture);
             mapFromResources.put(textureId, mat);

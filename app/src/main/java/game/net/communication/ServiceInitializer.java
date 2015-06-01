@@ -1,6 +1,7 @@
 package game.net.communication;
 
 import java.util.HashMap;
+
 import game.net.fieldsnames.ServicesFields;
 import game.net.services.Audio;
 import game.net.services.CurrentRoom;
@@ -14,24 +15,24 @@ import game.net.services.Service;
 import game.net.services.Unknown;
 
 /**
- * This class creates and initializes the specific service
- * from the ServicesFields.
+ * This class creates and initializes the specific <code>Service</code>
+ * from the <code>ServicesFields</code> values.
  *
  * @author De Pace
  */
 public class ServiceInitializer {
 
-    public HashMap<Enum, Service> mapServices(){
-        HashMap<Enum, Service> map=new HashMap<>();
-        map.put(ServicesFields.LOGIN,new Login());
-        map.put(ServicesFields.REGISTER,new Register());
-        map.put(ServicesFields.ROOMS,new Rooms());
-        map.put(ServicesFields.CURRENT_ROOM,new CurrentRoom());
-        map.put(ServicesFields.GAME,new Game());
-        map.put(ServicesFields.AUDIO,new Audio());
-        map.put(ServicesFields.POLLING,new Polling());
-        map.put(ServicesFields.ENCRYPT,new Encrypt());
-        map.put(ServicesFields.UNKNOWN,new Unknown());
+    public HashMap<Enum, Service> mapServices() {
+        HashMap<Enum, Service> map = new HashMap<>();
+        map.put(ServicesFields.LOGIN, new Login());
+        map.put(ServicesFields.REGISTER, new Register());
+        map.put(ServicesFields.ROOMS, new Rooms());
+        map.put(ServicesFields.CURRENT_ROOM, new CurrentRoom());
+        map.put(ServicesFields.GAME, new Game());
+        map.put(ServicesFields.AUDIO, new Audio());
+        map.put(ServicesFields.POLLING, new Polling());
+        map.put(ServicesFields.ENCRYPT, new Encrypt());
+        map.put(ServicesFields.UNKNOWN, new Unknown());
         return map;
     }
 

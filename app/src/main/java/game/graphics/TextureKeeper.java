@@ -31,9 +31,9 @@ public enum TextureKeeper {
      * Loads a new texture from an image in the resources
      * or return the BitmapTexture if the image has already been loaded.
      *
-     * @param context   Context to find resources.
+     * @param context   <code>Context</code> to find resources.
      * @param textureId Image index in the resources.
-     * @return BitmapTexture which represents the loaded texture.
+     * @return <code>BitmapTexture</code> which represents the loaded texture.
      */
     public BitmapTexture getTexture(Context context, int textureId) {
         if (mapFromResources.containsKey(textureId))
@@ -47,7 +47,7 @@ public enum TextureKeeper {
      * Represents a uniform color.
      *
      * @param color Color from which the texture is obtained.
-     * @return BitmapTexture which represents the loaded texture.
+     * @return <code>BitmapTexture</code> which represents the loaded texture.
      */
     public BitmapTexture getColorTexture(int color) {
         if (mapFromColors.containsKey(color))
@@ -59,7 +59,7 @@ public enum TextureKeeper {
     /**
      * Loads every loaded image, when needed.
      *
-     * @param context Context to find resources.
+     * @param context <code>Context</code> to find resources.
      */
     public void reload(Context context) {
         for (int i : mapFromResources.keySet()) {

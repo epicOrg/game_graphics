@@ -24,8 +24,8 @@ public class Obstacle implements MazeObject {
     /**
      * Creates a new Obstacle from specified dimension and texture.
      *
-     * @param c Circle which makes up the CollisionBox and defines the dimension of xz plane.
-     * @param height Height in y direction.
+     * @param c          <code>Circle</code> which makes up the <code>CollisionBox</code> and defines the dimension of xz plane.
+     * @param height     Height in y direction.
      * @param texture_id Texture index.
      */
     public Obstacle(Circle c, double height, int texture_id, String model) {

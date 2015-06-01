@@ -8,6 +8,13 @@ package game.listeners;
  */
 public interface PositionMoveListenerInterface {
 
+    /**
+     * Performes a position move action.
+     *
+     * @param angleXZ Angle over the XZ plane in which direction to move.
+     * @param angleYZ Angle over the YZ plane in which direction to move.
+     * @param delta   Timestep that indicated how long to move.
+     */
     void move(float angleXZ, float angleYZ, long delta);
 
 }

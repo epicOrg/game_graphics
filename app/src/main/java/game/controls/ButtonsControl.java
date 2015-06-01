@@ -16,7 +16,7 @@ import sfogl.integration.ShadingProgram;
 import sfogl2.SFOGLSystemState;
 
 /**
- * It allows to control if the Button, which are associated with a ButtonMaster,
+ * It allows to control if the <code>Button</code>, which are associated with a <code>ButtonMaster</code>,
  * are pressed through colorpicking.
  */
 public class ButtonsControl {
@@ -32,11 +32,11 @@ public class ButtonsControl {
     private ButtonMaster buttonMaster;
 
     /**
-     * Creates a nwe ButtonControl.
+     * Creates a nwe <code>ButtonControl</code>.
      *
-     * @param program ShadingProgram to be used.
-     * @param orthoMatrix 2D projection matrix.
-     * @param buttonMaster ButtonMaster which contains the Button to be controlled.
+     * @param program      <code>ShadingProgram</code> to be used.
+     * @param orthoMatrix  2D projection matrix.
+     * @param buttonMaster <code>ButtonMaster</code> which contains the <code>Button</code> to be controlled.
      */
     public ButtonsControl(ShadingProgram program, float[] orthoMatrix, ButtonMaster buttonMaster) {
         this.program = program;
@@ -51,10 +51,10 @@ public class ButtonsControl {
     }
 
     /**
-     * Sets (and updates) the ButtonControl if screen dimension has changed.
+     * Sets (and updates) the <code>ButtonControl</code> if screen dimension has changed.
      * Needs to be called at the beginning.
      *
-     * @param width Screen width.
+     * @param width  Screen width.
      * @param height Screen height.
      */
     public void update(int width, int height) {
@@ -79,14 +79,14 @@ public class ButtonsControl {
     }
 
     /**
-     * @return 'true' if the point (touchX,touchY) is within a Button.
+     * @return 'true' if the point (touchX,touchY) is within a <code>Button</code>.
      */
     public boolean isInsideAButton(float touchX, float touchY) {
         return getColorAt(touchX, touchY) != Color.rgb(0, 0, 0);
     }
 
     /**
-     * @return The Button in the specified position (touchX,touchY).
+     * @return The <code>Button</code> in the specified position (touchX,touchY).
      */
     public Button getPressedButton(float touchX, float touchY) {
         return buttonsMap.get(getColorAt(touchX, touchY)).button;

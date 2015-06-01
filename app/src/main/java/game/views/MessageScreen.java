@@ -10,6 +10,8 @@ import android.widget.TextView;
 import game.miscellaneous.Waiter;
 
 /**
+ * Represents a message over the game screen.
+ *
  * @author Torlaschi
  * @date 12/05/2015
  */
@@ -18,13 +20,19 @@ public class MessageScreen implements Waiter {
     public static final String LOG_TAG = "MessageScreen";
 
     private Activity activity;
-    private String message;
     private int textColor;
     private int backgroundColor;
     private LinearLayout container;
 
     private TextView textView;
 
+    /**
+     * Creates a new <code>MessageScreen</code> with given color and layout.
+     *
+     * @param activity        <code>Activity</code> on which thread the <code>MessageScreen</code> should work.
+     * @param backgroundColor color of the background of the <code>MessageScreen</code>.
+     * @param container       Layout to which add the <code>MessageScreen</code>.
+     */
     public MessageScreen(Activity activity, int backgroundColor, LinearLayout container) {
         this.activity = activity;
         this.backgroundColor = backgroundColor;
@@ -35,7 +43,6 @@ public class MessageScreen implements Waiter {
 
     private void setup() {
         textView = new TextView(activity);
-        textView.setText(message);
         textView.setTextColor(textColor);
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -46,14 +53,13 @@ public class MessageScreen implements Waiter {
         textView.setLayoutParams(layoutParams);
     }
 
+    /**
+     * Sets the text message of the <code>MessageScreen</code>.
+     *
+     * @param text  Text of the message.
+     * @param color color of the message text.
+     */
     public void setText(String text, int color) {
-        textColor = color;
-
-        textView.setText(text);
-        textView.setTextColor(textColor);
-    }
-
-    public void setText(int text, int color) {
         textColor = color;
 
         textView.setText(text);

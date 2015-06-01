@@ -8,7 +8,7 @@ import game.net.communication.JSONd;
 import game.net.communication.RequestMaker;
 
 /**
- * Singleton which maintains user data while advancing in the activities. It also creates RequestMaker with
+ * Singleton which maintains user data while advancing in the activities. It also creates <code>RequestMaker</code> with
  * all the added data, or with the requested data.
  *
  * @author De Pace
@@ -50,19 +50,19 @@ public enum UserData {
     }
 
     /**
-     * Creates a new RequestMaker with default requests given by all the added data.
+     * Creates a new <code>RequestMaker</code> with default requests given by all the added data.
      *
-     * @return the new generated RequestMaker.
+     * @return the new generated <code>RequestMaker</code>.
      */
     public RequestMaker getRequestMaker() {
         return getRequestMaker(dataMap.keySet());
     }
 
     /**
-     * Creates a new RequestMaker with default requests given by the data mapped by the given names.
+     * Creates a new <code>RequestMaker</code> with default requests given by the data mapped by the given names.
      *
-     * @param names names of the data previously added to use as default requests for the RequestMaker.
-     * @return the new generated RequestMaker.
+     * @param names names of the data previously added to use as default requests for the <code>RequestMaker</code>.
+     * @return the new generated <code>RequestMaker</code>.
      */
     public RequestMaker getRequestMakerWithData(Enum... names) {
         return getRequestMaker(Arrays.asList(names));
@@ -75,8 +75,8 @@ public enum UserData {
         return new RequestMaker(jsonds.toArray(new JSONd[0]));
     }
 
-    public String toString(){
-        return "[USERDATA: "+dataMap+"]";
+    public String toString() {
+        return "[USERDATA: " + dataMap + "]";
     }
 
 }

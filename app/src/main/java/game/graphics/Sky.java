@@ -16,6 +16,8 @@ import shadow.math.SFTransform3f;
 import shadow.math.SFVertex3f;
 
 /**
+ * Represents a skybox.
+ *
  * @author Torlaschi
  * @date 31/03/2015
  */
@@ -121,11 +123,11 @@ public class Sky {
     private Node mainNode = new Node();
 
     /**
-     * Creates a new Sky cube centered in the given position.
+     * Creates a new <code>Sky</code> cube centered in the given position.
      *
-     * @param context  Context from which to retrieve the resources.
-     * @param program  ShadingProgram to use for drawing the Sky.
-     * @param position position of the center of the Sky;
+     * @param context  <code>Context</code> from which to retrieve the resources.
+     * @param program  <code>ShadingProgram</code> to use for drawing the <code>Sky</code>.
+     * @param position position of the center of the <code>Sky</code>;
      */
     public Sky(Context context, ShadingProgram program, SFVertex3f position) {
         this.program = program;
@@ -149,11 +151,11 @@ public class Sky {
 
     private Node generateNode(ArrayObject arrayObject, int textureId) {
         return FundamentalGenerator.generateNode(arrayObject,
-                BitmapFactory.decodeResource(context.getResources(), textureId), ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER));
+                BitmapFactory.decodeResource(context.getResources(), textureId), program);
     }
 
     /**
-     * Draws the Sky.
+     * Draws the <code>Sky</code>.
      */
     public void draw() {
         mainNode.getRelativeTransform().setPosition(position.getX(), position.getY(), position.getZ());

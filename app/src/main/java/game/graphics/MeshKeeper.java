@@ -9,6 +9,10 @@ import sfogl.integration.ArrayObject;
 import sfogl.integration.Mesh;
 
 /**
+ * Singleton that manages the <code>Mesh</code> loaded from files.
+ * It allows to access the <code>Mesh</code> without load them several times or
+ * automatically load them when needed.
+ *
  * @author Torlaschi
  * @date 30/05/2015
  */

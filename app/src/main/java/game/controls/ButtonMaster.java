@@ -11,7 +11,7 @@ import shadow.math.SFTransform3f;
 import shadow.math.SFVertex3f;
 
 /**
- * It keeps a list of Button and draws them.
+ * It keeps a list of <code>Button</code> and draws them.
  *
  * @author De Pace
  */
@@ -23,7 +23,7 @@ public class ButtonMaster {
     private ArrayList<Node> parentNodes;
 
     /**
-     * Creates a new ButtonMaster.
+     * Creates a new <code>ButtonMaster</code>.
      */
     public ButtonMaster() {
         parentNodes = new ArrayList<>();
@@ -34,14 +34,14 @@ public class ButtonMaster {
     }
 
     /**
-     * Adds a Button, representing it with the last set Model.
-     * The Button is represented with a Node placed and rotated compared with the parentNode.
-     * Is useful to give a common pre-transformation to more Button.
+     * Adds a <code>Button</code>, representing it with the last set Model.
+     * The <code>Button</code> is represented with a <code>Node</code> placed and rotated compared with the parentNode.
+     * Is useful to give a common pre-transformation to more <code>Button</code>.
      *
-     * @param button Button to be added.
-     * @param position Button position relative to the parentNode.
-     * @param angle Button rotation angle relative to the parentNode.
-     * @param parentNode Node which can contain transformations for more Button.
+     * @param button     <code>Button</code> to be added.
+     * @param position   <code>Button</code> position relative to the parentNode.
+     * @param angle      <code>Button</code> rotation angle relative to the parentNode.
+     * @param parentNode <code>Node</code> which can contain transformations for more Button.
      */
     public void addButton(Button button, SFVertex3f position, float angle, Node parentNode) {
         Node node = new Node();
@@ -58,21 +58,21 @@ public class ButtonMaster {
     }
 
     /**
-     * @return Associated Button set.
+     * @return Associated <code>Button</code> set.
      */
     public Set<Button> getButtons() {
         return map.keySet();
     }
 
     /**
-     * @return Node which represents the specified Button.
+     * @return Node which represents the specified <code>Button</code>.
      */
     public Node getButtonNode(Button button) {
         return map.get(button);
     }
 
     /**
-     * Draws every Button.
+     * Draws every <code>Button</code>.
      */
     public void draw() {
         for (Node n : parentNodes) {

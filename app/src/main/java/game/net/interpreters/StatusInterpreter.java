@@ -49,10 +49,6 @@ public class StatusInterpreter implements Interpreter {
     @Override
     public void interpret(Message msg) {
 //        Log.d(LOG_TAG, "processStatusMessage");
-        if (!(msg.obj instanceof Game.GameStatusResult)) {
-            Log.d(LOG_TAG,"Error, wrong Handler for "+msg.obj);
-            return;
-        }
         Game.GameStatusResult results = (Game.GameStatusResult) msg.obj;
 
         if (results.go)
@@ -64,16 +60,16 @@ public class StatusInterpreter implements Interpreter {
             String gameEnd = results.gameEnd;
             switch (GameFields.valueOf(gameEnd)) {
                 case GAME_WIN:
-                    messageScreen.setText(R.string.messageWin, res.getColor(R.color.mWinCol));
+                    messageScreen.setText(res.getString(R.string.messageWin), res.getColor(R.color.mWinCol));
                     break;
                 case GAME_DRAW:
-                    messageScreen.setText(R.string.messageDraw, res.getColor(R.color.mDrawCol));
+                    messageScreen.setText(res.getString(R.string.messageDraw), res.getColor(R.color.mDrawCol));
                     break;
                 case GAME_LOSE:
-                    messageScreen.setText(R.string.messageLose, res.getColor(R.color.mLoseCol));
+                    messageScreen.setText(res.getString(R.string.messageLose), res.getColor(R.color.mLoseCol));
                     break;
                 case GAME_INTERRUPTED:
-                    messageScreen.setText(R.string.messageInterrupted, res.getColor(R.color.mInterruptedCol));
+                    messageScreen.setText(res.getString(R.string.messageInterrupted), res.getColor(R.color.mInterruptedCol));
                     break;
             }
 

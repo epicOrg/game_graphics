@@ -28,12 +28,12 @@ public class MoveButtonsGenerator {
     private PositionMoveListenerInterface positionMoveListener;
 
     /**
-     * Creates a new MoveButtonsGenerator.
+     * Creates a new <code>MoveButtonsGenerator</code>.
      *
-     * @param context Context to find resources.
-     * @param program ShadingProgram to represent the Button.
-     * @param buttonMaster ButtonMaster which the movement Button has to be associated with.
-     * @param positionMoveListener Interface through which the movement action is associated with Button.
+     * @param context              <code>Context</code> to find resources.
+     * @param program              <code>ShadingProgram</code> to represent the <code>Button</code>.
+     * @param buttonMaster         <code>ButtonMaster</code> which the movement <code>Button</code> has to be associated with.
+     * @param positionMoveListener Interface through which the movement action is associated with <code>Button</code>.
      */
     public MoveButtonsGenerator(Context context, ShadingProgram program, ButtonMaster buttonMaster, PositionMoveListenerInterface positionMoveListener) {
         this.context = context;
@@ -43,20 +43,20 @@ public class MoveButtonsGenerator {
     }
 
     /**
-     * Generates the movement Button in a cross configuration.
+     * Generates the movement <code>Button</code> in a cross configuration.
      *
-     * @param center Central position of the Button.
-     * @param scale Scale factor.
-     * @param distance Distance between movement Button.
+     * @param center   Central position of the <code>Button</code>.
+     * @param scale    Scale factor.
+     * @param distance Distance between movement <code>Button</code>.
      */
     public void generate(SFVertex3f center, float scale, float distance) {
         Node parentNode = new Node();
-        SFMatrix3f scalingMatrix = SFMatrix3f.getScale(scale,scale,scale);
+        SFMatrix3f scalingMatrix = SFMatrix3f.getScale(scale, scale, scale);
 
         parentNode.getRelativeTransform().setPosition(center);
         parentNode.getRelativeTransform().setMatrix(scalingMatrix);
 
-        int color=context.getResources().getColor(R.color.primary);
+        int color = context.getResources().getColor(R.color.primary);
         Model model = FundamentalGenerator.getModelFromFileAndMaterial(context, MaterialKeeper.MATERIAL_KEEPER.getColorMaterial(program, color), "Arrow.obj");
 
         buttonMaster.setModel(model);

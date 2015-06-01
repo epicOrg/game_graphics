@@ -14,16 +14,16 @@ public class FloatLoader {
     private Resources resources;
 
     /**
-     * Creates a anew FloatLoader with the given Context.
+     * Creates a new <code>FloatLoader</code> with the given Context.
      *
-     * @param context Context from which to retrieve resouces.
+     * @param context <code>Context</code> from which to retrieve resouces.
      */
     public FloatLoader(Context context) {
         this.resources = context.getResources();
     }
 
     /**
-     * Returns a flot value from resources.
+     * Returns a flaot value from resources.
      *
      * @param id id of the float value in resources, from R.dimen.
      * @return the requested float value.

@@ -2,8 +2,10 @@ package game.net.communication;
 
 import android.os.Handler;
 import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,6 +21,7 @@ import java.util.Enumeration;
 
 import game.data.UserData;
 import game.net.services.Service;
+
 import static game.net.communication.ServerCommunicationThreadState.CONNECTED;
 import static game.net.communication.ServerCommunicationThreadState.CONNECTING;
 import static game.net.communication.ServerCommunicationThreadState.NOT_CONNECTED;
@@ -61,11 +64,20 @@ public class ServerCommunicationThread extends Thread {
 
     }
 
+    /**
+     * Initilizes the <code>ServerCommunicationThread</code> with custom parameters.
+     *
+     * @param waitTime   time to wait while trying to connect to the server.
+     * @param serverPort port of the server to connect to.
+     */
     public void init(int waitTime, int serverPort) {
         this.waitTime = waitTime;
         this.serverPort = serverPort;
     }
 
+    /**
+     * @return the Ip address of the first <code>InetAddress</code> of the first <code>NetworkInterface</code>.
+     */
     public static String getLocalIpAddress() {
         try {
             for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
@@ -83,21 +95,32 @@ public class ServerCommunicationThread extends Thread {
         return null;
     }
 
+    /**
+     * @return the unique instance of the <code>ServerCommunicationThread</code>.
+     */
     public static ServerCommunicationThread getInstance() {
         if (instance == null) {
             instance = new ServerCommunicationThread();
             instance.threadState = NOT_CONNECTED;
-            instance.serverPort=SERVER_PORT;
-            instance.waitTime=WAIT_TIME;
+            instance.serverPort = SERVER_PORT;
+            instance.waitTime = WAIT_TIME;
             instance.threadListeners = new ArrayList<>();
         }
         return instance;
     }
 
+    /**
+     * @return the actual address of the server to connect.
+     */
     public static String getServerAddress() {
         return serverAddress;
     }
 
+    /**
+     * Sets the address of the server to connect.
+     *
+     * @param address the address of the server to connect.
+     */
     public static void setServerAddress(String address) {
         serverAddress = address;
     }
@@ -158,6 +181,9 @@ public class ServerCommunicationThread extends Thread {
         }
     }
 
+    /**
+     * Closes the connection and eliminates the reference to the instance of the <code>ServerCommunicationThread</code>.
+     */
     public void exit() {
         try {
             if (writer != null) writer.close();
@@ -177,6 +203,7 @@ public class ServerCommunicationThread extends Thread {
         instance = null;
         Log.e(LOG_TAG, "Exit ok");
     }
+
 
     public void setHandler(Handler handler) {
         this.handler = handler;

@@ -122,7 +122,7 @@ public class GameActivity extends Activity implements GameHandlerListener {
         SplashScreen splashScreen = new SplashScreen(this, R.id.game_splash_container, R.id.game_splash_image, R.id.game_splash_text);
         splashScreen.animate();
         waiterGroup.addWaiter(splashScreen);
-        messageScreen.setText(R.string.messageWait, getResources().getColor(R.color.primary_text));
+        messageScreen.setText(res.getString(R.string.messageWait), getResources().getColor(R.color.primary_text));
         waiterGroup.addWaiter(messageScreen);
 
         Log.d(LOG_TAG, "Starting GamePositionSender..");

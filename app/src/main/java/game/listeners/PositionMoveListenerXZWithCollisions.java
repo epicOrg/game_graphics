@@ -7,6 +7,11 @@ import game.player.PlayerStatus;
 import shadow.math.SFMatrix3f;
 import shadow.math.SFVertex3f;
 
+/**
+ * Performs action of movement taking collisions into account.
+ *
+ * @author Torlaschi
+ */
 public class PositionMoveListenerXZWithCollisions implements PositionMoveListenerInterface {
 
     public static final String LOG_TAG = "PositionMoveListenerXZ";
@@ -15,10 +20,17 @@ public class PositionMoveListenerXZWithCollisions implements PositionMoveListene
     private PlayerStatus playerStatus;
     private CollisionMediator cm;
 
+    /**
+     * Creates a new <code>PositionMoveListenerXZWithCollisionss</code>.
+     *
+     * @param playerStatus <code>PlayerStatus</code> to move.
+     * @param cm           <code>CollisionMediator</code> to perform collision checking.
+     * @param moveSpeed    speed of motion.
+     */
     public PositionMoveListenerXZWithCollisions(PlayerStatus playerStatus, CollisionMediator cm, float moveSpeed) {
         this.playerStatus = playerStatus;
         this.cm = cm;
-        this.moveSpeed=moveSpeed;
+        this.moveSpeed = moveSpeed;
     }
 
     @Override

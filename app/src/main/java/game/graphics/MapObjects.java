@@ -3,7 +3,7 @@ package game.graphics;
 import com.example.alessandro.computergraphicsexample.R;
 
 /**
- * It's a singleton that manages the MazeObject database and the relative textures.
+ * It's a singleton that manages the <code>MazeObject</code> database and the relative textures.
  *
  * @author De Pace
  */
@@ -16,11 +16,11 @@ public enum MapObjects {
     private MapResources<Integer> codes;
 
     /**
-     * @param object   MazeObject name.
-     * @param position MazeObject position.
-     * @param size     MazeObject dimension.
-     * @param texture  MazeObject texture's name.
-     * @return MazeObject which is built from the specified parameters.
+     * @param object   <code>MazeObject</code> name.
+     * @param position <code>MazeObject</code> position.
+     * @param size     <code>MazeObject</code> dimension.
+     * @param texture  <code>MazeObject</code> texture's name.
+     * @return <code>MazeObject</code> which is built from the specified parameters.
      */
     public MazeObject getObjectFromNameAndData(String object, String position, String size, String texture) {
         return map.getResourceFromName(object).cloneFromData(position, size, codes.getResourceFromName(texture));

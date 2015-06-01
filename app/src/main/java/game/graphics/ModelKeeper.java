@@ -9,8 +9,8 @@ import sfogl.integration.Mesh;
 import sfogl.integration.Model;
 
 /**
- * It manages the Models loaded from files.
- * It allows to access the Models without load them several times or
+ * Singleton that manages the <code>Model</code> loaded from files.
+ * It allows to access the <code>Model</code> without load them several times or
  * automatically load them when needed.
  */
 public enum ModelKeeper {
@@ -21,12 +21,12 @@ public enum ModelKeeper {
     private HashMap<ModelData, Model> map = new HashMap<>();
 
     /**
-     * Builds a Model from file, or returns it immediately in case it was already loaded.
+     * Builds a <code>Model</code> from file, or returns it immediately in case it was already loaded.
      *
-     * @param context  Context to load the files.
+     * @param context  <code>Context</code> to load the files.
      * @param name     Name of the file that contains the model geometry.
-     * @param material Material to use to build the Model.
-     * @return The required Model; if a Model from the same file name was previously requested and loaded, that one is
+     * @param material <code>Material</code> to use to build the Model.
+     * @return The required Model; if a <code>Model</code> from the same file name was previously requested and loaded, that one is
      * returned, regardless of the other parameters.
      */
     public Model getModel(Context context, String name, Material material) {
@@ -48,6 +48,9 @@ public enum ModelKeeper {
         return modelPos;
     }
 
+    /**
+     * Clears the mapped data.
+     */
     public void clear() {
         map.clear();
     }

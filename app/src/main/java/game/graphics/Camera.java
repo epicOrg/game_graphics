@@ -8,33 +8,33 @@ import static android.opengl.Matrix.orthoM;
 import static android.opengl.Matrix.setLookAtM;
 
 /**
- * Video camera: it manages the matrices for 3D and 2D projections following the position of a Player.
+ * Video camera: it manages the matrices for 3D and 2D projections following the position of a <code>Player</code>.
  *
  * @author De Pace
  */
 public class Camera {
 
-    private final float[] orthoMatrix=new float[16],
-            resultMatrix=new float[16];
-    private float[] projectionMatrix=new float[16];
+    private final float[] orthoMatrix = new float[16],
+            resultMatrix = new float[16];
+    private float[] projectionMatrix = new float[16];
     private Player me;
-    private float znear,zfar,k;
+    private float znear, zfar, k;
 
     /**
-     * Creates a new camera object from a Player position, on the strength of its direction.
+     * Creates a new camera object from a <code>Player</code> position, on the strength of its direction.
      *
-     * @param player The Player to be followed.
-     * @param znear Minimum distance between an object and the camera
-     *              to have the object displayed in the 3D projection.
-     * @param zfar Maximum distance between an object and the camera
-     *              to have the object displayed in the 3D projection.
-     * @param angle Vision angle of the 3D projection between up-down and right-left, expressed in degrees.
+     * @param player The <code>Player</code> to be followed.
+     * @param znear  Minimum distance between an object and the camera
+     *               to have the object displayed in the 3D projection.
+     * @param zfar   Maximum distance between an object and the camera
+     *               to have the object displayed in the 3D projection.
+     * @param angle  Vision angle of the 3D projection between up-down and right-left, expressed in degrees.
      */
-    public Camera(Player player, float znear, float zfar, float angle){
-        this.me=player;
-        this.znear=znear;
-        this.zfar=zfar;
-        this.k=znear*(float)Math.tan(angle*Math.PI/360);
+    public Camera(Player player, float znear, float zfar, float angle) {
+        this.me = player;
+        this.znear = znear;
+        this.zfar = zfar;
+        this.k = znear * (float) Math.tan(angle * Math.PI / 360);
     }
 
     /**
@@ -43,7 +43,7 @@ public class Camera {
      *
      * @param ratio Screen width/height ratio.
      */
-    public void updateMatrices(float ratio){
+    public void updateMatrices(float ratio) {
         setProjection(ratio);
         setOrthoMatrix(ratio);
     }
@@ -51,30 +51,30 @@ public class Camera {
     /**
      * @return 2D projection matrix.
      */
-    public float[] getOrthoMatrix(){
+    public float[] getOrthoMatrix() {
         return orthoMatrix;
     }
 
     /**
      * @return Current 3D projection matrix.
      */
-    public float[] getResultMatrix(){
+    public float[] getResultMatrix() {
         setResultMatrix();
         return resultMatrix;
     }
 
     private void setOrthoMatrix(float ratio) {
-        if (ratio>1)
+        if (ratio > 1)
             orthoM(orthoMatrix, 0, -ratio, ratio, -1, 1, -1, 1);
         else
             orthoM(orthoMatrix, 0, -1, 1, -(1 / ratio), (1 / ratio), -1, 1);
     }
 
     private void setProjection(float ratio) {
-        if (ratio>1)
-            frustumM(projectionMatrix, 0, -k, k, -(k/ratio), (k/ratio), znear, zfar);
+        if (ratio > 1)
+            frustumM(projectionMatrix, 0, -k, k, -(k / ratio), (k / ratio), znear, zfar);
         else
-            frustumM(projectionMatrix, 0, -k*ratio, k*ratio, -k, k, znear, zfar);
+            frustumM(projectionMatrix, 0, -k * ratio, k * ratio, -k, k, znear, zfar);
     }
 
     private void setResultMatrix() {

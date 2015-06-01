@@ -12,7 +12,7 @@ import sfogl.integration.Node;
 import shadow.math.SFTransform3f;
 
 /**
- * Map that contains all the MazeObjects, loads them in the collision system and draws them.
+ * Map that contains all the <code>MazeObjects</code>, loads them in the collision system and draws them.
  *
  * @author Stefano De Pace
  */
@@ -22,20 +22,20 @@ public class Map {
     private Node mainNode = new Node();
 
     /**
-     * Adds some MazeObjects to the Map.
+     * Adds one or more <code>MazeObjects</code> to the Map.
      *
-     * @param ms one or more MazeObject to add to the Map.
+     * @param ms one or more <code>MazeObjects</code> to add to the Map.
      */
     public void addObjects(MazeObject... ms) {
         Collections.addAll(list, ms);
     }
 
     /**
-     * Loads all the MazeObject's CollisionBoxes that are not null in the given CollisionMediator, and
-     * loads their Nodes for the rendering.
+     * Loads all the <code>MazeObjects</code>'s <code>CollisionBox</code> that are not null in the given <code>CollisionMediator</code>, and
+     * loads their <code>Node</code> for the rendering.
      *
-     * @param cm      CollisionMediator where to insert the MazeObject's CollisionBox.
-     * @param context Context from which to get the resources to represent the MazeObjects.
+     * @param cm      <code>CollisionMediator</code> where to insert the <code>MazeObjects</code>'s <code>CollisionBox</code>.
+     * @param context <code>Context</code> from which to get the resources to represent the <code>MazeObjects</code>.
      */
     public void loadMap(CollisionMediator cm, Context context) {
         List<Node> ln = mainNode.getSonNodes();
@@ -48,7 +48,7 @@ public class Map {
     }
 
     /**
-     * Draw the Map, namely every MazeObject's Node.
+     * Draw the <code>Map</code>, namely every <code>MazeObject</code>'s <code>Node</code>.
      */
     public void draw() {
         mainNode.updateTree(new SFTransform3f());

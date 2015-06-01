@@ -12,12 +12,12 @@ import shadow.math.SFVertex3f;
 public interface CollisionBox {
 
     /**
-     * @return SFVertex3f which represent the CollisionBox center.
+     * @return <code>SFVertex3f</code> which represent the <code>CollisionBox</code> center.
      */
     public SFVertex3f getPos();
 
     /**
-     * @return The radio of the circle which is circumscribed to the geometrical form of the CollisionBox.
+     * @return The radio of the circle which is circumscribed to the geometrical form of the <code>CollisionBox</code>.
      */
     public float getRadius();
 

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alessandro.computergraphicsexample.R;
+
 import game.net.communication.JSONd;
 import game.net.communication.RequestMaker;
 import game.data.Room;
@@ -26,6 +27,8 @@ import game.net.communication.NotConnectedException;
 import game.net.communication.ServerCommunicationThread;
 
 /**
+ * Represents a menu for change settings and exit during the game.
+ *
  * @author Torlaschi
  * @date 12/05/2015
  */
@@ -41,10 +44,17 @@ public class SettingsScreen {
 
     private SettingsScreen settingsScreen;
 
+    /**
+     * Creates a new <code>SettingsScreen</code> with a given Layout.
+     *
+     * @param activity     <code>Activity</code> on which thread the <code>SettingsScreen</code> should work.
+     * @param container    Layout to which the <code>SettingsScreen</code> should be added.
+     * @param requestMaker <code>RequestMaker</code> used to send the exit request.
+     */
     public SettingsScreen(Activity activity, LinearLayout container, RequestMaker requestMaker) {
         this.activity = activity;
         this.container = container;
-        this.requestMaker=requestMaker;
+        this.requestMaker = requestMaker;
 
         settingsScreen = this;
 
@@ -112,7 +122,7 @@ public class SettingsScreen {
         playersContainer.setLayoutParams(playersLayout);
         playersContainer.setOrientation(LinearLayout.VERTICAL);
 
-        Room room=(Room) UserData.DATA.getData(ServicesFields.CURRENT_ROOM);
+        Room room = (Room) UserData.DATA.getData(ServicesFields.CURRENT_ROOM);
         for (Team t : room.getTeams()) {
             TextView teamName = new TextView(activity);
             teamName.setText(t.getName());

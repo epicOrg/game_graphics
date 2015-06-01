@@ -26,13 +26,13 @@ public class TextLabel {
     /**
      * Creates a new textLabel
      *
-     * @param textSize Text dimension.
-     * @param height TextLabel height.
-     * @param h Vertical TextLabel position.
-     * @param direction TextLabel is oriented in order to be visible looking int this direction.
-     * @param position TextLabel position.
-     * @param text TextLabel text.
-     * @param color Text color.
+     * @param textSize  Text quality (dimension in pixels).
+     * @param height    <code>TextLabel</code> height.
+     * @param h         Vertical <code>TextLabel</code> position.
+     * @param direction <code>TextLabel</code> is oriented in order to be visible looking int this direction.
+     * @param position  <code>TextLabel</code> position.
+     * @param text      <code>TextLabel</code> text.
+     * @param color     Text color.
      */
     public TextLabel(int textSize, float height, float h, SFVertex3f direction, SFVertex3f position, String text, int color) {
         this.direction = direction;
@@ -42,14 +42,14 @@ public class TextLabel {
     }
 
     /**
-     * Changes the TextLabel position.
+     * Changes the <code>TextLabel</code> position.
      */
     public void setPosition(SFVertex3f position) {
         this.position = position;
     }
 
     /**
-     * Draws the TextLabel.
+     * Draws the <code>TextLabel</code>.
      */
     public void draw() {
         node.getRelativeTransform().setPosition(new SFVertex3f(position.getX(), h, position.getZ()));
