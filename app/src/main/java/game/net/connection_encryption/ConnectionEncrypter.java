@@ -59,7 +59,9 @@ public class ConnectionEncrypter {
                                 jsonResponse.getString(ServicesFields.SERVICE.toString())
                                         .equals(ServicesFields.POLLING.toString()) ||
                                 jsonResponse.getString(ServicesFields.SERVICE.toString())
-                                        .equals(ServicesFields.CURRENT_ROOM.toString())))
+                                        .equals(ServicesFields.CURRENT_ROOM.toString()) ||
+                                jsonResponse.getString(ServicesFields.SERVICE.toString())
+                                        .equals(ServicesFields.GAME.toString())))
                     return response;
 
             } catch (JSONException e) {
