@@ -19,7 +19,7 @@ import sfogl2.SFOGLSystemState;
  * It allows to control if the {@link Button}, which are associated with a {@link ButtonMaster},
  * are pressed through colorpicking.
  *
- * @see Button
+ * @see ShadingProgram
  */
 public class ButtonsControl {
 

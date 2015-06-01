@@ -10,6 +10,8 @@ import game.player.Player;
  *
  * @author Torlaschi
  * @date 18/04/2015
+ * @see Team
+ * @see Player
  */
 public class Room {
 
@@ -21,7 +23,7 @@ public class Room {
      * Creates a <code>Room</code> with given name and number of <code>Player</code>.
      *
      * @param name           name of the <code>Room</code>.
-     * @param maxPlayers     max number of players in this <code>Room</code>.
+     * @param maxPlayers     max number of <code>Player</code> in this <code>Room</code>.
      * @param currentPlayers number of current <code>Player</code> in this <code>Room</code>.
      */
     public Room(String name, int maxPlayers, int currentPlayers) {

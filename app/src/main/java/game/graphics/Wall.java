@@ -11,6 +11,7 @@ import shadow.math.SFVertex3f;
  * It represents a wall with the form of a parallelepiped.
  *
  * @author De Pace
+ * @see Square
  */
 public class Wall implements MazeObject {
 

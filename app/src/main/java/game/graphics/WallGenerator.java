@@ -14,6 +14,7 @@ import sfogl.integration.ShadingProgram;
  * Utility class to generate a {@link Model} for parallelepiped with proportional texture.
  *
  * @author De Pace
+ * @see ShadingProgram
  */
 public class WallGenerator {
 

@@ -13,6 +13,7 @@ import shadow.math.SFVertex3f;
  * Cylindrical obstacle.
  *
  * @author De Pace
+ * @see Circle
  */
 public class Obstacle implements MazeObject {
 

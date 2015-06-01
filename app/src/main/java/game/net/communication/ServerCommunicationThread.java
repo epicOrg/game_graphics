@@ -39,6 +39,7 @@ import static game.net.communication.ServerCommunicationThreadState.NOT_CONNECTE
  *
  * @author Micieli
  * @date 31/03/2015
+ * @see Handler
  */
 public class ServerCommunicationThread extends Thread {
 

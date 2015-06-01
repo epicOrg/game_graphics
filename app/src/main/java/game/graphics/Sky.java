@@ -20,6 +20,8 @@ import shadow.math.SFVertex3f;
  *
  * @author Torlaschi
  * @date 31/03/2015
+ * @see ShadingProgram
+ * @see Node
  */
 public class Sky {
 

@@ -18,7 +18,7 @@ import shadow.math.SFVertex3f;
  * This class builds the pause {@link Button}.
  *
  * @author Torlaschi
- * @see Button
+ * @see ButtonMaster
  */
 public class SettingsButtonsGenerator {
 

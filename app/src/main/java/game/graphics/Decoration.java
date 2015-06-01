@@ -12,6 +12,7 @@ import shadow.math.SFVertex3f;
  * Decoration of Object. Basically a collision-free <code>MazeObject</code> with customizable 3D model.
  *
  * @author De Pace
+ * @see sfogl.integration.Model
  */
 public class Decoration implements MazeObject {
 

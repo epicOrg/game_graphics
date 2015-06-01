@@ -20,7 +20,9 @@ import shadow.graphics.SFImageFormat;
  * Utility class with static methods which are used to generate {@link Model}and {@link Node}.
  *
  * @author Torlaschi
- * @see Node
+ * @see Material
+ * @see ArrayObject
+ * @see ShadingProgram
  */
 public class FundamentalGenerator {
 

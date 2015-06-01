@@ -9,6 +9,7 @@ import game.player.Player;
  *
  * @author Torlaschi
  * @date 23/04/2015
+ * @see Player
  */
 public class Team {
 

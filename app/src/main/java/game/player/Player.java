@@ -8,6 +8,7 @@ import shadow.math.SFVertex3f;
  *
  * @author Torlaschi
  * @date 28/03/2015
+ * @see PlayerStatus
  */
 public class Player {
 

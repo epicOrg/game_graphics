@@ -19,7 +19,7 @@ import shadow.math.SFVertex3f;
  * This class creates the 4 {@link Button} of movement.
  *
  * @author De Pace
- * @see Button
+ * @see ButtonMaster
  */
 public class MoveButtonsGenerator {
 

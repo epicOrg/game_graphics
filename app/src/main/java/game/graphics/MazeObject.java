@@ -8,6 +8,8 @@ import sfogl.integration.Node;
  * It represents a generic object in the labyrinth.
  *
  * @author De Pace
+ * @see CollisionBox
+ * @see Node
  */
 public interface MazeObject {
 
