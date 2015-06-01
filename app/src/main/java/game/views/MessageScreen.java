@@ -7,6 +7,8 @@ import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.alessandro.computergraphicsexample.R;
+
 import game.miscellaneous.Waiter;
 
 /**
@@ -44,6 +46,7 @@ public class MessageScreen implements Waiter {
     private void setup() {
         textView = new TextView(activity);
         textView.setTextColor(textColor);
+        textView.setTextSize(activity.getResources().getDimension(R.dimen.message_screen_text));
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
