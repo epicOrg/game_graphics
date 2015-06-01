@@ -30,7 +30,7 @@ public class Decoration implements MazeObject {
      * @param texture_id     Id of the texture that represents this <code>Decoration</code>.
      * @param scalexz        Scale factor on the x-z plane.
      * @param scaley         Scale factor in the y direction.
-     * @param supportCulling
+     * @param supportCulling If this object support face culling
      */
     public Decoration(SFVertex3f position, String model, int texture_id, float scalexz, float scaley, boolean supportCulling) {
         this.texture_id = texture_id;
@@ -58,7 +58,7 @@ public class Decoration implements MazeObject {
 
     @Override
     public boolean supportingCulling() {
-        return false;
+        return supportCulling;
     }
 
     @Override

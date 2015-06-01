@@ -29,7 +29,7 @@ public class Obstacle implements MazeObject {
      * @param c              <code>Circle</code> which makes up the <code>CollisionBox</code> and defines the dimension of xz plane.
      * @param height         Height in y direction.
      * @param texture_id     Texture index.
-     * @param supportCulling
+     * @param supportCulling If this object support face culling
      */
     public Obstacle(Circle c, double height, int texture_id, String model, boolean supportCulling) {
         this.c = c;
@@ -56,7 +56,7 @@ public class Obstacle implements MazeObject {
 
     @Override
     public boolean supportingCulling() {
-        return false;
+        return supportCulling;
     }
 
     @Override
