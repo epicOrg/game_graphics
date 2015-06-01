@@ -10,6 +10,8 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
 /**
+ * Wraps an asymmetric key into a package encrypted with a public key.
+ *
  * @author Noris
  * @author 27/04/2015
  */
@@ -24,6 +26,13 @@ public class KeyWrapper {
         this.symmetricKey = symmetricKey;
     }
 
+    /**
+     * Wraps an asymmetric key passed to the constructor into
+     * a package encrypted with the public key.
+     *
+     * @param publicKey the {@link PublicKey} used to wrap
+     *                  the symmetric key
+     */
     public void wrapKey(PublicKey publicKey) {
 
         try {
@@ -44,10 +53,16 @@ public class KeyWrapper {
 
     }
 
+    /**
+     * @return the wrapped symmetric key
+     */
     public byte[] getWrappedKeyBytes() {
         return wrappedKey;
     }
 
+    /**
+     * @return the wrapped symmetric key in string format
+     */
     public String getWrappedKeyString() {
         return StringConverter.bytesToString(wrappedKey);
     }

@@ -2,7 +2,7 @@ package game.net.connection_encryption;
 
 /**
  * @author Noris
- * @version 1
+ * @version 2
  * @date 2015/05/30
  */
 

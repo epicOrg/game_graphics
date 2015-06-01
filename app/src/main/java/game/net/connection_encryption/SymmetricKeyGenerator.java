@@ -5,6 +5,14 @@ import java.security.NoSuchAlgorithmException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
+/**
+ * Generate a symmetric key using {@link KeyGenerator}.
+ *
+ * @author Noris
+ * @date 27/04/2015
+ * @see KeyGenerator
+ */
+
 public class SymmetricKeyGenerator implements ISymmetricKeyGenerator {
 
     private SecretKey key;

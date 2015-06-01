@@ -9,6 +9,13 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
+/**
+ * Encrypts a string using a symmetric key.
+ *
+ * @author Noris
+ * @date 27/04/2015
+ */
+
 public class Encrypter {
 
     private byte[] encryptedData;
@@ -19,7 +26,9 @@ public class Encrypter {
     }
 
     /**
-     * @param unencryptedString String to encrypt.
+     * Encrypts a string using a symmetric key.
+     *
+     * @param unencryptedString the string to encrypt
      */
     public void encrypt(String unencryptedString) {
 
@@ -44,10 +53,16 @@ public class Encrypter {
         }
     }
 
+    /**
+     * @return the encrypted data.
+     */
     public byte[] getEncryptedData() {
         return encryptedData;
     }
 
+    /**
+     * @return the encrypted data in string format.
+     */
     public String getEncryptedString() {
         return StringConverter.bytesToString(encryptedData);
     }

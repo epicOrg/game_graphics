@@ -10,6 +10,13 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
+/**
+ * Decrypts a string using the symmetric key.
+ *
+ * @author Noris
+ * @date 27/04/2015
+ */
+
 public class Decrypter {
 
     private Key asymmetricKey;
@@ -20,7 +27,11 @@ public class Decrypter {
     }
 
     /**
-     * @param encryptedString String to decrypt.
+     * Decrypts a string using the symmetric key (obviously the key must be the
+     * same used to encrypt the string).
+     *
+     * @param encryptedString
+     *            the encrypted string
      */
     public void decrypt(String encryptedString) {
 
@@ -45,10 +56,16 @@ public class Decrypter {
         }
     }
 
+    /**
+     * @return the decrypted data
+     */
     public byte[] getDecryptedData() {
         return decryptedData;
     }
 
+    /**
+     * @return the decrypted data in string format
+     */
     public String getDecryptedString() {
         try {
             return new String(decryptedData, "UTF-8");
