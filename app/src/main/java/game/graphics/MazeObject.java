@@ -1,6 +1,7 @@
 package game.graphics;
 
 import android.content.Context;
+
 import game.physics.CollisionBox;
 import sfogl.integration.Node;
 
@@ -29,10 +30,17 @@ public interface MazeObject {
     public CollisionBox getBox();
 
     /**
+     * Returns if this <code>MazeObject</code> can be drawn with culling enabled.
+     *
+     * @return true if culling is supported otherwise false.
+     */
+    public boolean supportingCulling();
+
+    /**
      * Allows to create different <code>MazeObject</code> from a single prototype, with different parameters.
      *
-     * @param position <code>CollisionBox</code> position.
-     * @param size <code>CollisionBox</code> dimension.
+     * @param position  <code>CollisionBox</code> position.
+     * @param size      <code>CollisionBox</code> dimension.
      * @param textureId <code>CollisionBox</code> texture ID.
      * @return <code>CollisionBox</code> which is built from the specified parameters..
      */

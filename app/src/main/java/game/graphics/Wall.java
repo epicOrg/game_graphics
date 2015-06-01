@@ -17,16 +17,19 @@ public class Wall implements MazeObject {
 
     private Square box;
     private int textureID;
+    private boolean supportCulling;
 
     /**
      * Creates a new wall. Its dimension is proportional to those of the specific <code>Square</code>.
      *
-     * @param box       <code>Square</code> which represent the <code>Wall</code> collision box.
-     * @param textureID Index of the texture which represent the <code>Wall</code> face.
+     * @param box            <code>Square</code> which represent the <code>Wall</code> collision box.
+     * @param textureID      Index of the texture which represent the <code>Wall</code> face.
+     * @param supportCulling
      */
-    public Wall(Square box, int textureID) {
+    public Wall(Square box, int textureID, boolean supportCulling) {
         this.box = box;
         this.textureID = textureID;
+        this.supportCulling = supportCulling;
     }
 
     @Override
@@ -45,6 +48,11 @@ public class Wall implements MazeObject {
     }
 
     @Override
+    public boolean supportingCulling() {
+        return false;
+    }
+
+    @Override
     public MazeObject cloneFromData(String position, String size, int textureId) {
         float posX = Float.parseFloat(position.split(" ")[0]);
         float posY = Float.parseFloat(position.split(" ")[1]);
@@ -52,6 +60,6 @@ public class Wall implements MazeObject {
         float sizeX = Float.parseFloat(size.split(" ")[0]);
         float sizeY = Float.parseFloat(size.split(" ")[1]);
         float sizeZ = Float.parseFloat(size.split(" ")[2]);
-        return new Wall(new Square(new SFVertex3f(posX, posY, posZ), sizeX, sizeY, sizeZ), textureId);
+        return new Wall(new Square(new SFVertex3f(posX, posY, posZ), sizeX, sizeY, sizeZ), textureId, supportCulling);
     }
 }

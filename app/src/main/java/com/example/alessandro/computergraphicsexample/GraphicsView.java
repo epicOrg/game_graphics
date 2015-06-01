@@ -6,14 +6,16 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 import android.view.MotionEvent;
+
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
-import game.miscellaneous.FloatLoader;
-import game.data.Team;
+
 import game.controls.ButtonMaster;
 import game.controls.ButtonsControl;
+import game.data.Team;
 import game.generators.FundamentalGenerator;
 import game.generators.GroundGenerator;
 import game.generators.MoveButtonsGenerator;
@@ -34,6 +36,7 @@ import game.listeners.PositionMoveListenerInterface;
 import game.listeners.PositionMoveListenerXZWithCollisions;
 import game.listeners.TouchListener;
 import game.listeners.TouchListenerInterface;
+import game.miscellaneous.FloatLoader;
 import game.physics.CollisionMediator;
 import game.player.Player;
 import game.views.SettingsScreen;
@@ -71,8 +74,6 @@ public class GraphicsView extends GLSurfaceView {
     private CollisionMediator cm;
     private Map map;
 
-    private SFOGLState sfs;
-
     private int groundWidth, groundHeight;
     private ArrayList<PlayerView> playerViews = new ArrayList<>();
     private FloatLoader fl;
@@ -94,9 +95,8 @@ public class GraphicsView extends GLSurfaceView {
 
         this.settingsScreen = settingsScreen;
 
-        sfs = SFOGLStateEngine.glEnable(GL_CULL_FACE);
-        fl=new FloatLoader(context);
-        res= context.getResources();
+        fl = new FloatLoader(context);
+        res = context.getResources();
 
         positionMoveListener = new PositionMoveListenerXZWithCollisions(me.getStatus(), cm, fl.getFloat(R.dimen.moveSpeed));
         directionMoveListener = new DirectionDirectionMoveListener(me.getStatus().getDirection(), getWidth(), getHeight());
@@ -145,6 +145,9 @@ public class GraphicsView extends GLSurfaceView {
         private ButtonMaster buttonMaster;
         private ArrayList<TextLabel> labels = new ArrayList<>();
         private Camera camera;
+
+        private SFOGLState sfsWithCulling = SFOGLStateEngine.glEnable(GL_CULL_FACE);
+        private SFOGLState sfsWithoutCulling = SFOGLStateEngine.glDisable(GL_CULL_FACE);
 
         @Override
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -204,13 +207,15 @@ public class GraphicsView extends GLSurfaceView {
         public void onDrawFrame(GL10 gl) {
             program.setupProjection(camera.getResultMatrix());
             SFOGLSystemState.cleanupColorAndDepth(0, 0, 1, 1);
-            sfs.applyState();
 
-            groundNode.draw();
-            drawPlayers();
             map.draw();
-            sky.draw();
 
+            sfsWithCulling.applyState();
+            drawPlayers();
+
+            sfsWithoutCulling.applyState();
+            groundNode.draw();
+            sky.draw();
             for (TextLabel label : labels) {
                 label.draw();
             }

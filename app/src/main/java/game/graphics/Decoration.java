@@ -20,22 +20,25 @@ public class Decoration implements MazeObject {
     private String model;
     private SFVertex3f position;
     private float scaleXZ, scaleY;
+    private boolean supportCulling;
 
     /**
      * Creates a new <code>Decoration</code>.
      *
-     * @param position   Position of the <code>Decoration</code>.
-     * @param model      String name of the 3D model file to represent this <code>Decoration</code>.
-     * @param texture_id Id of the texture that represents this <code>Decoration</code>.
-     * @param scalexz    Scale factor on the x-z plane.
-     * @param scaley     Scale factor in the y direction.
+     * @param position       Position of the <code>Decoration</code>.
+     * @param model          String name of the 3D model file to represent this <code>Decoration</code>.
+     * @param texture_id     Id of the texture that represents this <code>Decoration</code>.
+     * @param scalexz        Scale factor on the x-z plane.
+     * @param scaley         Scale factor in the y direction.
+     * @param supportCulling
      */
-    public Decoration(SFVertex3f position, String model, int texture_id, float scalexz, float scaley) {
+    public Decoration(SFVertex3f position, String model, int texture_id, float scalexz, float scaley, boolean supportCulling) {
         this.texture_id = texture_id;
         this.model = model;
         this.position = position;
         this.scaleXZ = scalexz;
         this.scaleY = scaley;
+        this.supportCulling = supportCulling;
     }
 
     @Override
@@ -54,13 +57,18 @@ public class Decoration implements MazeObject {
     }
 
     @Override
+    public boolean supportingCulling() {
+        return false;
+    }
+
+    @Override
     public MazeObject cloneFromData(String position, String size, int textureId) {
         float posX = Float.parseFloat(position.split(" ")[0]);
         float posY = Float.parseFloat(position.split(" ")[1]);
         float posZ = Float.parseFloat(position.split(" ")[2]);
         float sizeX = Float.parseFloat(size.split(" ")[0]);
         float sizeY = Float.parseFloat(size.split(" ")[1]);
-        return new Decoration(new SFVertex3f(posX, posY, posZ), model, textureId, sizeX, sizeY);
+        return new Decoration(new SFVertex3f(posX, posY, posZ), model, textureId, sizeX, sizeY, supportCulling);
     }
 }
 

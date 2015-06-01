@@ -21,19 +21,22 @@ public class Obstacle implements MazeObject {
     private int texture_id;
     private float height;
     private String model;
+    private boolean supportCulling;
 
     /**
      * Creates a new Obstacle from specified dimension and texture.
      *
-     * @param c          <code>Circle</code> which makes up the <code>CollisionBox</code> and defines the dimension of xz plane.
-     * @param height     Height in y direction.
-     * @param texture_id Texture index.
+     * @param c              <code>Circle</code> which makes up the <code>CollisionBox</code> and defines the dimension of xz plane.
+     * @param height         Height in y direction.
+     * @param texture_id     Texture index.
+     * @param supportCulling
      */
-    public Obstacle(Circle c, double height, int texture_id, String model) {
+    public Obstacle(Circle c, double height, int texture_id, String model, boolean supportCulling) {
         this.c = c;
         this.texture_id = texture_id;
         this.height = (float) height / 2;
         this.model = model;
+        this.supportCulling = supportCulling;
     }
 
     @Override
@@ -52,13 +55,18 @@ public class Obstacle implements MazeObject {
     }
 
     @Override
+    public boolean supportingCulling() {
+        return false;
+    }
+
+    @Override
     public MazeObject cloneFromData(String position, String size, int textureId) {
         float posX = Float.parseFloat(position.split(" ")[0]);
         float posY = Float.parseFloat(position.split(" ")[1]);
         float posZ = Float.parseFloat(position.split(" ")[2]);
         float sizeX = Float.parseFloat(size.split(" ")[0]);
         float sizeY = Float.parseFloat(size.split(" ")[1]);
-        return new Obstacle(new Circle(new SFVertex3f(posX, posY, posZ), sizeX), sizeY, textureId, model);
+        return new Obstacle(new Circle(new SFVertex3f(posX, posY, posZ), sizeX), sizeY, textureId, model, supportCulling);
     }
 }
 

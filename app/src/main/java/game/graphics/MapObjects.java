@@ -34,11 +34,11 @@ public enum MapObjects {
 
     private void fillObjects() {
         map = new MapResources<>(null, "Object", LOG_TAG);
-        map.mapResource("Wall", new Wall(null, 0));
-        map.mapResource("Column", new Obstacle(null, 0, 0, "Obstacle01.obj"));
-        map.mapResource("Vase", new Obstacle(null, 0, 0, "vase.obj"));
-        map.mapResource("Meat", new Decoration(null, "Meat.obj", 0, 0, 0));
-        map.mapResource("Carrot", new Decoration(null, "Carrot.obj", 0, 0, 0));
+        map.mapResource("Wall", new Wall(null, 0, true));
+        map.mapResource("Column", new Obstacle(null, 0, 0, "Obstacle01.obj", true));
+        map.mapResource("Vase", new Obstacle(null, 0, 0, "vase.obj", false));
+        map.mapResource("Meat", new Decoration(null, "Meat.obj", 0, 0, 0, true));
+        map.mapResource("Carrot", new Decoration(null, "Carrot.obj", 0, 0, 0, true));
     }
 
     private void fillTextures() {
