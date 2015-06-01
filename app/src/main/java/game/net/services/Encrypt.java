@@ -2,6 +2,7 @@ package game.net.services;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,6 +54,7 @@ public class Encrypt implements Service {
 
             try {
                 ServerCommunicationThread.getInstance().send(request);
+                Log.d(LOG_TAG, "Encryption ended!");
                 Message message = handler.obtainMessage(0, true);
                 message.sendToTarget();
 

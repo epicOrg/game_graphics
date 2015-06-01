@@ -75,6 +75,7 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
         if (serverCommunicationThread != null)
             serverCommunicationThread.exit();
 
+        canLogin = false;
         serverCommunicationThread = ServerCommunicationThread.getInstance();
         serverCommunicationThread.addServerCommunicationThreadListener(this);
         setThreadHandler();
@@ -97,12 +98,12 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
 
     private void setThreadHandler() {
 //        LoginHandler loginHandler = new LoginHandler(this);
-        if (loginHandler==null || encryptionHandler==null) {
+        if (loginHandler == null || encryptionHandler == null) {
             loginHandler = new LoginHandler(this);
 
             loginHandler.addLoginHandlerListeners(this);
 
-            encryptionHandler=new EncryptionHandler(this);
+            encryptionHandler = new EncryptionHandler(this);
         }
         if (canLogin)
             serverCommunicationThread.setHandler(loginHandler);
@@ -175,19 +176,19 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
         startActivity(intent);
     }
 
-    private boolean canLogin=false;
+    private boolean canLogin = false;
 
-    public void letLogin(){
-        canLogin=true;
+    public void letLogin() {
+        canLogin = true;
         serverCommunicationThread.setHandler(loginHandler);
-        Log.d(LOG_TAG,"can login!");
+        Log.d(LOG_TAG, "can login!");
     }
 
     /**
      * Starts the login sending the request to the server.
      */
     public void attemptLogin(View view) {
-        if (canLogin){
+        if (canLogin) {
             ((TextView) views.get(R.id.username)).setError(null);
             ((TextView) views.get(R.id.password)).setError(null);
             loginData = getData();
@@ -205,8 +206,7 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
                     e.printStackTrace();
                 }
             }
-        }
-        else
+        } else
             Toast.makeText(this, "Connection encryption in progress...", Toast.LENGTH_SHORT).show();
     }
 
