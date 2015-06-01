@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
+import game.net.handling.EncryptionHandler;
 import game.net.handling.LoginHandler;
 import game.net.handling.LoginHandlerListener;
 import game.net.communication.JSONd;
@@ -91,11 +92,22 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
         setThreadHandler();
     }
 
-    private void setThreadHandler() {
-        LoginHandler loginHandler = new LoginHandler(this);
+    private LoginHandler loginHandler;
+    private EncryptionHandler encryptionHandler;
 
-        loginHandler.addLoginHandlerListeners(this);
-        serverCommunicationThread.setHandler(loginHandler);
+    private void setThreadHandler() {
+//        LoginHandler loginHandler = new LoginHandler(this);
+        if (loginHandler==null || encryptionHandler==null) {
+            loginHandler = new LoginHandler(this);
+
+            loginHandler.addLoginHandlerListeners(this);
+
+            encryptionHandler=new EncryptionHandler(this);
+        }
+        if (canLogin)
+            serverCommunicationThread.setHandler(loginHandler);
+        else
+            serverCommunicationThread.setHandler(encryptionHandler);
 
     }
 
@@ -163,27 +175,39 @@ public class MainActivity extends ActionBarActivity implements ServerCommunicati
         startActivity(intent);
     }
 
+    private boolean canLogin=false;
+
+    public void letLogin(){
+        canLogin=true;
+        serverCommunicationThread.setHandler(loginHandler);
+        Log.d(LOG_TAG,"can login!");
+    }
+
     /**
      * Starts the login sending the request to the server.
      */
     public void attemptLogin(View view) {
-        ((TextView) views.get(R.id.username)).setError(null);
-        ((TextView) views.get(R.id.password)).setError(null);
-        loginData = getData();
-        boolean cancel = loginData.checkData(getApplicationContext(), views);
+        if (canLogin){
+            ((TextView) views.get(R.id.username)).setError(null);
+            ((TextView) views.get(R.id.password)).setError(null);
+            loginData = getData();
+            boolean cancel = loginData.checkData(getApplicationContext(), views);
 
-        if (!cancel) {
-            progressShower.showProgress(true);
-            try {
-                serverCommunicationThread.send(requestMaker.getNewRequest(new JSONd(ServicesFields.SERVICE, ServicesFields.LOGIN.toString()),
-                        new JSONd(CommonFields.USERNAME, loginData.getUsername()),
-                        new JSONd(CommonFields.PASSWORD, loginData.getPassword())));
-            } catch (NotConnectedException e) {
-                progressShower.showProgress(false);
-                Toast.makeText(activity, getString(R.string.error_not_connected), Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
+            if (!cancel) {
+                progressShower.showProgress(true);
+                try {
+                    serverCommunicationThread.send(requestMaker.getNewRequest(new JSONd(ServicesFields.SERVICE, ServicesFields.LOGIN.toString()),
+                            new JSONd(CommonFields.USERNAME, loginData.getUsername()),
+                            new JSONd(CommonFields.PASSWORD, loginData.getPassword())));
+                } catch (NotConnectedException e) {
+                    progressShower.showProgress(false);
+                    Toast.makeText(activity, getString(R.string.error_not_connected), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
             }
         }
+        else
+            Toast.makeText(this, "Connection encryption in progress...", Toast.LENGTH_SHORT).show();
     }
 
 

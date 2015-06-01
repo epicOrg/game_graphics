@@ -10,7 +10,7 @@ import java.security.spec.X509EncodedKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * Some useful Key conversion methods.
+ * Some useful {@link Key} conversion methods.
  *
  * @author Noris
  * @date 2015/04/28
@@ -21,20 +21,20 @@ import javax.crypto.spec.SecretKeySpec;
 public class KeyConverter {
 
     /**
-     * Converts a Key into a string.
+     * Converts a <code>Key</code> into a <code>String</code>.
      *
-     * @param key a generic Key
-     * @return a string encoding the Key
+     * @param key a generic <code>Key</code>.
+     * @return a <code>String</code> encoding the <code>Key</code>.
      */
     public static String keyToString(Key key) {
         return StringConverter.bytesToString(key.getEncoded());
     }
 
     /**
-     * Convert a string, that encodes a PublicKey, into the PublicKey.
+     * Convert a <code>String</code>, that encodes a <code>PublicKey</code>, into the <code>PublicKey</code>.
      *
-     * @param key a string that encodes a PublicKey
-     * @return the PublicKey
+     * @param key a <code>String</code> that encodes a <code>PublicKey</code>.
+     * @return the <code>PublicKey</code>.
      */
     public static PublicKey stringToPublicKey(String key) {
 
@@ -60,10 +60,10 @@ public class KeyConverter {
     }
 
     /**
-     * Convert a string, that encodes a generic Key, into the Key.
+     * Convert a <code>String</code>, that encodes a generic <code>Key</code>, into the <code>Key</code>.
      *
-     * @param key a string that encodes a Key
-     * @return the Key
+     * @param key a <code>String</code> that encodes a <code>Key</code>.
+     * @return the <code>Key</code>.
      */
     public static Key stringToSymmetricKey(String key) {
 

@@ -1,6 +1,7 @@
 package game.net.services;
 
 import android.os.Handler;
+import android.os.Message;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,6 +53,9 @@ public class Encrypt implements Service {
 
             try {
                 ServerCommunicationThread.getInstance().send(request);
+                Message message = handler.obtainMessage(0, true);
+                message.sendToTarget();
+
             } catch (NotConnectedException e) {
                 e.printStackTrace();
             }

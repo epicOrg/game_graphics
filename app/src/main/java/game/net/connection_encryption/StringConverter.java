@@ -15,7 +15,7 @@ public class StringConverter {
     private static final int FLAG = Base64.NO_WRAP;
 
     /**
-     * Converts an array of bytes into a string, using Base 64 encoding schemes
+     * Converts an array of bytes into a <code>String</code>, using Base 64 encoding schemes
      * (with a FLAG encoding).
      *
      * @param bytes an array of bytes
@@ -26,7 +26,7 @@ public class StringConverter {
     }
 
     /**
-     * Converts a string encoded with Base 64 encoding schemes (in the FLAG encoding)
+     * Converts a <code>String</code> encoded with Base 64 encoding schemes (in the FLAG encoding)
      * into the original bytes array.
      *
      * @param string a string encoded using using Base 64 encoding schemes

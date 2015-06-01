@@ -17,13 +17,14 @@ import java.util.HashMap;
  */
 public class LoginData {
 
-    public static final int MIN_LENGHT=8;
+    public static final int MIN_LENGHT = 8;
 
     private String username;
     private String password;
 
     /**
      * Creates a new <code>LoginData</code> with given username and password.
+     *
      * @param username name of the user.
      * @param password password of the user.
      */
@@ -41,7 +42,6 @@ public class LoginData {
     }
 
     /**
-     *
      * @return the user name.
      */
     public String getUsername() {
@@ -49,7 +49,6 @@ public class LoginData {
     }
 
     /**
-     *
      * @return the user password.
      */
     public String getPassword() {
