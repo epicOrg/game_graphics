@@ -13,5 +13,6 @@ public class EncryptionConst {
     public static final String ASYMMETRIC_DECODE = ASYMMETRIC_ALGORITHM + "/ECB/PKCS1Padding";
 
     public static final String SYMMETRIC_ALGORITHM = "AES";
+    public static final int SYMMETRIC_KEYSIZE = 128;
 
 }

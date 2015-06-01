@@ -15,7 +15,7 @@ public class SymmetricKeyGenerator implements ISymmetricKeyGenerator {
             // SecureRandom secureRandom = new SecureRandom();
 
             KeyGenerator keyGenerator = KeyGenerator.getInstance(EncryptionConst.SYMMETRIC_ALGORITHM);
-            keyGenerator.init(128);
+            keyGenerator.init(EncryptionConst.SYMMETRIC_KEYSIZE);
             key = keyGenerator.generateKey();
 
         } catch (NoSuchAlgorithmException e) {
