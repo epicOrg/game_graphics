@@ -20,9 +20,9 @@ public class GameStatusWaiter implements Waiter {
     private RequestMaker requestMaker;
 
     /**
-     * Construct a new GameStatusWaiter.
+     * Construct a new <code>GameStatusWaiter</code>.
      *
-     * @param requestMaker RequestMaker to be used to create the message
+     * @param requestMaker <code>RequestMaker</code> to be used to create the message.
      */
     public GameStatusWaiter(RequestMaker requestMaker) {
         this.requestMaker = requestMaker;

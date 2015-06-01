@@ -1,13 +1,18 @@
 package game.net.interpreters;
 
 import android.os.Message;
+import android.util.Log;
 
 import java.util.HashMap;
 
 import game.data.Room;
+import game.data.Team;
 import game.net.services.Game;
 import game.player.Player;
 
+/**
+ * Responsible for interpreting position data and updating all the other <code>Player</code>'s <code>PlayerStatus</code>.
+ */
 public class PositionsInterpreter implements Interpreter {
 
     public static final String LOG_TAG = "PositionsInterpreter";
@@ -15,9 +20,9 @@ public class PositionsInterpreter implements Interpreter {
     private Room room;
 
     /**
-     * Creates a new PositionInterpreter.
+     * Creates a new <code>PositionInterpreter</code>.
      *
-     * @param room Room which contains players to which update position data.
+     * @param room <code>Room</code> which contains players to which update position data.
      */
     public PositionsInterpreter(Room room) {
         this.room = room;
@@ -28,9 +33,6 @@ public class PositionsInterpreter implements Interpreter {
         return Game.POSITIONS;
     }
 
-    /**
-     * Interprets position data.
-     */
     @Override
     public void interpret(Message msg) {
         //Log.d(LOG_TAG, "processPositionsMessage");

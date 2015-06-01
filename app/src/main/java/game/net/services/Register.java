@@ -13,16 +13,19 @@ import java.util.Iterator;
 
 import game.net.fieldsnames.CommonFields;
 
+/**
+ * Manages registration operations.
+ */
 public class Register implements Service {
-	
-	private JSONObject json;
-	private Handler handler;
-	
-	@Override
-	public void start(JSONObject json) {
-		this.json=json;
+
+    private JSONObject json;
+    private Handler handler;
+
+    @Override
+    public void start(JSONObject json) {
+        this.json = json;
         readFields();
-	}
+    }
 
     private void readFields() {
 
@@ -30,14 +33,14 @@ public class Register implements Service {
             boolean value = json.getBoolean(CommonFields.NO_ERRORS.toString());
             Log.d("REGISTER_RESPONSE", json.toString());
             RegistrationResult result;
-            if(value) {
+            if (value) {
                 result = new RegistrationResult(true, null);
-            }else{
+            } else {
                 ArrayList<String> errors;
                 errors = extractErrors();
-                result = new RegistrationResult(false,errors );
+                result = new RegistrationResult(false, errors);
             }
-            Message message= handler.obtainMessage(0,result);
+            Message message = handler.obtainMessage(0, result);
             message.sendToTarget();
         } catch (JSONException e) {
             e.printStackTrace();
@@ -48,11 +51,11 @@ public class Register implements Service {
         ArrayList<String> errorKinds = new ArrayList<>();
         JSONObject errorsObj = json.getJSONObject(CommonFields.ERRORS.toString());
         Iterator<String> errors = errorsObj.keys();
-        while (errors.hasNext()){
+        while (errors.hasNext()) {
             String errorName = errors.next();
             JSONArray errorTypes = errorsObj.getJSONArray(errorName);
-            for(int i = 0; i< errorTypes.length(); i++){
-                errorKinds.add(errorName +" "+ errorTypes.getString(i));
+            for (int i = 0; i < errorTypes.length(); i++) {
+                errorKinds.add(errorName + " " + errorTypes.getString(i));
             }
         }
         return errorKinds;

@@ -17,8 +17,11 @@ import game.net.fieldsnames.RegisterFields;
 
 public class RegistrationErrorStrings {
 
-    private HashMap<String, Integer> errors = new HashMap<String, Integer>();
+    private HashMap<String, Integer> errors = new HashMap<>();
 
+    /**
+     * Creates a new <code>RegistrationErrorStrings</code> and maps every error descriptions with a corrisponding error <code>String</code>.
+     */
     public RegistrationErrorStrings() {
         createMap();
     }
@@ -36,6 +39,12 @@ public class RegistrationErrorStrings {
         errors.put(RegisterFields.EMAIL + " " + RegisterFields.REGISTER_ALREADY_USED, R.string.email_already_used);
     }
 
+    /**
+     * Returns an error <code>String</code> id given an error description.
+     *
+     * @param error <code>String</code> that describes the error.
+     * @return the error <code>String</code> id.
+     */
     public int getStringIdByError(String error) {
         return errors.get(error);
     }

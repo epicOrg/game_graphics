@@ -33,8 +33,8 @@ public class Player {
      * @param name username of the <code>Player</code>.
      */
     public Player(String name) {
-        SFVertex3f position = DEFAULT_POSITION;
-        SFVertex3f direction = DEFAULT_DIRECTION;
+        SFVertex3f position = new SFVertex3f(DEFAULT_POSITION);
+        SFVertex3f direction = new SFVertex3f(DEFAULT_DIRECTION);
         Circle circle = new Circle(position, DEFAULT_RADIUS);
         this.status = new PlayerStatus(direction, circle);
         this.name = name;

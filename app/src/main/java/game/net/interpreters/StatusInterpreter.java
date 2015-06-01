@@ -16,6 +16,9 @@ import game.net.fieldsnames.GameFields;
 import game.net.services.Game;
 import game.views.MessageScreen;
 
+/**
+ * Responsible for intepreting <code>Message</code> about <code>Game.STATUS</code> data.
+ */
 public class StatusInterpreter implements Interpreter {
 
     public static final String LOG_TAG = "StatusInterpreter";
@@ -25,14 +28,14 @@ public class StatusInterpreter implements Interpreter {
     private LinkedList<GameHandlerListener> gameHandlerListeners = new LinkedList<>();
 
     /**
-     * Creates a new StatusInterpreter.
+     * Creates a new <code>StatusInterpreter</code>.
      *
-     * @param messageScreen        MessageScreen that shows the status.
-     * @param gamePositionSender   GamePositionSender to stop sending position data.
-     * @param gameHandlerListeners GameHandlerListeners to call at game start and end.
+     * @param messageScreen        <code>MessageScreen</code> that shows the status.
+     * @param gamePositionSender   <code>GamePositionSender/code> to stop sending position data.
+     * @param gameHandlerListeners <code>GameHandlerListener</code> to call at game start and end.
      */
     public StatusInterpreter(Context context, MessageScreen messageScreen, GamePositionSender gamePositionSender, GameHandlerListener... gameHandlerListeners) {
-        this.res=context.getResources();
+        this.res = context.getResources();
         this.messageScreen = messageScreen;
         this.gamePositionSender = gamePositionSender;
         this.gameHandlerListeners = new LinkedList<>(Arrays.asList(gameHandlerListeners));
@@ -43,9 +46,6 @@ public class StatusInterpreter implements Interpreter {
         return Game.STATUS;
     }
 
-    /**
-     * Interprets status data.
-     */
     @Override
     public void interpret(Message msg) {
 //        Log.d(LOG_TAG, "processStatusMessage");

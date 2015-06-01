@@ -22,6 +22,11 @@ public class LoginData {
     private String username;
     private String password;
 
+    /**
+     * Creates a new <code>LoginData</code> with given username and password.
+     * @param username name of the user.
+     * @param password password of the user.
+     */
     public LoginData(String username, String password) {
         this.username = username;
         this.password = password;
@@ -35,10 +40,18 @@ public class LoginData {
         return password.matches(".*\\d+.*") && password.matches(".*[a-zA-Z]+.*");
     }
 
+    /**
+     *
+     * @return the user name.
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     *
+     * @return the user password.
+     */
     public String getPassword() {
         return password;
     }

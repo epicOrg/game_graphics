@@ -1,5 +1,7 @@
 package game.listeners;
 
+import android.util.Log;
+
 import shadow.math.SFMatrix3f;
 import shadow.math.SFTransform3f;
 import shadow.math.SFVertex3f;
@@ -29,6 +31,7 @@ public class DirectionDirectionMoveListener implements DirectionMoveListenerInte
 
     @Override
     public void move(float dx, float dy) {
+        Log.d(LOG_TAG,"moving direction of "+dx+ ", "+dy);
         float oldLenght = direction.getLength();
         float oldVerAngle = (float) Math.atan2(direction.getY(), oldXZLenght);
 

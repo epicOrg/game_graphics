@@ -15,6 +15,9 @@ import game.net.fieldsnames.GameFields;
 import game.net.fieldsnames.ServicesFields;
 import shadow.math.SFVertex3f;
 
+/**
+ * Manages game data.
+ */
 public class Game implements Service {
 
     public static final String LOG_TAG = "Game";

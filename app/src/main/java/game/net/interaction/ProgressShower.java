@@ -16,6 +16,13 @@ public class ProgressShower {
     private View mProgressView;
     private int shortAnimTime;
 
+    /**
+     * Creates a new <code>ProgressShower</code>, that shows animation during progresses.
+     *
+     * @param mProgressView <code>View</code> that represents operation progressing.
+     * @param mLoginFormView <code>View</code> associated with the current operation.
+     * @param shortAnimTime time of the animation.
+     */
     public ProgressShower(View mProgressView, View mLoginFormView, int shortAnimTime) {
         this.mProgressView = mProgressView;
         this.mLoginFormView = mLoginFormView;
@@ -24,6 +31,8 @@ public class ProgressShower {
 
     /**
      * Sets visibility and animations of mLoginFormView and mProgressView.
+     *
+     * @param show whether to show the mLoginFormView and mProgressView.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     public void showProgress(final boolean show) {

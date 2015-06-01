@@ -16,6 +16,8 @@ import game.net.fieldsnames.RoomsFields;
 import game.net.fieldsnames.ServicesFields;
 
 /**
+ * Manages data about all the current existing <code>Room</code>, and lets an user join a <code>Room</code> or create a new one.
+ *
  * @author Micieli
  * @date 31/03/2015
  */
@@ -33,7 +35,7 @@ public class Rooms implements Service {
 
     @Override
     public void start(JSONObject json) {
-        this.json=json;
+        this.json = json;
         readFields();
     }
 

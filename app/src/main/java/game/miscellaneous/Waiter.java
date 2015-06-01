@@ -8,7 +8,7 @@ package game.miscellaneous;
 public interface Waiter {
 
     /**
-     * Perform the action associated with this Waiter.
+     * Perform the action associated with this <code>Waiter</code>.
      */
     void unleash();
 

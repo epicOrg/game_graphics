@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import game.net.fieldsnames.ServicesFields;
 
 /**
+ * Represents an unkonwn <code>Service</code>.
  * @author Noris
  * @date 26/03/2015
  */
@@ -21,7 +22,7 @@ public class Unknown implements Service {
     @Override
     public void setHandler(Handler handler) { }
 
-    public void setContext(Context context) { }
+//    public void setContext(Context context) { }
 
     private JSONObject getResponse() {
 

@@ -15,7 +15,7 @@ import game.net.communication.NotConnectedException;
 import game.net.communication.ServerCommunicationThread;
 
 /**
- * Class containing a thread which sends the current player's position and direction to the server.
+ * Class containing a thread which sends the current <code>Player</code> 's position and direction to the server.
  *
  * @author Torlaschi
  */
@@ -34,10 +34,10 @@ public class GamePositionSender implements Waiter {
     private RequestMaker requestMaker = new RequestMaker();
 
     /**
-     * Constructs a sender for the specified player.
+     * Constructs a sender for the specified <code>Player</code>.
      *
-     * @param player   player containing the position and direction to send
-     * @param roomName room containing the specified player
+     * @param player   <code>Player</code> containing the position and direction to send.
+     * @param roomName room containing the specified <code>Player</code>.
      */
     public GamePositionSender(Player player, String roomName) {
         this.player = player;
@@ -48,6 +48,7 @@ public class GamePositionSender implements Waiter {
      * Set the status of the thread.
      * <p>
      * When stopped it can't be resumed.
+     * </p>
      *
      * @param sending status of the thread
      */

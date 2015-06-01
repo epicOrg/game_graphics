@@ -9,6 +9,8 @@ import org.json.JSONObject;
 import game.net.fieldsnames.CommonFields;
 
 /**
+ * Manages login data.
+ *
  * @author Micieli
  * @date 31/03/2015
  */
@@ -20,7 +22,7 @@ public class Login implements Service {
 
     @Override
     public void start(JSONObject json) {
-        this.json=json;
+        this.json = json;
         readFields();
     }
 

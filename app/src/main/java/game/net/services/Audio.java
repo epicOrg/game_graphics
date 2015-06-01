@@ -13,6 +13,8 @@ import game.net.communication.ServerCommunicationThread;
 import game.net.fieldsnames.AudioFields;
 
 /**
+ * Manages audio data.
+ *
  * @author Micieli
  * @date 02/05/2015
  */
@@ -22,7 +24,7 @@ public class Audio implements Service {
 
     @Override
     public void start(JSONObject json) {
-        this.jsonRequest=json;
+        this.jsonRequest = json;
         AudioCallManager audioCallManager = AudioCallManager.getInstance();
         try {
             int serverPort = jsonRequest.getInt(AudioFields.AUDIO_PORT_SERVER.toString());
