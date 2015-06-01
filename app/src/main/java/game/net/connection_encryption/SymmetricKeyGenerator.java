@@ -13,10 +13,10 @@ public class SymmetricKeyGenerator implements ISymmetricKeyGenerator {
     public void generateKey() {
         try {
 
-            SecureRandom secureRandom = new SecureRandom();
+            //SecureRandom secureRandom = new SecureRandom();
 
             KeyGenerator keyGenerator = KeyGenerator.getInstance(EncryptionConst.SYMMETRIC_ALGORITHM);
-            keyGenerator.init(secureRandom);
+            keyGenerator.init(256);
             key = keyGenerator.generateKey();
 
         } catch (NoSuchAlgorithmException e) {
