@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 
 import game.net.connection_encryption.ConnectionEncrypter;
-import game.net.connection_encryption.SymmetricKeyGenerator;
 import game.net.fieldsnames.ServicesFields;
 import game.net.services.Service;
 
@@ -166,8 +165,6 @@ public class ServerCommunicationThread extends Thread {
     }
 
     private void init() {
-
-        ConnectionEncrypter.init(new SymmetricKeyGenerator());
 
         setStateAndUpdate(CONNECTING);
 

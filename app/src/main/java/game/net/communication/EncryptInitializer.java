@@ -17,7 +17,7 @@ public class EncryptInitializer {
 
     public void initConnection() {
 
-        //ConnectionEncrypter.init(new SymmetricKeyGenerator());
+        ConnectionEncrypter.init(new SymmetricKeyGenerator());
 
         RequestMaker requestMaker = UserData.DATA.getRequestMaker();
 
